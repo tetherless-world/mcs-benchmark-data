@@ -1,6 +1,7 @@
 
 import json
 
+
 class Benchmark(object):
     def load_question_file(self, path):
         raise NotImplementedError
@@ -38,6 +39,9 @@ class Benchmark(object):
     def get_correct_choice_label(self, question):
         raise NotImplementedError
 
+    def get_chosen_choice_label(self, question):
+        raise NotImplementedError
+
     def convert(self):
         data = []
 
@@ -52,6 +56,7 @@ class Benchmark(object):
             ques_data["concept"] = self.get_question_concept(ques)
             ques_data["choices"] = self.get_choices(ques)
             ques_data["correctChoiceLabel"] = self.get_correct_choice_label(ques)
+            ques_data["chosenChoiceLabel"] = self.get_chosen_choice_label(ques)
             data.append(ques_data)
         return data
 
