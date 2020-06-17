@@ -56,6 +56,7 @@ class Benchmark(object):
             ques_data["questionType"] = self.get_question_type(ques)
             ques_data["categories"] = self.get_question_categories(ques)
             ques_data["text"] = self.get_question_text(ques)
+            ques_data["context"] = self.get_question_context(ques)
             ques_data["concept"] = self.get_question_concept(ques)
             ques_data["choices"] = self.get_choices(ques)
             ques_data["correctChoiceLabel"] = self.get_correct_choice_label(ques)
