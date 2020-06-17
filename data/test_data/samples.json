@@ -5,7 +5,7 @@
         "inludedInDataset": "CycIC/cycic_training_questions",
         "antecedent": {
             "@type": "BenchmarkSampleAntecedent",
-            "numberOfItems": 1,
+            "numberOfItems": 3,
             "itemListElement": [
                 {
                     "@type": "BenchmarkQuestionCategory",
