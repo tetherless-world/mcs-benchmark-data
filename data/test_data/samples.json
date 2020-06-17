@@ -1,0 +1,249 @@
+[
+    {
+        "@id": "CycIC-324917",
+        "@type": "BenchmarkSample",
+        "inludedInDataset": "CycIC/cycic_training_questions",
+        "antecedent": {
+            "@type": "BenchmarkSampleAntecedent",
+            "numberOfItems": 1,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkQuestionCategory",
+                    "name": "Question category",
+                    "text": [
+                        "temporal reasoning",
+                        "temporal sequences"
+                    ],
+                    "position": 0
+                },
+                {
+                    "@type": "BenchmarkQuestionType",
+                    "name": "Question type",
+                    "text": "multiple choice",
+                    "position": 1
+                },
+                {
+                    "@type": "BenchmarkQuestion",
+                    "name": "Question",
+                    "text": "In U.S. summer, Daisy visits the botanical garden every day. In U.S. autumn, Daisy visits the shipyard every day. Where will Daisy go on June 2?",
+                    "position": 2
+                }
+            ]
+        },
+        "choice": {
+            "@type": "BenchmarkChoices",
+            "numberOfItems": 5,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "the shipyard",
+                    "position": 0
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "the financial district",
+                    "position": 1
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "the botanical garden",
+                    "position": 2
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "the forest",
+                    "position": 3
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "the theater district",
+                    "position": 4
+                }
+            ]
+        },
+        "correctChoice": 2
+    },
+    {
+        "@id": "CommonsenseQA-dd640927f9920930501fb8dc3efc196b",
+        "@type": "BenchmarkSample",
+        "inludedInDataset": "CommonsenseQA/train_rand_split",
+        "antecedent": {
+            "@type": "BenchmarkSampleAntecedent",
+            "numberOfItems": 1,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkQuestionConcept",
+                    "name": "Question concept",
+                    "text": "electricity",
+                    "position": 0
+                },
+                {
+                    "@type": "BenchmarkQuestion",
+                    "name": "Question",
+                    "text": "I forgot to pay the electricity bill, now what can't I do with my ground pump?",
+                    "position": 1
+                }
+            ]
+        },
+        "choice": {
+            "@type": "BenchmarkChoices",
+            "numberOfItems": 5,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "put in to the water",
+                    "identifier": "A",
+                    "position": 0
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "cause fire",
+                    "identifier": "B",
+                    "position": 1
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "produce heat",
+                    "identifier": "C",
+                    "position": 2
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "short fuse",
+                    "identifier": "D",
+                    "position": 3
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "shock",
+                    "identifier": "E",
+                    "position": 4
+                }
+            ]
+        },
+        "correctChoice": "C"
+    },
+    {
+        "@id": "SocialIQA-[line_number]",
+        "@type": "BenchmarkSample",
+        "includedInDataset": "SocialIQA/train",
+        "antecedent": {
+            "@type": "BenchmarkSampleAntecedent",
+            "numberOfItems": 2,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkContext",
+                    "name": "Context",
+                    "text": "Aubrey offered tribute to the gods. They did this out of reverence.",
+                    "position": 0
+                },
+                {
+                    "@type": "BenchmarkQuestion",
+                    "name": "Question",
+                    "text": "How would Others feel as a result?",
+                    "position": 1
+                }
+            ]
+        },
+        "choice": {
+            "@type": "BenchmarkChoices",
+            "numberOfItems": 3,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "they were diffierent",
+                    "position": 1
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "religious and spiritual",
+                    "position": 2
+                },
+                {
+                    "@type": "BenchmarkAnswer",
+                    "text": "they were unique",
+                    "position": 3
+                }
+            ]
+        },
+        "correctChoice": 3
+    },
+    {
+        "@id": "AlphaNLI-fffed530-f737-4dc7-8cc4-15760765d440-1-X",
+        "@type": "BenchmarkSample",
+        "includedInDataset": "AlphaNLI/train",
+        "antecedent": {
+            "@type": "BenchmarkSampleAntecedent",
+            "numberOfItems": 2,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkObservation",
+                    "name": "Observation",
+                    "text": "Our two year old granddaughter is in day care.",
+                    "position": 1
+                },
+                {
+                    "@type": "BenchmarkObservation",
+                    "name": "Observation",
+                    "text": "We thought it was cute.",
+                    "position": 2
+                }
+            ]
+        },
+        "choice": {
+            "@type": "BenchmarkChoices",
+            "numberOfItems": 2,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkHypothesis",
+                    "name": "Hypothesis",
+                    "text": "She was eating and had sauce food on her face. It looked awful.",
+                    "position": 1
+                },
+                {
+                    "@type": "BenchmarkHypothesis",
+                    "name": "Hypothesis",
+                    "text": "She was eating and had sauce food on her face.",
+                    "position": 2
+                }
+            ]
+        },
+        "correctChoice": 2
+    },
+    {
+        "@id": "PhysicalIQA-cd8acbfa-f163-4670-ad2f-88074578fc65",
+        "@type": "BenchmarkSample",
+        "includedInDataset": "PhysicalIQA/train",
+        "antecedent": {
+            "@type": "BenchmarkSampleAntecedent",
+            "numberOfItems": 1,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkGoal",
+                    "name": "Goal",
+                    "text": "how do you frost a cupcake?",
+                    "position": 0
+                }
+            ]
+        },
+        "choice": {
+            "@type": "BenchmarkChoice",
+            "numberOfItems": 2,
+            "itemListElement": [
+                {
+                    "@type": "BenchmarkSolution",
+                    "name": "Solution",
+                    "text": "use a knife to spread the frosting over the top and sides of the cupcake.",
+                    "position": 0
+                },
+                {
+                    "@type": "BenchmarkSolution",
+                    "name": "Solution",
+                    "text": "dip the cupcake into frostin until it covers the top and sides.",
+                    "position": 1
+                }
+            ]
+        },
+        "correctChoice": 0
+    }
+]
