@@ -5,15 +5,15 @@ import json
 from benchmark import Benchmark
 
 
-class SocialIQA(Benchmark):
+class PhysicalIQA(Benchmark):
     def __init__(self, question_set_id):
-        super(SocialIQA, self).__init__()
+        super(PhysicalIQA, self).__init__()
+
         self.question_set_id = question_set_id
         self.benchmark_id = "physicaliqa"
         self.questions = []
         self.labels = dict()
         self.chosen_labels = dict()
-        self.runid2guid = dict()
 
     def load_question_file(self, path):
         with open(path) as f:
@@ -83,13 +83,13 @@ if __name__ == "__main__":
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    benchmark = SocialIQA(question_set_id="train")
+    benchmark = PhysicalIQA(question_set_id="train")
     benchmark.load_question_file("data/{}/train.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/train-labels.lst".format(dataset))
     data = benchmark.convert()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_train.jsonl".format(dataset)))
 
-    benchmark = SocialIQA(question_set_id="dev")
+    benchmark = PhysicalIQA(question_set_id="dev")
     benchmark.load_question_file("data/{}/dev.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/dev-labels.lst".format(dataset))
     data = benchmark.convert()
