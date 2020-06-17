@@ -30,6 +30,9 @@ class Benchmark(object):
     def get_question_text(self, question):
         raise NotImplementedError
 
+    def get_question_context(self, question):
+        raise NotImplementedError
+
     def get_question_concept(self, question):
         raise NotImplementedError
 

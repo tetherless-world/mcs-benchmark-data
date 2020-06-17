@@ -53,6 +53,9 @@ class CycIC(Benchmark):
     def get_question_text(self, question):
         return question["question"]
 
+    def get_question_context(self, question):
+        return ""
+
     def get_question_concept(self, question):
         return ""
 
