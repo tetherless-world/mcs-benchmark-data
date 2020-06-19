@@ -12,135 +12,135 @@ class Benchmark(object):
     def get_benchmark_id(self):
         raise NotImplementedError
 
-    def get_questions(self):
+    def get_samples(self):
         raise NotImplementedError
 
-    def get_question_type(self, question):
+    def get_question_type(self, sample):
         raise NotImplementedError
 
-    def get_question_categories(self, question):
+    def get_question_categories(self, sample):
         return None
 
-    def get_question_id(self, question):
+    def get_question_id(self, sample):
         raise NotImplementedError
 
-    def get_question_set_id(self, question):
+    def get_question_set_id(self, sample):
         raise NotImplementedError
 
-    def get_question_text(self, question):
+    def get_question_text(self, sample):
         return None
 
-    def get_question_goal(self, question):
+    def get_question_goal(self, sample):
         return None
 
-    def get_question_context(self, question):
+    def get_question_context(self, sample):
         return None
 
-    def get_question_concept(self, question):
+    def get_question_concept(self, sample):
         return None
 
-    def get_choices(self, question):
+    def get_choices(self, sample):
         raise NotImplementedError
 
-    def get_correct_choice_label(self, question):
+    def get_correct_choice_label(self, sample):
         raise NotImplementedError
 
-    def get_chosen_choice_label(self, question):
+    def get_chosen_choice_label(self, sample):
         raise NotImplementedError
 
     def convert_to_json(self):
         data = []
 
-        for i, ques in enumerate(self.get_questions()):
-            ques_data = dict()
-            ques_data["benchmarkId"] = self.get_benchmark_id()
-            ques_data["id"] = self.get_question_id(ques)
-            ques_data["questionSetId"] = self.get_question_set_id(ques)
-            ques_data["questionType"] = self.get_question_type(ques)
-            ques_data["categories"] = self.get_question_categories(ques)
-            ques_data["text"] = self.get_question_text(ques)
-            ques_data["context"] = self.get_question_context(ques)
-            ques_data["concept"] = self.get_question_concept(ques)
-            ques_data["choices"] = self.get_choices(ques)
-            ques_data["correctChoiceLabel"] = self.get_correct_choice_label(ques)
-            ques_data["chosenChoiceLabel"] = self.get_chosen_choice_label(ques)
-            data.append(ques_data)
+        for i, spl in enumerate(self.get_questions()):
+            spl_data = dict()
+            spl_data["benchmarkId"] = self.get_benchmark_id()
+            spl_data["id"] = self.get_question_id(spl)
+            spl_data["questionSetId"] = self.get_question_set_id(spl)
+            spl_data["questionType"] = self.get_question_type(spl)
+            spl_data["categories"] = self.get_question_categories(spl)
+            spl_data["text"] = self.get_question_text(spl)
+            spl_data["context"] = self.get_question_context(spl)
+            spl_data["concept"] = self.get_question_concept(spl)
+            spl_data["choices"] = self.get_choices(spl)
+            spl_data["correctChoiceLabel"] = self.get_correct_choice_label(spl)
+            spl_data["chosenChoiceLabel"] = self.get_chosen_choice_label(spl)
+            data.append(spl_data)
         return data
 
     def convert_to_jsonld(self):
         data = []
 
-        for i, ques in enumerate(self.get_questions()):
-            ques_data = dict()
-            ques_data["@id"] = self.get_benchmark_id() + "-" + self.get_question_id(ques)
-            ques_data["@type"] = "BenchmarkSample"
-            ques_data["inludedInDataset"] = self.get_benchmark_id() + "/" + self.get_question_set_id(ques)
+        for i, spl in enumerate(self.get_samples()):
+            spl_data = dict()
+            spl_data["@id"] = self.get_benchmark_id() + "-" + self.get_question_id(spl)
+            spl_data["@type"] = "BenchmarkSample"
+            spl_data["inludedInDataset"] = self.get_benchmark_id() + "/" + self.get_question_set_id(spl)
 
             antecedents = list()
             category = dict()
             category["@type"] = "BenchmarkQuestionCategory"
             category["name"] = "Question category"
-            category["text"] = self.get_question_categories(ques)
+            category["text"] = self.get_question_categories(spl)
             if category["text"] is not None:
                 antecedents.append(category)
 
             ques_type = dict()
             ques_type["@type"] = "BenchmarkQuestionType"
             ques_type["name"] = "Question type"
-            ques_type["text"] = self.get_question_type(ques)
+            ques_type["text"] = self.get_question_type(spl)
             if ques_type["text"] is not None:
                 antecedents.append(ques_type)
 
             question = dict()
             question["@type"] = "BenchmarkQuestion"
             question["name"] = "Question"
-            question["text"] = self.get_question_text(ques)
+            question["text"] = self.get_question_text(spl)
             if question["text"] is not None:
                 antecedents.append(question)
 
             goal = dict()
             goal["@type"] = "BenchmarkGoal"
             goal["name"] = "Goal"
-            goal["text"] = self.get_question_goal(ques)
+            goal["text"] = self.get_question_goal(spl)
             if goal["text"] is not None:
                 antecedents.append(goal)
 
             context = dict()
             context["@type"] = "BenchmarkContext"
             context["name"] = "Context"
-            context["text"] = self.get_question_context(ques)
+            context["text"] = self.get_question_context(spl)
             if context["text"] is not None:
                 antecedents.append(context)
 
             concept = dict()
             concept["@type"] = "BenchmarkQuestionConcept"
             concept["name"] = "Question concept"
-            concept["text"] = self.get_question_concept(ques)
+            concept["text"] = self.get_question_concept(spl)
             if concept["text"] is not None:
                 antecedents.append(concept)
 
-            ques_data["antecedent"] = dict()
-            ques_data["antecedent"]["@type"] = "BenchmarkSampleAntecedent"
-            ques_data["antecedent"]["numberOfItems"] = len(antecedents)
+            spl_data["antecedent"] = dict()
+            spl_data["antecedent"]["@type"] = "BenchmarkSampleAntecedent"
+            spl_data["antecedent"]["numberOfItems"] = len(antecedents)
             for pos in range(len(antecedents)):
                 antecedents[pos]["position"] = pos
-            ques_data["antecedent"]["itemListElement"] = antecedents
+            spl_data["antecedent"]["itemListElement"] = antecedents
 
-            choices = self.get_choices(ques)
-            ques_data["choice"] = dict()
-            ques_data["choice"]["@type"] = "BenchmarkChoice"
-            ques_data["choice"]["numberOfItems"] = len(choices)
+            choices = self.get_choices(spl)
+            spl_data["choice"] = dict()
+            spl_data["choice"]["@type"] = "BenchmarkChoice"
+            spl_data["choice"]["numberOfItems"] = len(choices)
             for pos in range(len(choices)):
                 choices[pos]["position"] = pos
-            ques_data["choice"]["itemListElement"] = choices
-            ques_data["correctChoice"] = self.get_correct_choice_label(ques)
-            ques_data["chosenChoiceLabel"] = self.get_chosen_choice_label(ques)
-            data.append(ques_data)
+            spl_data["choice"]["itemListElement"] = choices
+            spl_data["correctChoice"] = self.get_correct_choice_label(spl)
+            spl_data["chosenChoiceLabel"] = self.get_chosen_choice_label(spl)
+            data.append(spl_data)
         return data
 
     def write_data_as_jsonl(self, data, output_path):
         with open(output_path, "w") as f:
-            for ques in data:
-                f.write(json.dumps(ques))
+            for sample in data:
+                f.write(json.dumps(sample))
                 f.write("\n")
 

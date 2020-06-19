@@ -11,22 +11,22 @@ class PhysicalIQA(Benchmark):
 
         self.question_set_id = question_set_id
         self.benchmark_id = "PhysicalIQA"
-        self.questions = []
+        self.samples = []
         self.labels = dict()
         self.chosen_labels = dict()
 
     def load_question_file(self, path):
         with open(path) as f:
             for i, line in enumerate(f):
-                question = json.loads(line.strip())
-                self.questions.append(question)
+                sample = json.loads(line.strip())
+                self.samples.append(sample)
 
     def load_label_file(self, path):
-        assert len(self.questions) > 0
+        assert len(self.samples) > 0
         with open(path) as f:
             for i, line in enumerate(f):
                 label = line.strip()
-                self.labels[self.questions[i]["id"]] = label
+                self.labels[self.samples[i]["id"]] = label
 
     def load_chosen_label_file(self, path):
         pass
@@ -34,30 +34,30 @@ class PhysicalIQA(Benchmark):
     def get_benchmark_id(self):
         return self.benchmark_id
 
-    def get_questions(self):
-        return self.questions
+    def get_samples(self):
+        return self.samples
 
-    def get_question_type(self, question):
+    def get_question_type(self, sample):
         return "multiple choice"
 
-    def get_question_id(self, question):
-        return question["id"]
+    def get_question_id(self, sample):
+        return sample["id"]
 
-    def get_question_set_id(self, question):
+    def get_question_set_id(self, sample):
         return self.question_set_id
 
-    def get_question_goal(self, question):
-        return question["goal"]
+    def get_question_goal(self, sample):
+        return sample["goal"]
 
-    def get_correct_choice_label(self, question):
-        return self.labels[self.get_question_id(question)]
+    def get_correct_choice_label(self, sample):
+        return self.labels[self.get_question_id(sample)]
 
-    def get_chosen_choice_label(self, question):
-        if self.get_question_id(question) not in self.chosen_labels:
+    def get_chosen_choice_label(self, sample):
+        if self.get_question_id(sample) not in self.chosen_labels:
             return ""
-        return self.chosen_labels[self.get_question_id(question)]
+        return self.chosen_labels[self.get_question_id(sample)]
 
-    def get_choices(self, question):
+    def get_choices(self, sample):
         choices = []
         num_choices = 2
         for i in range(num_choices):
@@ -65,7 +65,7 @@ class PhysicalIQA(Benchmark):
                 "@type": "BenchmarkSolution",
                 "name": "Solution",
                 "identifier": str(i),
-                "text": question["sol{}".format(i + 1)]
+                "text": sample["sol{}".format(i + 1)]
             })
         return choices
 

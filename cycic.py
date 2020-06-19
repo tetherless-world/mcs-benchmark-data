@@ -9,7 +9,7 @@ class CycIC(Benchmark):
         super(CycIC, self).__init__()
         self.question_set_id = question_set_id
         self.benchmark_id = "CycIC"
-        self.questions = []
+        self.samples = []
         self.labels = dict()
         self.chosen_labels = dict()
         self.runid2guid = dict()
@@ -17,7 +17,7 @@ class CycIC(Benchmark):
     def load_question_file(self, path):
         with open(path) as f:
             for line in f:
-                self.questions.append(json.loads(line.strip()))
+                self.samples.append(json.loads(line.strip()))
 
     def load_label_file(self, path):
         with open(path) as f:
@@ -35,37 +35,37 @@ class CycIC(Benchmark):
     def get_benchmark_id(self):
         return self.benchmark_id
 
-    def get_questions(self):
-        return self.questions
+    def get_samples(self):
+        return self.samples
 
-    def get_question_type(self, question):
-        return question["questionType"]
+    def get_question_type(self, sample):
+        return sample["questionType"]
 
-    def get_question_categories(self, question):
-        return question["categories"]
+    def get_question_categories(self, sample):
+        return sample["categories"]
 
-    def get_question_id(self, question):
-        return question["guid"]
+    def get_question_id(self, sample):
+        return sample["guid"]
 
-    def get_question_set_id(self, question):
+    def get_question_set_id(self, sample):
         return self.question_set_id
 
-    def get_question_text(self, question):
-        return question["question"]
+    def get_question_text(self, sample):
+        return sample["question"]
 
-    def get_correct_choice_label(self, question):
-        return self.labels[self.get_question_id(question)]
+    def get_correct_choice_label(self, sample):
+        return self.labels[self.get_question_id(sample)]
 
-    def get_chosen_choice_label(self, question):
-        if self.get_question_id(question) not in self.chosen_labels:
+    def get_chosen_choice_label(self, sample):
+        if self.get_question_id(sample) not in self.chosen_labels:
             return ""
-        return self.chosen_labels[self.get_question_id(question)]
+        return self.chosen_labels[self.get_question_id(sample)]
 
-    def get_choices(self, question):
+    def get_choices(self, sample):
         choices = []
-        if self.get_question_type(question) == "multiple choice":
+        if self.get_question_type(sample) == "multiple choice":
             num_choices = 5
-        elif self.get_question_type(question) == "true/false":
+        elif self.get_question_type(sample) == "true/false":
             num_choices = 2
 
         for i in range(num_choices):
@@ -73,7 +73,7 @@ class CycIC(Benchmark):
                 "@type": "BenchmarkAnswer",
                 "name": "Answer",
                 "identifier": str(i),
-                "text": question["answer_option{}".format(i)]
+                "text": sample["answer_option{}".format(i)]
             })
         return choices
 

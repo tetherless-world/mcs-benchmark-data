@@ -10,7 +10,7 @@ class SocialIQA(Benchmark):
         super(SocialIQA, self).__init__()
         self.question_set_id = question_set_id
         self.benchmark_id = "SocialIQA"
-        self.questions = []
+        self.samples = []
         self.labels = dict()
         self.chosen_labels = dict()
         self.runid2guid = dict()
@@ -18,10 +18,10 @@ class SocialIQA(Benchmark):
     def load_question_file(self, path):
         with open(path) as f:
             for i, line in enumerate(f):
-                question = json.loads(line.strip())
+                sample = json.loads(line.strip())
                 # Assign GUID if not provided
-                question["guid"] = "{}-{}".format(self.question_set_id, i)
-                self.questions.append(question)
+                sample["guid"] = "{}-{}".format(self.question_set_id, i)
+                self.samples.append(sample)
 
     def load_label_file(self, path):
         with open(path) as f:
@@ -36,33 +36,33 @@ class SocialIQA(Benchmark):
     def get_benchmark_id(self):
         return self.benchmark_id
 
-    def get_questions(self):
-        return self.questions
+    def get_samples(self):
+        return self.samples
 
-    def get_question_type(self, question):
+    def get_question_type(self, sample):
         return "multiple choice"
 
-    def get_question_id(self, question):
-        return question["guid"]
+    def get_question_id(self, sample):
+        return sample["guid"]
 
-    def get_question_set_id(self, question):
+    def get_question_set_id(self, sample):
         return self.question_set_id
 
-    def get_question_text(self, question):
-        return question["question"]
+    def get_question_text(self, sample):
+        return sample["question"]
 
-    def get_question_context(self, question):
-        return question["context"]
+    def get_question_context(self, sample):
+        return sample["context"]
 
-    def get_correct_choice_label(self, question):
-        return self.labels[self.get_question_id(question)]
+    def get_correct_choice_label(self, sample):
+        return self.labels[self.get_question_id(sample)]
 
-    def get_chosen_choice_label(self, question):
-        if self.get_question_id(question) not in self.chosen_labels:
+    def get_chosen_choice_label(self, sample):
+        if self.get_question_id(sample) not in self.chosen_labels:
             return ""
-        return self.chosen_labels[self.get_question_id(question)]
+        return self.chosen_labels[self.get_question_id(sample)]
 
-    def get_choices(self, question):
+    def get_choices(self, sample):
         choices = []
         num_choices = 3
         choice_ids = ["A", "B", "C"]
@@ -71,7 +71,7 @@ class SocialIQA(Benchmark):
                 "@type": "BenchmarkAnswer",
                 "name": "Answer",
                 "identifier": str(i + 1),
-                "text": question["answer{}".format(choice_ids[i])]
+                "text": sample["answer{}".format(choice_ids[i])]
             })
         return choices
 
