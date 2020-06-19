@@ -10,7 +10,7 @@ class PhysicalIQA(Benchmark):
         super(PhysicalIQA, self).__init__()
 
         self.question_set_id = question_set_id
-        self.benchmark_id = "physicaliqa"
+        self.benchmark_id = "PhysicalIQA"
         self.questions = []
         self.labels = dict()
         self.chosen_labels = dict()
@@ -40,23 +40,14 @@ class PhysicalIQA(Benchmark):
     def get_question_type(self, question):
         return "multiple choice"
 
-    def get_question_categories(self, question):
-        return []
-
     def get_question_id(self, question):
         return question["id"]
 
     def get_question_set_id(self, question):
         return self.question_set_id
 
-    def get_question_text(self, question):
+    def get_question_goal(self, question):
         return question["goal"]
-
-    def get_question_context(self, question):
-        return ""
-
-    def get_question_concept(self, question):
-        return ""
 
     def get_correct_choice_label(self, question):
         return self.labels[self.get_question_id(question)]
@@ -71,7 +62,9 @@ class PhysicalIQA(Benchmark):
         num_choices = 2
         for i in range(num_choices):
             choices.append({
-                "label": str(i),
+                "@type": "BenchmarkSolution",
+                "name": "Solution",
+                "identifier": str(i),
                 "text": question["sol{}".format(i + 1)]
             })
         return choices
@@ -86,12 +79,12 @@ if __name__ == "__main__":
     benchmark = PhysicalIQA(question_set_id="train")
     benchmark.load_question_file("data/{}/train.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/train-labels.lst".format(dataset))
-    data = benchmark.convert()
+    data = benchmark.convert_to_jsonld()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_train.jsonl".format(dataset)))
 
     benchmark = PhysicalIQA(question_set_id="dev")
     benchmark.load_question_file("data/{}/dev.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/dev-labels.lst".format(dataset))
-    data = benchmark.convert()
+    data = benchmark.convert_to_jsonld()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
 

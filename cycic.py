@@ -8,7 +8,7 @@ class CycIC(Benchmark):
     def __init__(self, question_set_id):
         super(CycIC, self).__init__()
         self.question_set_id = question_set_id
-        self.benchmark_id = "cycic"
+        self.benchmark_id = "CycIC"
         self.questions = []
         self.labels = dict()
         self.chosen_labels = dict()
@@ -53,12 +53,6 @@ class CycIC(Benchmark):
     def get_question_text(self, question):
         return question["question"]
 
-    def get_question_context(self, question):
-        return ""
-
-    def get_question_concept(self, question):
-        return ""
-
     def get_correct_choice_label(self, question):
         return self.labels[self.get_question_id(question)]
 
@@ -76,33 +70,36 @@ class CycIC(Benchmark):
 
         for i in range(num_choices):
             choices.append({
-                "label": str(i),
+                "@type": "BenchmarkAnswer",
+                "name": "Answer",
+                "identifier": str(i),
                 "text": question["answer_option{}".format(i)]
             })
         return choices
 
 
 if __name__ == "__main__":
-    output_dir = "converted/CycIC"
+    dataset = "CycIC"
+    output_dir = "converted/{}".format(dataset)
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
     benchmark = CycIC(question_set_id="train")
     benchmark.load_question_file("data/CycIC/CycIC_training_questions.jsonl")
     benchmark.load_label_file("data/CycIC/CycIC_training_labels.jsonl")
-    data = benchmark.convert()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "CycIC_train.jsonl"))
+    data = benchmark.convert_to_jsonld()
+    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_train.jsonl".format(dataset)))
 
     benchmark = CycIC(question_set_id="dev")
     benchmark.load_question_file("data/CycIC/CycIC_dev_questions.jsonl")
     benchmark.load_label_file("data/CycIC/CycIC_dev_labels.jsonl")
     benchmark.load_chosen_label_file("data/CycIC/CycIC_dev_predictions.jsonl")
-    data = benchmark.convert()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "CycIC_dev.jsonl"))
+    data = benchmark.convert_to_jsonld()
+    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
 
     benchmark = CycIC(question_set_id="test")
     benchmark.load_question_file("data/CycIC/CycIC_test_questions.jsonl")
     benchmark.load_label_file("data/CycIC/CycIC_test_labels.jsonl")
-    data = benchmark.convert()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "CycIC_test.jsonl"))
+    data = benchmark.convert_to_jsonld()
+    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_test.jsonl".format(dataset)))
 
