@@ -14,23 +14,20 @@ class CommonsenseQA(Benchmark):
         self.chosen_labels = dict()
 
     def load_question_file(self, path):
+        self.samples = []
         with open(path) as f:
             for line in f:
                 self.samples.append(json.loads(line.strip()))
 
     def load_label_file(self, path):
+        self.labels = dict()
         with open(path) as f:
             for line in f:
                 sample = json.loads(line.strip())
                 self.labels[sample["id"]] = sample["answerKey"]
 
     def load_chosen_label_file(self, path):
-        with open(path) as f:
-            for line in f:
-                sample = json.loads(line.strip())
-                self.chosen_labels[sample["id"]] = sample["chosenAnswer"]
-
-    def load_explanation_file(self, path):
+        self.chosen_labels = dict()
         with open(path) as f:
             for line in f:
                 sample = json.loads(line.strip())
@@ -76,6 +73,18 @@ class CommonsenseQA(Benchmark):
             choice["name"] = "Answer"
             choice["identifier"] = sample["question"]["choices"][i]["label"]
             choice["text"] = sample["question"]["choices"][i]["text"]
+            choices.append(choice)
+        return choices
+
+    def get_choice_explanation(self, sample):
+        choices = []
+        num_choices = 5
+        for i in range(num_choices):
+            choice = dict()
+            choice["@type"] = "BenchmarkAnswer"
+            choice["name"] = "Answer"
+            choice["identifier"] = sample["question"]["choices"][i]["label"]
+            choice["text"] = sample["question"]["choices"][i]["text"]
 
             if "explanation" in sample["question"]["choices"][i]:
                 explanation = dict()
@@ -109,17 +118,23 @@ if __name__ == "__main__":
     benchmark = CommonsenseQA(question_set_id="train")
     benchmark.load_question_file("data/{}/train_rand_split.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/train_rand_split.jsonl".format(dataset))
-    data = benchmark.convert_to_jsonld()
+    data = benchmark.convert_samples_to_jsonld()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_train.jsonl".format(dataset)))
 
     benchmark = CommonsenseQA(question_set_id="dev")
-    benchmark.load_question_file("data/{}/dev_rand_split_w_explanation.jsonl".format(dataset))
-    benchmark.load_label_file("data/{}/dev_rand_split_w_explanation.jsonl".format(dataset))
-    data = benchmark.convert_to_jsonld()
+    benchmark.load_question_file("data/{}/dev_rand_split.jsonl".format(dataset))
+    benchmark.load_label_file("data/{}/dev_rand_split.jsonl".format(dataset))
+    data = benchmark.convert_samples_to_jsonld()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
+
+    benchmark.load_question_file("data/{}/dev_rand_split_kagnet_submission.jsonl".format(dataset))
+    benchmark.load_label_file("data/{}/dev_rand_split_kagnet_submission.jsonl".format(dataset))
+    benchmark.load_chosen_label_file("data/{}/dev_rand_split_kagnet_submission.jsonl".format(dataset))
+    data = benchmark.convert_system_choices_to_jsonld()
+    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev_kagnet_submission.jsonl".format(dataset)))
 
     benchmark = CommonsenseQA(question_set_id="test")
     benchmark.load_question_file("data/{}/test_rand_split_no_answers.jsonl".format(dataset))
-    data = benchmark.convert_to_jsonld()
+    data = benchmark.convert_samples_to_jsonld()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_test.jsonl".format(dataset)))
 
