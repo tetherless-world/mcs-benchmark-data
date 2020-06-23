@@ -5,6 +5,13 @@
         "@type": "Benchmark",
         "name": "CycIC",
         "abstract": "The CycIC dataset was designed by Cycorp Inc., and is hosted by AI2 as a courtesy. Please email cycic@cyc.com with questions or feedback about the dataset. The CycIC dataset is a set of multiple choice and true/false questions requiring general common sense knowledge and reasoning in a very broad variety of areas, including simple reasoning about time, place, everyday objects, events, and situations. Some of the questions require a small bit of logic to get the right answer.",
+        "author": [
+            {
+                "@type": "Organization",
+                "name": "Cycorp",
+                "url": "http://www.cyc.com"
+            }
+        ],
         "dataset": [
             {
                 "@id": "CycIC/cycic_training_questions",
@@ -34,6 +41,24 @@
         "@type": "Benchmark",
         "name": "CommonsenseQA",
         "abstract": "CommonsenseQA is a new multiple-choice question answering dataset that requires different types of commonsense knowledge to predict the correct answers . It contains 12,102 questions with one correct answer and four distractor answers.  The dataset is provided in two major training/validation/testing set splits: \"Random split\" which is the main evaluation split, and \"Question token split\", see paper for details.",
+        "author": [
+            {
+                "@type": "Person",
+                "name": "Alon Talmor"
+            },
+            {
+                "@type": "Person",
+                "name": "Jonathan Herzig"
+            },
+            {
+                "@type": "Person",
+                "name": "Nicholas Lourie"
+            },
+            {
+                "@type": "Person",
+                "name": "Jonathan Berant"
+            }
+        ],
         "dataset": [
             {
                 "@id": "CommonsenseQA/train_rand_split",
@@ -58,6 +83,28 @@
         "@type": "Benchmark",
         "name": "SocialIQA",
         "abstract": "We introduce Social IQa: Social Interaction QA, a new question-answering benchmark for testing social commonsense intelligence. Contrary to many prior benchmarks that focus on physical or taxonomic knowledge, Social IQa focuses on reasoning about people’s actions and their social implications. For example, given an action like \"Jesse saw a concert\" and a question like \"Why did Jesse do this?\", humans can easily infer that Jesse wanted \"to see their favorite performer\" or \"to enjoy the music\", and not \"to see what's happening inside\" or \"to see if it works\". The actions in Social IQa span a wide variety of social situations, and answer candidates contain both human-curated answers and adversarially-filtered machine-generated candidates. Social IQa contains over 37,000 QA pairs for evaluating models’ abilities to reason about the social implications of everyday events and situations.",
+        "author": [
+            {
+                "@type": "Person",
+                "name": "Maarten Sap"
+            },
+            {
+                "@type": "Person",
+                "name": "Hannah Rashkin"
+            },
+            {
+                "@type": "Person",
+                "name": "Derek Chen"
+            },
+            {
+                "@type": "Person",
+                "name": "Ronan Le Bras"
+            },
+            {
+                "@type": "Person",
+                "name": "Yejin Choi"
+            }
+        ],
         "dataset": [
             {
                 "@id": "SocialIQA/train",
