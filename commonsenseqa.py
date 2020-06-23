@@ -130,7 +130,7 @@ if __name__ == "__main__":
     benchmark.load_question_file("data/{}/dev_rand_split_kagnet_submission.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/dev_rand_split_kagnet_submission.jsonl".format(dataset))
     benchmark.load_chosen_label_file("data/{}/dev_rand_split_kagnet_submission.jsonl".format(dataset))
-    data = benchmark.convert_system_choices_to_jsonld()
+    data = benchmark.convert_system_choices_to_jsonld("CommonsenseQA-kagnet")
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev_kagnet_submission.jsonl".format(dataset)))
 
     benchmark = CommonsenseQA(question_set_id="test")

@@ -96,7 +96,7 @@ if __name__ == "__main__":
     benchmark.load_chosen_label_file("data/CycIC/CycIC_dev_cycic-transformers_submission.jsonl")
     data = benchmark.convert_samples_to_jsonld()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
-    data = benchmark.convert_system_choices_to_jsonld()
+    data = benchmark.convert_system_choices_to_jsonld("CycIC-cycic-transformers")
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev_cycic-transformers_submission.jsonl".format(dataset)))
 
     benchmark = CycIC(question_set_id="test")

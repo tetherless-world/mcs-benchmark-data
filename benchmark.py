@@ -140,14 +140,16 @@ class Benchmark(object):
             data.append(spl_data)
         return data
 
-    def convert_system_choices_to_jsonld(self):
+    def convert_system_choices_to_jsonld(self, submission_id):
         data = []
         for i, spl in enumerate(self.get_samples()):
             spl_data = dict()
-            spl_data["@id"] = self.get_benchmark_id() + "-" + self.get_question_id(spl)
-            spl_data["choices"] = self.get_choice_explanation(spl)
+            spl_data["about"] = self.get_benchmark_id() + "-" + self.get_question_id(spl)
+            spl_data["@type"] = "SubmissionSample"
+            spl_data["includedInDataset"] = submission_id
+            spl_data["explanation"] = self.get_choice_explanation(spl)
             spl_data["correctChoiceLabel"] = self.get_correct_choice_label(spl)
-            spl_data["chosenChoiceLabel"] = self.get_chosen_choice_label(spl)
+            spl_data["value"] = self.get_chosen_choice_label(spl)
             data.append(spl_data)
         return data
 
