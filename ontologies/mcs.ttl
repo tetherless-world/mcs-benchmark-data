@@ -1,0 +1,219 @@
+@prefix : <http://purl.org/twc/mcs/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@base <http://purl.org/twc/mcs/> .
+
+<http://purl.org/twc/mcs/> rdf:type owl:Ontology ;
+                            owl:imports <https://schema.org/version/latest/schema.rdf> ;
+                            schema:description "The main goal in commonsense reasoning is to improve score against specific commonsense question-answering benchmarks. In this context, there exists leaderboards that act as a hub for hosting benchmarks and allowing systems submissions that try to improve the score. These benchmarks vary in structure. Some provide questions and answer choices, while others may require systems to reason over observations and provide explanations by the choice of a most appropriate hypothesis. This is an ontology that provide a common vocabulary for annotating datasets that compose commonsense reasoning benchmarks, as well as submissions, and systems. Its goal is to allow diverse benchmarks to be compared, integrated and also support the analysis of systems and machine-learning models." .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/twc/mcs/antecedent
+:antecedent rdf:type owl:AnnotationProperty ;
+            schema:domainIncludes :BenchmarkSample ;
+            schema:rangeIncludes :BenchmarkAntecedent ;
+            rdfs:comment "Indicates the list of elements (antecedent) that is part of this benchmark sample." ;
+            rdfs:label "antecedent" ;
+            rdfs:subPropertyOf schema:hasPart .
+
+
+###  http://purl.org/twc/mcs/choice
+:choice rdf:type owl:AnnotationProperty ;
+        schema:domainIncludes :BenchmarkSample ;
+        schema:rangeIncludes :BenchmarkChoices ;
+        rdfs:comment "Indicates a benchmark choice that is part of this benchmark sample." ;
+        rdfs:label "choice" ;
+        rdfs:subPropertyOf schema:hasPart .
+
+
+###  http://purl.org/twc/mcs/resultOf
+:resultOf rdf:type owl:AnnotationProperty ;
+          schema:domainIncludes schema:Thing ;
+          schema:inverseOf schema:result ;
+          schema:rangeIncludes schema:Action ;
+          rdfs:comment "The result produced in the action. Inverse of result." ;
+          rdfs:label "resultOf" .
+
+
+###  http://purl.org/twc/mcs/sample
+:sample rdf:type owl:AnnotationProperty ;
+        schema:domainIncludes :BenchmarkDataset ;
+        schema:rangeIncludes :BenchmarkSample ;
+        rdfs:comment "Indicates a benchmark sample that is part of this benchmark dataset." ;
+        rdfs:label "sample" ;
+        rdfs:subPropertyOf schema:hasPart .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://purl.org/twc/mcs/Benchmark
+:Benchmark rdf:type owl:Class ;
+           rdfs:subClassOf schema:DataCatalog ;
+           rdfs:comment "A collection of datasets composing a QA benchmark." ;
+           rdfs:label "Benchmark" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkAnswer
+:BenchmarkAnswer rdf:type owl:Class ;
+                 rdfs:subClassOf :BenchmarkChoice ;
+                 rdfs:comment "Text of a benchmark answer choice." ;
+                 rdfs:label "BenchmarkAnswer" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkAntecedent
+:BenchmarkAntecedent rdf:type owl:Class ;
+                     rdfs:subClassOf schema:ItemList ;
+                     rdfs:comment "A list of elements that compose a benchmark sample." ;
+                     rdfs:label "BenchmarkAntecedent" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkChoice
+:BenchmarkChoice rdf:type owl:Class ;
+                 rdfs:subClassOf schema:ListItem ;
+                 rdfs:comment "A possible choice for a benchmark sample." ;
+                 rdfs:label "BenchmarkChoice" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkChoices
+:BenchmarkChoices rdf:type owl:Class ;
+                  rdfs:subClassOf schema:ItemList ;
+                  rdfs:comment "List of possible choices in a benchmark sample." ;
+                  rdfs:label "BenchmarkChoices" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkConcept
+:BenchmarkConcept rdf:type owl:Class ;
+                  rdfs:subClassOf schema:ListItem ;
+                  rdfs:comment "The ConceptNet concept which the question of created from (i.e. electricity)." ;
+                  rdfs:label "BenchmarkConcept" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkContext
+:BenchmarkContext rdf:type owl:Class ;
+                  rdfs:subClassOf schema:ListItem ;
+                  rdfs:comment "Context text about the question." ;
+                  rdfs:label "BenchmarkContext" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkDataset
+:BenchmarkDataset rdf:type owl:Class ;
+                  rdfs:subClassOf schema:Dataset ;
+                  rdfs:comment "A file containing questions/answers of a QA benchmark." ;
+                  rdfs:label "BenchmarkDataset" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkDevDataset
+:BenchmarkDevDataset rdf:type owl:Class ;
+                     rdfs:subClassOf :BenchmarkDataset ;
+                     rdfs:comment "A dataset containing dev questions/asnwers of a QA bechmark." ;
+                     rdfs:label "BenchmarkDevDataset" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkGoal
+:BenchmarkGoal rdf:type owl:Class ;
+               rdfs:subClassOf schema:ListItem ;
+               rdfs:comment "Text of a benchmark goal." ;
+               rdfs:label "BenchmarkGoal" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkHypothesis
+:BenchmarkHypothesis rdf:type owl:Class ;
+                     rdfs:subClassOf :BenchmarkChoice ;
+                     rdfs:comment "Text of a benchmark hypothesis choice." ;
+                     rdfs:label "BenchmarkHypothesis" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkObservation
+:BenchmarkObservation rdf:type owl:Class ;
+                      rdfs:subClassOf schema:ListItem ;
+                      rdfs:comment "Narrative text for an observation." ;
+                      rdfs:label "BenchmarkObservation" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkQuestion
+:BenchmarkQuestion rdf:type owl:Class ;
+                   rdfs:subClassOf schema:ListItem ;
+                   rdfs:comment "Text of a benchmark question." ;
+                   rdfs:label "BenchmarkQuestion" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkQuestionCategory
+:BenchmarkQuestionCategory rdf:type owl:Class ;
+                           rdfs:subClassOf schema:ListItem ;
+                           rdfs:comment "The category of a benchmark question (i.e. temporal reasoming, temporal sequences ...)" ;
+                           rdfs:label "BenchmarkQuestionCategory" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkQuestionType
+:BenchmarkQuestionType rdf:type owl:Class ;
+                       rdfs:subClassOf schema:ListItem ;
+                       rdfs:comment "The type of a benchmark question (i.e. multiple choice, true/false)." ;
+                       rdfs:label "BenchmarkQuestionType" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkSample
+:BenchmarkSample rdf:type owl:Class ;
+                 rdfs:subClassOf schema:CreativeWork ;
+                 rdfs:comment "An entry in a benchmark dataset (e.g. questions, observations, goals ...)" ;
+                 rdfs:label "BenchmarkSample" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkSolution
+:BenchmarkSolution rdf:type owl:Class ;
+                   rdfs:subClassOf :BenchmarkChoice ;
+                   rdfs:comment "Text of a benchmark solution choice." ;
+                   rdfs:label "BenchmarkSolution" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkTestDataset
+:BenchmarkTestDataset rdf:type owl:Class ;
+                      rdfs:subClassOf :BenchmarkDataset ;
+                      rdfs:comment "A dataset containing test questions of a QA bechmark." ;
+                      rdfs:label "BenchmarkTestDataset" .
+
+
+###  http://purl.org/twc/mcs/BenchmarkTrainingDataset
+:BenchmarkTrainingDataset rdf:type owl:Class ;
+                          rdfs:subClassOf :BenchmarkDataset ;
+                          rdfs:comment "A dataset containing training questions/asnwers of a QA bechmark." ;
+                          rdfs:label "BenchmarkTrainingDataset" .
+
+
+###  http://purl.org/twc/mcs/DevScore
+:DevScore rdf:type owl:Class ;
+          rdfs:subClassOf schema:Rating ;
+          rdfs:comment "Score of correct predictions agains a dev benchmark dataset." ;
+          rdfs:label "DevScore" .
+
+
+###  http://purl.org/twc/mcs/Submission
+:Submission rdf:type owl:Class ;
+            rdfs:subClassOf schema:Dataset ;
+            rdfs:comment "A submission dataset from a QA system with prediction choices for a benchmark." ;
+            rdfs:label "Submission" .
+
+
+###  http://purl.org/twc/mcs/SubmissionSample
+:SubmissionSample rdf:type owl:Class ;
+                  rdfs:subClassOf schema:CreativeWork ;
+                  rdfs:comment "An entry in a submission dataset (i.e. a prediction)." ;
+                  rdfs:label "SubmissionSample" .
+
+
+###  http://purl.org/twc/mcs/TestScore
+:TestScore rdf:type owl:Class ;
+           rdfs:subClassOf schema:Rating ;
+           rdfs:comment "Score of correct predictions agains a test benchmark dataset." ;
+           rdfs:label "TestScore" .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
