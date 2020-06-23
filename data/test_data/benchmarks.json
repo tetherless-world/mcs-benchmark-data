@@ -1,6 +1,6 @@
 [
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "CycIC",
         "@type": "Benchmark",
         "name": "CycIC",
@@ -29,7 +29,7 @@
         ]
     },
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "CommonsenseQA",
         "@type": "Benchmark",
         "name": "CommonsenseQA",
@@ -53,7 +53,7 @@
         ]
     },
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "SocialIQA",
         "@type": "Benchmark",
         "name": "SocialIQA",
