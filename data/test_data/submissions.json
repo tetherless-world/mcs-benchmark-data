@@ -1,6 +1,6 @@
 [
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "brg0m7uqaup1kchu59g0",
         "@type": "Submission",
         "name": "cycic-roberta4",
@@ -31,7 +31,7 @@
         }
     },
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "bloc6no9bmuv5kr6fe60",
         "@type": "Submission",
         "name": "McQueen ANLI",
