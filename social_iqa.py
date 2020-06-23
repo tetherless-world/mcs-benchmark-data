@@ -18,6 +18,8 @@ class SocialIQA(Benchmark):
     def load_question_file(self, path):
         with open(path) as f:
             for i, line in enumerate(f):
+                if len(line.strip()) == 0:
+                    continue
                 sample = json.loads(line.strip())
                 # Assign GUID if not provided
                 sample["guid"] = "{}-{}".format(self.question_set_id, i)
@@ -26,7 +28,9 @@ class SocialIQA(Benchmark):
     def load_label_file(self, path):
         with open(path) as f:
             for i, line in enumerate(f):
-                label = line.strip()
+                if len(line.strip()) == 0:
+                    continue
+                label = int(line.strip()) - 1   # zero-based
                 guid = "{}-{}".format(self.question_set_id, i)
                 self.labels[guid] = label
 
@@ -54,12 +58,12 @@ class SocialIQA(Benchmark):
     def get_question_context(self, sample):
         return sample["context"]
 
-    def get_correct_choice_label(self, sample):
+    def get_correct_choice(self, sample):
         return self.labels[self.get_question_id(sample)]
 
-    def get_chosen_choice_label(self, sample):
+    def get_chosen_choice(self, sample):
         if self.get_question_id(sample) not in self.chosen_labels:
-            return ""
+            return None
         return self.chosen_labels[self.get_question_id(sample)]
 
     def get_choices(self, sample):
@@ -70,7 +74,6 @@ class SocialIQA(Benchmark):
             choices.append({
                 "@type": "BenchmarkAnswer",
                 "name": "Answer",
-                "identifier": str(i + 1),
                 "text": sample["answer{}".format(choice_ids[i])]
             })
         return choices

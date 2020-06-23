@@ -45,10 +45,10 @@ class Benchmark(object):
     def get_choice_explanation(self, sample):
         return None
 
-    def get_correct_choice_label(self, sample):
+    def get_correct_choice(self, sample):
         raise NotImplementedError
 
-    def get_chosen_choice_label(self, sample):
+    def get_chosen_choice(self, sample):
         raise NotImplementedError
 
     def convert_to_json(self):
@@ -65,8 +65,8 @@ class Benchmark(object):
             spl_data["context"] = self.get_question_context(spl)
             spl_data["concept"] = self.get_question_concept(spl)
             spl_data["choices"] = self.get_choices(spl)
-            spl_data["correctChoiceLabel"] = self.get_correct_choice_label(spl)
-            spl_data["chosenChoiceLabel"] = self.get_chosen_choice_label(spl)
+            spl_data["correctChoice"] = self.get_correct_choice(spl)
+            spl_data["chosenChoice"] = self.get_chosen_choice(spl)
             data.append(spl_data)
         return data
 
@@ -75,9 +75,10 @@ class Benchmark(object):
 
         for i, spl in enumerate(self.get_samples()):
             spl_data = dict()
+            spl_data["@context"] = "http://schema.org/"
             spl_data["@id"] = self.get_benchmark_id() + "-" + self.get_question_id(spl)
             spl_data["@type"] = "BenchmarkSample"
-            spl_data["inludedInDataset"] = self.get_benchmark_id() + "/" + self.get_question_set_id(spl)
+            spl_data["includedInDataset"] = self.get_benchmark_id() + "/" + self.get_question_set_id(spl)
 
             antecedents = list()
             category = dict()
@@ -130,13 +131,13 @@ class Benchmark(object):
             spl_data["antecedent"]["itemListElement"] = antecedents
 
             choices = self.get_choices(spl)
-            spl_data["choice"] = dict()
-            spl_data["choice"]["@type"] = "BenchmarkChoice"
-            spl_data["choice"]["numberOfItems"] = len(choices)
+            spl_data["choices"] = dict()
+            spl_data["choices"]["@type"] = "BenchmarkChoices"
+            spl_data["choices"]["numberOfItems"] = len(choices)
             for pos in range(len(choices)):
                 choices[pos]["position"] = pos
-            spl_data["choice"]["itemListElement"] = choices
-            spl_data["correctChoice"] = self.get_correct_choice_label(spl)
+            spl_data["choices"]["itemListElement"] = choices
+            spl_data["correctChoice"] = self.get_correct_choice(spl)
             data.append(spl_data)
         return data
 
@@ -144,12 +145,14 @@ class Benchmark(object):
         data = []
         for i, spl in enumerate(self.get_samples()):
             spl_data = dict()
-            spl_data["about"] = self.get_benchmark_id() + "-" + self.get_question_id(spl)
+            spl_data["@context"] = "http://schema.org/"
             spl_data["@type"] = "SubmissionSample"
+            spl_data["about"] = self.get_benchmark_id() + "-" + self.get_question_id(spl)
             spl_data["includedInDataset"] = submission_id
-            spl_data["explanation"] = self.get_choice_explanation(spl)
-            spl_data["correctChoiceLabel"] = self.get_correct_choice_label(spl)
-            spl_data["value"] = self.get_chosen_choice_label(spl)
+            explanation = self.get_choice_explanation(spl)
+            if explanation is not None:
+                spl_data["explanation"] = explanation
+            spl_data["value"] = self.get_chosen_choice(spl)
             data.append(spl_data)
         return data
 

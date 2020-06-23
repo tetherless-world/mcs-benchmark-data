@@ -25,7 +25,9 @@ class PhysicalIQA(Benchmark):
         assert len(self.samples) > 0
         with open(path) as f:
             for i, line in enumerate(f):
-                label = line.strip()
+                if len(line.strip()) == 0:
+                    continue
+                label = int(line.strip())
                 self.labels[self.samples[i]["id"]] = label
 
     def load_chosen_label_file(self, path):
@@ -49,12 +51,12 @@ class PhysicalIQA(Benchmark):
     def get_question_goal(self, sample):
         return sample["goal"]
 
-    def get_correct_choice_label(self, sample):
+    def get_correct_choice(self, sample):
         return self.labels[self.get_question_id(sample)]
 
-    def get_chosen_choice_label(self, sample):
+    def get_chosen_choice(self, sample):
         if self.get_question_id(sample) not in self.chosen_labels:
-            return ""
+            return None
         return self.chosen_labels[self.get_question_id(sample)]
 
     def get_choices(self, sample):
@@ -64,7 +66,6 @@ class PhysicalIQA(Benchmark):
             choices.append({
                 "@type": "BenchmarkSolution",
                 "name": "Solution",
-                "identifier": str(i),
                 "text": sample["sol{}".format(i + 1)]
             })
         return choices

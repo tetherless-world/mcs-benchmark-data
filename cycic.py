@@ -23,14 +23,14 @@ class CycIC(Benchmark):
         with open(path) as f:
             for line in f:
                 json_data = json.loads(line.strip())
-                self.labels[json_data["guid"]] = str(json_data["correct_answer"])
+                self.labels[json_data["guid"]] = json_data["correct_answer"]
                 self.runid2guid[json_data["run_id"]] = json_data["guid"]
 
     def load_chosen_label_file(self, path):
         with open(path) as f:
             for line in f:
                 json_data = json.loads(line.strip())
-                self.chosen_labels[self.runid2guid[json_data["example_id"]]] = json_data["pred"]
+                self.chosen_labels[self.runid2guid[json_data["example_id"]]] = int(json_data["pred"])
 
     def get_benchmark_id(self):
         return self.benchmark_id
@@ -53,12 +53,12 @@ class CycIC(Benchmark):
     def get_question_text(self, sample):
         return sample["question"]
 
-    def get_correct_choice_label(self, sample):
+    def get_correct_choice(self, sample):
         return self.labels[self.get_question_id(sample)]
 
-    def get_chosen_choice_label(self, sample):
+    def get_chosen_choice(self, sample):
         if self.get_question_id(sample) not in self.chosen_labels:
-            return ""
+            return None
         return self.chosen_labels[self.get_question_id(sample)]
 
     def get_choices(self, sample):
@@ -72,7 +72,6 @@ class CycIC(Benchmark):
             choices.append({
                 "@type": "BenchmarkAnswer",
                 "name": "Answer",
-                "identifier": str(i),
                 "text": sample["answer_option{}".format(i)]
             })
         return choices

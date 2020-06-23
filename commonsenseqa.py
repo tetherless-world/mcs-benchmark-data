@@ -21,17 +21,19 @@ class CommonsenseQA(Benchmark):
 
     def load_label_file(self, path):
         self.labels = dict()
+        ans_mapping = {ans: i for i, ans in enumerate("ABCDE")}
         with open(path) as f:
             for line in f:
                 sample = json.loads(line.strip())
-                self.labels[sample["id"]] = sample["answerKey"]
+                self.labels[sample["id"]] = ans_mapping[sample["answerKey"]]
 
     def load_chosen_label_file(self, path):
         self.chosen_labels = dict()
+        ans_mapping = {ans: i for i, ans in enumerate("ABCDE")}
         with open(path) as f:
             for line in f:
                 sample = json.loads(line.strip())
-                self.chosen_labels[sample["id"]] = sample["chosenAnswer"]
+                self.chosen_labels[sample["id"]] = ans_mapping[sample["chosenAnswer"]]
 
     def get_benchmark_id(self):
         return self.benchmark_id
@@ -54,14 +56,14 @@ class CommonsenseQA(Benchmark):
     def get_question_concept(self, sample):
         return sample["question"]["question_concept"]
 
-    def get_correct_choice_label(self, sample):
+    def get_correct_choice(self, sample):
         if self.get_question_id(sample) not in self.labels:
             return None
         return self.labels[self.get_question_id(sample)]
 
-    def get_chosen_choice_label(self, sample):
+    def get_chosen_choice(self, sample):
         if self.get_question_id(sample) not in self.chosen_labels:
-            return ""
+            return None
         return self.chosen_labels[self.get_question_id(sample)]
 
     def get_choices(self, sample):
