@@ -1,6 +1,6 @@
 [
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "CycIC-324917",
         "@type": "BenchmarkSample",
         "includedInDataset": "CycIC/cycic_training_questions",
@@ -65,7 +65,7 @@
         "correctChoice": 2
     },
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "CommonsenseQA-dd640927f9920930501fb8dc3efc196b",
         "@type": "BenchmarkSample",
         "inludedInDataset": "CommonsenseQA/train_rand_split",
@@ -126,7 +126,7 @@
         "correctChoice": "C"
     },
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "SocialIQA-[line_number]",
         "@type": "BenchmarkSample",
         "includedInDataset": "SocialIQA/train",
@@ -172,7 +172,7 @@
         "correctChoice": 3
     },
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "AlphaNLI-fffed530-f737-4dc7-8cc4-15760765d440-1-X",
         "@type": "BenchmarkSample",
         "includedInDataset": "AlphaNLI/train",
@@ -215,7 +215,7 @@
         "correctChoice": 2
     },
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@id": "PhysicalIQA-cd8acbfa-f163-4670-ad2f-88074578fc65",
         "@type": "BenchmarkSample",
         "includedInDataset": "PhysicalIQA/train",

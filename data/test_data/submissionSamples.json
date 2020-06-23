@@ -1,13 +1,13 @@
 [
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@type": "SubmissionSample",
         "includedInDataset": "brg0m7uqaup1kchu59g0",
         "value": 2,
         "about": "CycIC-324917"
     },
     {
-        "@context": "http://schema.org",
+        "@context": "http://schema.org/",
         "@type": "SubmissionSample",
         "includedInDataset": "bloc6no9bmuv5kr6fe60",
         "value": 1,
