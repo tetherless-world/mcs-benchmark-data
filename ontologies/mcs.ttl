@@ -25,12 +25,12 @@
 
 
 ###  http://purl.org/twc/mcs/choice
-:choice rdf:type owl:AnnotationProperty ;
-        schema:domainIncludes :BenchmarkSample ;
-        schema:rangeIncludes :BenchmarkChoices ;
-        rdfs:comment "Indicates a benchmark choice that is part of this benchmark sample." ;
-        rdfs:label "choice" ;
-        rdfs:subPropertyOf schema:hasPart .
+:choices rdf:type owl:AnnotationProperty ;
+         schema:domainIncludes :BenchmarkSample ;
+         schema:rangeIncludes :BenchmarkChoices ;
+         rdfs:comment "Indicates a list of benchmark choices that is part of this benchmark sample." ;
+         rdfs:label "choices" ;
+         rdfs:subPropertyOf schema:hasPart .
 
 
 ###  http://purl.org/twc/mcs/resultOf
