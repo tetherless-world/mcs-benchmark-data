@@ -24,7 +24,7 @@
             rdfs:subPropertyOf schema:hasPart .
 
 
-###  http://purl.org/twc/mcs/choice
+###  http://purl.org/twc/mcs/choices
 :choices rdf:type owl:AnnotationProperty ;
          schema:domainIncludes :BenchmarkSample ;
          schema:rangeIncludes :BenchmarkChoices ;
