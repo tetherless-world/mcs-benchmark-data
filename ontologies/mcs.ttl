@@ -4,52 +4,86 @@
 @prefix xml: <http://www.w3.org/XML/1998/namespace> .
 @prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
 @prefix schema: <http://schema.org/> .
 @base <http://purl.org/twc/mcs/> .
 
 <http://purl.org/twc/mcs/> rdf:type owl:Ontology ;
-                            owl:imports <https://schema.org/version/latest/schema.rdf> ;
-                            schema:description "The main goal in commonsense reasoning is to improve score against specific commonsense question-answering benchmarks. In this context, there exists leaderboards that act as a hub for hosting benchmarks and allowing systems submissions that try to improve the score. These benchmarks vary in structure. Some provide questions and answer choices, while others may require systems to reason over observations and provide explanations by the choice of a most appropriate hypothesis. This is an ontology that provide a common vocabulary for annotating datasets that compose commonsense reasoning benchmarks, as well as submissions, and systems. Its goal is to allow diverse benchmarks to be compared, integrated and also support the analysis of systems and machine-learning models." .
+                            owl:versionIRI <http://purl.org/twc/mcs/0.1> ;
+                            owl:imports schema: ;
+                            vann:preferredNamespacePrefix "mcs" ;
+                            vann:preferredNamespaceUri "http://purl.org/twc/mcs/" ;
+                            schema:creator "Henrique O. Santos" ;
+                            schema:dateCreated "2020-06-22" ;
+                            schema:description "The main goal in commonsense reasoning is to improve score against specific commonsense question-answering benchmarks. In this context, there exists leaderboards that act as a hub for hosting benchmarks and allowing systems submissions that try to improve the score. These benchmarks vary in structure. Some provide questions and answer choices, while others may require systems to reason over observations and provide explanations by the choice of a most appropriate hypothesis. This is an ontology that provide a common vocabulary for annotating datasets that compose commonsense reasoning benchmarks, as well as submissions, and systems. Its goal is to allow diverse benchmarks to be compared, integrated and also support the analysis of systems and machine-learning models." ;
+                            schema:name "MCS Ontology" ;
+                            owl:versionInfo 0.1 .
 
 #################################################################
 #    Annotation properties
 #################################################################
 
+###  http://purl.org/vocab/vann/preferredNamespacePrefix
+vann:preferredNamespacePrefix rdf:type owl:AnnotationProperty .
+
+
+###  http://purl.org/vocab/vann/preferredNamespaceUri
+vann:preferredNamespaceUri rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/creator
+schema:creator rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/dateCreated
+schema:dateCreated rdf:type owl:AnnotationProperty .
+
+
+###  http://schema.org/description
+schema:description rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
 ###  http://purl.org/twc/mcs/antecedent
-:antecedent rdf:type owl:AnnotationProperty ;
-            schema:domainIncludes :BenchmarkSample ;
-            schema:rangeIncludes :BenchmarkAntecedent ;
+:antecedent rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf schema:hasPart ;
+            rdfs:domain :BenchmarkSample ;
+            rdfs:range :BenchmarkAntecedent ;
             rdfs:comment "Indicates the list of elements (antecedent) that is part of this benchmark sample." ;
-            rdfs:label "antecedent" ;
-            rdfs:subPropertyOf schema:hasPart .
+            rdfs:label "antecedent" .
 
 
 ###  http://purl.org/twc/mcs/choices
-:choices rdf:type owl:AnnotationProperty ;
-         schema:domainIncludes :BenchmarkSample ;
-         schema:rangeIncludes :BenchmarkChoices ;
+:choices rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf schema:hasPart ;
+         rdfs:domain :BenchmarkSample ;
+         rdfs:range :BenchmarkChoices ;
          rdfs:comment "Indicates a list of benchmark choices that is part of this benchmark sample." ;
-         rdfs:label "choices" ;
-         rdfs:subPropertyOf schema:hasPart .
+         rdfs:label "choices" .
 
 
 ###  http://purl.org/twc/mcs/resultOf
-:resultOf rdf:type owl:AnnotationProperty ;
-          schema:domainIncludes schema:Thing ;
-          schema:inverseOf schema:result ;
-          schema:rangeIncludes schema:Action ;
+:resultOf rdf:type owl:ObjectProperty ;
+          owl:inverseOf schema:result ;
+          rdfs:domain schema:Thing ;
+          rdfs:range schema:Action ;
           rdfs:comment "The result produced in the action. Inverse of result." ;
           rdfs:label "resultOf" .
 
 
 ###  http://purl.org/twc/mcs/sample
-:sample rdf:type owl:AnnotationProperty ;
-        schema:domainIncludes :BenchmarkDataset ;
-        schema:rangeIncludes :BenchmarkSample ;
+:sample rdf:type owl:ObjectProperty ;
+        rdfs:subPropertyOf schema:hasPart ;
+        rdfs:domain :BenchmarkDataset ;
+        rdfs:range :BenchmarkSample ;
         rdfs:comment "Indicates a benchmark sample that is part of this benchmark dataset." ;
-        rdfs:label "sample" ;
-        rdfs:subPropertyOf schema:hasPart .
+        rdfs:label "sample" .
 
+
+###  http://schema.org/result
 
 #################################################################
 #    Classes
