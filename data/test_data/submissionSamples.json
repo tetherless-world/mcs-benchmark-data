@@ -2,6 +2,7 @@
     {
         "@context": "http://schema.org/",
         "@type": "SubmissionSample",
+        "@id": "CycIC-324917-submission",
         "includedInDataset": "brg0m7uqaup1kchu59g0",
         "value": 2,
         "about": "CycIC-324917"
@@ -9,6 +10,7 @@
     {
         "@context": "http://schema.org/",
         "@type": "SubmissionSample",
+        "@id": "AlphaNLI-fffed530-f737-4dc7-8cc4-15760765d440-1-X",
         "includedInDataset": "bloc6no9bmuv5kr6fe60",
         "value": 1,
         "about": "AlphaNLI-fffed530-f737-4dc7-8cc4-15760765d440-1-X"
