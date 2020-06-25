@@ -15,17 +15,17 @@
     "dataset": [
       {
         "@id": "CycIC/dev",
-        "@type": "BenchmarkDataset",
+        "@type": "BenchmarkDevDataset",
         "name": "CycIC dev questions"
       },
       {
         "@id": "CycIC/test",
-        "@type": "BenchmarkDataset",
+        "@type": "BenchmarkTestDataset",
         "name": "CycIC test questions"
       },
       {
         "@id": "CycIC/train",
-        "@type": "BenchmarkDataset",
+        "@type": "BenchmarkTrainingDataset",
         "name": "CycIC training questions"
       }
     ]
@@ -57,17 +57,17 @@
     "dataset": [
       {
         "@id": "CommonsenseQA/dev",
-        "@type": "BenchmarkDataset",
+        "@type": "BenchmarkDevDataset",
         "name": "CommonsenseQA dev"
       },
       {
         "@id": "CommonsenseQA/test",
-        "@type": "BenchmarkDataset",
+        "@type": "BenchmarkTestDataset",
         "name": "CommonsenseQA test"
       },
       {
         "@id": "CommonsenseQA/train",
-        "@type": "BenchmarkDataset",
+        "@type": "BenchmarkTrainingDataset",
         "name": "CommonsenseQA training"
       }
     ]
@@ -102,14 +102,14 @@
     ],
     "dataset": [
       {
-        "@id": "SocialIQA/train",
-        "@type": "BenchmarkDataset",
-        "name": "SocialIQA train"
+        "@id": "SocialIQA/dev",
+        "@type": "BenchmarkDevDataset",
+        "name": "SocialIQA dev"
       },
       {
-        "@id": "SocialIQA/dev",
-        "@type": "BenchmarkDataset",
-        "name": "SocialIQA dev"
+        "@id": "SocialIQA/train",
+        "@type": "BenchmarkTrainingDataset",
+        "name": "SocialIQA train"
       }
     ]
   },
@@ -143,14 +143,14 @@
     ],
     "dataset": [
       {
-        "@id": "PhysicalIQA/train",
-        "@type": "BenchmarkDataset",
-        "name": "PhysicalIQA train"
+        "@id": "PhysicalIQA/dev",
+        "@type": "BenchmarkDevDataset",
+        "name": "PhysicalIQA dev"
       },
       {
-        "@id": "PhysicalIQA/dev",
-        "@type": "BenchmarkDataset",
-        "name": "PhysicalIQA dev"
+        "@id": "PhysicalIQA/train",
+        "@type": "BenchmarkTrainingDataset",
+        "name": "PhysicalIQA train"
       }
     ]
   }
