@@ -5,10 +5,11 @@ from benchmark import Benchmark
 
 
 class CommonsenseQA(Benchmark):
-    def __init__(self, question_set_id):
+    def __init__(self, question_set_id, explanation=False):
         super(CommonsenseQA, self).__init__()
         self.question_set_id = question_set_id
         self.benchmark_id = "CommonsenseQA"
+        self.explanation = explanation
         self.samples = []
         self.labels = dict()
         self.chosen_labels = dict()
@@ -60,6 +61,9 @@ class CommonsenseQA(Benchmark):
     def get_question_concept(self, sample):
         return sample["question"]["question_concept"]
 
+    def has_explanation(self):
+        return self.explanation
+
     def get_correct_choice(self, sample):
         if self.get_question_id(sample) not in self.labels:
             return None
@@ -75,6 +79,7 @@ class CommonsenseQA(Benchmark):
         num_choices = 5
         for i in range(num_choices):
             choice = dict()
+            choice
             choice["@type"] = "BenchmarkAnswer"
             choice["name"] = "Answer"
             choice["identifier"] = sample["question"]["choices"][i]["label"]
@@ -87,6 +92,7 @@ class CommonsenseQA(Benchmark):
         num_choices = 5
         for i in range(num_choices):
             choice = dict()
+            choice["@id"] = "{}-{}-{}".format(self.get_benchmark_id(), self.get_question_id(sample), i)
             choice["@type"] = "BenchmarkAnswer"
             choice["name"] = "Answer"
             choice["identifier"] = sample["question"]["choices"][i]["label"]
@@ -133,12 +139,14 @@ if __name__ == "__main__":
     data = benchmark.convert_samples_to_jsonld()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
 
+    benchmark = CommonsenseQA(question_set_id="dev", explanation=True)
     benchmark.load_question_file("data/{}/dev_rand_split_kagnet_submission.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/dev_rand_split_kagnet_submission.jsonl".format(dataset))
     benchmark.load_chosen_label_file("data/{}/dev_rand_split_kagnet_submission.jsonl".format(dataset))
     data = benchmark.convert_system_choices_to_jsonld("CommonsenseQA-kagnet")
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev_kagnet_submission.jsonl".format(dataset)))
 
+    benchmark = CommonsenseQA(question_set_id="dev")
     benchmark.load_question_file("data/{}/dev_rand_split.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/dev_rand_split_roberta_submission.jsonl".format(dataset))
     benchmark.load_chosen_label_file("data/{}/dev_rand_split_roberta_submission.jsonl".format(dataset))
