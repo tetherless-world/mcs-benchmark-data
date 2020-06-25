@@ -3,7 +3,7 @@
         "@context": "http://schema.org/",
         "@id": "CycIC-324917",
         "@type": "BenchmarkSample",
-        "includedInDataset": "CycIC/cycic_training_questions",
+        "includedInDataset": "CycIC/train",
         "antecedent": {
             "@type": "BenchmarkSampleAntecedent",
             "numberOfItems": 3,
