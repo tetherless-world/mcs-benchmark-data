@@ -13,6 +13,7 @@ class CycIC(Benchmark):
         self.labels = dict()
         self.chosen_labels = dict()
         self.runid2guid = dict()
+        self.id_set = set()
 
     def load_question_file(self, path):
         with open(path) as f:
@@ -23,6 +24,7 @@ class CycIC(Benchmark):
         with open(path) as f:
             for line in f:
                 json_data = json.loads(line.strip())
+                self.id_set.add(json_data["guid"])
                 self.labels[json_data["guid"]] = json_data["correct_answer"]
                 self.runid2guid[json_data["run_id"]] = json_data["guid"]
 
@@ -86,21 +88,20 @@ if __name__ == "__main__":
     benchmark = CycIC(question_set_id="train")
     benchmark.load_question_file("data/CycIC/CycIC_training_questions.jsonl")
     benchmark.load_label_file("data/CycIC/CycIC_training_labels.jsonl")
+    train_id_set = benchmark.id_set
     data = benchmark.convert_samples_to_jsonld()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_train.jsonl".format(dataset)))
 
     benchmark = CycIC(question_set_id="dev")
     benchmark.load_question_file("data/CycIC/CycIC_dev_questions.jsonl")
     benchmark.load_label_file("data/CycIC/CycIC_dev_labels.jsonl")
+    dev_id_set = benchmark.id_set
     benchmark.load_chosen_label_file("data/CycIC/CycIC_dev_cycic-transformers_submission.jsonl")
     data = benchmark.convert_samples_to_jsonld()
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
     data = benchmark.convert_system_choices_to_jsonld("CycIC-cycic-transformers")
     benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev_cycic-transformers_submission.jsonl".format(dataset)))
 
-    benchmark = CycIC(question_set_id="test")
-    benchmark.load_question_file("data/CycIC/CycIC_test_questions.jsonl")
-    benchmark.load_label_file("data/CycIC/CycIC_test_labels.jsonl")
-    data = benchmark.convert_samples_to_jsonld()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_test.jsonl".format(dataset)))
+    if len(train_id_set.intersection(dev_id_set)) != 0:
+        print(train_id_set.intersection(dev_id_set))
 
