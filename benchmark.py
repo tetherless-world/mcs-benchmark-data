@@ -30,6 +30,9 @@ class Benchmark(object):
     def get_question_text(self, sample):
         return None
 
+    def get_question_observation(self, sample):
+        return None
+
     def get_question_goal(self, sample):
         return None
 
@@ -104,6 +107,11 @@ class Benchmark(object):
             question["text"] = self.get_question_text(spl)
             if question["text"] is not None:
                 antecedents.append(question)
+
+            observations = self.get_question_observation(spl)
+            if observations is not None:
+                for obs in observations:
+                    antecedents.append(obs)
 
             goal = dict()
             goal["@type"] = "BenchmarkGoal"

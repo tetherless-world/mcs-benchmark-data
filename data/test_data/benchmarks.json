@@ -14,24 +14,14 @@
         ],
         "dataset": [
             {
-                "@id": "CycIC/cycic_training_questions",
-                "@type": "BenchmarkDataset",
-                "name": "CycIC training questions"
+                "@id": "CycIC/train",
+                "@type": "BenchmarkTrainingDataset",
+                "name": "CycIC training dataset"
             },
             {
-                "@id": "CycIC/cycic_training_labels",
-                "@type": "BenchmarkDataset",
-                "name": "CycIC training labels"
-            },
-            {
-                "@id": "CycIC/cycic_dev_questions",
-                "@type": "BenchmarkDataset",
-                "name": "CycIC dev questions"
-            },
-            {
-                "@id": "CycIC/cycic_dev_labels",
-                "@type": "BenchmarkDataset",
-                "name": "CycIC dev labels"
+                "@id": "CycIC/dev",
+                "@type": "BenchmarkDevDataset",
+                "name": "CycIC dev dataset"
             }
         ]
     },
@@ -61,19 +51,19 @@
         ],
         "dataset": [
             {
-                "@id": "CommonsenseQA/train_rand_split",
-                "@type": "BenchmarkDataset",
-                "name": "CommonsenseQA training"
+                "@id": "CommonsenseQA/train",
+                "@type": "BenchmarkTrainingDataset",
+                "name": "CommonsenseQA training dataset"
             },
             {
-                "@id": "CommonsenseQA/dev_rand_split",
-                "@type": "BenchmarkDataset",
-                "name": "CommonsenseQA dev"
+                "@id": "CommonsenseQA/dev",
+                "@type": "BenchmarkDevDataset",
+                "name": "CommonsenseQA dev dataset"
             },
             {
-                "@id": "CommonsenseQA/test_rand_split_no_answers",
-                "@type": "BenchmarkDataset",
-                "name": "CommonsenseQA test"
+                "@id": "CommonsenseQA/test",
+                "@type": "BenchmarkTestDataset",
+                "name": "CommonsenseQA test dataset"
             }
         ]
     },
@@ -108,23 +98,13 @@
         "dataset": [
             {
                 "@id": "SocialIQA/train",
-                "@type": "BenchmarkDataset",
-                "name": "SocialIQA train"
-            },
-            {
-                "@id": "SocialIQA/train-labels",
-                "@type": "BenchmarkDataset",
-                "name": "SocialIQA train labels"
+                "@type": "BenchmarkTrainingDataset",
+                "name": "SocialIQA training dataset"
             },
             {
                 "@id": "SocialIQA/dev",
-                "@type": "BenchmarkDataset",
-                "name": "SocialIQA dev"
-            },
-            {
-                "@id": "SocialIQA/dev-labels",
-                "@type": "BenchmarkDataset",
-                "name": "SocialIQA dev labels"
+                "@type": "BenchmarkDevDataset",
+                "name": "SocialIQA dev dataset"
             }
         ]
     }
