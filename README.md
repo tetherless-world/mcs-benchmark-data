@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # CommonsenseBenchmark
 
 This repo contains a light-weight code template for converting various commonsense question answering benchmarks 
@@ -160,3 +161,6 @@ Benchmarks supported:
 ## CycIC
 ## SocialIQA
 ## PhysicalIQA
+=======
+# benchmark_etl
+>>>>>>> benchmark_etl/master
