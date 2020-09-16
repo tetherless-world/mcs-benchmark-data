@@ -13,3 +13,4 @@ class Submission(NamedTuple):
     isBasedOn: str #benchmark name
     contributor: Tuple[str, ...]
     contentRating: Tuple[TestScore, DevScore]
+    result: #Are we missing a result object here?? 
