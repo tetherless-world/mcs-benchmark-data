@@ -1,37 +1,39 @@
+import logging
 from abc import ABC
-from typing import Optional, Union
+from pathlib import Path
+from typing import Dict, Optional
 
 from configargparse import ArgParser
+from rdflib import URIRef
 
-from mcs-benchmark-data._extractor import _Extractor
-from mcs-benchmark-data._loader import _Loader
-from mcs-benchmark-data._transformer import _Transformer
-from mcs-benchmark-data.loader.cskg_csv.cskg_csv_loader import CskgCsvLoader
-from mcs-benchmark-data.loader.kgtk.kgtk_edges_tsv_loader import KgtkEdgesTsvLoader
+from mcs_benchmark_data._extractor import _Extractor
+from mcs_benchmark_data._loader import _Loader
+from mcs_benchmark_data._transformer import _Transformer
+from mcs_benchmark_data.loaders.default_loader import DefaultLoader
 
 
 class _Pipeline(ABC):
-    """
-    Abstract base class for extract-transform-load pipelines.
-    A pipeline consists of an extractor, a transformer, and a loader. Most pipeline implementations (subclasses) only supply the former two.
-    """
-
-    def __init__(self, *, extractor: _Extractor, id: str, transformer: _Transformer, loader: Optional[Union[_Loader, str]] = None, single_source=True, **kwds):
+    def __init__(
+        self,
+        *,
+        extractor: _Extractor,
+        id: str,
+        transformer: _Transformer,
+        loader: Optional[_Loader] = None,
+        **kwds
+    ):
         """
         Construct an extract-transform-load pipeline.
         :param extractor: extractor implementation
         :param id: unique identifier for this pipeline instance, may be adapted from arguments
-        :param loader: optional _Loader instance or loader name to use
-        :param single_source: indicates whether the pipeline emits a single source (per the sources fields in nodes and edges)
+        :param loader: optional loader; if not specified, a default loader will be used
         :param transformer: transformer implementation
-        :param kwds: ignored
         """
         self.__extractor = extractor
         self.__id = id
-        if not isinstance(loader, _Loader):
-            loader = self.__create_loader(id=id, loader=loader, **kwds)
+        if loader is None:
+            loader = DefaultLoader(pipeline_id=id, **kwds)
         self.__loader = loader
-        self.__single_source = single_source
         self.__transformer = transformer
 
     @classmethod
@@ -39,41 +41,107 @@ class _Pipeline(ABC):
         """
         Add pipeline-specific arguments. The parsed arguments are passed to the constructor as keywords.
         """
-        cls.__add_loader_arguments(arg_parser)
+        arg_parser.add_argument("-c", is_config_file=True, help="config file path")
+        arg_parser.add_argument(
+            "--data-dir-path",
+            help="path to a directory to store extracted data and transformed models",
+        )
+        arg_parser.add_argument(
+            "--debug", action="store_true", help="turn on debugging"
+        )
+        arg_parser.add_argument(
+            "-f",
+            "--force",
+            action="store_true",
+            help="force extract and transform, ignoring any cached data",
+        )
+        arg_parser.add_argument(
+            "--force-extract",
+            action="store_true",
+            help="force extract, ignoring any cached data",
+        )
+        arg_parser.add_argument(
+            "--logging-level",
+            help="set logging-level level (see Python logging module)",
+        )
 
     @classmethod
-    def __add_loader_arguments(cls, arg_parser):
-        arg_parser.add_argument("--loader", default="cskg_csv")
+    def _add_collection_arguments(cls, arg_parser: ArgParser) -> None:
+        arg_parser.add_argument("--collection-title", required=True)
+        arg_parser.add_argument("--collection-uri", required=True)
 
-    def __create_loader(self, id: str, loader: Optional[str] = None, **loader_kwds) -> _Loader:
-        if loader is None:
-            loader = "cskg_csv"
-        else:
-            loader = loader.lower()
+    @classmethod
+    def _add_institution_arguments(cls, arg_parser: ArgParser) -> None:
+        arg_parser.add_argument("--institution-name", required=True)
+        arg_parser.add_argument("--institution-rights", required=True)
+        arg_parser.add_argument("--institution-uri", required=True)
 
-        if loader == "cskg_csv":
-            return CskgCsvLoader()
-        elif loader == "kgtk_edges_tsv":
-            return KgtkEdgesTsvLoader()
-        else:
-            raise NotImplementedError(loader)
+    def extract_transform(self, *, force_extract: bool = False):
+        extract_kwds = self.extractor.extract(force=force_extract)
+        if not extract_kwds:
+            extract_kwds = {}
+        return self.transformer.transform(**extract_kwds)
+
+    def extract_transform_load(self, *, force_extract: bool = False):
+        models = self.extract_transform(force_extract=force_extract)
+        self.loader.load(models=models)
+        return self.loader.flush()
 
     @property
-    def extractor(self) -> _Extractor:
+    def extractor(self):
         return self.__extractor
 
-    @property
-    def id(self) -> str:
-        return self.__id
+    @classmethod
+    def main(cls, args: Optional[Dict[str, object]] = None):
+        if args is None:
+            arg_parser = ArgParser()
+            cls.add_arguments(arg_parser)
+            args = arg_parser.parse_args()
+            args = vars(args).copy()
+
+        if args.get("debug", False):
+            logging_level = logging.DEBUG
+        elif args.get("logging_level") is not None:
+            logging_level = getattr(logging, args["logging_level"].upper())
+        else:
+            logging_level = logging.INFO
+        logging.basicConfig(
+            format="%(asctime)s:%(module)s:%(lineno)s:%(name)s:%(levelname)s: %(message)s",
+            level=logging_level,
+        )
+
+        pipeline_kwds = args.copy()
+        for key in ("force", "force_extract", "logging_level"):
+            try:
+                pipeline_kwds.pop(key)
+            except KeyError:
+                pass
+        data_dir_path = pipeline_kwds.get("data_dir_path")
+        if data_dir_path is not None:
+            pipeline_kwds["data_dir_path"] = Path(data_dir_path)
+        pipeline = cls(**pipeline_kwds)
+
+        force = bool(args.get("force", False))
+        force_extract = force or bool(args.get("force_extract", False))
+
+        pipeline.extract_transform_load(force_extract=force_extract)
 
     @property
-    def loader(self) -> _Loader:
+    def id(self):
+        return self.__id
+
+    @staticmethod
+    def id_to_uri(id_: str) -> URIRef:
+        return URIRef("urn:mcs_benchmark_data:pipeline:" + id_)
+
+    @property
+    def loader(self):
         return self.__loader
 
     @property
-    def single_source(self) -> bool:
-        return self.__single_source
+    def transformer(self):
+        return self.__transformer
 
     @property
-    def transformer(self) -> _Transformer:
-        return self.__transformer
+    def uri(self) -> URIRef:
+        return self.id_to_uri(self.id)

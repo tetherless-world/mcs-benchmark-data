@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from rdflib import URIref
 
-@dataclass
+@dataclass(frozen = True)
 class Model():
     id: URIref

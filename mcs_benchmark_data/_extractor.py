@@ -1,110 +1,81 @@
-import bz2
 import logging
-import os.path
 from abc import ABC, abstractmethod
 from pathlib import Path
-from typing import Optional, Dict, Tuple, Union
-from zipfile import ZipFile
+from typing import Dict, Optional
+from urllib.request import urlopen
 
 from pathvalidate import sanitize_filename
 
-from mcs-benchmark-data.http_client.etl_http_client import EtlHttpClient
-from mcs-benchmark-data.http_client.real_etl_http_client import RealEtlHttpClient
-from mcs-benchmark-data.pipeline_storage import PipelineStorage
+from paradicms_etl._pipeline_phase import _PipelinePhase
 
 
-class _Extractor(ABC):
-    """
-    Abstract base class for extractors.
-    See the extract method.
-    """
+class _Extractor(_PipelinePhase):
+    def __init__(
+        self,
+        *,
+        data_dir_path: Optional[Path] = None,
+        extracted_data_dir_path: Optional[Path] = None,
+        **kwds
+    ):
+        """
+        Construct an extractor.
+        If extracted_data_dir_path is specified, use it for the extractor's outputs.
+        If data_dir_path is specified, use data_dir_path / pipeline_id / "extracted".
+        If neither is specified, use the default data_dir_path in the repository / pipeline_id / "extracted".
+        """
 
-    def __init__(self, http_client: EtlHttpClient = None, **kwargs):
-        if http_client is None:
-            http_client = RealEtlHttpClient()
-        self.__http_client = http_client
-        self._logger = logging.getLogger(self.__class__.__name__)
+        _PipelinePhase.__init__(self, **kwds)
+        self.__data_dir_path = data_dir_path
+        self.__extracted_data_dir_path = extracted_data_dir_path
 
-    def _download(self, from_url: str, force: bool, storage: PipelineStorage) -> Path:
+    def _download(self, from_url: str, force: bool) -> Path:
         """
         Utility method to download a file from a URL to a local file path.
         """
-
-        downloaded_file_path = storage.extracted_data_dir_path / sanitize_filename(
-            from_url
-        )
-        if not force and os.path.isfile(downloaded_file_path):
+        file_path = self._extracted_data_dir_path / sanitize_filename(from_url)
+        if not force and file_path.exists():
             self._logger.info(
-                "%s already download and force not specified, skipping download",
+                "%s already downloaded to %s and force not specified, skipping download",
                 from_url,
+                file_path,
             )
-        else:
-            self._logger.info("downloading %s", from_url)
-            in_f = self.__http_client.urlopen(from_url)
-            with open(downloaded_file_path, "w+b") as out_f:
-                out_f.write(in_f.read())
-            self._logger.info("downloaded %s", from_url)
-        return downloaded_file_path
+            return file_path
+
+        self._logger.info("downloading %s to %s", from_url, file_path)
+        try:
+            url_ = urlopen(from_url)
+            url_contents = url_.read()
+        finally:
+            url_.close()
+        with open(file_path, "w+b") as file_:
+            file_.write(url_contents)
+        self._logger.info("downloaded %s", from_url)
+        return file_path
 
     @abstractmethod
-    def extract(
-        self, *, force: bool, storage: PipelineStorage
-    ) -> Optional[Dict[str, object]]:
+    def extract(self, *, force: bool) -> Optional[Dict[str, object]]:
         """
-        Extract data from a source. The source data is passed to the transformer.
+        Extract data from a source.
         :param force: force extraction, ignoring any cached data
         :return a **kwds dictionary to merge with kwds to pass to transformer
         """
 
-    def _extract_bz2(self, path: str, force: bool, storage: PipelineStorage) -> Path:
+    @property
+    def _extracted_data_dir_path(self) -> Path:
         """
-        Utility method to decompress a local bz2 file and load it into the given storage repository.
+        Directory to use to store extracted data.
+        The directory is created on demand when this method is called.
+        Paths into this directory can be passed to the transformer via the kwds return from extract.
         """
 
-        extracted_file_path = storage.extracted_data_dir_path / sanitize_filename(path)
-        if not force and os.path.isfile(extracted_file_path):
-            self._logger.info(
-                "%s already extracted and force not specified, skipping decompression",
-                path,
-            )
-            return extracted_file_path
-        self._logger.info("extracting bz2 file %s", path)
-        with bz2.open(path) as in_f:
-            with open(extracted_file_path, "w+b") as out_f:
-                out_f.write(in_f.read())
-        self._logger.info("extracted bz2 file %s", path)
-        return extracted_file_path
-
-    def _extract_zip(
-        self,
-        *,
-        archive_path: Union[str, Path],
-        filenames: Union[str, Tuple[str, ...]],
-        force: bool,
-        storage: PipelineStorage
-    ) -> Dict[str, Path]:
-        """
-        Decompress a local zip file and load it into the given storage.
-        :param archive_path: path to zip archive
-        :param force: if false, extraction will be skipped for files already present in storage
-        :param storage: PipelineStorage instance
-        :param filenames: name or tuple of names of files to extract from the archive
-        :return paths to extracted filenames with order corresponding to filenames param.
-        """
-        extracted_dir = storage.extracted_data_dir_path
-        if not isinstance(filenames, Tuple):
-            filenames = (filenames,)
-        extracted_file_paths = {fn: extracted_dir / fn for fn in filenames}
-        if not force and all(fp.exists() for fp in extracted_file_paths.values()):
-            self._logger.info(
-                "%s already extracted from %s and force not specified.  Skipping extraction.",
-                filenames,
-                archive_path,
+        if self.__extracted_data_dir_path is not None:
+            extracted_data_dir_path = self.__extracted_data_dir_path
+        elif self.__data_dir_path is not None:
+            extracted_data_dir_path = (
+                self.__data_dir_path / self._pipeline_id / "extracted"
             )
         else:
-            self._logger.info(
-                "extracting %s from zip archive %s", filenames, archive_path
-            )
-            with ZipFile(archive_path) as zip_file:
-                zip_file.extractall(path=extracted_dir, members=filenames)
-        return extracted_file_paths
+            raise ValueError("must specify extracted_data_dir_path or data_dir_path")
+        extracted_data_dir_path = extracted_data_dir_path.absolute()
+        extracted_data_dir_path.mkdir(parents=True, exist_ok=True)
+        return extracted_data_dir_path
