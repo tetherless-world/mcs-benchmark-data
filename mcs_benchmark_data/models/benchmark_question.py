@@ -1,8 +1,9 @@
-from mcs_benchmark_data.models.model import Model
+from dataclasses import dataclass
+from dataclasses_json import LetterCase, dataclass_json
 
+from mcs_benchmark_data.models.benchmark_prompt import BenchmarkPrompt
 
-class BenchmarkQuestion(Model):
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass(frozen = True)
+class BenchmarkQuestion(BenchmarkPrompt):
     '''A benchmark's sample question element'''
-    name: str
-    text: str
-    position: int #necessary?

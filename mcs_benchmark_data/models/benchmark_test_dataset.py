@@ -1,8 +1,11 @@
+from dataclasses import dataclass
+from dataclasses_json import LetterCase, dataclass_json
 from typing import NamedTuple
 
 from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
 
-class BenchmarkDevDataset(BenchmarkDataset):
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass(frozen = True)
+class BenchmarkTestDataset(BenchmarkDataset):
     '''A dataset containing test samples of a benchmark'''
-    '''Super-class: BenchmarkDataset'''
     type: "BenchmarkTestDataset"

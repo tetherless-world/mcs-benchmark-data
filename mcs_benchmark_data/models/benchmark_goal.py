@@ -1,5 +1,9 @@
-from mcs_benchmark_data.models.model import Model
+from dataclasses import dataclass
+from dataclasses_json import LetterCase, dataclass_json
 
-class BenchmarkGoal(Model):
+from mcs_benchmark_data.models.benchmark_prompt import BenchmarkPrompt
+
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass(frozen = True)
+class BenchmarkGoal(BenchmarkPrompt):
     '''A benchmark sample goal element'''
-    #Not sure what to put here
