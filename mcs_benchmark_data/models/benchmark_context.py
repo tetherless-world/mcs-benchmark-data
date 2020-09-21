@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
-from typing import Tuple
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion

@@ -26,7 +26,7 @@ class _Model:
             else:
                 resource.add(property_definition.uri, Literal(property_.value))
 
-    def to_rdf(self, *, graph: Graph, property_definitions) -> Resource:
+    def to_rdf(self, *, graph: Graph) -> Resource:
         """
         Convert this model to RDF.
         """

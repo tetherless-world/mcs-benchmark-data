@@ -1,6 +1,5 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
-from typing import Tuple
 
 from mcs_benchmark_data._model import _Model
 
@@ -8,4 +7,5 @@ from mcs_benchmark_data._model import _Model
 @dataclass(frozen = True)
 class BenchmarkConcept(_Model):
     '''The ConceptNet concept which the question was created from (i.e. electricity)'''
-    concept: Tuple[str, ...]
+    concept: str
+
