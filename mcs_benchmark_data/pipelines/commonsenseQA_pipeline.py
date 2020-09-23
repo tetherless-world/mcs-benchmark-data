@@ -3,9 +3,9 @@ from typing import Optional
 from rdflib import URIRef
 
 from mcs_benchmark_data._pipeline import _Pipeline
-from mcs_benchmark_data.extractors.commonsenseQA_extractor import CommonsenseQAExtractor
+from mcs_benchmark_data.extractors.nop_extractor import NopExtractor
 from mcs_benchmark_data.transformers.commonsenseQA_transformer import (
-    CommonsenseQATransformer,
+    CommonsenseQATransformer
 )
 
 
@@ -20,7 +20,7 @@ class CommonsenseQAPipeline(_Pipeline):
     ):
         _Pipeline.__init__(
             self,
-            extractor=CommonsenseQAExtractor(export_xml_file_path=export_xml_file_path),
+            extractor=NopExtractor(),
             id=pipeline_id,
             transformer=CommonsenseQATransformer(
                 owner=URIRef(owner) if owner is not None else None,
@@ -31,10 +31,7 @@ class CommonsenseQAPipeline(_Pipeline):
 
     @classmethod
     def add_arguments(cls, arg_parser):
-        _Pipeline.add_arguments(cls, arg_parser)
-        arg_parser.add_argument(
-            "--export-xml-file-path", help="path to book-export.xml", required=True
-        )
+        _Pipeline.add_arguments(arg_parser)
         arg_parser.add_argument("--owner", help="URI of the owner, or public if absent")
         arg_parser.add_argument(
             "--pipeline-id",
@@ -44,4 +41,4 @@ class CommonsenseQAPipeline(_Pipeline):
 
 
 if __name__ == "__main__":
-    BookCollectorPipeline.main()
+    CommonsenseQAPipeline.main()

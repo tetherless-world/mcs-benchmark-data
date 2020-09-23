@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 from typing import Tuple
 
-from ..namespace import RDF, MCS
+from mcs_benchmark_data.namespace import MCS, SCHEMA
 from rdflib import Graph
 from rdflib.resource import Resource
 
@@ -18,14 +18,13 @@ class BenchmarkDataset(_Model):
     entries: Tuple[BenchmarkSample,...]
 
     def to_rdf(
-        self, *, graph: Graph, **kwds) -> Resource:
+        self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(
-            self, graph=graph, **kwds
+            self, graph=graph
         )
-        resource.add(RDF.type, MCS[self.__class__.__name__])
 
-        #How to add name?
+        resource.add(SCHEMA.name, self.name)
         for entry in self.entries:
-            entry.to_rdf(add_to_resource=resource)
+            entry.to_rdf(graph)
 
         return resource

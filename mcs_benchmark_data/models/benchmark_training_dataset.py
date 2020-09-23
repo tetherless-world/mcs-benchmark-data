@@ -12,11 +12,3 @@ from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
 class BenchmarkTrainingDataset(BenchmarkDataset):
     '''A dataset containing training samples of a benchmark'''
     type: "BenchmarkTrainingDataset"
-
-    def to_rdf(
-        self, *, graph: Graph, **kwds) -> Resource:
-        resource = super.to_rdf(self,graph=graph)
-
-        #How to add type?
-
-        return resource

@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from mcs_benchmark_data.models.model import Model
+from mcs_benchmark_data._model import _Model
 
 
 def model_to_json_object(_model: _Model):

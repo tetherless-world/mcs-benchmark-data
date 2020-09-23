@@ -2,9 +2,8 @@ from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 from typing import Tuple
 
-from ..namespace import MCS
+from mcs_benchmark_data.namespace import MCS, SCHEMA
 from rdflib import Graph
-from rdflib.namespace import RDF
 from rdflib.resource import Resource
 
 from mcs_benchmark_data._model import _Model
@@ -17,13 +16,13 @@ class BenchmarkChoices(_Model):
     choices: Tuple[BenchmarkChoice, ...]
 
     def to_rdf(
-        self, *, graph: Graph, **kwds) -> Resource:
+        self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(
-            self, graph=graph, **kwds
+            self, graph=graph
         )
-        resource.add(RDF.type, MCS[self.__class__.__name__])
 
         for choice in self.choices:
-            resource.add(MCS.BenchmarkChoice, choice)
-            choice.to_rdf(add_to_resource=resource)
+            resource.add(MCS.benchmarkChoice, choice)
+            choice.to_rdf(graph)
+
         return resource

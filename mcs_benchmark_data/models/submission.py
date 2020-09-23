@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 from datetime import datetime
-from typing import Tuple
+from typing import Tuple, Optional
 
 from rdflib import Graph
 from rdflib.resource import Resource
-from ..namespace import MCS, RDF
+from mcs_benchmark_data.namespace import MCS, SCHEMA, XSD
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data.models.dev_score import DevScore
@@ -20,28 +20,39 @@ class Submission(_Model):
     description: str
     dateCreated: datetime
     isBasedOn: str #benchmark name
-    contributor: Tuple[str, ...]
+    contributors: Tuple[str, ...]
     contentRating: Tuple[TestScore, DevScore]
-    result: Tuple[str, datetime, datetime, str] #type (e.g. SoftwareAplication), startTime, endTime, url
-    sample: Tuple[SubmissionSample, ...]
+    result: Tuple[str, datetime, datetime, str] 
+    sample: Optional[Tuple[SubmissionSample, ...]]
 
 
     def to_rdf(
-        self, *, graph: Graph, **kwds) -> Resource:
+        self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(
-            self, graph=graph, **kwds
+            self, graph=graph
         )
-        resource.add(RDF.type, MCS[self.__class__.__name__])
 
-        #How to add name? FOAF?
-        #How to add description, datecreated, isBasedOn?
-        #How to add contributors? FOAF?
-        resource.add(MCS.TestScore, self.contentRating[0])
-        resource.add(MCS.DevScore, self.contentRating[1])
-        #How to add result?
+        resource.add(SCHEMA.name, self.name)
+        resource.add(XSD.string, self.description)
+        resource.add(SCHEMA.date, self.dateCreated)
+        resource.add(SCHEMA.isBasedOn, self.isBasedOn)
+        for contributor in self.contributors:
+            resource.add(SCHEMA.person, contributor)
+        
+        resource.add(MCS.testScore, self.contentRating[0])
+        self.contentRating[0].to_rdf(graph)
+        resource.add(MCS.devScore, self.contentRating[1])
+        self.contentRating[1].to_rdf(graph)
+
+        resource.add(SCHEMA.resultOf, self.result)
+        resource.add(SCHEMA.softwareApplication, self.result[0])
+        resource.add(SCHEMA.endTime, self.result[1])
+        resource.add(SCHEMA.startTime, self.result[2])
+        resource.add(SCHEMA.url, self.result[3])
+
         if self.sample is not None:
             for smpl in self.sample:
-                resource.add(MCS.SubmissionSample, smpl)
-                #Need to smpl.to_rdf?
+                resource.add(MCS.submissionSample, smpl)
+                smpl.to_rdf(graph)
 
         return resource

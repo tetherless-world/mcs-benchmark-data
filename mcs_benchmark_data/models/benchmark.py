@@ -4,7 +4,7 @@ from typing import NamedTuple, Tuple
 
 from rdflib import Graph
 from rdflib.resource import Resource
-from ..namespace import MCS, RDF
+from mcs_benchmark_data.namespace import MCS, SCHEMA
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
@@ -16,25 +16,27 @@ class Benchmark(_Model):
     '''A collection of datasets composing a benchmark'''
     name: str
     abstract: str
-    author: Tuple[str, ...]
-    dataset: Tuple[BenchmarkDataset, ...]
+    authors: Tuple[str, ...]
+    datasets: Tuple[BenchmarkDataset, ...]
     submissions: Tuple[Submission, ...]
 
     def to_rdf(
-        self, *, graph: Graph, **kwds) -> Resource:
+        self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(
-            self, graph=graph, **kwds
+            self, graph=graph
         )
-        resource.add(RDF.type, MCS[self.__class__.__name__])
 
-        #How to add name? FOAF?
-        #How to add abstract? Text?
-        #How to add authors? FOAF? DCTERMS?
-        for ds in self.dataset:
-            resource.add(MCS.BenchmarkDataset, ds)
-            #Do I need to additionally call ds.to_rdf?
+        resource.add(SCHEMA.name, self.name)
+        resource.add(SCHEMA.abstract, self.abstract)
+        for author in self.authors:
+            resource.add(SCHEMA.person, author)
+
+        for dataset in self.datasets:
+            resource.add(MCS.benchmarkDataset, dataset)
+            dataset.to_rdf(graph)
         if self.submissions is not None:
             for submission in self.submissions:
-                resource.add(MCS.Submission, submission)
+                resource.add(MCS.submission, submission)
+                submission.to_rdf(graph)
 
         return resource

@@ -1,18 +1,16 @@
 from datetime import datetime
 from typing import Dict, Optional
 from urllib.parse import quote_plus
-from xml.etree import ElementTree
+import json 
 
 from rdflib import Graph, Literal, URIRef
-from rdflib.namespace import DCTERMS, RDF
+from rdflib.namespace import RDF
 
 from mcs_benchmark_data._transformer import _Transformer
-from mcs_benchmark_data.models.collection import Collection
-from mcs_benchmark_data.models.date_time_description import DateTimeDescription
 from mcs_benchmark_data.models.institution import Institution
 from mcs_benchmark_data.models.object import Object
 from mcs_benchmark_data.models.person import Person
-from mcs_benchmark_data.namespace import CMS, SCHEMA
+from mcs_benchmark_data.namespace import MCS, SCHEMA
 
 
 class CommonsenseQATransformer(_Transformer):
@@ -25,15 +23,13 @@ class CommonsenseQATransformer(_Transformer):
         etree = ElementTree.parse(export_xml_file_path).getroot()
         graph = self._new_graph
 
-        institution = \
-            Institution(
+        benchmark = \
+            Benchmark(
                 graph=graph,
-                uri=CMS.CommonsenseQAInstitution
+                uri=MCS.Benchmark
             )
-        institution.name = "Book Collector"
-        institution.owner = CMS.public
 
-        book_uris = set()
+        benchmark_uris = set()
         for data_etree in etree.iter("data"):
             for bookinfo_etree in data_etree.iter("bookinfo"):
                 for booklist_etree in data_etree.iter("booklist"):
