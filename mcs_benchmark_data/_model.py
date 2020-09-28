@@ -19,7 +19,7 @@ class _Model:
 
         resource = graph.resource(self.uri)
         resource.add(RDF.type, MCS[self.__class__.__name__])
-         return resource
+        return resource
 
     @staticmethod
     def _quote_rdf_literal(text: str) -> Literal:
@@ -28,3 +28,4 @@ class _Model:
         fixed = fixed.replace("\n", "\\n")
         fixed = fixed.replace("\r", "\\r")
         return Literal(fixed)
+
