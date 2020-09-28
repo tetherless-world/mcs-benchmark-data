@@ -1,0 +1,27 @@
+version: 2.1
+orbs:
+  slack: circleci/slack@3.4.2
+jobs:
+  build:
+    docker:
+      - image: circleci/python:3.8
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - pip_cache-{{ checksum "requirements.txt" }}
+            - pip_cache
+      - run:
+          name: Install mandatory dependencies
+          command: pip install -r requirements.txt
+      - save_cache:
+          paths:
+            - ~/.cache/pip
+          key: pip_cache-{{ checksum "requirements.txt"}}
+      - run:
+          name: Run tests
+          command: |
+            pytest --junitxml=test-results/junit.xml
+      - store_test_results:
+          path: test-results
+      - slack/status
