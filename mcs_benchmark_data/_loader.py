@@ -2,8 +2,8 @@ from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Generator, Optional
 
-from paradicms_etl._model import _Model
-from paradicms_etl._pipeline_phase import _PipelinePhase
+from mcs_benchmark_data._model import _Model
+from mcs_benchmark_data._pipeline_phase import _PipelinePhase
 
 
 class _Loader(_PipelinePhase):

@@ -6,7 +6,7 @@ from urllib.request import urlopen
 
 from pathvalidate import sanitize_filename
 
-from paradicms_etl._pipeline_phase import _PipelinePhase
+from mcs_benchmark_data._pipeline_phase import _PipelinePhase
 
 
 class _Extractor(_PipelinePhase):
