@@ -19,6 +19,6 @@ class BenchmarkConcept(_Model):
         resource = _Model.to_rdf(
             self, graph=graph
         )
-        resource.add(XSD.string, self.concept)
+        resource.add(XSD.string, self._quote_rdf_literal(self.concept))
 
         return resource

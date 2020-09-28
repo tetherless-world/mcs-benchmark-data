@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
-from typing import NamedTuple, Tuple
+from typing import NamedTuple, Tuple, Optional
 
 from rdflib import Graph
 from rdflib.resource import Resource
@@ -18,7 +18,7 @@ class Benchmark(_Model):
     abstract: str
     authors: Tuple[str, ...]
     datasets: Tuple[BenchmarkDataset, ...]
-    submissions: Tuple[Submission, ...]
+    submissions: Optional[Tuple[Submission, ...]]
 
     def to_rdf(
         self, *, graph: Graph) -> Resource:
@@ -26,17 +26,16 @@ class Benchmark(_Model):
             self, graph=graph
         )
 
-        resource.add(SCHEMA.name, self.name)
-        resource.add(SCHEMA.abstract, self.abstract)
+        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
+        resource.add(SCHEMA.abstract, self._quote_rdf_literal(self.abstract))
         for author in self.authors:
-            resource.add(SCHEMA.person, author)
+            resource.add(SCHEMA.person, self._quote_rdf_literal(author))
 
         for dataset in self.datasets:
             resource.add(MCS.benchmarkDataset, dataset)
-            dataset.to_rdf(graph)
+
         if self.submissions is not None:
             for submission in self.submissions:
                 resource.add(MCS.submission, submission)
-                submission.to_rdf(graph)
 
         return resource

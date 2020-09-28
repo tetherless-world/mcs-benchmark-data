@@ -26,3 +26,11 @@ class _Model:
         resource.add(RDF.type, MCS[self.__class__.__name__])
 
         return resource
+
+    @staticmethod
+    def _quote_rdf_literal(text: str) -> Literal:
+        fixed = text.replace("'", "\\'")
+        fixed = fixed.replace('"', '\\"')
+        fixed = fixed.replace("\n", "\\n")
+        fixed = fixed.replace("\r", "\\r")
+        return Literal(fixed)

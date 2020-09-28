@@ -1,51 +1,24 @@
-from abc import abstractmethod
-from typing import Generator, Union
-
-from rdflib import URIRef
+import logging
+from abc import ABC, abstractmethod
+from typing import Generator
 
 from mcs_benchmark_data._model import _Model
-from mcs_benchmark_data._pipeline_phase import _PipelinePhase
-from mcs_benchmark_data.models.collection import Collection
-from mcs_benchmark_data.models.institution import Institution
-from mcs_benchmark_data.models.rights import Rights
 
 
-class _Transformer(_PipelinePhase):
+class _Transformer(ABC):
+    """
+    Abstract base class for transformers.
+    See the transform method.
+    """
+
+    def __init__(self):
+        self._logger = logging.getLogger(self.__class__.__name__)
+
     @abstractmethod
     def transform(self, **kwds) -> Generator[_Model, None, None]:
         """
-        Transform previously-extracted data.
+        Transform previously-extracted data into models (e.g., nodes and edges).
         :param kwds: merged dictionary of initial extract kwds and the result of extract
         :return: generator of models
         """
-
-    def _transform_collection_from_arguments(
-        self,
-        *,
-        collection_title: str,
-        collection_uri: str,
-        institution_uri: Union[str, URIRef],
-        **kwds
-    ) -> Collection:
-        if not isinstance(institution_uri, URIRef):
-            institution_uri = URIRef(str(institution_uri))
-
-        return Collection(
-            institution_uri=institution_uri,
-            title=collection_title,
-            uri=URIRef(collection_uri),
-        )
-
-    def _transform_institution_from_arguments(
-        self,
-        *,
-        institution_name: str,
-        institution_rights: str,
-        institution_uri: str,
-        **kwds
-    ) -> Institution:
-        return Institution(
-            name=institution_name,
-            rights=Rights(holder=institution_name, statements=(institution_rights,),),
-            uri=URIRef(institution_uri),
-        )
+    

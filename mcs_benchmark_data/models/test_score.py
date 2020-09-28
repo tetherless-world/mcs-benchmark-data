@@ -19,7 +19,7 @@ class TestScore(_Model):
         resource = _Model.to_rdf(
             self, graph=graph
         )
-        resource.add(XSD.string, self.name)
-        resource.add(XSD.string, self.value)
+        resource.add(XSD.string, self._quote_rdf_literal(self.name))
+        resource.add(XSD.string, self._quote_rdf_literal(self.value))
 
         return resource

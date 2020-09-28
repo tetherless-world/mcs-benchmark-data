@@ -23,6 +23,5 @@ class BenchmarkChoices(_Model):
 
         for choice in self.choices:
             resource.add(MCS.benchmarkChoice, choice)
-            choice.to_rdf(graph)
 
         return resource

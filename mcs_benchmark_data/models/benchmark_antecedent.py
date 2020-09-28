@@ -4,6 +4,9 @@ from typing import Tuple, Union
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data.models.benchmark_prompt import BenchmarkPrompt
+from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
+from mcs_benchmark_data.models.benchmark_observation import BenchmarkObservation
+from mcs_benchmark_data.models.benchmark_goal import BenchmarkGoal
 from mcs_benchmark_data.models.benchmark_context import BenchmarkContext
 
 from mcs_benchmark_data.namespace import MCS, SCHEMA
@@ -23,7 +26,14 @@ class BenchmarkAntecedent(_Model):
         for element in self.elements:
             if isinstance(element,BenchmarkContext):
                 resource.add(MCS.benchmarkContext, element)
-            element.to_rdf(graph)
+            elif isinstance(element, BenchmarkQuestion):
+                resource.add(MCS.benchmarkQuestion, element)
+            elif isinstance(element, BenchmarkObservation):
+                resource.add(MCS.benchmarkObservation, element)
+            elif isinstance(element, BenchmarkGoal):
+                resource.add(MCS.benchmarkGoal, element)
+            else:
+                 resource.add(MCS.benchmarkPrompt, element)
 
 
         return resource

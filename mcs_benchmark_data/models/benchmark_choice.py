@@ -23,7 +23,7 @@ class BenchmarkChoice(_Model):
             self, graph=graph
         )
 
-        resource.add(SCHEMA.answer, self.text)
-        resource.add(SCHEMA.position, self.position)
+        resource.add(SCHEMA.answer, self._quote_rdf_literal(self.text))
+        resource.add(SCHEMA.position, self._quote_rdf_literal(self.position))
 
         return resource

@@ -16,7 +16,6 @@ class BenchmarkQuestion(BenchmarkPrompt):
     concepts: Tuple[BenchmarkConcept, ...]
 
     def to_rdf( self, *, graph: Graph) -> Resource:
-        resource = BenchmarkPrompt().to_rdf(graph)
+        resource = BenchmarkPrompt().to_rdf(graph=graph)
         for concept in self.concepts:
             resource.add(MCS.benchmarkConcept, concept)
-            concept.to_rdf(graph)

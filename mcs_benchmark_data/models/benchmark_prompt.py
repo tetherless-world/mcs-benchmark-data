@@ -21,6 +21,6 @@ class BenchmarkPrompt(_Model):
         )
         #Trying to add sub-class name if possible...
         resource.add(MCS.MCS[self.__class__.__name__], self)
-        resource.add(XSD.string, self.text)
+        resource.add(XSD.string, self._quote_rdf_literal(self.text))
 
         return resource

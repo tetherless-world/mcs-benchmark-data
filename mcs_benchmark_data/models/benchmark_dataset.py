@@ -22,9 +22,9 @@ class BenchmarkDataset(_Model):
         resource = _Model.to_rdf(
             self, graph=graph
         )
-
-        resource.add(SCHEMA.name, self.name)
+        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
+        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
         for entry in self.entries:
-            entry.to_rdf(graph)
+            resource.add(MCS.BenchmarkSample, entry)
 
         return resource

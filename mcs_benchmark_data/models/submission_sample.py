@@ -1,3 +1,4 @@
+from typing import Literal
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 
@@ -20,8 +21,8 @@ class SubmissionSample(_Model):
         resource = _Model.to_rdf(
             self, graph=graph
         )
-        resource.add(SCHEMA.about, self.about)
-        resource.add(XSD.string, self.includedInDataset)
-        resource.add(SCHEMA.value, self.value)
+        resource.add(SCHEMA.about, self._quote_rdf_literal(self.about))
+        resource.add(XSD.string, self._quote_rdf_literal(self.includedInDataset))
+        resource.add(SCHEMA.value, Literal(self.value))
 
         return resource

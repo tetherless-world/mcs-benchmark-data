@@ -18,6 +18,6 @@ class BenchmarkContext(_Model):
         resource = _Model.to_rdf(
             self, graph=graph
         )
-        resource.add(XSD.string, self.text)
+        resource.add(XSD.string, self._quote_rdf_literal(self.text))
 
         return resource

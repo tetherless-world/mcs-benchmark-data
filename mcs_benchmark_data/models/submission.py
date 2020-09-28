@@ -23,7 +23,7 @@ class Submission(_Model):
     contributors: Tuple[str, ...]
     contentRating: Tuple[TestScore, DevScore]
     result: Tuple[str, datetime, datetime, str] 
-    sample: Optional[Tuple[SubmissionSample, ...]]
+    sample: Tuple[SubmissionSample, ...]
 
 
     def to_rdf(
@@ -32,27 +32,24 @@ class Submission(_Model):
             self, graph=graph
         )
 
-        resource.add(SCHEMA.name, self.name)
-        resource.add(XSD.string, self.description)
+        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
+        resource.add(XSD.string, self._quote_rdf_literal(self.description))
         resource.add(SCHEMA.date, self.dateCreated)
-        resource.add(SCHEMA.isBasedOn, self.isBasedOn)
+        resource.add(SCHEMA.isBasedOn, self._quote_rdf_literal(self.isBasedOn))
         for contributor in self.contributors:
-            resource.add(SCHEMA.person, contributor)
+            resource.add(SCHEMA.person, self._quote_rdf_literal(contributor))
         
         resource.add(MCS.testScore, self.contentRating[0])
-        self.contentRating[0].to_rdf(graph)
         resource.add(MCS.devScore, self.contentRating[1])
-        self.contentRating[1].to_rdf(graph)
 
         resource.add(SCHEMA.resultOf, self.result)
-        resource.add(SCHEMA.softwareApplication, self.result[0])
+        resource.add(SCHEMA.softwareApplication, self._quote_rdf_literal(self.result[0]))
         resource.add(SCHEMA.endTime, self.result[1])
         resource.add(SCHEMA.startTime, self.result[2])
-        resource.add(SCHEMA.url, self.result[3])
+        resource.add(SCHEMA.url, self._quote_rdf_literal(self.result[3]))
 
-        if self.sample is not None:
-            for smpl in self.sample:
-                resource.add(MCS.submissionSample, smpl)
-                smpl.to_rdf(graph)
+    
+        for smpl in self.sample:
+            resource.add(MCS.submissionSample, smpl)
 
         return resource
