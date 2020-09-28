@@ -1,11 +1,9 @@
 from pathlib import Path
-from typing import Generator, Optional
+from typing import Optional
 
 from pathvalidate import sanitize_filename
 from rdflib import Graph
 
-from mcs_benchmark_data._loader import _Loader
-from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data.loaders._buffering_loader import _BufferingLoader
 from mcs_benchmark_data.namespace import bind_namespaces
 
