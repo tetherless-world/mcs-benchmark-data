@@ -7,27 +7,10 @@ from urllib.request import urlopen
 from pathvalidate import sanitize_filename
 
 from mcs_benchmark_data._pipeline_phase import _PipelinePhase
+from mcs_benchmark_data.path import DATA_DIR_PATH
 
 
 class _Extractor(_PipelinePhase):
-    def __init__(
-        self,
-        *,
-        data_dir_path: Optional[Path] = None,
-        extracted_data_dir_path: Optional[Path] = None,
-        **kwds
-    ):
-        """
-        Construct an extractor.
-        If extracted_data_dir_path is specified, use it for the extractor's outputs.
-        If data_dir_path is specified, use data_dir_path / pipeline_id / "extracted".
-        If neither is specified, use the default data_dir_path in the repository / pipeline_id / "extracted".
-        """
-
-        _PipelinePhase.__init__(self, **kwds)
-        self.__data_dir_path = data_dir_path
-        self.__extracted_data_dir_path = extracted_data_dir_path
-
     def _download(self, from_url: str, force: bool) -> Path:
         """
         Utility method to download a file from a URL to a local file path.
@@ -68,14 +51,7 @@ class _Extractor(_PipelinePhase):
         Paths into this directory can be passed to the transformer via the kwds return from extract.
         """
 
-        if self.__extracted_data_dir_path is not None:
-            extracted_data_dir_path = self.__extracted_data_dir_path
-        elif self.__data_dir_path is not None:
-            extracted_data_dir_path = (
-                self.__data_dir_path / self._pipeline_id / "extracted"
-            )
-        else:
-            raise ValueError("must specify extracted_data_dir_path or data_dir_path")
+        extracted_data_dir_path = DATA_DIR_PATH / "extracted" / self._pipeline_id
         extracted_data_dir_path = extracted_data_dir_path.absolute()
         extracted_data_dir_path.mkdir(parents=True, exist_ok=True)
         return extracted_data_dir_path

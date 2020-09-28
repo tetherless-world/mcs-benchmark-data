@@ -4,27 +4,10 @@ from typing import Generator, Optional
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._pipeline_phase import _PipelinePhase
+from mcs_benchmark_data.path import DATA_DIR_PATH
 
 
 class _Loader(_PipelinePhase):
-    def __init__(
-        self,
-        *,
-        data_dir_path: Optional[Path] = None,
-        loaded_data_dir_path: Optional[Path] = None,
-        **kwds
-    ):
-        """
-        Construct a loader.
-        If loaded_data_dir_path is specified, use it for the loader's outputs.
-        If data_dir_path is specified, use data_dir_path / pipeline_id / "loaded".
-        If neither is specified, use the default data_dir_path in the repository / pipeline_id / "loaded".
-        """
-
-        _PipelinePhase.__init__(self, **kwds)
-        self.__data_dir_path = data_dir_path
-        self.__loaded_data_dir_path = loaded_data_dir_path
-
     def flush(self):
         """
         Flush any buffered data.
@@ -45,12 +28,7 @@ class _Loader(_PipelinePhase):
         A loader does not have to use this directory. It can load data into an external database, for example.
         """
 
-        if self.__loaded_data_dir_path is not None:
-            loaded_data_dir_path = self.__loaded_data_dir_path
-        elif self.__data_dir_path is not None:
-            loaded_data_dir_path = self.__data_dir_path / self._pipeline_id / "loaded"
-        else:
-            raise ValueError("must specify loaded_data_dir_path or data_dir_path")
+        loaded_data_dir_path = DATA_DIR_PATH / "loaded" / self._pipeline_id
         loaded_data_dir_path = loaded_data_dir_path.absolute()
         loaded_data_dir_path.mkdir(parents=True, exist_ok=True)
         return loaded_data_dir_path

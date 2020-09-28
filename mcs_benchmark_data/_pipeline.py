@@ -1,10 +1,8 @@
 import logging
 from abc import ABC
-from pathlib import Path
 from typing import Dict, Optional
 
 from configargparse import ArgParser
-from rdflib import URIRef
 
 from mcs_benchmark_data._extractor import _Extractor
 from mcs_benchmark_data._loader import _Loader
@@ -42,10 +40,6 @@ class _Pipeline(ABC):
         Add pipeline-specific arguments. The parsed arguments are passed to the constructor as keywords.
         """
         arg_parser.add_argument("-c", is_config_file=True, help="config file path")
-        arg_parser.add_argument(
-            "--data-dir-path",
-            help="path to a directory to store extracted data and transformed models",
-        )
         arg_parser.add_argument(
             "--debug", action="store_true", help="turn on debugging"
         )
@@ -105,9 +99,6 @@ class _Pipeline(ABC):
                 pipeline_kwds.pop(key)
             except KeyError:
                 pass
-        data_dir_path = pipeline_kwds.get("data_dir_path")
-        if data_dir_path is not None:
-            pipeline_kwds["data_dir_path"] = Path(data_dir_path)
         pipeline = cls(**pipeline_kwds)
 
         force = bool(args.get("force", False))
