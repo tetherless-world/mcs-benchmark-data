@@ -14,9 +14,3 @@ class _PipelinePhase(ABC):
     @property
     def _pipeline_id(self):
         return self.__pipeline_id
-
-    @property
-    def _pipeline_uri(self):
-        from ._pipeline import _Pipeline
-
-        return _Pipeline.id_to_uri(self._pipeline_id)

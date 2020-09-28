@@ -65,17 +65,6 @@ class _Pipeline(ABC):
             help="set logging-level level (see Python logging module)",
         )
 
-    @classmethod
-    def _add_collection_arguments(cls, arg_parser: ArgParser) -> None:
-        arg_parser.add_argument("--collection-title", required=True)
-        arg_parser.add_argument("--collection-uri", required=True)
-
-    @classmethod
-    def _add_institution_arguments(cls, arg_parser: ArgParser) -> None:
-        arg_parser.add_argument("--institution-name", required=True)
-        arg_parser.add_argument("--institution-rights", required=True)
-        arg_parser.add_argument("--institution-uri", required=True)
-
     def extract_transform(self, *, force_extract: bool = False):
         extract_kwds = self.extractor.extract(force=force_extract)
         if not extract_kwds:
@@ -130,10 +119,6 @@ class _Pipeline(ABC):
     def id(self):
         return self.__id
 
-    @staticmethod
-    def id_to_uri(id_: str) -> URIRef:
-        return URIRef("urn:mcs_benchmark_data:pipeline:" + id_)
-
     @property
     def loader(self):
         return self.__loader
@@ -141,7 +126,3 @@ class _Pipeline(ABC):
     @property
     def transformer(self):
         return self.__transformer
-
-    @property
-    def uri(self) -> URIRef:
-        return self.id_to_uri(self.id)
