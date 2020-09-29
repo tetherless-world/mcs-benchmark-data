@@ -25,7 +25,6 @@ class Submission(_Model):
     contributors: Tuple[str, ...]
     contentRating: Tuple[TestScore, DevScore]
     result: Tuple[str, datetime, datetime, str]
-    sample: Tuple[SubmissionSample, ...]
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)

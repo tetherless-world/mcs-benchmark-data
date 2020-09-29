@@ -8,9 +8,6 @@ from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_pipeli
 def test_extract_transform():
     models = tuple(CommonsenseQaBenchmarkPipeline().extract_transform())
     assert models
-    assert len(models) == 4
-
-    assert type(list(models[0])) == "Benchmark"
 
     benchmark = [model for model in models if isinstance(model, Benchmark)]
     assert benchmark
