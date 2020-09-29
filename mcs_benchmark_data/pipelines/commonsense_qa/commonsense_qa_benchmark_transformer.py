@@ -30,7 +30,7 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
         dev_jsonl_file_path: Path,
         test_jsonl_file_path: Path,
         train_jsonl_file_path: Path,
-        submission_jsonl_file_paths: Tuple[Path,...]
+        submission_jsonl_file_paths: Tuple[Path, ...]
     ) -> Generator[_Model, None, None]:
 
         benchmark_json = open(benchmark_json_file_path)
@@ -62,7 +62,7 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
             datasets=tuple(
                 BenchmarkDataset(uri=dataset["@id"], name=dataset["name"])
                 for dataset in benchmark_metadata["dataset"]
-            )
+            ),
         )
 
     def __transform_benchmark_sample(

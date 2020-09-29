@@ -28,4 +28,3 @@ class _Model:
         fixed = fixed.replace("\n", "\\n")
         fixed = fixed.replace("\r", "\\r")
         return Literal(fixed)
-

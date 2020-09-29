@@ -10,14 +10,18 @@ from mcs_benchmark_data.namespace import MCS, SCHEMA, XSD
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
-from mcs_benchmark_data.models.benchmark_question_category import BenchmarkQuestionCategory
+from mcs_benchmark_data.models.benchmark_question_category import (
+    BenchmarkQuestionCategory,
+)
 from mcs_benchmark_data.models.benchmark_choices import BenchmarkChoices
 from mcs_benchmark_data.models.benchmark_antecedent import BenchmarkAntecedent
 
+
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass(frozen = True)
+@dataclass(frozen=True)
 class BenchmarkSample(_Model):
-    '''An entry in a benchmark dataset'''
+    """An entry in a benchmark dataset"""
+
     includedInDataset: str
     questionType: BenchmarkQuestionType
     questionCategory: BenchmarkQuestionCategory
@@ -25,13 +29,9 @@ class BenchmarkSample(_Model):
     choices: BenchmarkChoices
     correctChoice: int
 
-    def to_rdf(
-        self, *, graph: Graph) -> Resource:
-        resource = _Model.to_rdf(
-            self, graph=graph
-        )
+    def to_rdf(self, *, graph: Graph) -> Resource:
+        resource = _Model.to_rdf(self, graph=graph)
 
-        
         resource.add(XSD.string, self._quote_rdf_literal(self.includedInDataset))
 
         resource.add(MCS.benchmarkQuestionType, self.questionType)
@@ -45,4 +45,3 @@ class BenchmarkSample(_Model):
         resource.add(XSD.int, Literal(self.correctChoice))
 
         return resource
-

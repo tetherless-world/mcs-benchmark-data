@@ -7,8 +7,10 @@ from rdflib.resource import Resource
 
 from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
 
+
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass(frozen = True)
+@dataclass(frozen=True)
 class BenchmarkTrainingDataset(BenchmarkDataset):
-    '''A dataset containing training samples of a benchmark'''
+    """A dataset containing training samples of a benchmark"""
+
     type: "BenchmarkTrainingDataset"

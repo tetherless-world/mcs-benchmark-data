@@ -13,18 +13,20 @@ from mcs_benchmark_data.namespace import MCS, SCHEMA
 from rdflib import Graph
 from rdflib.resource import Resource
 
-@dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass(frozen = True)
-class BenchmarkAntecedent(_Model):
-    '''A list of elements that compose a benchmark sample'''
-    elements: Union[Tuple[BenchmarkContext, BenchmarkPrompt], Tuple[BenchmarkPrompt,...]]
 
-    def to_rdf( self, *, graph: Graph) -> Resource:
-        resource = _Model.to_rdf(
-            self, graph=graph
-        )
+@dataclass_json(letter_case=LetterCase.CAMEL)
+@dataclass(frozen=True)
+class BenchmarkAntecedent(_Model):
+    """A list of elements that compose a benchmark sample"""
+
+    elements: Union[
+        Tuple[BenchmarkContext, BenchmarkPrompt], Tuple[BenchmarkPrompt, ...]
+    ]
+
+    def to_rdf(self, *, graph: Graph) -> Resource:
+        resource = _Model.to_rdf(self, graph=graph)
         for element in self.elements:
-            if isinstance(element,BenchmarkContext):
+            if isinstance(element, BenchmarkContext):
                 resource.add(MCS.benchmarkContext, element)
             elif isinstance(element, BenchmarkQuestion):
                 resource.add(MCS.benchmarkQuestion, element)
@@ -33,7 +35,6 @@ class BenchmarkAntecedent(_Model):
             elif isinstance(element, BenchmarkGoal):
                 resource.add(MCS.benchmarkGoal, element)
             else:
-                 resource.add(MCS.benchmarkPrompt, element)
-
+                resource.add(MCS.benchmarkPrompt, element)
 
         return resource

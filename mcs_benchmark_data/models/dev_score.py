@@ -8,18 +8,17 @@ from mcs_benchmark_data.namespace import XSD
 
 from mcs_benchmark_data._model import _Model
 
+
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass(frozen = True)
+@dataclass(frozen=True)
 class DevScore(_Model):
-    '''Score of a system's correct predictions against a dev benchmark dataset'''
+    """Score of a system's correct predictions against a dev benchmark dataset"""
+
     name: str
     value: str
 
-    def to_rdf(
-        self, *, graph: Graph) -> Resource:
-        resource = _Model.to_rdf(
-            self, graph=graph
-        )
+    def to_rdf(self, *, graph: Graph) -> Resource:
+        resource = _Model.to_rdf(self, graph=graph)
         resource.add(XSD.string, self._quote_rdf_literal(self.name))
         resource.add(XSD.string, self._quote_rdf_literal(self.value))
 

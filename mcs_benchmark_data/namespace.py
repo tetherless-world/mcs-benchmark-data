@@ -9,6 +9,7 @@ SCHEMA = Namespace("http://schema.org/")
 VANN = Namespace("http://purl.org/vocab/vann")
 XSD = Namespace("http://www.w3.org/2001/XMLSchema")
 
+
 def bind_namespaces(namespace_manager: NamespaceManager):
     namespace_manager.bind("mcs", MCS)
     namespace_manager.bind("owl", OWL)

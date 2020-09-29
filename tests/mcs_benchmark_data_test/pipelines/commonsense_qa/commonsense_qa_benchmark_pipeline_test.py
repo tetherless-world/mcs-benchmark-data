@@ -22,4 +22,3 @@ def test_extract_transform():
     assert any(dataset.name == "dev" for dataset in datasets)
     assert any(dataset.name == "test" for dataset in datasets)
     assert any(dataset.name == "train" for dataset in datasets)
-

@@ -10,21 +10,20 @@ from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
 from mcs_benchmark_data.models.submission import Submission
 
+
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass(frozen = True)
+@dataclass(frozen=True)
 class Benchmark(_Model):
-    '''A collection of datasets composing a benchmark'''
+    """A collection of datasets composing a benchmark"""
+
     name: str
     abstract: str
     authors: Tuple[str, ...]
     datasets: Tuple[BenchmarkDataset, ...]
     submissions: Optional[Tuple[Submission, ...]]
 
-    def to_rdf(
-        self, *, graph: Graph) -> Resource:
-        resource = _Model.to_rdf(
-            self, graph=graph
-        )
+    def to_rdf(self, *, graph: Graph) -> Resource:
+        resource = _Model.to_rdf(self, graph=graph)
 
         resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
         resource.add(SCHEMA.abstract, self._quote_rdf_literal(self.abstract))
