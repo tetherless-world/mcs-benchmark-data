@@ -12,6 +12,7 @@ from mcs_benchmark_data._model import _Model
 @dataclass(frozen=True)
 class TestScore(_Model):
     """Score of a system's correct predictions against a test benchmark dataset"""
+
     isBasedOn: str
     name: str
     value: str

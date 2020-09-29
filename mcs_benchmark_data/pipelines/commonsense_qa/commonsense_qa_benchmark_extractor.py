@@ -17,7 +17,6 @@ class CommonsenseQaBenchmarkExtractor(_Extractor):
                 self._extracted_data_dir_path
                 / "dev_rand_split_roberta_submission.jsonl",
                 self._extracted_data_dir_path
-                / "dev_rand_split_kagnet_submission.jsonl"
-            )
-
+                / "dev_rand_split_kagnet_submission.jsonl",
+            ),
         }

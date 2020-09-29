@@ -16,6 +16,6 @@ def test_extract_transform():
 
     datasets = [model for model in models if isinstance(model, BenchmarkDataset)]
     assert len(datasets) == 3
-    assert any(dataset.name == "dev" for dataset in datasets)
-    assert any(dataset.name == "test" for dataset in datasets)
-    assert any(dataset.name == "train" for dataset in datasets)
+    assert any(dataset.name == "CommonsenseQA dev dataset" for dataset in datasets)
+    assert any(dataset.name == "CommonsenseQA test dataset" for dataset in datasets)
+    assert any(dataset.name == "CommonsenseQA training dataset" for dataset in datasets)
