@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
-from typing import Literal
+from typing_extensions import Literal
 
 from mcs_benchmark_data.namespace import MCS, SCHEMA
 from rdflib import Graph

@@ -30,27 +30,29 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
         dev_jsonl_file_path: Path,
         test_jsonl_file_path: Path,
         train_jsonl_file_path: Path,
+        submission_jsonl_file_paths: Tuple[Path,...]
     ) -> Generator[_Model, None, None]:
+
         benchmark_json = open(benchmark_json_file_path)
-        self.__transform_benchmark(benchmark_json_file_path)
+        yield self.__transform_benchmark(benchmark_json_file_path)
 
         # Yield benchmark dev sample
-        dev_json = open(dev_json_file_path)
-        self.__transform_benchmark_sample(dev_json, "dev")
+        dev_json = open(dev_jsonl_file_path)
+        yield self.__transform_benchmark_sample(dev_json, "dev")
 
         # Yield benchmark train sample
-        train_json = open(train_json_file_path)
-        self.__transform_benchmark_sample(train_json, "train")
+        train_json = open(train_jsonl_file_path)
+        yield self.__transform_benchmark_sample(train_json, "train")
 
         # Yield submissions
         # Assumes file name in form "*_[systemname]_submission.jsonl" (e.g. dev_rand_split_roberta_submission.jsonl)
-        for path in submission_json_file_paths:
+        for path in submission_jsonl_file_paths:
             submission_json = open(path)
             dirs, fname = os.path.split(path)
             system = fname.split("_")[-2]
-            self.__transform_submission(submission_json, system)
+            yield self.__transform_submission(submission_json, system)
 
-    def __transform_benchmark(self, benchmark_json):
+    def __transform_benchmark(self, benchmark_json) -> Generator[Benchmark, None, None]:
         # benchmark_bootstrap = BenchmarkBoostrap.from_json(benchmark_json)
         benchmark_metadata = json.loads(benchmark_json)
         yield Benchmark(
@@ -60,7 +62,7 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
             datasets=tuple(
                 BenchmarkDataset(uri=dataset["@id"], name=dataset["name"])
                 for dataset in benchmark_metadata["dataset"]
-            ),
+            )
         )
 
     def __transform_benchmark_sample(

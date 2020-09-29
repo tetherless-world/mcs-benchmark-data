@@ -11,4 +11,7 @@ class CommonsenseQaBenchmarkExtractor(_Extractor):
             / "test_rand_split_no_answers.jsonl",
             "train_jsonl_file_path": self._extracted_data_dir_path
             / "train_rand_split.jsonl",
+            "submission_jsonl_file_paths": (self._extracted_data_dir_path
+            / "dev_rand_split_roberta_submission.jsonl", self._extracted_data_dir_path
+            / "dev_rand_split_kagnet_submission.jsonl")
         }

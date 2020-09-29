@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
-from typing import Tuple, Literal
+from typing import Tuple
+from typing_extensions import Literal
 
 from rdflib import Graph
 from rdflib.resource import Resource
