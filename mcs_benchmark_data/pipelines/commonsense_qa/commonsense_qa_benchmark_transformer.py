@@ -13,17 +13,15 @@ from mcs_benchmark_data.models.benchmark_choice import BenchmarkChoice
 from mcs_benchmark_data.models.benchmark_choices import BenchmarkChoices
 from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
 from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
+from mcs_benchmark_data.models.benchmark_training_dataset import BenchmarkTrainingDataset
+from mcs_benchmark_data.models.benchmark_test_dataset import BenchmarkTestDataset
+from mcs_benchmark_data.models.benchmark_dev_dataset import BenchmarkDevDataset
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
-from mcs_benchmark_data.models.submission import Submission
-from mcs_benchmark_data.models.test_score import TestScore
-from mcs_benchmark_data.models.dev_score import DevScore
 
 
 class CommonsenseQaBenchmarkTransformer(_Transformer):
-    __TYPE = "@type"
-    __LIST = "itemListElement"
 
     def transform(
         self,
@@ -47,16 +45,10 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
         train_json = open(train_jsonl_file_path)
         yield from self.__transform_benchmark_sample(train_json, "train")
 
-        # Yield submissions
-        # Assumes file name in form "*_[systemname]_submission.jsonl" (e.g. dev_rand_split_roberta_submission.jsonl)
-        submission_data_jsonl = open(submission_data_jsonl_file_path)
-        for path in submission_jsonl_file_paths:
-            submission_json = open(path)
-            dirs, fname = os.path.split(path)
-            system = fname.split("_")[-2]
-            yield from self.__transform_submission(
-                submission_data_jsonl, submission_json, system
-            )
+        # Yield benchmark test sample
+        test_json = open(test_jsonl_file_path)
+        yield from self.__transform_benchmark_sample(test_json, "test")
+
 
     def __transform_benchmark(self, benchmark_json) -> Generator[_Model, None, None]:
         # benchmark_bootstrap = BenchmarkBoostrap.from_json(benchmark_json)
@@ -65,9 +57,21 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
         benchmark_datasets = []
 
         for dataset in benchmark_metadata["datasets"]:
-            new_dataset = BenchmarkDataset(
-                uri=dataset["@id"], name=dataset["name"], entries=tuple()
-            )
+
+            dataset_type = dataset["@id"].split("/")[-1]
+
+            if dataset_type == "train":
+                new_dataset = BenchmarkTrainingDataset(
+                    uri=dataset["@id"], type = "train", name=dataset["name"], entries=tuple()
+                )
+            elif dataset_type == "test":
+                new_dataset = BenchmarkTestDataset(
+                    uri=dataset["@id"], type = "test", name=dataset["name"], entries=tuple()
+                )
+            elif dataset_type == "dev":
+                new_dataset = BenchmarkDevDataset(
+                    uri=dataset["@id"], type = "dev", name=dataset["name"], entries=tuple()
+                )
 
             yield new_dataset
 
@@ -78,127 +82,66 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
             name=benchmark_metadata["name"],
             abstract=benchmark_metadata["abstract"],
             authors=tuple(str for author in benchmark_metadata["authors"]),
-            datasets=tuple(benchmark_datasets),
-            submissions=None,
+            datasets=tuple(benchmark_datasets)
         )
+
 
     def __transform_benchmark_sample(
-        self, sample_json, sample_type: str
-    ) -> Generator[_Model, None, None]:
+            self, sample_json, sample_type: str
+        ) -> Generator[_Model, None, None]:
 
-        question_type = BenchmarkQuestionType.MULTIPLE_CHOICE
-        question_category = None
-        included_in_dataset = "CommonsenseQA/{}".format(sample_type)
+            question_type = BenchmarkQuestionType.MULTIPLE_CHOICE
+            question_category = None
+            included_in_dataset = "CommonsenseQA/{}".format(sample_type)
 
-        ans_mapping = {ans: i for i, ans in enumerate("ABCDE")}
+            ans_mapping = {ans: i for i, ans in enumerate("ABCDE")}
 
-        all_samples = list(sample_json)
+            all_samples = list(sample_json)
 
-        for line in all_samples:
+            for line in all_samples:
 
-            sample = json.loads(line)
+                sample = json.loads(line)
 
-            correct_choice = ans_mapping[sample["answerKey"]]
+                correct_choice = None
 
-            concept = BenchmarkConcept(
-                uri="", concept=sample["question"]["question_concept"]
-            )
+                if sample_type != "test":
+                    correct_choice = ans_mapping[sample["answerKey"]]
+                
 
-            yield concept
-
-            choices_list = []
-
-            for item in sample["question"]["choices"]:
-                choice = BenchmarkChoice(
-                    uri="",
-                    position=item["label"],
-                    text=item["text"],
+                concept = BenchmarkConcept(
+                    uri="", concept=sample["question"]["question_concept"]
                 )
-                choices_list.append(choice)
-                yield choice
 
-            choices = BenchmarkChoices(uri="", choices=tuple(choices_list))
-            yield choices
+                yield concept
 
-            question = BenchmarkQuestion(
-                uri="", text=sample["question"]["stem"], concepts=concept
-            )
-            yield question
+                choices_list = []
 
-            antecedent = BenchmarkAntecedent(uri="", elements=question)
-            yield BenchmarkSample(
-                uri=sample["id"],
-                includedInDataset=included_in_dataset,
-                questionType=question_type,
-                questionCategory=question_category,
-                antecedent=antecedent,
-                choices=choices,
-                correctChoice=correct_choice,
-            )
-
-    def __transform_submission(
-        self, submission_data_jsonl, submission_json, system: str
-    ) -> Generator[Submission, None, None]:
-
-        all_submissions = list(submission_data_jsonl)
-
-        for line in all_submissions:
-
-            submission = json.loads(line)
-
-            if submission["name"] != "system":
-                continue
-
-            scores = []
-
-            for item in submission["contentRating"]:
-
-                score = None
-
-                if item["type"] == "TestScore":
-                    score = Test_Score(
-                        isBasedOn=item["isBasedOn"],
-                        name=item["name"],
-                        value=item["value"],
+                for item in sample["question"]["choices"]:
+                    choice = BenchmarkChoice(
+                        uri="",
+                        position=item["label"],
+                        text=item["text"],
                     )
+                    choices_list.append(choice)
+                    yield choice
 
-                elif item["type"] == "DevScore":
-                    score = Test_Score(
-                        isBasedOn=item["isBasedOn"],
-                        name=item["name"],
-                        value=item["value"],
-                    )
+                choices = BenchmarkChoices(uri="", choices=tuple(choices_list))
+                yield choices
 
-                yield score
-
-                scores.append(score)
-
-            yield Submission(
-                uri="",
-                name=submission["@id"],
-                description=submission["description"],
-                dateCreated=submission["dateCreated"],
-                isBasedOn=submission["isBasedOn"],
-                contributors=tuple(
-                    contributor["name"] for contributor in benchmark_metadata["authors"]
-                ),
-                contentRating=tuple(scores),
-                resultOf=(
-                    submission["resultOf"]["@type"],
-                    strptime(submission["resultOf"]["startTime"], "%m-%d-%YT%H:%M:%SZ"),
-                    strptime(submission["resultOf"]["endTime"], "%m-%d-%YT%H:%M:%SZ"),
-                    submission["url"],
+                question = BenchmarkQuestion(
+                    uri="", text=sample["question"]["stem"], concepts=concept
                 )
-                # Samples?
-            )
+                yield question
 
-            break
+                antecedent = BenchmarkAntecedent(uri="", elements=question)
+                yield BenchmarkSample(
+                    uri=sample["id"],
+                    includedInDataset=included_in_dataset,
+                    questionType=question_type,
+                    questionCategory=question_category,
+                    antecedent=antecedent,
+                    choices=choices,
+                    correctChoice=correct_choice,
+                )
 
-    def __transform_submission_sample(
-        self, submission_sample_json
-    ) -> Generator[BenchmarkAnswer, None, None]:
-        yield BenchmarkAnswer(
-            uri="",
-            text=submission_sample_json["value"],
-            position=submission_sample_json["position"],
-        )
+   

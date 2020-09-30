@@ -14,9 +14,9 @@ from mcs_benchmark_data._model import _Model
 class SubmissionSample(_Model):
     """An entry in a submission dataset (i.e. prediction)"""
 
-    about: str
     includedInDataset: str
     value: int
+    about: str
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)

@@ -20,7 +20,6 @@ class Benchmark(_Model):
     abstract: str
     authors: Tuple[str, ...]
     datasets: Tuple[BenchmarkDataset, ...]
-    submissions: Optional[Tuple[Submission, ...]]
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
