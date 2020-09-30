@@ -3,7 +3,7 @@ from dataclasses_json import LetterCase, dataclass_json
 from typing import Tuple
 from typing_extensions import Literal
 
-from rdflib import Graph
+from rdflib import Graph, URIRef
 from rdflib.resource import Resource
 
 from mcs_benchmark_data.namespace import MCS, SCHEMA, XSD
@@ -22,7 +22,7 @@ from mcs_benchmark_data.models.benchmark_antecedent import BenchmarkAntecedent
 class BenchmarkSample(_Model):
     """An entry in a benchmark dataset"""
 
-    includedInDataset: str
+    datasetURI: URIRef
     questionType: BenchmarkQuestionType
     questionCategory: BenchmarkQuestionCategory
     antecedent: BenchmarkAntecedent
@@ -31,6 +31,8 @@ class BenchmarkSample(_Model):
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
+
+        resource.add(RDF.type, self.datasetURI)
 
         resource.add(XSD.string, self._quote_rdf_literal(self.includedInDataset))
 

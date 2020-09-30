@@ -7,6 +7,7 @@ from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_submission_trans
     CommonsenseQaSubmissionTransformer,
 )
 
+
 class CommonsenseQaKagnetSubmissionPipeline(_Pipeline):
     __ID = "CommonsenseQA"
 

@@ -15,15 +15,11 @@ from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
 class BenchmarkDataset(_Model):
     """A file containing elements (questions, answers, context, observations, ...) of a benchmark"""
 
-    """Sub-classes: BenchmarkDevDataset, BenchmarkTestDataset, BenchmarkTrainingDataset"""
+    """Sub-classes: BenchmarkDevDataset, BenchmarkTestDataset, BenchmarkTrainDataset"""
     name: str
-    entries: Tuple[BenchmarkSample, ...]
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
         resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
-        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
-        for entry in self.entries:
-            resource.add(MCS.BenchmarkSample, entry)
 
         return resource

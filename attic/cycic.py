@@ -1,4 +1,3 @@
-
 import os
 import json
 from benchmark import Benchmark
@@ -32,7 +31,9 @@ class CycIC(Benchmark):
         with open(path) as f:
             for line in f:
                 json_data = json.loads(line.strip())
-                self.chosen_labels[self.runid2guid[json_data["example_id"]]] = int(json_data["pred"])
+                self.chosen_labels[self.runid2guid[json_data["example_id"]]] = int(
+                    json_data["pred"]
+                )
 
     def get_benchmark_id(self):
         return self.benchmark_id
@@ -71,11 +72,13 @@ class CycIC(Benchmark):
             num_choices = 2
 
         for i in range(num_choices):
-            choices.append({
-                "@type": "BenchmarkAnswer",
-                "name": "Answer",
-                "text": sample["answer_option{}".format(i)]
-            })
+            choices.append(
+                {
+                    "@type": "BenchmarkAnswer",
+                    "name": "Answer",
+                    "text": sample["answer_option{}".format(i)],
+                }
+            )
         return choices
 
 
@@ -90,18 +93,28 @@ if __name__ == "__main__":
     benchmark.load_label_file("data/CycIC/CycIC_training_labels.jsonl")
     train_id_set = benchmark.id_set
     data = benchmark.convert_samples_to_jsonld()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_train.jsonl".format(dataset)))
+    benchmark.write_data_as_jsonl(
+        data, os.path.join(output_dir, "{}_train.jsonl".format(dataset))
+    )
 
     benchmark = CycIC(question_set_id="dev")
     benchmark.load_question_file("data/CycIC/CycIC_dev_questions.jsonl")
     benchmark.load_label_file("data/CycIC/CycIC_dev_labels.jsonl")
     dev_id_set = benchmark.id_set
-    benchmark.load_chosen_label_file("data/CycIC/CycIC_dev_cycic-transformers_submission.jsonl")
+    benchmark.load_chosen_label_file(
+        "data/CycIC/CycIC_dev_cycic-transformers_submission.jsonl"
+    )
     data = benchmark.convert_samples_to_jsonld()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
+    benchmark.write_data_as_jsonl(
+        data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset))
+    )
     data = benchmark.convert_system_choices_to_jsonld("CycIC-cycic-transformers")
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev_cycic-transformers_submission.jsonl".format(dataset)))
+    benchmark.write_data_as_jsonl(
+        data,
+        os.path.join(
+            output_dir, "{}_dev_cycic-transformers_submission.jsonl".format(dataset)
+        ),
+    )
 
     if len(train_id_set.intersection(dev_id_set)) != 0:
         print(train_id_set.intersection(dev_id_set))
-

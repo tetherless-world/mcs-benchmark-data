@@ -12,4 +12,10 @@ from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
 class BenchmarkDevDataset(BenchmarkDataset):
     """A dataset containing dev samples of a benchmark"""
 
-    type: "BenchmarkDevDataset"
+    type: str
+
+    def to_rdf(self, *, graph: Graph) -> Resource:
+        resource = super().to_rdf(self, graph=graph)
+        resource.add(XSD.string, self._quote_rdf_literal(self.type))
+
+        return resource

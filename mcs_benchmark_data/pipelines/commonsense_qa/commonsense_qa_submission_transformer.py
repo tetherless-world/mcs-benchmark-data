@@ -3,6 +3,7 @@ import os
 from datetime import datetime
 from pathlib import Path
 from typing import Tuple, Generator
+from rdflib import URIRef
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._transformer import _Transformer
@@ -14,42 +15,49 @@ from mcs_benchmark_data.models.dev_score import DevScore
 
 class CommonsenseQaSubmissionTransformer(_Transformer):
 
+    __URI_BASE = "benchmark:commonsense_qa"
+    __BENCHMARK_SCORE_CLASSES={
+        "TestScore": TestScore,
+        "DevScore": DevScore
+    }
+
     def transform(
         self,
         *,
         system: str,
-        benchmark_json_file_path: Path,
-        dev_jsonl_file_path: Path,
-        test_jsonl_file_path: Path,
-        train_jsonl_file_path: Path,
         submission_data_jsonl_file_path: Path,
-        submission_jsonl_file_paths: Tuple[Path, ...]
+        submission_jsonl_file_paths: Tuple[Path, ...],
+        **kwds
     ) -> Generator[_Model, None, None]:
 
         # Yield submissions
         # Assumes file name in form "*_[systemname]_submission.jsonl" (e.g. dev_rand_split_roberta_submission.jsonl)
-        submission_data_jsonl = open(submission_data_jsonl_file_path)
-        yield from self.__transform_submission(submission_data_jsonl, system)
+        submission =  self.__transform_submission(submission_data_jsonl, system)
+
+        yield submission
 
         for path in submission_jsonl_file_paths:
-            submission_jsonl = open(path)
             dirs, fname = os.path.split(path)
             submission_system = fname.split("_")[-2]
             if submission_system = system:
                 yield from self.__transform_submission_sample(
-                    submission_jsonl, system
+                    path, system, submission.uri
                 )
 
 
+
     def __transform_submission(
-        self, submission_data_jsonl, system:str
+        self, submission_data_jsonl_file_path, system:str
     ) -> Generator[Submission, None, None]:
 
-        all_submissions = list(submission_data_jsonl)
+        with open(submission_data_jsonl_file_path) as submission_data_jsonl:
+            all_submissions = list(submission_data_jsonl)
 
         for line in all_submissions:
 
             submission = json.loads(line)
+
+            submission_uri = "{}:submission:{}".format(self.__URI_BASE,submission["@id"])
 
             if submission["name"] != system:
                 continue
@@ -58,28 +66,17 @@ class CommonsenseQaSubmissionTransformer(_Transformer):
 
             for item in submission["contentRating"]:
 
-                score = None
-
-                if item["type"] == "TestScore":
-                    score = Test_Score(
-                        isBasedOn=item["isBasedOn"],
-                        name=item["name"],
-                        value=item["value"],
-                    )
-
-                elif item["type"] == "DevScore":
-                    score = Test_Score(
-                        isBasedOn=item["isBasedOn"],
-                        name=item["name"],
-                        value=item["value"],
-                    )
-
-                yield score
+                score = self.__BENCHMARK_SCORE_CLASSES[item["type"]](
+                    uri = "{}:{}".format(submission_uri,item["type"]),
+                    isBasedOn=item["isBasedOn"],
+                    name=item["name"],
+                    value=item["value"],            
+                )
 
                 scores.append(score)
 
             yield Submission(
-                uri="",
+                uri=submission_uri,
                 name=submission["@id"],
                 description=submission["description"],
                 dateCreated=submission["dateCreated"],
@@ -96,10 +93,13 @@ class CommonsenseQaSubmissionTransformer(_Transformer):
                 )
             )
 
+            for score in scores:
+                yield score
+
             break
 
     def __transform_submission_sample(
-        self, submission_sample_json, system: str
+        self, submission_sample_json, system: str, submission_uri: URIRef
     ) -> Generator[SubmissionSample, None, None]:
 
         all_samples = list(submission_sample_jsonl)
@@ -109,9 +109,9 @@ class CommonsenseQaSubmissionTransformer(_Transformer):
             sample = json.loads(line)
 
             yield SubmissionSample(
-                uri="{}-{}-submission".format(system,sample["id"]),
+                uri="{}:sample:{}".format(submission_uri,sample["id"]),
                 about="{}-{}".format(system,sample["id"]),
                 #I do not think includedInDataset is correct.
-                includedInDataset=sample["id"],
+                datasetURI=submission_uri,
                 value=sample["chosenAnswer"]
             )

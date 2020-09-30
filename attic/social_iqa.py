@@ -1,4 +1,3 @@
-
 import os
 import json
 
@@ -30,7 +29,7 @@ class SocialIQA(Benchmark):
             for i, line in enumerate(f):
                 if len(line.strip()) == 0:
                     continue
-                label = int(line.strip()) - 1   # zero-based
+                label = int(line.strip()) - 1  # zero-based
                 guid = "{}-{}".format(self.question_set_id, i)
                 self.labels[guid] = label
 
@@ -71,11 +70,13 @@ class SocialIQA(Benchmark):
         num_choices = 3
         choice_ids = ["A", "B", "C"]
         for i in range(num_choices):
-            choices.append({
-                "@type": "BenchmarkAnswer",
-                "name": "Answer",
-                "text": sample["answer{}".format(choice_ids[i])]
-            })
+            choices.append(
+                {
+                    "@type": "BenchmarkAnswer",
+                    "name": "Answer",
+                    "text": sample["answer{}".format(choice_ids[i])],
+                }
+            )
         return choices
 
 
@@ -89,11 +90,14 @@ if __name__ == "__main__":
     benchmark.load_question_file("data/{}/train.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/train-labels.lst".format(dataset))
     data = benchmark.convert_samples_to_jsonld()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_train.jsonl".format(dataset)))
+    benchmark.write_data_as_jsonl(
+        data, os.path.join(output_dir, "{}_train.jsonl".format(dataset))
+    )
 
     benchmark = SocialIQA(question_set_id="dev")
     benchmark.load_question_file("data/{}/dev.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/dev-labels.lst".format(dataset))
     data = benchmark.convert_samples_to_jsonld()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
-
+    benchmark.write_data_as_jsonl(
+        data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset))
+    )
