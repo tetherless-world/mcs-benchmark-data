@@ -5,7 +5,7 @@ from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_pipeli
 )
 
 
-def test_extract_transform():
+def test_extract_transform_benchmark():
     models = tuple(CommonsenseQaBenchmarkPipeline().extract_transform())
     assert models
 

@@ -1,14 +1,11 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
-from typing_extensions import Literal
 
-from mcs_benchmark_data.namespace import MCS, SCHEMA
+from mcs_benchmark_data.namespace import SCHEMA
 from rdflib import Graph
-from rdflib.namespace import RDF
 from rdflib.resource import Resource
 
 from mcs_benchmark_data._model import _Model
-
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass(frozen=True)

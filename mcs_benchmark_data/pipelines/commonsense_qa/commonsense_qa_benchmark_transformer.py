@@ -4,10 +4,12 @@ from datetime import datetime
 from pathlib import Path
 from typing import Tuple, Generator
 from rdflib import URIRef
+from dataclasses_json import dataclass_json
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._transformer import _Transformer
 from mcs_benchmark_data.models.benchmark import Benchmark
+from mcs_benchmark_data.models.benchmark_bootstrap import BenchmarkBootstrap
 from mcs_benchmark_data.models.benchmark_answer import BenchmarkAnswer
 from mcs_benchmark_data.models.benchmark_antecedent import BenchmarkAntecedent
 from mcs_benchmark_data.models.benchmark_choice import BenchmarkChoice
@@ -38,7 +40,16 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
         with open(benchmark_json_file_path) as benchmark_json:
             benchmark_metadata = json.load(benchmark_json)
 
-        benchmark_datasets = []
+        benchmark_bootstrap = BenchmarkBootstrap.from_json(benchmark_metadata)
+
+        benchmark = Benchmark(
+            uri="{}:benchmark:{}".format(self.__URI_BASE, benchmark_metadata["@id"]),
+            name=benchmark_bootstrap.name,
+            abstract=benchmark_bootstrap.abstract,
+            authors=benchmark_bootstrap.authors,
+        )
+
+        yield benchmark
 
         for dataset in benchmark_metadata["datasets"]:
 
@@ -47,27 +58,14 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
             dataset_uri = "{}:dataset:{}".format(self.__URI_BASE, dataset["@id"])
 
             new_dataset = self.__BENCHMARK_DATASET_CLASSES[dataset_type](
-                uri=dataset_uri, type=dataset_type, name=dataset["name"]
+                uri=dataset_uri, benchmark_uri=benchmark.uri, name=dataset["name"]
             )
 
-            benchmark_datasets.append(new_dataset)
+            yield new_dataset
 
             yield from self.__transform_benchmark_sample(
                 kwds[dataset_type + "_jsonl_file_path"], dataset_type, new_dataset.uri
             )
-
-        benchmark = Benchmark(
-            uri="{}:benchmark:{}".format(self.__URI_BASE, benchmark_metadata["@id"]),
-            name=benchmark_metadata["name"],
-            abstract=benchmark_metadata["abstract"],
-            authors=tuple(str for author in benchmark_metadata["authors"]),
-            datasets=tuple(benchmark_datasets),
-        )
-
-        yield benchmark
-
-        for dataset in benchmark_datasets:
-            yield dataset
 
     def __transform_benchmark_sample(
         self, sample_jsonl_file_path, sample_type: str, dataset_uri: URIRef
@@ -85,57 +83,60 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
 
             sample = json.loads(line)
 
-            benchmark_sample_uri = "{}:sample:{}".format(dataset_uri, sample["id"])
-
             correct_choice = None
 
             if sample_type != "test":
                 correct_choice = ans_mapping[sample["answerKey"]]
 
+            benchmark_sample = BenchmarkSample(
+                uri="{}:sample:{}".format(dataset_uri, sample["id"]),
+                dataset_uri=dataset_uri,
+                question_type=question_type,
+                question_category=question_category,
+                correct_choice=correct_choice,
+            )
+
+            yield benchmark_sample
+
             concept = BenchmarkConcept(
-                uri="{}:concept".format(benchmark_sample_uri),
+                uri="{}:concept".format(benchmark_sample.uri),
+                benchmark_sample_uri=benchmark_sample.uri,
                 concept=sample["question"]["question_concept"],
             )
+
+            yield concept
 
             choices_list = []
 
             for item in sample["question"]["choices"]:
                 choice = BenchmarkChoice(
-                    uri="{}:choice:{}: ".format(benchmark_sample_uri, item["label"]),
+                    uri="{}:choice:{}: ".format(benchmark_sample.uri, item["label"]),
                     position=item["label"],
                     text=item["text"],
                 )
                 choices_list.append(choice)
 
+                yield choice
+
             choices = BenchmarkChoices(
-                uri="{}:choices".format(benchmark_sample_uri),
+                benchmark_sample_uri=benchmark_sample.uri,
                 choices=tuple(choices_list),
             )
 
+            yield choices
+
+            antecedent = BenchmarkAntecedent(
+                uri="{}:antecedent".format(benchmark_sample.uri),
+                benchmark_sample_uri=benchmark_sample.uri,
+            )
+
+            yield antecedent
+
             question = BenchmarkQuestion(
-                uri="{}:question".format(benchmark_sample_uri),
+                uri="{}:question".format(benchmark_sample.uri),
+                antecedent_uri=antecedent.uri,
                 text=sample["question"]["stem"],
                 concepts=concept,
             )
 
-            antecedent = BenchmarkAntecedent(
-                uri="{}:antecedent".format(benchmark_sample_uri), elements=question
-            )
-            yield BenchmarkSample(
-                uri=sample["id"],
-                datasetURI=dataset_uri,
-                questionType=question_type,
-                questionCategory=question_category,
-                antecedent=antecedent,
-                choices=choices,
-                correctChoice=correct_choice,
-            )
-
             yield question
-            yield choices
-
-            for item in choices_list:
-                yield choice
-
-            yield antecedent
-            yield concept
