@@ -6,7 +6,7 @@ from mcs_benchmark_data._model import _Model
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
-@dataclass
+@dataclass(frozen=True)
 class BenchmarkBootstrap:
     """A model to parse data for a given benchmark"""
 

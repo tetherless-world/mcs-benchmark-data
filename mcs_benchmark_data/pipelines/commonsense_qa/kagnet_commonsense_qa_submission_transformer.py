@@ -20,10 +20,12 @@ class KagnetCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransform
     Class for transforming CommonsenseQA kagnet sample.
     """
 
+    __URI_BASE = "benchmark:commonsense_qa"
+    __BENCHMARK_SCORE_CLASSES = {"TestScore": TestScore, "DevScore": DevScore}
+
     def transform(
         self,
         *,
-        system: str,
         submission_data_jsonl_file_path: Path,
         submission_jsonl_file_path: Path,
         **kwds
@@ -31,12 +33,12 @@ class KagnetCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransform
 
         # Yield submissions
         # Assumes file name in form "*_[systemname]_submission.jsonl" (e.g. dev_rand_split_kagnet_submission.jsonl)
-        submission = yield self.__transform_submission(submission_data_jsonl_file_path)
+        yield from self.__transform_submission(submission_data_jsonl_file_path)
 
-        yield submission
+        submission_uri = "{}:submission:CommonsenseQA-kagnet".format(self.__URI_BASE)
 
         yield from self.__transform_submission_sample(
-            submission_jsonl_file_path, submission.uri
+            submission_jsonl_file_path, submission_uri
         )
 
     def __transform_submission(
@@ -50,32 +52,35 @@ class KagnetCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransform
 
             submission = json.loads(line)
 
-            if submission["name"].lower() != "kagnet":
-                continue
+            if submission["name"].lower() == "kagnet":
 
-            submission_obj = Submission(
-                uri="{}:submission:{}".format(self.__URI_BASE, submission["@id"]),
-                name=submission["@id"],
-                description=submission["description"],
-                date_created=submission["dateCreated"],
-                is_based_on=submission["isBasedOn"],
-                contributors=tuple(
-                    contributor["name"] for contributor in submission["contributor"]
-                ),
-                result_of=(
-                    submission["resultOf"]["@type"],
-                    strptime(submission["resultOf"]["startTime"], "%m-%d-%YT%H:%M:%SZ"),
-                    strptime(submission["resultOf"]["endTime"], "%m-%d-%YT%H:%M:%SZ"),
-                    submission["url"],
-                ),
-            )
+                submission_obj = Submission(
+                    uri="{}:submission:{}".format(self.__URI_BASE, submission["@id"]),
+                    name=submission["@id"],
+                    description=submission["description"],
+                    date_created=submission["dateCreated"],
+                    is_based_on=submission["isBasedOn"],
+                    contributors=tuple(
+                        contributor for contributor in submission["contributor"]
+                    ),
+                    result_of=(
+                        submission["resultOf"]["@type"],
+                        strptime(
+                            submission["resultOf"]["startTime"], "%m-%d-%YT%H:%M:%SZ"
+                        ),
+                        strptime(
+                            submission["resultOf"]["endTime"], "%m-%d-%YT%H:%M:%SZ"
+                        ),
+                        submission["resultOf"]["url"],
+                    ),
+                )
 
-            yield submission_obj
+                yield submission_obj
 
             for item in submission["contentRating"]:
 
-                score = self.__BENCHMARK_SCORE_CLASSES[item["type"]](
-                    uri="{}:{}".format(submission_obj.uri, item["type"]),
+                score = self.__BENCHMARK_SCORE_CLASSES[item["@type"]](
+                    uri="{}:{}".format(submission_obj.uri, item["@type"]),
                     submission_uri=submission_obj.uri,
                     is_based_on=item["isBasedOn"],
                     name=item["name"],
@@ -90,7 +95,8 @@ class KagnetCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransform
         self, submission_sample_jsonl_file_path: Path, submission_uri: URIRef
     ) -> Generator[_Model, None, None]:
 
-        all_samples = list(submission_sample_jsonl_file_path)
+        with open(submission_sample_jsonl_file_path) as submission_sample_jsonl:
+            all_samples = list(submission_sample_jsonl)
 
         for line in all_samples:
 

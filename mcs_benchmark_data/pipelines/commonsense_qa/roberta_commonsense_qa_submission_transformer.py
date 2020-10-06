@@ -19,10 +19,12 @@ class RobertaCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransfor
     Class for transforming CommonsenseQA roberta sample.
     """
 
+    __URI_BASE = "benchmark:commonsense_qa"
+    __BENCHMARK_SCORE_CLASSES = {"TestScore": TestScore, "DevScore": DevScore}
+
     def transform(
         self,
         *,
-        system: str,
         submission_data_jsonl_file_path: Path,
         submission_jsonl_file_path: Path,
         **kwds
@@ -30,12 +32,12 @@ class RobertaCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransfor
 
         # Yield submissions
         # Assumes file name in form "*_[systemname]_submission.jsonl" (e.g. dev_rand_split_roberta_submission.jsonl)
-        submission = yield self.__transform_submission(submission_data_jsonl_file_path)
+        yield from self.__transform_submission(submission_data_jsonl_file_path)
 
-        yield submission
+        submission_uri = "{}:submission:CommonsenseQA-roberta".format(self.__URI_BASE)
 
         yield from self.__transform_submission_sample(
-            submission_jsonl_file_path, submission.uri
+            submission_jsonl_file_path, submission_uri
         )
 
     def __transform_submission(
@@ -59,13 +61,13 @@ class RobertaCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransfor
                 date_created=submission["dateCreated"],
                 is_based_on=submission["isBasedOn"],
                 contributors=tuple(
-                    contributor["name"] for contributor in submission["contributor"]
+                    contributor for contributor in submission["contributor"]
                 ),
                 result_of=(
                     submission["resultOf"]["@type"],
                     strptime(submission["resultOf"]["startTime"], "%m-%d-%YT%H:%M:%SZ"),
                     strptime(submission["resultOf"]["endTime"], "%m-%d-%YT%H:%M:%SZ"),
-                    submission["url"],
+                    submission["resultOf"]["url"],
                 ),
             )
 
@@ -73,8 +75,8 @@ class RobertaCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransfor
 
             for item in submission["contentRating"]:
 
-                score = self.__BENCHMARK_SCORE_CLASSES[item["type"]](
-                    uri="{}:{}".format(submission_obj.uri, item["type"]),
+                score = self.__BENCHMARK_SCORE_CLASSES[item["@type"]](
+                    uri="{}:{}".format(submission_obj.uri, item["@type"]),
                     submission_uri=submission_obj.uri,
                     is_based_on=item["isBasedOn"],
                     name=item["name"],
@@ -89,7 +91,8 @@ class RobertaCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransfor
         self, submission_sample_jsonl_file_path: Path, submission_uri: URIRef
     ) -> Generator[_Model, None, None]:
 
-        all_samples = list(submission_sample_jsonl_file_path)
+        with open(submission_sample_jsonl_file_path) as submission_sample_jsonl:
+            all_samples = list(submission_sample_jsonl)
 
         for line in all_samples:
 

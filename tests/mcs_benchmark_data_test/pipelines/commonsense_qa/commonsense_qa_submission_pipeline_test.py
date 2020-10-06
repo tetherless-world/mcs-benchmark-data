@@ -12,10 +12,24 @@ def test_extract_transform_kagnet_submission_benchmark():
     models = tuple(KagnetCommonsenseQaSubmissionPipeline().extract_transform())
     assert models
 
-    submissions = [model for model in models if isinstance(model, Submission)]
+    submissions = [model for model in models if not isinstance(model, SubmissionSample)]
     assert submissions
     submission = submissions[0]
     assert submission.name == "CommonsenseQA-kagnet"
+
+    samples = [model for model in models if isinstance(model, SubmissionSample)]
+    assert len(samples) > 3
+    assert all(sample.submission_uri == submission.uri for sample in samples)
+
+
+def test_extract_transform_roberta_submission_benchmark():
+    models = tuple(RobertaCommonsenseQaSubmissionPipeline().extract_transform())
+    assert models
+
+    submissions = [model for model in models if not isinstance(model, SubmissionSample)]
+    assert submissions
+    submission = submissions[0]
+    assert submission.name == "CommonsenseQA-roberta"
 
     samples = [model for model in models if isinstance(model, SubmissionSample)]
     assert len(samples) > 3
