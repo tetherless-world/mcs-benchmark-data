@@ -9,16 +9,14 @@ from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_transf
 
 
 class CommonsenseQaBenchmarkPipeline(_Pipeline):
-    __ID = "CommonsenseQA"
+    ID = "CommonsenseQA"
 
     def __init__(self, **kwds):
         _Pipeline.__init__(
             self,
-            extractor=CommonsenseQaBenchmarkExtractor(pipeline_id=self.__ID, **kwds),
-            id=self.__ID,
-            transformer=CommonsenseQaBenchmarkTransformer(
-                pipeline_id=self.__ID, **kwds
-            ),
+            extractor=CommonsenseQaBenchmarkExtractor(pipeline_id=self.ID, **kwds),
+            id=self.ID,
+            transformer=CommonsenseQaBenchmarkTransformer(pipeline_id=self.ID, **kwds),
             **kwds,
         )
 
