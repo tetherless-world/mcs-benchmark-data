@@ -13,7 +13,7 @@ def test_extract_transform():
     assert benchmark
     benchmark = benchmark[0]
     assert benchmark.name == "CommonsenseQA"
-    assert benchmark.authors[0]["name"] == "Alon Talmor"
+    assert benchmark.authors[0] == "Alon Talmor"
 
     datasets = [model for model in models if isinstance(model, BenchmarkDataset)]
     assert len(datasets) == 3

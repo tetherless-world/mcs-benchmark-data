@@ -6,7 +6,7 @@ from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_pipeli
 
 def test_extract_transform_load(tmp_path):
     CommonsenseQaBenchmarkPipeline().extract_transform_load()
-    loaded_data_dir_path = DATA_DIR_PATH / CommonsenseQaBenchmarkPipeline.ID / "loaded"
+    loaded_data_dir_path = DATA_DIR_PATH / "loaded" / CommonsenseQaBenchmarkPipeline.ID
     assert loaded_data_dir_path.is_dir()
     rdf_file_path = loaded_data_dir_path / (CommonsenseQaBenchmarkPipeline.ID + ".ttl")
     assert rdf_file_path.is_file()
