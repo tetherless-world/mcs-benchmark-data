@@ -31,7 +31,7 @@ class Submission(_Model):
         resource.add(SCHEMA.isBasedOn, self._quote_rdf_literal(self.is_based_on))
         for contributor in self.contributors:
             resource.add(SCHEMA.person, self._quote_rdf_literal(contributor))
-            
+
         resource.add(SCHEMA.resultOf, self.result)
         resource.add(
             SCHEMA.softwareApplication, self._quote_rdf_literal(self.result[0])

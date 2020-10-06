@@ -7,6 +7,7 @@ from rdflib.resource import Resource
 
 from mcs_benchmark_data._model import _Model
 
+
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass(frozen=True)
 class BenchmarkChoice(_Model):

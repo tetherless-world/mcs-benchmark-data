@@ -12,8 +12,9 @@ from mcs_benchmark_data._model import _Model
 @dataclass(frozen=True)
 class BenchmarkDataset(_Model):
     """A file containing elements (questions, answers, context, observations, ...) of a benchmark"""
+
     """Sub-classes: BenchmarkDevDataset, BenchmarkTestDataset, BenchmarkTrainDataset"""
-    
+
     benchmark_uri: URIRef
     name: str
 

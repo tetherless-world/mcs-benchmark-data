@@ -9,7 +9,9 @@ from mcs_benchmark_data.namespace import MCS, XSD
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
-from mcs_benchmark_data.models.benchmark_question_category import BenchmarkQuestionCategory
+from mcs_benchmark_data.models.benchmark_question_category import (
+    BenchmarkQuestionCategory,
+)
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
