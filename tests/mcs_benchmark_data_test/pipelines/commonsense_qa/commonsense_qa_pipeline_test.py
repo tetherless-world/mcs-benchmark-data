@@ -20,6 +20,8 @@ def test_extract_transform_load(tmp_path):
             loaded_data_dir_path / f"{CommonsenseQaBenchmarkPipeline.ID}_{suffix}.jsonl"
         ) as jsonl_file:
             for json_line in jsonl_file:
+                if not json_line.strip():
+                    continue
                 old_graph.parse(data=json_line, format="json-ld")
 
     new_graph = Graph()
