@@ -35,7 +35,9 @@ class KagnetCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransform
         # Assumes file name in form "*_[systemname]_submission.jsonl" (e.g. dev_rand_split_kagnet_submission.jsonl)
         yield from self.__transform_submission(submission_data_jsonl_file_path)
 
-        submission_uri = "{}:submission:CommonsenseQA-kagnet".format(self.__URI_BASE)
+        submission_uri = URIRef(
+            "{}:submission:CommonsenseQA-kagnet".format(self.__URI_BASE)
+        )
 
         yield from self.__transform_submission_sample(
             submission_jsonl_file_path, submission_uri
@@ -55,14 +57,14 @@ class KagnetCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransform
             if submission["name"].lower() == "kagnet":
 
                 submission_obj = Submission(
-                    uri="{}:submission:{}".format(self.__URI_BASE, submission["@id"]),
+                    uri=URIRef(
+                        "{}:submission:{}".format(self.__URI_BASE, submission["@id"])
+                    ),
                     name=submission["@id"],
                     description=submission["description"],
                     date_created=submission["dateCreated"],
                     is_based_on=submission["isBasedOn"],
-                    contributors=tuple(
-                        contributor for contributor in submission["contributor"]
-                    ),
+                    contributors=tuple(submission["contributor"]["name"]),
                     result_of=(
                         submission["resultOf"]["@type"],
                         strptime(
@@ -80,7 +82,7 @@ class KagnetCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransform
             for item in submission["contentRating"]:
 
                 score = self.__BENCHMARK_SCORE_CLASSES[item["@type"]](
-                    uri="{}:{}".format(submission_obj.uri, item["@type"]),
+                    uri=URIRef("{}:{}".format(submission_obj.uri, item["@type"])),
                     submission_uri=submission_obj.uri,
                     is_based_on=item["isBasedOn"],
                     name=item["name"],
@@ -103,7 +105,7 @@ class KagnetCommonsenseQaSubmissionTransformer(_CommonsenseQaSubmissionTransform
             sample = json.loads(line)
 
             yield SubmissionSample(
-                uri="{}:sample:{}".format(submission_uri, sample["id"]),
+                uri=URIRef("{}:sample:{}".format(submission_uri, sample["id"])),
                 submission_uri=submission_uri,
                 value=sample["chosenAnswer"],
                 about="kagnet-{}".format(sample["id"]),

@@ -14,7 +14,7 @@ class BenchmarkDevDataset(BenchmarkDataset):
     """A dataset containing dev samples of a benchmark"""
 
     def to_rdf(self, *, graph: Graph) -> Resource:
-        resource = super.to_rdf(self, graph=graph)
+        resource = super().to_rdf(graph=graph)
         resource.add(RDF.type, self._quote_rdf_literal("BenchmarkDevDataset"))
 
         return resource

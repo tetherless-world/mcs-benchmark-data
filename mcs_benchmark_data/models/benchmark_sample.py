@@ -1,8 +1,7 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
-from typing_extensions import Literal
 
-from rdflib import Graph, URIRef
+from rdflib import Graph, URIRef, Literal
 from rdflib.resource import Resource
 
 from mcs_benchmark_data.namespace import MCS, XSD
@@ -29,10 +28,16 @@ class BenchmarkSample(_Model):
 
         resource.add(MCS.includedInDataset, self.dataset_uri)
 
-        resource.add(MCS.benchmarkQuestionType, self.question_type)
+        resource.add(
+            MCS.benchmarkQuestionType, self._quote_rdf_literal(self.question_type)
+        )
 
-        resource.add(MCS.benchmarkQuestionCategory, self.question_category)
+        if self.question_category is not None:
+            resource.add(
+                MCS.benchmarkQuestionCategory,
+                self._quote_rdf_literal(self.question_category),
+            )
 
-        resource.add(XSD.int, Literal(self.correct_choice))
+        resource.add(XSD.integer, Literal(self.correct_choice))
 
         return resource

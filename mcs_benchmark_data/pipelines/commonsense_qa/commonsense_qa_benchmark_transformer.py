@@ -43,10 +43,12 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
         benchmark_bootstrap = BenchmarkBootstrap.from_dict(benchmark_metadata)
 
         benchmark = Benchmark(
-            uri="{}:benchmark:{}".format(self.__URI_BASE, benchmark_metadata["@id"]),
+            uri=URIRef(
+                "{}:benchmark:{}".format(self.__URI_BASE, benchmark_metadata["@id"])
+            ),
             name=benchmark_bootstrap.name,
             abstract=benchmark_bootstrap.abstract,
-            authors=benchmark_bootstrap.authors,
+            authors=tuple(author["name"] for author in benchmark_bootstrap.authors),
         )
 
         yield benchmark
@@ -55,7 +57,9 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
 
             dataset_type = dataset["@id"].split("/")[-1]
 
-            dataset_uri = "{}:dataset:{}".format(self.__URI_BASE, dataset["@id"])
+            dataset_uri = URIRef(
+                "{}:dataset:{}".format(self.__URI_BASE, dataset["@id"])
+            )
 
             new_dataset = self.__BENCHMARK_DATASET_CLASSES[dataset_type](
                 uri=dataset_uri, benchmark_uri=benchmark.uri, name=dataset["name"]
@@ -89,7 +93,7 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
                 correct_choice = ans_mapping[sample["answerKey"]]
 
             benchmark_sample = BenchmarkSample(
-                uri="{}:sample:{}".format(dataset_uri, sample["id"]),
+                uri=URIRef("{}:sample:{}".format(dataset_uri, sample["id"])),
                 dataset_uri=dataset_uri,
                 question_type=question_type,
                 question_category=question_category,
@@ -99,7 +103,7 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
             yield benchmark_sample
 
             concept = BenchmarkConcept(
-                uri="{}:concept".format(benchmark_sample.uri),
+                uri=URIRef("{}:concept".format(benchmark_sample.uri)),
                 benchmark_sample_uri=benchmark_sample.uri,
                 concept=sample["question"]["question_concept"],
             )
@@ -110,7 +114,9 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
 
             for item in sample["question"]["choices"]:
                 choice = BenchmarkChoice(
-                    uri="{}:choice:{}: ".format(benchmark_sample.uri, item["label"]),
+                    uri=URIRef(
+                        "{}:choice:{}".format(benchmark_sample.uri, item["label"])
+                    ),
                     position=item["label"],
                     text=item["text"],
                 )
@@ -118,22 +124,23 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
 
                 yield choice
 
-            choices = BenchmarkChoices(
-                benchmark_sample_uri=benchmark_sample.uri,
-                choices=tuple(choices_list),
-            )
+            # Choices seems redundant now. Need to check-in about this.
+            # choices = BenchmarkChoices(
+            #     benchmark_sample_uri=benchmark_sample.uri,
+            #     choices=tuple(choices_list),
+            # )
 
-            yield choices
+            # yield choices
 
             antecedent = BenchmarkAntecedent(
-                uri="{}:antecedent".format(benchmark_sample.uri),
+                uri=URIRef("{}:antecedent".format(benchmark_sample.uri)),
                 benchmark_sample_uri=benchmark_sample.uri,
             )
 
             yield antecedent
 
             question = BenchmarkQuestion(
-                uri="{}:question".format(benchmark_sample.uri),
+                uri=URIRef("{}:question".format(benchmark_sample.uri)),
                 antecedent_uri=antecedent.uri,
                 text=sample["question"]["stem"],
             )

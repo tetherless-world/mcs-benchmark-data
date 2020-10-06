@@ -17,12 +17,9 @@ class BenchmarkChoices:
     benchmark_sample_uri: URIRef
     choices: Tuple[BenchmarkChoice, ...]
 
-    def to_rdf(self, *, graph: Graph) -> Resource:
-        resource = _Model.to_rdf(self, graph=graph)
-        resource.add(RDF.type, benchmark_sample_uri)
+    # Not necessary, since it doesn't have a URI - I believe
+    # def to_rdf(self, *, graph: Graph) -> Resource:
+    #     resource = super().to_rdf(graph=graph)
+    #     resource.add(MCS.includedInDataset, benchmark_sample_uri)
 
-        # I don't think this is necessary, because each of the choices are yielded themselves
-        # for choice in self.choices:
-        #     resource.add(MCS.benchmarkChoice, choice)
-
-        return resource
+    #     return resource
