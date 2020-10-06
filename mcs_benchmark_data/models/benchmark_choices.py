@@ -21,7 +21,7 @@ class BenchmarkChoices:
         resource = _Model.to_rdf(self, graph=graph)
         resource.add(RDF.type, benchmark_sample_uri)
 
-        #I don't think this is necessary, because each of the choices are yielded themselves
+        # I don't think this is necessary, because each of the choices are yielded themselves
         # for choice in self.choices:
         #     resource.add(MCS.benchmarkChoice, choice)
 

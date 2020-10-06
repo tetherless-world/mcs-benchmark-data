@@ -12,8 +12,9 @@ from mcs_benchmark_data.namespace import XSD, MCS
 @dataclass(frozen=True)
 class BenchmarkPrompt(_Model):
     """A benchmark's sample prompt element"""
+
     """Sub-classes: BenchmarkQuestion, BenchmarkObservation, BenchmarkGoal"""
-    
+
     antecedent_uri: URIRef
     text: str
 
