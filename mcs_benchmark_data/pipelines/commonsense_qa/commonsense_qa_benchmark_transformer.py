@@ -38,9 +38,9 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
     ) -> Generator[_Model, None, None]:
 
         with open(benchmark_json_file_path) as benchmark_json:
-            benchmark_metadata = json.load(benchmark_json)
+            benchmark_metadata = json.loads(benchmark_json.read())
 
-        benchmark_bootstrap = BenchmarkBootstrap.from_json(benchmark_metadata)
+        benchmark_bootstrap = BenchmarkBootstrap.from_dict(benchmark_metadata)
 
         benchmark = Benchmark(
             uri="{}:benchmark:{}".format(self.__URI_BASE, benchmark_metadata["@id"]),
@@ -136,7 +136,6 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
                 uri="{}:question".format(benchmark_sample.uri),
                 antecedent_uri=antecedent.uri,
                 text=sample["question"]["stem"],
-                concepts=concept,
             )
 
             yield question
