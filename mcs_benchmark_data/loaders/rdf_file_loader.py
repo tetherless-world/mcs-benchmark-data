@@ -9,7 +9,7 @@ from mcs_benchmark_data.namespace import bind_namespaces
 
 
 class RdfFileLoader(_BufferingLoader):
-    def __init__(self, *, file_path: Optional[Path] = None, format="ttl", **kwds):
+    def __init__(self, *, file_path: Optional[Path] = None, format="json-ld", **kwds):
         _BufferingLoader.__init__(self, **kwds)
         self.__file_path = file_path
         self.__format = format
@@ -18,7 +18,9 @@ class RdfFileLoader(_BufferingLoader):
         file_path = self.__file_path
         if file_path is None:
             file_path = self._loaded_data_dir_path / (
-                sanitize_filename(self._pipeline_id) + "." + self.__format
+                sanitize_filename(self._pipeline_id)
+                + "."
+                + self.__format.replace("-", "")
             )
         graph = Graph()
         bind_namespaces(graph.namespace_manager)

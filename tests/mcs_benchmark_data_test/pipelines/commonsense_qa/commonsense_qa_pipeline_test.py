@@ -14,7 +14,9 @@ def test_extract_transform_load(tmp_path):
     CommonsenseQaBenchmarkPipeline().extract_transform_load()
     loaded_data_dir_path = DATA_DIR_PATH / "loaded" / CommonsenseQaBenchmarkPipeline.ID
     assert loaded_data_dir_path.is_dir()
-    rdf_file_path = loaded_data_dir_path / (CommonsenseQaBenchmarkPipeline.ID + ".ttl")
+    rdf_file_path = loaded_data_dir_path / (
+        CommonsenseQaBenchmarkPipeline.ID + ".jsonld"
+    )
     assert rdf_file_path.is_file()
 
     # old_graph = Graph()
