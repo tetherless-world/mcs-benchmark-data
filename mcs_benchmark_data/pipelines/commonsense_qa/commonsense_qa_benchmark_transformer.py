@@ -113,7 +113,7 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
             choices_list = []
 
             for item in sample["question"]["choices"]:
-                choice = BenchmarkChoice(
+                choice = BenchmarkAnswer(
                     uri=URIRef(
                         "{}:choice:{}".format(benchmark_sample.uri, item["label"])
                     ),

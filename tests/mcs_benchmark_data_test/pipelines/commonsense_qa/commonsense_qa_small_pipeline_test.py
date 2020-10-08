@@ -5,17 +5,19 @@ from rdflib.compare import to_isomorphic
 from rdflib.parser import StringInputSource
 
 from mcs_benchmark_data.path import DATA_DIR_PATH
-from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_pipeline import (
-    CommonsenseQaBenchmarkPipeline,
+from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_small_benchmark_pipeline import (
+    CommonsenseQaSmallBenchmarkPipeline,
 )
 
 
 def test_extract_transform_load(tmp_path):
-    # CommonsenseQaBenchmarkPipeline().extract_transform_load()
-    loaded_data_dir_path = DATA_DIR_PATH / "loaded" / CommonsenseQaBenchmarkPipeline.ID
+    CommonsenseQaSmallBenchmarkPipeline().extract_transform_load()
+    loaded_data_dir_path = (
+        DATA_DIR_PATH / "loaded" / CommonsenseQaSmallBenchmarkPipeline.ID
+    )
     assert loaded_data_dir_path.is_dir()
     rdf_file_path = loaded_data_dir_path / (
-        CommonsenseQaBenchmarkPipeline.ID + ".jsonld"
+        CommonsenseQaSmallBenchmarkPipeline.ID + ".jsonld"
     )
     assert rdf_file_path.is_file()
 
@@ -46,6 +48,11 @@ def test_extract_transform_load(tmp_path):
         #     if not json_line.strip():
         #         continue
         new_graph.parse(data=jsonl_file.read(), format="json-ld")
+
+    trpls = new_graph.triples((None, None, None))
+
+    for trpl in trpls:
+        assert 2
 
     # old_graph = to_isomorphic(old_graph)
     # new_graph = to_isomorphic(new_graph)

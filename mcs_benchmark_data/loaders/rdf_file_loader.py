@@ -26,5 +26,14 @@ class RdfFileLoader(_BufferingLoader):
         bind_namespaces(graph.namespace_manager)
         for model in models:
             model.to_rdf(graph=graph)
+        context = [
+            "https://tetherless-world.github.io/mcs-ontology/utils/context.jsonld",
+            {
+                "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns",
+                "rdfs": "http://www.w3.org/2000/01/rdf-schema",
+            },
+        ]
+
         with open(file_path, "w+b") as file_:
-            graph.serialize(destination=file_, format=self.__format)
+            graph.serialize(destination=file_, format=self.__format, context=context)
+            # graph.serialize(destination=file_, format=self.__format)

@@ -21,7 +21,7 @@ class BenchmarkSample(_Model):
     dataset_uri: URIRef
     question_type: BenchmarkQuestionType
     question_category: BenchmarkQuestionCategory
-    correct_choice: int
+    correct_choice: URIRef
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
