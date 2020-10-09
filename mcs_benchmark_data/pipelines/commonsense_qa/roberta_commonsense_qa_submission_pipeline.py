@@ -15,7 +15,9 @@ class RobertaCommonsenseQaSubmissionPipeline(_Pipeline):
         _Pipeline.__init__(
             self,
             extractor=RobertaCommonsenseQaSubmissionExtractor(
-                pipeline_id=self.__ID, **kwds
+                pipeline_id=self.__ID,
+                submission_jsonl_file="dev_rand_split_roberta_submission_small.jsonl",
+                **kwds,
             ),
             id=self.__ID,
             transformer=RobertaCommonsenseQaSubmissionTransformer(

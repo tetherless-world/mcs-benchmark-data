@@ -2,2461 +2,2029 @@
   "@context": [
     "https://tetherless-world.github.io/mcs-ontology/utils/context.jsonld",
     {
-      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns",
-      "rdfs": "http://www.w3.org/2000/01/rdf-schema"
+      "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+      "rdfs": "http://www.w3.org/2000/01/rdf-schema#"
     }
   ],
   "@graph": [
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:antecedent",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "hear sounds"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        },
+        {
+          "@id": ""
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:question",
+      "@type": "BenchmarkQuestion",
       "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93"
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:antecedent"
       },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
+      "text": "Sammy wanted to go to where the people were.  Where might he go?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "wear hats"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:D"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "radio shack"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "coach"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "kitchen"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627"
+      },
+      "text": "blade"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": ""
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "get tired"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "office building"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "bedside table"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "singing"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "cabinet"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:antecedent"
+      },
+      "text": "Where are  you likely to find a hamburger?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643"
+      },
+      "text": "star"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "wonderful memories"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "skyline"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:antecedent"
+      },
+      "text": "What were the kids doing as they looked up at the sky and clouds?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "accidents"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "mortuary"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:antecedent"
+      },
+      "text": "A revolving door is convenient for two direction travel, but it also serves as a security measure at a what?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "carpet"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:antecedent"
+      },
+      "text": "Where is a business restaurant likely to be located?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf"
+      },
+      "text": "animals"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28"
+      },
+      "text": "people"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "frustration"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff"
+      },
+      "text": "magazines"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "boutique"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "the desert"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "know truth"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "yell at"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "midwest"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "storybook"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "oceans"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "pretty flowers."
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "neighborhood"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:antecedent"
+      },
+      "text": "What home entertainment equipment requires cable?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:antecedent"
+      },
+      "text": "What do animals do when an enemy is approaching?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "avoid"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "hostility"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "calligrapher\\'s hand"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c"
       }
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "sword"
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:E"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38"
       },
+      "text": "farmland"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "jewelry box"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:choice:E",
+      "@type": "BenchmarkAnswer",
       "position": "E",
-      "schema:answer": "canteen"
+      "schema:answer": "satisfaction"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac"
+      },
+      "text": "revolving door"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "pizza"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461"
+      },
+      "text": "punishing"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "roadblock"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93"
+      },
+      "text": "reading newspaper"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "authoritarian"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "department store"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "pass water"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "estate"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "bookstore"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "cup"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3"
+      },
+      "text": "writing program"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "safe"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "hollywood"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "television"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "diner"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99"
+      },
+      "text": "check"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31"
+      },
+      "text": "fountain pen"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "military"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "listen to each other"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:antecedent"
+      },
+      "text": "Reading newspaper one of many ways to practice your what?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:B"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "street"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "ground up dead cows"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "airport"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8"
+      },
+      "text": "people"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "neck"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": ""
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:antecedent"
+      },
+      "text": "Something that has a long and sharp blade is a?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "wallet"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527"
+      },
+      "text": "hamburger"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "desk"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "train station"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "bank"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "jewelry store"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:A"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@type": "BenchmarkAnswer",
       "position": "E",
       "schema:answer": "blotter"
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 3
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 1
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "money"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "check"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "the desert"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "learn from each other"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "knowing how to read"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "estate"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "What were the kids doing as they looked up at the sky and clouds?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "loop"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "intelligent children"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "town"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "own house"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "tiredness"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "jewelry store"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "race track"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "ground up dead cows"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "writing program"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "After graduating the dentist set up his dental office back where he grew up, he wanted to always live in his home what?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "There is a star at the center of what group of celestial bodies?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "singing"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "fox"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "talk to each other"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "pretty flowers."
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "office building"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:benchmark:CommonsenseQA"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nsstring": "BenchmarkTrainDataset",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkTrainDataset"
-      },
-      "name": "CommonsenseQA training dataset"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "spatula"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:D"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@type": "BenchmarkAnswer",
       "position": "D",
       "schema:answer": "buying"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "chuck"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "The man wanted to telegram the check, so where did he place it?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "ferret"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "dense forest"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "fast food restaurant"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "desk drawer"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "kids"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "enforce"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "skyline"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "person"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "illinois"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "jewelry store"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:antecedent",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:concept",
+      "@type": "BenchmarkConcept",
       "http://purl.org/twc/mcs/includedInDataset": {
         "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7"
       },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
+      "text": "drawstring bag"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:antecedent",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:question",
+      "@type": "BenchmarkQuestion",
       "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf"
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:antecedent"
       },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
+      "text": "What is a likely consequence of ignorance of rules?"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "outer space"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "market"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "mortuary"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "radio shack"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:antecedent",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:concept",
+      "@type": "BenchmarkConcept",
       "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e"
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85"
       },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "fan"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "satisfaction"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "animals"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "authoritarian"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "fountain pen"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "wonder about"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "complete job"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 2
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "natural habitat"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "The townhouse was a hard sell for the realtor, it was right next to a high rise what?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "oceans"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "bugs"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "populated areas"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "playing guitar"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "garbage can"
+      "text": "highway"
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@type": "BenchmarkAnswer",
       "position": "B",
       "schema:answer": "mexico"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "highway"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "cash register"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "Reading newspaper one of many ways to practice your what?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "star"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "great britain"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:B",
+      "@type": "BenchmarkAnswer",
       "position": "B",
-      "schema:answer": "procreate"
+      "schema:answer": "learn from each other"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "fridge"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "hollywood"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "desk drawer"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "Where is a business restaurant likely to be located?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "Something that has a long and sharp blade is a?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "desk"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 3
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "mall"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "solar system"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "revolving door"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "mall"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "cow carcus"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "wonderful memories"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 1
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "midwest"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "In what Spanish speaking North American country can you get a great cup of coffee?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "feel pleasure"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "A revolving door is convenient for two direction travel, but it also serves as a security measure at a what?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "The only baggage the woman checked was a drawstring bag, where was she heading with it?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "apartment building"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "bank"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "at hotel"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "blade"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "ignorance"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "pay envelope"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "To locate a choker not located in a jewelry box or boutique where would you go?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "money bank"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "Where would you find magazines along side many other printed works?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "jewlery box"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "distracting"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "michigan"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "The fox walked from the city into the forest, what was it looking for?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 3
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "bus stop"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "wallet"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "cable"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "hostility"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 2
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "atlas"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 1
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "mouth"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "television"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "get tired"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "cup"
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        },
+        {
+          "@id": ""
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@type": "BenchmarkAnswer",
       "position": "B",
       "schema:answer": "substation"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "people"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "yell at"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "reading newspaper"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "ignore"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "What will you experience after doing housework for a long time?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "calligrapher\\'s hand"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "choker"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "town"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "hutch"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:concept",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:antecedent",
+      "@type": "BenchmarkAntecedent",
       "http://purl.org/twc/mcs/includedInDataset": {
         "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "dental office"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "constellation"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:benchmark:CommonsenseQA"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": [
-        "BenchmarkTestDataset",
-        {
-          "@id": "http://purl.org/twc/mcs/BenchmarkTestDataset"
-        }
-      ],
-      "name": "CommonsenseQA test dataset"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "bedside table"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "accidents"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
       }
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:question",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:antecedent",
+      "@type": "BenchmarkAntecedent",
       "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "What do people use to absorb extra ink from a fountain pen?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf"
       }
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "literacy"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "jewelry box"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "breadbox"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "backache"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "business sector"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 0
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "frustration"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:E",
+      "@type": "BenchmarkAnswer",
       "position": "E",
-      "schema:answer": "making music"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "Sammy wanted to go to where the people were.  Where might he go?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "The sanctions against the school were a punishing blow, and they seemed to what the efforts the school had made to change?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "neighborhood"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "bookstore"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "pizza"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "city"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "find truth"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "doing housework"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "diner"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "own self"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "What do people typically do while playing guitar?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "kitchen"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "street"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "open door"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "know truth"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 0
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "damage"
+      "schema:answer": "spatula"
     },
     {
       "@id": "benchmark:commonsense_qa:benchmark:CommonsenseQA",
+      "@type": "Benchmark",
       "abstract": "When answering a question, people often draw upon their rich world knowledge in addition to the particular context. Recent work has focused primarily on answering questions given some relevant document or context, and required very little general background. To investigate question answering with prior knowledge, we present CommonsenseQA: a challenging new dataset for commonsense question answering. To capture common sense beyond associations, we extract from ConceptNet (Speer et al., 2017) multiple target concepts that have the same semantic relation to a single source concept. Crowd-workers are asked to author multiple-choice questions that mention the source concept and discriminate in turn between each of the target concepts. This encourages workers to create questions with complex semantics that often require prior knowledge. We create 12,247 questions through this procedure and demonstrate the difficulty of our task with a large number of strong baselines. Our best baseline is based on BERT-large (Devlin et al., 2018) and obtains 56% accuracy, well below human performance, which is 89%.",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/Benchmark"
-      },
-      "name": "CommonsenseQA",
-      "schema:person": [
-        "Alon Talmor",
+      "author": [
+        "Nicholas Lourie",
         "Jonathan Herzig",
-        "Jonathan Berant",
-        "Nicholas Lourie"
-      ]
+        "Alon Talmor",
+        "Jonathan Berant"
+      ],
+      "name": "CommonsenseQA"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "suburban development"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:D",
+      "@type": "BenchmarkAnswer",
       "position": "D",
-      "schema:answer": "arthritis"
+      "schema:answer": "atlas"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "storybook"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "drawstring bag"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "sneezing"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "restaurant"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 1
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "What might a successful writing program cause?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "people"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "united states"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:C",
+      "@type": "BenchmarkAnswer",
       "position": "C",
-      "schema:answer": "cabinet"
+      "schema:answer": "natural habitat"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 0
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "listen to each other"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "punishing"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "mexico"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "cry"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "kill animals"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 0
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "wear hats"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "yellow pages"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "north carolina"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "ponder"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "pass water"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "countryside"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "refrigerator"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "farming areas"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "The person taught an advanced class only for who?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "The forgotten leftovers had gotten quite old, he found it covered in mold in the back of his what?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "townhouse"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "roadblock"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "department store"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "C",
-      "schema:answer": "bliss"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "suburbs"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "hear sounds"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "Where are  you likely to find a hamburger?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "avoid"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "become adults"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "countryside"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "What is a likely consequence of ignorance of rules?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "new york"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train",
+      "@type": "BenchmarkTrainDataset",
       "http://purl.org/twc/mcs/includedInDataset": {
         "@id": "benchmark:commonsense_qa:benchmark:CommonsenseQA"
       },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": [
-        "BenchmarkDevDataset",
+      "name": "CommonsenseQA training dataset",
+      "text": "BenchmarkTrainDataset"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:antecedent"
+      },
+      "text": "What do people typically do while playing guitar?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "apartment building"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "complete job"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
         {
-          "@id": "http://purl.org/twc/mcs/BenchmarkDevDataset"
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        },
+        {
+          "@id": ""
         }
       ],
-      "name": "CommonsenseQA dev dataset"
+      "text": "MULTIPLE_CHOICE"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "mold"
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "cow carcus"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "safe"
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "race track"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:D"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:B",
+      "@type": "BenchmarkAnswer",
       "position": "B",
-      "schema:answer": "hen house"
+      "schema:answer": "town"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "Google Maps and other highway and street GPS services have replaced what?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:A",
+      "@type": "BenchmarkAnswer",
       "position": "A",
-      "schema:answer": "mildred\\'s coffee shop"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "What island country is ferret popular?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "doctor"
+      "schema:answer": "garbage can"
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 0
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "What home entertainment equipment requires cable?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 4
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "airport"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "carpet"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "library"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "magazines"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "military"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "satisfaction"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "outdoors"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 0
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 0
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": "None"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
-      }
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 4
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "coach"
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:A"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@type": "BenchmarkAnswer",
       "position": "C",
       "schema:answer": "inkwell"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:choice:D",
+      "@type": "BenchmarkAnswer",
       "position": "D",
-      "schema:answer": "train station"
+      "schema:answer": "loop"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:antecedent",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:question",
+      "@type": "BenchmarkQuestion",
       "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89"
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:antecedent"
       },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
+      "text": "The forgotten leftovers had gotten quite old, he found it covered in mold in the back of his what?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "doctor"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "suburbs"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "desk drawer"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "countryside"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "intelligent children"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e"
+      },
+      "text": "ignorance"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d"
+      },
+      "text": "person"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "become adults"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824"
       }
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "What do people aim to do at work?"
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:A"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:D",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "D",
-      "schema:answer": "apartment"
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:A"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "own home"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 3
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:concept",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:antecedent",
+      "@type": "BenchmarkAntecedent",
       "http://purl.org/twc/mcs/includedInDataset": {
         "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "farmland"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:concept",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "hamburger"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:question",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:antecedent"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "James was looking for a good place to buy farmland.  Where might he look?"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:B",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "B",
-      "schema:answer": "neck"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:choice:A",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "A",
-      "schema:answer": "shirt pocket"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
-      "position": "E",
-      "schema:answer": "boutique"
-    },
-    {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:antecedent",
-      "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
       }
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c",
-      "benchmarkQuestionType": "MULTIPLE_CHOICE",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:question",
+      "@type": "BenchmarkQuestion",
       "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:antecedent"
       },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkSample"
-      },
-      "http://www.w3.org/2001/XMLSchemainteger": 2
+      "text": "After graduating the dentist set up his dental office back where he grew up, he wanted to always live in his home what?"
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:E",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@type": "BenchmarkAnswer",
       "position": "E",
       "schema:answer": "sing"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:question",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "backache"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "great britain"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "cry"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:B"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:question",
+      "@type": "BenchmarkQuestion",
       "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:antecedent"
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:antecedent"
       },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkQuestion"
+      "text": "Where would you find magazines along side many other printed works?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:A"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "sneezing"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "refrigerator"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:A"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "mexico"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "bus stop"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe"
       },
-      "http://www.w3.org/2001/XMLSchemastring": "What do animals do when an enemy is approaching?"
+      "text": "restaurant"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "satisfaction"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:antecedent"
+      },
+      "text": "The sanctions against the school were a punishing blow, and they seemed to what the efforts the school had made to change?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "yellow pages"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "sword"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "knowing how to read"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        },
+        {
+          "@id": ""
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:antecedent"
+      },
+      "text": "What island country is ferret popular?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:antecedent"
+      },
+      "text": "What might a successful writing program cause?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "fan"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "outer space"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:antecedent"
+      },
+      "text": "What do people aim to do at work?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:C"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        },
+        {
+          "@id": ""
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "countryside"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "town"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:antecedent"
+      },
+      "text": "The man wanted to telegram the check, so where did he place it?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test",
+      "@type": "BenchmarkTestDataset",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:benchmark:CommonsenseQA"
+      },
+      "name": "CommonsenseQA test dataset",
+      "text": "BenchmarkTestDataset"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "populated areas"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:antecedent"
+      },
+      "text": "What will you experience after doing housework for a long time?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "ignore"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "arthritis"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "jewelry store"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:09555c056f3cf0b7e0b84d8df4be1db7:antecedent"
+      },
+      "text": "The only baggage the woman checked was a drawstring bag, where was she heading with it?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "bugs"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "hen house"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab"
+      },
+      "text": "doing housework"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "north carolina"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "procreate"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "mall"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:antecedent"
+      },
+      "text": "The fox walked from the city into the forest, what was it looking for?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:antecedent"
+      },
+      "text": "In what Spanish speaking North American country can you get a great cup of coffee?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "mouth"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "breadbox"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:C"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "enforce"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "mall"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "jewlery box"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "find truth"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "shirt pocket"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "talk to each other"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "pay envelope"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b"
+      },
+      "text": "townhouse"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "solar system"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "farming areas"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev",
+      "@type": "BenchmarkDevDataset",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:benchmark:CommonsenseQA"
+      },
+      "name": "CommonsenseQA dev dataset",
+      "text": "BenchmarkDevDataset"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "open door"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "wonder about"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "making music"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824"
+      },
+      "text": "cable"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "own home"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "mildred\\'s coffee shop"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:antecedent"
+      },
+      "text": "James was looking for a good place to buy farmland.  Where might he look?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "dense forest"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "fridge"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860"
+      },
+      "text": "fox"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:B"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "canteen"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "apartment"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:antecedent"
+      },
+      "text": "To locate a choker not located in a jewelry box or boutique where would you go?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "library"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:antecedent"
+      },
+      "text": "The townhouse was a hard sell for the realtor, it was right next to a high rise what?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a7ab086045575bb497933726e4e6ad28:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "kill animals"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:antecedent"
+      },
+      "text": "There is a star at the center of what group of celestial bodies?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:antecedent"
+      },
+      "text": "The person taught an advanced class only for who?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": ""
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:05ea49b82e8ec519e82d6633936ab8bf:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "feel pleasure"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "damage"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c"
+      },
+      "text": "playing guitar"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:3d0f8824ea83ddcc9ab03055658b89d3"
+      },
+      "text": "mold"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d"
+      },
+      "text": "dental office"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8"
+      },
+      "text": "kids"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "money bank"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85"
+      }
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866:concept",
+      "@type": "BenchmarkConcept",
       "http://purl.org/twc/mcs/includedInDataset": {
         "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:118a9093a30695622363455e4d911866"
       },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkConcept"
-      },
-      "http://www.w3.org/2001/XMLSchemastring": "cup of coffee"
+      "text": "cup of coffee"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "literacy"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:075e483d21c29a511267ef62bedc0461"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1d24f406b6828492040b405d3f35119c:choice:C"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:2435de612dd69f2012b9e40d6af4ce38:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "illinois"
     },
     {
       "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3:choice:C",
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAnswer"
-      },
+      "@type": "BenchmarkAnswer",
       "position": "C",
       "schema:answer": "need to integrate"
     },
     {
-      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:antecedent",
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "united states"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:antecedent",
+      "@type": "BenchmarkAntecedent",
       "http://purl.org/twc/mcs/includedInDataset": {
-        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8"
-      },
-      "http://www.w3.org/1999/02/22-rdf-syntax-nstype": {
-        "@id": "http://purl.org/twc/mcs/BenchmarkAntecedent"
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643"
       }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:e8a8b3a2061aa0e6d7c6b522e9612824:choice:D"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:4c1cb0e95b99f72d55c068ba0255c54d"
+      },
+      "text": "choker"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8d916be530b91e6269b1d475601ae7ab:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "tiredness"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:c0c07ce781653b2a2c01871ba2bcba93:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "money"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:d8d5e97e8e7f90712a81b14aee6f3627:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "chuck"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "desk drawer"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "ponder"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "own house"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:04919ff8acd9c71a0d7f1383255512b3",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": ""
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "bliss"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:8795a949b39702af0e452c9e1229046d:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "own self"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:dca0f2859f3c3dd43a9b2bfeff4936a8:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "distracting"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:000990552527b1353f98f1e1a7dfc643:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "constellation"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "outdoors"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "new york"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:61fe6e879ff18686d7552425a36344c8:choice:B"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "hutch"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "business sector"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:a1f4dfbe9a3f49d4a84c2283e15d4c99:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "cash register"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:0b7734f608c188350573247e3ef2a00d:choice:E",
+      "@type": "BenchmarkAnswer",
+      "position": "E",
+      "schema:answer": "city"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:choice:E"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:86c59f14af97b33ec13edc6ec4389e31:antecedent"
+      },
+      "text": "What do people use to absorb extra ink from a fountain pen?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "suburban development"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:1f74ea1f73b9f5d91a665b4d90218a6e",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test"
+        },
+        {
+          "@id": ""
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860:antecedent",
+      "@type": "BenchmarkAntecedent",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:23505889b94e880c3e89cff4ba119860"
+      }
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89:concept",
+      "@type": "BenchmarkConcept",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:a4892551cb4beb279653ae52d0de4c89"
+      },
+      "text": "ferret"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:question",
+      "@type": "BenchmarkQuestion",
+      "http://purl.org/twc/mcs/includedInDataset": {
+        "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:02e821a3e53cb320790950aab4489e85:antecedent"
+      },
+      "text": "Google Maps and other highway and street GPS services have replaced what?"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:b8c0a4703079cf661d7261a60a1bcbff:choice:C",
+      "@type": "BenchmarkAnswer",
+      "position": "C",
+      "schema:answer": "market"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac",
+      "@type": "BenchmarkSample",
+      "http://purl.org/twc/mcs/includedInDataset": [
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev"
+        },
+        {
+          "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:1afa02df02c908a558b4036e80242fac:choice:A"
+        }
+      ],
+      "text": "MULTIPLE_CHOICE"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/dev:sample:e68fb2448fd74e402aae9982aa76e527:choice:A",
+      "@type": "BenchmarkAnswer",
+      "position": "A",
+      "schema:answer": "fast food restaurant"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/test:sample:90b30172e645ff91f7171a048582eb8b:choice:D",
+      "@type": "BenchmarkAnswer",
+      "position": "D",
+      "schema:answer": "michigan"
+    },
+    {
+      "@id": "benchmark:commonsense_qa:dataset:CommonsenseQA/train:sample:cae61908c731d4a20889e04c3e784ebe:choice:B",
+      "@type": "BenchmarkAnswer",
+      "position": "B",
+      "schema:answer": "at hotel"
     }
   ]
 }

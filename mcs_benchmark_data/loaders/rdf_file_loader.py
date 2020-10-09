@@ -3,6 +3,7 @@ from typing import Optional
 
 from pathvalidate import sanitize_filename
 from rdflib import Graph
+import bz2
 
 from mcs_benchmark_data.loaders._buffering_loader import _BufferingLoader
 from mcs_benchmark_data.namespace import bind_namespaces
@@ -29,11 +30,11 @@ class RdfFileLoader(_BufferingLoader):
         context = [
             "https://tetherless-world.github.io/mcs-ontology/utils/context.jsonld",
             {
-                "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns",
-                "rdfs": "http://www.w3.org/2000/01/rdf-schema",
+                "rdf": "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+                "rdfs": "http://www.w3.org/2000/01/rdf-schema#",
             },
         ]
 
         with open(file_path, "w+b") as file_:
             graph.serialize(destination=file_, format=self.__format, context=context)
-            # graph.serialize(destination=file_, format=self.__format)
+            bz2.compress(file_.read())

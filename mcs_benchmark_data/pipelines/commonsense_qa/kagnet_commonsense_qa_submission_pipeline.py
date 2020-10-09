@@ -11,11 +11,15 @@ from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submissio
 class KagnetCommonsenseQaSubmissionPipeline(_Pipeline):
     __ID = "CommonsenseQA"
 
-    def __init__(self, **kwds):
+    def __init__(
+        self, submission_jsonl_file="dev_rand_split_kagnet_submission.jsonl", **kwds
+    ):
         _Pipeline.__init__(
             self,
             extractor=KagnetCommonsenseQaSubmissionExtractor(
-                pipeline_id=self.__ID, **kwds
+                pipeline_id=self.__ID,
+                submission_jsonl_file=submission_jsonl_file,
+                **kwds,
             ),
             id=self.__ID,
             transformer=KagnetCommonsenseQaSubmissionTransformer(

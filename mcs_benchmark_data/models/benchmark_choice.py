@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 
-from mcs_benchmark_data.namespace import SCHEMA
+from mcs_benchmark_data.namespace import SCHEMA, MCS
 from rdflib import Graph
 from rdflib.resource import Resource
 
@@ -21,6 +21,6 @@ class BenchmarkChoice(_Model):
         resource = _Model.to_rdf(self, graph=graph)
 
         resource.add(SCHEMA.answer, self._quote_rdf_literal(self.text))
-        resource.add(SCHEMA.position, self._quote_rdf_literal(self.position))
+        resource.add(MCS.position, self._quote_rdf_literal(self.position))
 
         return resource

@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 
-from mcs_benchmark_data.namespace import MCS, SCHEMA
+from mcs_benchmark_data.namespace import MCS
 from rdflib import Graph, URIRef
 from rdflib.resource import Resource
 
@@ -21,6 +21,6 @@ class BenchmarkDataset(_Model):
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
         resource.add(MCS.includedInDataset, self.benchmark_uri)
-        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
+        resource.add(MCS.name, self._quote_rdf_literal(self.name))
 
         return resource

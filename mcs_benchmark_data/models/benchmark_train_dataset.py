@@ -3,7 +3,7 @@ from dataclasses_json import LetterCase, dataclass_json
 
 from rdflib import Graph
 from rdflib.resource import Resource
-from mcs_benchmark_data.namespace import RDF
+from mcs_benchmark_data.namespace import MCS
 
 from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
 
@@ -15,6 +15,6 @@ class BenchmarkTrainDataset(BenchmarkDataset):
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = super().to_rdf(graph=graph)
-        resource.add(RDF.string, self._quote_rdf_literal("BenchmarkTrainDataset"))
+        resource.add(MCS.text, self._quote_rdf_literal("BenchmarkTrainDataset"))
 
         return resource
