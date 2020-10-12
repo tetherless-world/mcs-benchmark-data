@@ -21,7 +21,7 @@ class DevScore(_Model):
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
-        resource.add(MCS.includedInDataset, self.submission_uri)
+        graph.add((self.submission_uri, MCS.devScore, self.uri))
         resource.add(MCS.isBasedOn, self._quote_rdf_literal(self.is_based_on))
         resource.add(MCS.name, self._quote_rdf_literal(self.name))
         resource.add(MCS.value, self._quote_rdf_literal(self.value))

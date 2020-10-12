@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 from typing import Tuple
 
-from mcs_benchmark_data.namespace import RDF
+from mcs_benchmark_data.namespace import RDF, MCS
 from rdflib import Graph, URIRef
 from rdflib.resource import Resource
 
@@ -17,9 +17,6 @@ class BenchmarkChoices:
     benchmark_sample_uri: URIRef
     choices: Tuple[BenchmarkChoice, ...]
 
-    # Not necessary, since it doesn't have a URI - I believe
-    # def to_rdf(self, *, graph: Graph) -> Resource:
-    #     resource = super().to_rdf(graph=graph)
-    #     resource.add(MCS.includedInDataset, benchmark_sample_uri)
-
-    #     return resource
+    def to_rdf(self, *, graph: Graph) -> None:
+        for choice in self.choices:
+            graph.add((self.benchmark_sample_uri, MCS.choice, choice.uri))

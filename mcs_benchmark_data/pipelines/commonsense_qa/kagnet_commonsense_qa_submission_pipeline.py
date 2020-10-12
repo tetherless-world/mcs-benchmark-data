@@ -12,13 +12,15 @@ class KagnetCommonsenseQaSubmissionPipeline(_Pipeline):
     __ID = "CommonsenseQA"
 
     def __init__(
-        self, submission_jsonl_file="dev_rand_split_kagnet_submission.jsonl", **kwds
+        self,
+        submission_jsonl_file_name="dev_rand_split_kagnet_submission.jsonl",
+        **kwds
     ):
         _Pipeline.__init__(
             self,
             extractor=KagnetCommonsenseQaSubmissionExtractor(
                 pipeline_id=self.__ID,
-                submission_jsonl_file=submission_jsonl_file,
+                submission_jsonl_file_name=submission_jsonl_file_name,
                 **kwds,
             ),
             id=self.__ID,

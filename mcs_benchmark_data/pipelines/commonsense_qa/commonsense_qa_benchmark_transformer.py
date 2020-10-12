@@ -91,8 +91,12 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
             benchmark_sample = BenchmarkSample(
                 uri=URIRef(f"{dataset_uri}:sample:{sample['id']}"),
                 dataset_uri=dataset_uri,
-                question_type=question_type,
-                question_category=question_category,
+                question_type=URIRef(
+                    f"{self.__URI_BASE}:question_type:{question_type}"
+                ),
+                question_category=URIRef(
+                    f"{self.__URI_BASE}:question_category:{question_category}"
+                ),
                 correct_choice=correct_choice,
             )
 

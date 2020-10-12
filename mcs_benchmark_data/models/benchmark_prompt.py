@@ -20,7 +20,7 @@ class BenchmarkPrompt(_Model):
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
-        resource.add(MCS.includedInDataset, self.antecedent_uri)
+        graph.add((self.antecedent_uri, MCS.prompt, self.uri))
         resource.add(MCS.text, self._quote_rdf_literal(self.text))
 
         return resource

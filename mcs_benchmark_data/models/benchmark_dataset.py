@@ -20,7 +20,7 @@ class BenchmarkDataset(_Model):
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
-        resource.add(MCS.includedInDataset, self.benchmark_uri)
+        graph.add((self.benchmark_uri, MCS.dataset, self.uri))
         resource.add(MCS.name, self._quote_rdf_literal(self.name))
 
         return resource

@@ -17,6 +17,6 @@ class BenchmarkAntecedent(_Model):
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
-        resource.add(MCS.includedInDataset, self.benchmark_sample_uri)
+        graph.add((self.benchmark_sample_uri, MCS.antecedent, self.uri))
 
         return resource

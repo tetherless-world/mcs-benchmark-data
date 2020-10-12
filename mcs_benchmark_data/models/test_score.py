@@ -20,7 +20,7 @@ class TestScore(_Model):
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
-        resource.add(MCS.includedInDataset, self.submission_uri)
+        graph.add((self.submission_uri, MCS.testScore, self.uri))
         resource.add(XSD.string, self._quote_rdf_literal(self.is_based_on))
         resource.add(XSD.string, self._quote_rdf_literal(self.name))
         resource.add(XSD.string, self._quote_rdf_literal(self.value))

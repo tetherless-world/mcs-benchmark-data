@@ -13,18 +13,18 @@ class CommonsenseQaBenchmarkPipeline(_Pipeline):
 
     def __init__(
         self,
-        dev_jsonl_file="dev_rand_split.jsonl",
-        test_jsonl_file="test_rand_split_no_answers.jsonl",
-        train_jsonl_file="train_rand_split.jsonl",
+        dev_jsonl_file_name="dev_rand_split.jsonl",
+        test_jsonl_file_name="test_rand_split_no_answers.jsonl",
+        train_jsonl_file_name="train_rand_split.jsonl",
         **kwds
     ):
         _Pipeline.__init__(
             self,
             extractor=CommonsenseQaBenchmarkExtractor(
                 pipeline_id=self.ID,
-                dev_jsonl_file=dev_jsonl_file,
-                test_jsonl_file=test_jsonl_file,
-                train_jsonl_file=train_jsonl_file,
+                dev_jsonl_file_name=dev_jsonl_file_name,
+                test_jsonl_file_name=test_jsonl_file_name,
+                train_jsonl_file_name=train_jsonl_file_name,
                 **kwds,
             ),
             id=self.ID,

@@ -4,7 +4,7 @@ from dataclasses_json import LetterCase, dataclass_json
 from rdflib import Graph, URIRef, Literal
 from rdflib.resource import Resource
 
-from mcs_benchmark_data.namespace import MCS, RDF
+from mcs_benchmark_data.namespace import MCS, SCHEMA
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
@@ -26,16 +26,15 @@ class BenchmarkSample(_Model):
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
 
+        graph.add((self.dataset_uri, MCS.sample, self.uri))
+
         resource.add(MCS.includedInDataset, self.dataset_uri)
 
-        resource.add(MCS.text, self._quote_rdf_literal(self.question_type))
+        resource.add(SCHEMA.definedTerm, self.question_type)
 
         if self.question_category is not None:
-            resource.add(
-                MCS.text,
-                self._quote_rdf_literal(self.question_category),
-            )
+            resource.add(SCHEMA.definedTerm, self.question_category)
 
-        resource.add(MCS.includedInDataset, self.correct_choice)
+        resource.add(MCS.correctChoice, self.correct_choice)
 
         return resource
