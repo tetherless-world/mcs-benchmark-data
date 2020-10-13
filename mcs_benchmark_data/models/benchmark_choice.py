@@ -16,11 +16,3 @@ class BenchmarkChoice(_Model):
     """Sub-classes: BenchmarkAnswer, BenchmarkHypothesis, BenchmarkSolution"""
     text: str
     position: int
-
-    def to_rdf(self, *, graph: Graph) -> Resource:
-        resource = _Model.to_rdf(self, graph=graph)
-
-        resource.add(SCHEMA.answer, self._quote_rdf_literal(self.text))
-        resource.add(MCS.position, self._quote_rdf_literal(self.position))
-
-        return resource

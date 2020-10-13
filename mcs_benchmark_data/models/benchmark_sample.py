@@ -1,3 +1,5 @@
+from typing import Optional
+
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 
@@ -19,9 +21,7 @@ class BenchmarkSample(_Model):
     """An entry in a benchmark dataset"""
 
     dataset_uri: URIRef
-    question_type: BenchmarkQuestionType
-    question_category: BenchmarkQuestionCategory
-    correct_choice: URIRef
+    correct_choice: Optional[URIRef]
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
@@ -30,11 +30,7 @@ class BenchmarkSample(_Model):
 
         resource.add(MCS.includedInDataset, self.dataset_uri)
 
-        resource.add(SCHEMA.definedTerm, self.question_type)
-
-        if self.question_category is not None:
-            resource.add(SCHEMA.definedTerm, self.question_category)
-
-        resource.add(MCS.correctChoice, self.correct_choice)
+        if self.correct_choice is not None:
+            resource.add(MCS.correctChoice, self.correct_choice)
 
         return resource

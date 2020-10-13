@@ -74,14 +74,15 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
         with open(sample_jsonl_file_path) as sample_jsonl:
             all_samples = list(sample_jsonl)
 
+        ans_mapping = {ans: i for i, ans in enumerate("ABCDE")}
+
         question_type = BenchmarkQuestionType.MULTIPLE_CHOICE
-        question_category = None
 
         for line in all_samples:
 
             sample = json.loads(line)
 
-            correct_choice = URIRef("")
+            correct_choice = None
 
             if sample_type != "test":
                 correct_choice = URIRef(
@@ -91,20 +92,25 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
             benchmark_sample = BenchmarkSample(
                 uri=URIRef(f"{dataset_uri}:sample:{sample['id']}"),
                 dataset_uri=dataset_uri,
-                question_type=URIRef(
-                    f"{self.__URI_BASE}:question_type:{question_type}"
-                ),
-                question_category=URIRef(
-                    f"{self.__URI_BASE}:question_category:{question_category}"
-                ),
                 correct_choice=correct_choice,
             )
 
             yield benchmark_sample
 
+            antecedent = BenchmarkAntecedent(
+                uri=URIRef(f"{benchmark_sample.uri}:antecedent"),
+                benchmark_sample_uri=benchmark_sample.uri,
+                question_type=URIRef(f"{self.__URI_BASE}:question_type:{question_type}")
+                if question_type
+                else None,
+                question_category=None,
+            )
+
+            yield antecedent
+
             concept = BenchmarkConcept(
                 uri=URIRef(f"{benchmark_sample.uri}:concept"),
-                benchmark_sample_uri=benchmark_sample.uri,
+                antecedent_uri=antecedent.uri,
                 concept=sample["question"]["question_concept"],
             )
 
@@ -115,27 +121,12 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
             for item in sample["question"]["choices"]:
                 choice = BenchmarkAnswer(
                     uri=URIRef(f"{benchmark_sample.uri}:choice:{item['label']}"),
-                    position=item["label"],
+                    position=ans_mapping[item["label"]],
                     text=item["text"],
                 )
                 choices_list.append(choice)
 
                 yield choice
-
-            # Choices seems redundant now. Need to check-in about this.
-            # choices = BenchmarkChoices(
-            #     benchmark_sample_uri=benchmark_sample.uri,
-            #     choices=tuple(choices_list),
-            # )
-
-            # yield choices
-
-            antecedent = BenchmarkAntecedent(
-                uri=URIRef(f"{benchmark_sample.uri}:antecedent"),
-                benchmark_sample_uri=benchmark_sample.uri,
-            )
-
-            yield antecedent
 
             question = BenchmarkQuestion(
                 uri=URIRef(f"{benchmark_sample.uri}:question"),

@@ -15,6 +15,6 @@ class BenchmarkDevDataset(BenchmarkDataset):
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = super().to_rdf(graph=graph)
-        resource.add(RDF.type, MCS.BenchmarkDevDataset)
+        resource.add(RDF.type, MCS.BenchmarkDataset)
 
         return resource

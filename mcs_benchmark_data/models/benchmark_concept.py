@@ -13,12 +13,12 @@ from mcs_benchmark_data._model import _Model
 class BenchmarkConcept(_Model):
     """The ConceptNet concept which the question was created from (i.e. electricity)"""
 
-    benchmark_sample_uri: URIRef
+    antecedent_uri: URIRef
     concept: str
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
-        graph.add((self.benchmark_sample_uri, MCS.concept, self.uri))
+        graph.add((self.antecedent_uri, MCS.concept, self.uri))
         resource.add(SCHEMA.text, self._quote_rdf_literal(self.concept))
 
         return resource
