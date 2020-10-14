@@ -28,7 +28,7 @@ class BenchmarkSample(_Model):
 
         graph.add((self.dataset_uri, MCS.sample, self.uri))
 
-        resource.add(MCS.includedInDataset, self.dataset_uri)
+        resource.add(SCHEMA.includedInDataset, self.dataset_uri)
 
         if self.correct_choice is not None:
             resource.add(MCS.correctChoice, self.correct_choice)

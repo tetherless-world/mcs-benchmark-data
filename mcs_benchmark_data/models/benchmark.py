@@ -21,9 +21,9 @@ class Benchmark(_Model):
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
 
-        resource.add(MCS.name, self._quote_rdf_literal(self.name))
-        resource.add(MCS.abstract, self._quote_rdf_literal(self.abstract))
+        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
+        resource.add(SCHEMA.abstract, self._quote_rdf_literal(self.abstract))
         for author in self.authors:
-            resource.add(MCS.author, self._quote_rdf_literal(author))
+            resource.add(SCHEMA.author, self._quote_rdf_literal(author))
 
         return resource

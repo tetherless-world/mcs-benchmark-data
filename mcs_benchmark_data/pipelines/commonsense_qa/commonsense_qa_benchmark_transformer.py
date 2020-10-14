@@ -13,7 +13,6 @@ from mcs_benchmark_data.models.benchmark_bootstrap import BenchmarkBootstrap
 from mcs_benchmark_data.models.benchmark_answer import BenchmarkAnswer
 from mcs_benchmark_data.models.benchmark_antecedent import BenchmarkAntecedent
 from mcs_benchmark_data.models.benchmark_choice import BenchmarkChoice
-from mcs_benchmark_data.models.benchmark_choices import BenchmarkChoices
 from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
 from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
 from mcs_benchmark_data.models.benchmark_train_dataset import BenchmarkTrainDataset
@@ -116,15 +115,13 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
 
             yield concept
 
-            choices_list = []
-
             for item in sample["question"]["choices"]:
                 choice = BenchmarkAnswer(
                     uri=URIRef(f"{benchmark_sample.uri}:choice:{item['label']}"),
+                    benchmark_sample_uri=benchmark_sample.uri,
                     position=ans_mapping[item["label"]],
                     text=item["text"],
                 )
-                choices_list.append(choice)
 
                 yield choice
 

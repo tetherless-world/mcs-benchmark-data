@@ -3,7 +3,7 @@ from dataclasses_json import LetterCase, dataclass_json
 
 from rdflib import Graph, URIRef
 from rdflib.resource import Resource
-from mcs_benchmark_data.namespace import XSD, MCS
+from mcs_benchmark_data.namespace import MCS, SCHEMA
 
 from mcs_benchmark_data._model import _Model
 
@@ -21,8 +21,8 @@ class TestScore(_Model):
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
         graph.add((self.submission_uri, MCS.testScore, self.uri))
-        resource.add(XSD.string, self._quote_rdf_literal(self.is_based_on))
-        resource.add(XSD.string, self._quote_rdf_literal(self.name))
-        resource.add(XSD.string, self._quote_rdf_literal(self.value))
+        resource.add(SCHEMA.isBasedOn, self._quote_rdf_literal(self.is_based_on))
+        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
+        resource.add(SCHEMA.value, self._quote_rdf_literal(self.value))
 
         return resource

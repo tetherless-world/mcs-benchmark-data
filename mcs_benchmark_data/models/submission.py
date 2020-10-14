@@ -25,18 +25,18 @@ class Submission(_Model):
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
 
-        resource.add(MCS.name, self._quote_rdf_literal(self.name))
-        resource.add(MCS.description, self._quote_rdf_literal(self.description))
-        resource.add(MCS.dateCreated, self.date_created)
-        resource.add(MCS.isBasedOn, self._quote_rdf_literal(self.is_based_on))
+        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
+        resource.add(SCHEMA.description, self._quote_rdf_literal(self.description))
+        resource.add(SCHEMA.dateCreated, self.date_created)
+        resource.add(SCHEMA.isBasedOn, self._quote_rdf_literal(self.is_based_on))
         for contributor in self.contributors:
             resource.add(MCS.contributor, self._quote_rdf_literal(contributor))
 
         resource.add(
             SCHEMA.softwareApplication, self._quote_rdf_literal(self.result_of[0])
         )
-        resource.add(MCS.endTime, self.result_of[1])
-        resource.add(MCS.startTime, self.result_of[2])
-        resource.add(MCS.url, self._quote_rdf_literal(self.result_of[3]))
+        resource.add(SCHEMA.endTime, self.result_of[1])
+        resource.add(SCHEMA.startTime, self.result_of[2])
+        resource.add(SCHEMA.url, self._quote_rdf_literal(self.result_of[3]))
 
         return resource

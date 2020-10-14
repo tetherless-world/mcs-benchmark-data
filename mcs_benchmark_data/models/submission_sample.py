@@ -2,7 +2,7 @@ from typing_extensions import Literal
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 
-from mcs_benchmark_data.namespace import MCS
+from mcs_benchmark_data.namespace import MCS, SCHEMA
 from rdflib import Graph, URIRef
 from rdflib.resource import Resource
 
@@ -21,7 +21,7 @@ class SubmissionSample(_Model):
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
         graph.add((self.submission_uri, MCS.submissionSample, self.uri))
-        resource.add(MCS.value, Literal(self.value))
-        resource.add(MCS.about, self._quote_rdf_literal(self.about))
+        resource.add(SCHEMA.value, Literal(self.value))
+        resource.add(SCHEMA.about, self._quote_rdf_literal(self.about))
 
         return resource

@@ -18,7 +18,7 @@ class BenchmarkConcept(_Model):
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
-        graph.add((self.antecedent_uri, MCS.concept, self.uri))
+        graph.add((self.antecedent_uri, MCS.BenchmarkConcept, self.uri))
         resource.add(SCHEMA.text, self._quote_rdf_literal(self.concept))
 
         return resource
