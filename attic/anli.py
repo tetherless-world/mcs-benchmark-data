@@ -1,4 +1,3 @@
-
 import os
 import json
 
@@ -52,11 +51,13 @@ class ANLI(Benchmark):
         observations = []
         num_obs = 2
         for i in range(num_obs):
-            observations.append({
-                "@type": "BenchmarkObservation",
-                "name": "Observation",
-                "text": sample["obs{}".format(i + 1)]
-            })
+            observations.append(
+                {
+                    "@type": "BenchmarkObservation",
+                    "name": "Observation",
+                    "text": sample["obs{}".format(i + 1)],
+                }
+            )
         return observations
 
     def get_correct_choice(self, sample):
@@ -71,11 +72,13 @@ class ANLI(Benchmark):
         choices = []
         num_choices = 2
         for i in range(num_choices):
-            choices.append({
-                "@type": "BenchmarkHypothesis",
-                "name": "Hypothesis",
-                "text": sample["hyp{}".format(i + 1)]
-            })
+            choices.append(
+                {
+                    "@type": "BenchmarkHypothesis",
+                    "name": "Hypothesis",
+                    "text": sample["hyp{}".format(i + 1)],
+                }
+            )
         return choices
 
 
@@ -89,11 +92,14 @@ if __name__ == "__main__":
     benchmark.load_question_file("data/{}/train.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/train-labels.lst".format(dataset))
     data = benchmark.convert_samples_to_jsonld()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_train.jsonl".format(dataset)))
+    benchmark.write_data_as_jsonl(
+        data, os.path.join(output_dir, "{}_train.jsonl".format(dataset))
+    )
 
     benchmark = ANLI(question_set_id="dev")
     benchmark.load_question_file("data/{}/dev.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/dev-labels.lst".format(dataset))
     data = benchmark.convert_samples_to_jsonld()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
-
+    benchmark.write_data_as_jsonl(
+        data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset))
+    )

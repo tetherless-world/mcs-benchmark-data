@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 
-from rdflib import Graph
+from rdflib import Graph, URIRef
 from rdflib.resource import Resource
 
-from mcs_benchmark_data.namespace import XSD
+from mcs_benchmark_data.namespace import MCS, SCHEMA
 
 from mcs_benchmark_data._model import _Model
 
@@ -14,12 +14,16 @@ from mcs_benchmark_data._model import _Model
 class DevScore(_Model):
     """Score of a system's correct predictions against a dev benchmark dataset"""
 
+    submission_uri: URIRef
+    is_based_on: str
     name: str
     value: str
 
     def to_rdf(self, *, graph: Graph) -> Resource:
         resource = _Model.to_rdf(self, graph=graph)
-        resource.add(XSD.string, self._quote_rdf_literal(self.name))
-        resource.add(XSD.string, self._quote_rdf_literal(self.value))
+        graph.add((self.submission_uri, MCS.devScore, self.uri))
+        resource.add(SCHEMA.isBasedOn, self._quote_rdf_literal(self.is_based_on))
+        resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
+        resource.add(SCHEMA.value, self._quote_rdf_literal(self.value))
 
         return resource

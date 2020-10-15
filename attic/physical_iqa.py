@@ -1,4 +1,3 @@
-
 import os
 import json
 
@@ -63,11 +62,13 @@ class PhysicalIQA(Benchmark):
         choices = []
         num_choices = 2
         for i in range(num_choices):
-            choices.append({
-                "@type": "BenchmarkSolution",
-                "name": "Solution",
-                "text": sample["sol{}".format(i + 1)]
-            })
+            choices.append(
+                {
+                    "@type": "BenchmarkSolution",
+                    "name": "Solution",
+                    "text": sample["sol{}".format(i + 1)],
+                }
+            )
         return choices
 
 
@@ -81,11 +82,14 @@ if __name__ == "__main__":
     benchmark.load_question_file("data/{}/train.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/train-labels.lst".format(dataset))
     data = benchmark.convert_samples_to_jsonld()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_train.jsonl".format(dataset)))
+    benchmark.write_data_as_jsonl(
+        data, os.path.join(output_dir, "{}_train.jsonl".format(dataset))
+    )
 
     benchmark = PhysicalIQA(question_set_id="dev")
     benchmark.load_question_file("data/{}/dev.jsonl".format(dataset))
     benchmark.load_label_file("data/{}/dev-labels.lst".format(dataset))
     data = benchmark.convert_samples_to_jsonld()
-    benchmark.write_data_as_jsonl(data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset)))
-
+    benchmark.write_data_as_jsonl(
+        data, os.path.join(output_dir, "{}_dev.jsonl".format(dataset))
+    )

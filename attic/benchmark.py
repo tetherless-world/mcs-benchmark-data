@@ -1,4 +1,3 @@
-
 import json
 
 
@@ -84,7 +83,9 @@ class Benchmark(object):
             spl_data["@context"] = "http://schema.org/"
             spl_data["@id"] = self.get_benchmark_id() + "-" + self.get_question_id(spl)
             spl_data["@type"] = "BenchmarkSample"
-            spl_data["includedInDataset"] = self.get_benchmark_id() + "/" + self.get_question_set_id(spl)
+            spl_data["includedInDataset"] = (
+                self.get_benchmark_id() + "/" + self.get_question_set_id(spl)
+            )
 
             antecedents = list()
             category = dict()
@@ -149,7 +150,9 @@ class Benchmark(object):
                 choices[pos]["position"] = pos
                 choices[pos]["@id"] = "{}-{}".format(spl_data["@id"], pos)
             spl_data["choices"]["itemListElement"] = choices
-            spl_data["correctChoice"] = "{}-{}".format(spl_data["@id"], self.get_correct_choice(spl))
+            spl_data["correctChoice"] = "{}-{}".format(
+                spl_data["@id"], self.get_correct_choice(spl)
+            )
             data.append(spl_data)
         return data
 
@@ -159,13 +162,17 @@ class Benchmark(object):
             spl_data = dict()
             spl_data["@context"] = "http://schema.org/"
             spl_data["@type"] = "SubmissionSample"
-            spl_data["about"] = self.get_benchmark_id() + "-" + self.get_question_id(spl)
+            spl_data["about"] = (
+                self.get_benchmark_id() + "-" + self.get_question_id(spl)
+            )
             spl_data["includedInDataset"] = submission_id
             if self.has_explanation():
                 explanation = self.get_choice_explanation(spl)
                 if explanation is not None:
                     spl_data["explanation"] = explanation
-            spl_data["value"] = "{}-{}".format(spl_data["about"], self.get_chosen_choice(spl))
+            spl_data["value"] = "{}-{}".format(
+                spl_data["about"], self.get_chosen_choice(spl)
+            )
             data.append(spl_data)
         return data
 
@@ -174,4 +181,3 @@ class Benchmark(object):
             for sample in data:
                 f.write(json.dumps(sample))
                 f.write("\n")
-
