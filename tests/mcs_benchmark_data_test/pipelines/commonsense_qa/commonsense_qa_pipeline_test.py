@@ -25,6 +25,6 @@ def test_extract_transform_load(tmp_path):
     assert rdf_bz2_file_path.is_file()
 
     new_graph = Graph()
-    with open(rdf_bz2_file_path) as rdf_bz2_file:
-        with bz2.open(rdf_bz2_file) as rdf_file:
+    with open(rdf_bz2_file_path, "rb") as rdf_bz2_file:
+        with bz2.open(rdf_bz2_file, "rb") as rdf_file:
             new_graph.parse(source=rdf_file, format="json-ld")
