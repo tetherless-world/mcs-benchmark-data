@@ -11,7 +11,6 @@ from mcs_benchmark_data._transformer import _Transformer
 from mcs_benchmark_data.models.benchmark import Benchmark
 from mcs_benchmark_data.models.benchmark_bootstrap import BenchmarkBootstrap
 from mcs_benchmark_data.models.benchmark_answer import BenchmarkAnswer
-from mcs_benchmark_data.models.benchmark_antecedent import BenchmarkAntecedent
 from mcs_benchmark_data.models.benchmark_choice import BenchmarkChoice
 from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
 from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
@@ -96,24 +95,26 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
 
             yield benchmark_sample
 
-            antecedent = BenchmarkAntecedent(
-                uri=URIRef(f"{benchmark_sample.uri}:antecedent"),
+            question_type = BenchmarkQuestionType(
+                uri=URIRef(f"{self.__URI_BASE}:question_type:{question_type}"),
                 benchmark_sample_uri=benchmark_sample.uri,
-                question_type=URIRef(f"{self.__URI_BASE}:question_type:{question_type}")
-                if question_type
-                else None,
-                question_category=None,
             )
-
-            yield antecedent
 
             concept = BenchmarkConcept(
                 uri=URIRef(f"{benchmark_sample.uri}:concept"),
-                antecedent_uri=antecedent.uri,
+                benchmark_sample_uri=benchmark_sample.uri,
                 concept=sample["question"]["question_concept"],
             )
 
             yield concept
+
+            question = BenchmarkQuestion(
+                uri=URIRef(f"{benchmark_sample.uri}:question"),
+                benchmark_sample_uri=benchmark_sample.uri,
+                text=sample["question"]["stem"],
+            )
+
+            yield question
 
             for item in sample["question"]["choices"]:
                 choice = BenchmarkAnswer(
@@ -124,11 +125,3 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
                 )
 
                 yield choice
-
-            question = BenchmarkQuestion(
-                uri=URIRef(f"{benchmark_sample.uri}:question"),
-                antecedent_uri=antecedent.uri,
-                text=sample["question"]["stem"],
-            )
-
-            yield question

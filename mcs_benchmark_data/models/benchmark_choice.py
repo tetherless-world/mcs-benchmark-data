@@ -22,7 +22,7 @@ class BenchmarkChoice(_Model):
         resource = _Model.to_rdf(self, graph=graph)
         graph.add((self.benchmark_sample_uri, MCS.choice, self.uri))
         resource.add(RDF.type, MCS.BenchmarkChoice)
-        resource.add(SCHEMA.answer, self._quote_rdf_literal(self.text))
+        resource.add(SCHEMA.text, self._quote_rdf_literal(self.text))
         resource.add(SCHEMA.position, Literal(self.position))
 
         return resource

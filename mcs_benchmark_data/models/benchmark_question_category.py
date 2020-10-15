@@ -2,12 +2,12 @@ from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 from enum import auto, Enum
 
-from mcs_benchmark_data._model import _Model
+from mcs_benchmark_data.models.benchmark_input import BenchmarkInput
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass(frozen=True)
-class BenchmarkQuestionCategory(_Model, str, Enum):
+class BenchmarkQuestionCategory(BenchmarkInput, str, Enum):
     """The category of a benchmark sample (i.e. temporal reasoning, temporal sequences ...)"""
 
     TEMPORAL_REASONING = "TEMPORAL_REASONING"
