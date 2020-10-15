@@ -74,8 +74,6 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
 
         ans_mapping = {ans: i for i, ans in enumerate("ABCDE")}
 
-        question_type = BenchmarkQuestionType.MULTIPLE_CHOICE
-
         for line in all_samples:
 
             sample = json.loads(line)
@@ -95,10 +93,11 @@ class CommonsenseQaBenchmarkTransformer(_Transformer):
 
             yield benchmark_sample
 
-            question_type = BenchmarkQuestionType(
-                uri=URIRef(f"{self.__URI_BASE}:question_type:{question_type}"),
+            question_type = BenchmarkQuestionType.multiple_choice(
+                uri_base=self.__URI_BASE,
                 benchmark_sample_uri=benchmark_sample.uri,
             )
+            yield question_type
 
             concept = BenchmarkConcept(
                 uri=URIRef(f"{benchmark_sample.uri}:concept"),
