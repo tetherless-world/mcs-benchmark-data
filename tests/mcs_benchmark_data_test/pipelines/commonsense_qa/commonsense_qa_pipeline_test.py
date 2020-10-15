@@ -1,3 +1,4 @@
+import bz2
 from io import StringIO
 
 from rdflib import Graph
@@ -18,12 +19,12 @@ def test_extract_transform_load(tmp_path):
     ).extract_transform_load()
     loaded_data_dir_path = DATA_DIR_PATH / "loaded" / CommonsenseQaBenchmarkPipeline.ID
     assert loaded_data_dir_path.is_dir()
-    rdf_file_path = loaded_data_dir_path / (
+    rdf_bz2_file_path = loaded_data_dir_path / (
         CommonsenseQaBenchmarkPipeline.ID + ".jsonld.bz2"
     )
-    assert rdf_file_path.is_file()
+    assert rdf_bz2_file_path.is_file()
 
     new_graph = Graph()
-    with open(rdf_file_path) as jsonl_file:
-
-        new_graph.parse(data=jsonl_file.read(), format="json-ld")
+    with open(rdf_bz2_file_path) as rdf_bz2_file:
+        with bz2.open(rdf_bz2_file) as rdf_file:
+            new_graph.parse(source=rdf_file, format="json-ld")
