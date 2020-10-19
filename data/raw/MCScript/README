@@ -1,0 +1,29 @@
+#########################################################################################
+# MCScript (A Novel Dataset for Assessing Machine Comprehension Using Script Knowledge) #
+#########################################################################################
+
+### OVERVIEW ###
+
+MCScript is a new dataset for the task of machine comprehension focussing on commonsense knowledge. Questions were collected based on script scenarios, rather than individual texts, which resulted in question–answer pairs that explicitly involve commonsense knowledge. It comprises 13,939 questions on 2,119 narrative texts and covers 110 different everyday scenarios.
+
+
+### DATA ###
+The dataset is split into training (9,731 questions on 1,470 texts), development (1,411 questions on 219 texts), and test set (2,797 questions on 430 texts). Each text appears only in one of the three sets. The complete set of texts for 5 scenarios was held out for the test set.
+
+Each text is annotated with one of 110 scenarios. Questions are typed with a crowdsourced annotation, indicating whether they can be answered from the text or if commonsense knowledge is needed for finding an answer.
+
+
+
+### REFERENCE ###
+please cite as:
+
+	Ostermann, S., Modi, A., Roth, M., Thater, S., Pinkal, M. (2018): MCScript: A Novel Dataset for Assessing Machine Comprehension Using Script Knowledge. Proceedings of the 11th International Conference on Language Resources and Evaluation (LREC 2018), Miyazaki, Japan.	
+
+	BibTeX:
+	@InProceedings{MCScript,
+ 		author = {Ostermann, Simon and Modi, Ashutosh and Roth, Michael and Thater, Stefan and Pinkal, Manfred},
+ 		title = {{MCScript: A Novel Dataset for Assessing Machine Comprehension Using Script Knowledge}},
+ 		booktitle = {Proceedings of the 11th International Conference on Language Resources and Evaluation (LREC 2018)},
+ 		address = {Miyazaki, Japan},
+ 		year = {2018}
+ 	}

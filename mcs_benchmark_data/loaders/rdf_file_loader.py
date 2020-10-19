@@ -39,6 +39,8 @@ class RdfFileLoader(_BufferingLoader):
         bind_namespaces(graph.namespace_manager)
         self._logger.info("serializing %d models to RDF", len(models))
         for model in tqdm(models):
+            if isinstance(model, dict):
+                print(model)
             model.to_rdf(graph=graph)
         self._logger.info("serialized %d models to RDF", len(models))
 
