@@ -3,10 +3,22 @@ from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
 from mcs_benchmark_data.pipelines.mcscript.mcscript_benchmark_pipeline import (
     MCScriptBenchmarkPipeline,
 )
+from mcs_benchmark_data.pipelines.mcscript.mcscript_benchmark_file_names import (
+    MCScriptBenchmarkFileNames,
+)
 
 
 def test_extract_transform():
-    models = tuple(MCScriptBenchmarkPipeline().extract_transform())
+    models = tuple(
+        MCScriptBenchmarkPipeline(
+            file_names=MCScriptBenchmarkFileNames(
+                meta_data="metadata.json",
+                dev_samples="dev-data.xml",
+                train_samples="train-data.xml",
+                test_samples="test-data.xml",
+            ),
+        ).extract_transform()
+    )
     assert models
 
     benchmark = [model for model in models if isinstance(model, Benchmark)]
