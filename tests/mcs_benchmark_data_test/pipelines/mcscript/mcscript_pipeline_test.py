@@ -25,7 +25,7 @@ def test_extract_transform_load():
     loaded_data_dir_path = DATA_DIR_PATH / "loaded" / MCScriptBenchmarkPipeline.ID
     assert loaded_data_dir_path.is_dir()
     rdf_bz2_file_path = loaded_data_dir_path / (
-        MCScriptBenchmarkPipeline.ID + ".turtle.bz2"
+        MCScriptBenchmarkPipeline.ID + ".ttl.bz2"
     )
     assert rdf_bz2_file_path.is_file()
 

@@ -12,7 +12,7 @@ from mcs_benchmark_data.pipelines.physical_iqa.physical_iqa_benchmark_file_names
 
 
 class PhysicalIQaBenchmarkPipeline(_Pipeline):
-    ID = "PhysicalIQa"
+    ID = "PhysicalIQA"
 
     def __init__(self, file_names=PhysicalIQaBenchmarkFileNames, **kwds):
         _Pipeline.__init__(
