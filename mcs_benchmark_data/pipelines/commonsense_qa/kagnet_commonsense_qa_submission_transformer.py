@@ -17,14 +17,7 @@ class KagnetCommonsenseQaSubmissionTransformer(_BenchmarkSubmissionTransformer):
 
     def transform(
         self,
-        *,
-        submission_data_jsonl_file_path: Path,
-        submission_jsonl_file_path: Path,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        yield from self._transform(
-            submission_data_jsonl_file_path=submission_data_jsonl_file_path,
-            submission_jsonl_file_path=submission_jsonl_file_path,
-            submission_name="kagnet",
-        )
+        yield from self._transform(submission_name="kagnet", **kwds)

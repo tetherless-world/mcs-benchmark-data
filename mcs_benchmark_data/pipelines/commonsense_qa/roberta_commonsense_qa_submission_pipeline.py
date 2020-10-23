@@ -6,21 +6,20 @@ from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submissi
 from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_transformer import (
     RobertaCommonsenseQaSubmissionTransformer,
 )
+from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_file_names import (
+    RobertaCommonsenseQaSubmissionFileNames,
+)
 
 
 class RobertaCommonsenseQaSubmissionPipeline(_Pipeline):
     __ID = "CommonsenseQA"
 
-    def __init__(
-        self,
-        submission_jsonl_file_name="dev_rand_split_roberta_submission.jsonl",
-        **kwds
-    ):
+    def __init__(self, file_names: RobertaCommonsenseQaSubmissionFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=RobertaCommonsenseQaSubmissionExtractor(
                 pipeline_id=self.__ID,
-                submission_jsonl_file_name="dev_rand_split_roberta_submission_small.jsonl",
+                file_names=file_names,
                 **kwds,
             ),
             id=self.__ID,

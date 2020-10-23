@@ -31,11 +31,17 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     def _transform(
         self,
         *,
-        submission_data_jsonl_file_path: Path,
-        submission_jsonl_file_path: Path,
         submission_name: str,
         **kwds,
     ) -> Generator[_Model, None, None]:
+
+        submission_data_jsonl_file_path = kwds["extracted_path"] / getattr(
+            kwds["file_names"], "meta_data"
+        )
+
+        submission_jsonl_file_path = kwds["extracted_path"] / getattr(
+            kwds["file_names"], "submission_file_name"
+        )
 
         # Yield submissions
         # Assumes file name in form "*_[systemname]_submission.jsonl" (e.g. dev_rand_split_roberta_submission.jsonl)
@@ -45,7 +51,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
         )
 
         submission_uri = URIRef(
-            f"{self._uri_base()}:submission:{self._pipeline_id}-{submission_name}"
+            f"{self._uri_base}:submission:{self._pipeline_id}-{submission_name}"
         )
 
         yield from self.__transform_submission_sample(
@@ -69,7 +75,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
                 continue
 
             submission_obj = Submission(
-                uri=URIRef(f"{self._uri_base()}:submission:{submission['@id']}"),
+                uri=URIRef(f"{self._uri_base}:submission:{submission['@id']}"),
                 name=submission["@id"],
                 description=submission["description"],
                 date_created=submission["dateCreated"],

@@ -15,14 +15,7 @@ class RobertaCommonsenseQaSubmissionTransformer(_BenchmarkSubmissionTransformer)
 
     def transform(
         self,
-        *,
-        submission_data_jsonl_file_path: Path,
-        submission_jsonl_file_path: Path,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        yield from self._transform(
-            submission_data_jsonl_file_path=submission_data_jsonl_file_path,
-            submission_jsonl_file_path=submission_jsonl_file_path,
-            submission_name="roberta",
-        )
+        yield from self._transform(submission_name="roberta", **kwds)
