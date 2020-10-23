@@ -1,7 +1,9 @@
 import json
-import xmltodict
 
 from mcs_benchmark_data._extractor import _Extractor
+from mcs_benchmark_data.pipelines.physical_iqa.physical_iqa_benchmark_file_names import (
+    PhysicalIQaBenchmarkFileNames,
+)
 
 from mcs_benchmark_data.path import DATA_DIR_PATH
 
@@ -9,31 +11,15 @@ from mcs_benchmark_data.path import DATA_DIR_PATH
 class PhysicalIQaBenchmarkExtractor(_Extractor):
     def __init__(
         self,
-        dev_jsonl_file_name: str,
-        dev_labels_file_name: str,
-        test_jsonl_file_name: str,
-        train_jsonl_file_name: str,
-        train_labels_file_name: str,
+        file_names: PhysicalIQaBenchmarkFileNames,
         **kwds,
     ):
-        self.__dev_jsonl_file_name = dev_jsonl_file_name
-        self.__dev_labels_file_name = dev_labels_file_name
-        self.__test_jsonl_file_name = test_jsonl_file_name
-        self.__train_jsonl_file_name = train_jsonl_file_name
-        self.__train_labels_file_name = train_labels_file_name
+        _Extractor.__init__(self, **kwds)
+        self.__file_names = file_names
 
     def extract(self, **kwds):
 
-        extracted_data_dir_path = DATA_DIR_PATH / "extracted" / "PhysicalIQA"
         return {
-            "benchmark_json_file_path": extracted_data_dir_path / "metadata.json",
-            "dev_jsonl_file_path": extracted_data_dir_path / self.__dev_jsonl_file_name,
-            "dev_labels_file_path": extracted_data_dir_path
-            / self.__dev_labels_file_name,
-            "test_jsonl_file_path": extracted_data_dir_path
-            / self.__test_jsonl_file_name,
-            "train_jsonl_file_path": extracted_data_dir_path
-            / self.__train_jsonl_file_name,
-            "train_labels_file_path": extracted_data_dir_path
-            / self.__train_labels_file_name,
+            "extracted_path": self._extracted_data_dir_path,
+            "file_names": self.__file_names,
         }

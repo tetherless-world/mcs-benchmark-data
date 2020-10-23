@@ -1,0 +1,25 @@
+<!-- element definitions -->
+<!ELEMENT data (instance*)>
+<!ELEMENT instance (text, questions)>
+<!ELEMENT text (#PCDATA)>
+<!ELEMENT questions (question*)>
+<!ELEMENT question (answer, answer)>
+<!ELEMENT answer EMPTY>
+
+
+<!-- attribute definitions -->
+<!-- root element -->
+<!ATTLIST instance
+	id	CDATA	#REQUIRED
+	scenario	CDATA	#REQUIRED
+>
+<!ATTLIST question
+	id	CDATA	#REQUIRED
+	text	CDATA	#REQUIRED
+	type	(text|commonsense)	#REQUIRED
+>
+<!ATTLIST answer
+	id	CDATA	#REQUIRED
+	text	CDATA	#REQUIRED
+	correct	(True|False)	#REQUIRED
+>

@@ -1,5 +1,6 @@
 import json
 import os
+import xmltodict
 from datetime import datetime
 from pathlib import Path
 from typing import Tuple, Generator
@@ -7,7 +8,7 @@ from rdflib import URIRef
 from dataclasses_json import dataclass_json
 
 from mcs_benchmark_data._model import _Model
-from mcs_benchmark_data._transformer import _Transformer
+from mcs_benchmark_data._benchmark_transformer import _Benchmark_Transformer
 from mcs_benchmark_data.models.benchmark import Benchmark
 from mcs_benchmark_data.models.benchmark_bootstrap import BenchmarkBootstrap
 from mcs_benchmark_data.models.benchmark_answer import BenchmarkAnswer
@@ -23,55 +24,20 @@ from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionT
 from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
 
 
-class MCScriptBenchmarkTransformer(_Transformer):
+class MCScriptBenchmarkTransformer(_Benchmark_Transformer):
+    def transform(self, **kwds) -> Generator[_Model, None, None]:
 
-    __URI_BASE = "benchmark:mcscript"
-    __BENCHMARK_DATASET_CLASSES = {
-        "dev": BenchmarkDevDataset,
-        "test": BenchmarkTestDataset,
-        "train": BenchmarkTrainDataset,
-    }
+        yield from _Benchmark_Transformer._transform(self, **kwds)
 
-    def transform(
-        self, benchmark_json_file_path: Path, **kwds
+    def _transform_benchmark_sample(
+        self, *, dataset_type: str, dataset_uri: URIRef, **kwds
     ) -> Generator[_Model, None, None]:
 
-        with open(benchmark_json_file_path) as benchmark_json:
-            benchmark_metadata = json.loads(benchmark_json.read())
-
-        benchmark_bootstrap = BenchmarkBootstrap.from_dict(benchmark_metadata)
-
-        benchmark = Benchmark(
-            uri=URIRef(f"{self.__URI_BASE}:benchmark:{benchmark_metadata['@id']}"),
-            name=benchmark_bootstrap.name,
-            abstract=benchmark_bootstrap.abstract,
-            authors=tuple(author["name"] for author in benchmark_bootstrap.authors),
+        sample_xml_file_path = kwds["extracted_path"] / getattr(
+            kwds["file_names"], dataset_type + "_samples"
         )
-
-        yield benchmark
-
-        for dataset in benchmark_metadata["datasets"]:
-
-            dataset_type = dataset["@id"].split("/")[-1]
-
-            dataset_uri = URIRef(f"{self.__URI_BASE}:dataset:{dataset['@id']}")
-
-            new_dataset = self.__BENCHMARK_DATASET_CLASSES[dataset_type](
-                uri=dataset_uri, benchmark_uri=benchmark.uri, name=dataset["name"]
-            )
-
-            yield new_dataset
-
-            yield from self.__transform_benchmark_sample(
-                kwds[dataset_type + "_json_file_path"], dataset_type, new_dataset.uri
-            )
-
-    def __transform_benchmark_sample(
-        self, sample_json_file_path, sample_type: str, dataset_uri: URIRef
-    ) -> Generator[_Model, None, None]:
-
-        with open(sample_json_file_path) as sample_json:
-            all_samples = json.load(sample_json)
+        with open(sample_xml_file_path) as sample_file:
+            all_samples = xmltodict.parse(sample_file.read())
 
         sample_dict = all_samples["data"]["instance"]
 
@@ -79,64 +45,62 @@ class MCScriptBenchmarkTransformer(_Transformer):
 
             correct_choice = None
 
-            benchmark_sample = BenchmarkSample(
-                uri=URIRef(f"{dataset_uri}:sample:{sample['@id']}"),
-                dataset_uri=dataset_uri,
-                correct_choice=correct_choice,
-            )
+            if not sample["questions"]:
+                continue
 
-            yield benchmark_sample
+            for question in sample["questions"]["question"]:
 
-            concept = BenchmarkConcept(
-                uri=URIRef(f"{benchmark_sample.uri}:concept"),
-                benchmark_sample_uri=benchmark_sample.uri,
-                concept=sample["@scenario"],
-            )
+                if not isinstance(question, dict):
+                    continue
 
-            yield concept
+                benchmark_sample_uri = URIRef(
+                    f"{dataset_uri}:sample:{sample['@id']}_{question['@id']}"
+                )
 
-            context = BenchmarkContext(
-                uri=URIRef(f"{benchmark_sample.uri}:context"),
-                benchmark_sample_uri=benchmark_sample.uri,
-                text=sample["text"],
-            )
+                yield BenchmarkConcept(
+                    uri=URIRef(f"{benchmark_sample_uri}:concept"),
+                    benchmark_sample_uri=benchmark_sample_uri,
+                    concept=sample["@scenario"],
+                )
 
-            yield context
+                yield BenchmarkContext(
+                    uri=URIRef(f"{benchmark_sample_uri}:context"),
+                    benchmark_sample_uri=benchmark_sample_uri,
+                    text=sample["text"],
+                )
 
-            question_type = BenchmarkQuestionType.multiple_choice(
-                uri_base=self.__URI_BASE,
-                benchmark_sample_uri=benchmark_sample.uri,
-            )
+                yield BenchmarkQuestionType.multiple_choice(
+                    uri_base=self._uri_base,
+                    benchmark_sample_uri=benchmark_sample_uri,
+                )
 
-            yield question_type
+                benchmark_question = BenchmarkQuestion(
+                    uri=URIRef(f"{benchmark_sample_uri}:question:{question['@id']}"),
+                    benchmark_sample_uri=benchmark_sample_uri,
+                    text=question["@text"],
+                )
 
-            if sample["questions"]:
+                yield benchmark_question
 
-                for question in sample["questions"]["question"]:
-                    if isinstance(question, dict):
-                        benchmark_question = BenchmarkQuestion(
-                            uri=URIRef(
-                                f"{benchmark_sample.uri}:question:{question['@id']}"
-                            ),
-                            benchmark_sample_uri=benchmark_sample.uri,
-                            text=question["@text"],
+                for answer in question["answer"]:
+                    benchmark_answer = BenchmarkAnswer(
+                        uri=URIRef(
+                            f"{benchmark_question.uri}:choice:{str(answer['@id'])}"
+                        ),
+                        benchmark_sample_uri=benchmark_sample_uri,
+                        position=answer["@id"],
+                        text=answer["@text"],
+                    )
+
+                    yield benchmark_answer
+
+                    if answer["@correct"] == "True":
+                        correct_choice = URIRef(
+                            f"{benchmark_question.uri}:correct_choice:{answer['@id']}"
                         )
 
-                        yield benchmark_question
-
-                        for answer in question["answer"]:
-                            benchmark_answer = BenchmarkAnswer(
-                                uri=URIRef(
-                                    f"{benchmark_question.uri}:choice:{str(answer['@id'])}"
-                                ),
-                                benchmark_sample_uri=benchmark_sample.uri,
-                                position=answer["@id"],
-                                text=answer["@text"],
-                            )
-
-                            yield benchmark_answer
-
-                            if answer["@correct"] == "True":
-                                correct_choice = URIRef(
-                                    f"{benchmark_question.uri}:correct_choice:{answer['@id']}"
-                                )
+                yield BenchmarkSample(
+                    uri=benchmark_sample_uri,
+                    dataset_uri=dataset_uri,
+                    correct_choice=correct_choice,
+                )

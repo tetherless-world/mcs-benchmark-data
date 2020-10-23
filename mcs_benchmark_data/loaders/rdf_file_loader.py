@@ -26,7 +26,7 @@ class RdfFileLoader(_BufferingLoader):
         *,
         compress: bool = True,
         file_path: Optional[Path] = None,
-        format="json-ld",
+        format="turtle",
         **kwds,
     ):
         _BufferingLoader.__init__(self, **kwds)
@@ -39,8 +39,6 @@ class RdfFileLoader(_BufferingLoader):
         bind_namespaces(graph.namespace_manager)
         self._logger.info("serializing %d models to RDF", len(models))
         for model in tqdm(models):
-            if isinstance(model, dict):
-                print(model)
             model.to_rdf(graph=graph)
         self._logger.info("serialized %d models to RDF", len(models))
 

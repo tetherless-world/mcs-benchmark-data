@@ -6,29 +6,20 @@ from mcs_benchmark_data.pipelines.physical_iqa.physical_iqa_benchmark_extractor 
 from mcs_benchmark_data.pipelines.physical_iqa.physical_iqa_benchmark_transformer import (
     PhysicalIQaBenchmarkTransformer,
 )
+from mcs_benchmark_data.pipelines.physical_iqa.physical_iqa_benchmark_file_names import (
+    PhysicalIQaBenchmarkFileNames,
+)
 
 
 class PhysicalIQaBenchmarkPipeline(_Pipeline):
     ID = "PhysicalIQa"
 
-    def __init__(
-        self,
-        dev_jsonl_file_name="dev.jsonl",
-        dev_labels_file_name="dev-labels.lst",
-        test_jsonl_file_name="test.jsonl",
-        train_jsonl_file_name="train.jsonl",
-        train_labels_file_name="train-labels.lst",
-        **kwds
-    ):
+    def __init__(self, file_names=PhysicalIQaBenchmarkFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=PhysicalIQaBenchmarkExtractor(
                 pipeline_id=self.ID,
-                dev_jsonl_file_name=dev_jsonl_file_name,
-                dev_labels_file_name=dev_labels_file_name,
-                test_jsonl_file_name=test_jsonl_file_name,
-                train_jsonl_file_name=train_jsonl_file_name,
-                train_labels_file_name=train_labels_file_name,
+                file_names=file_names,
                 **kwds,
             ),
             id=self.ID,
