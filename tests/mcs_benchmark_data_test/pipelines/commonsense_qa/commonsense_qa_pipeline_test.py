@@ -12,7 +12,7 @@ from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_file_n
 )
 
 
-def test_extract_transform_load(tmp_path):
+def test_extract_transform_load():
     CommonsenseQaBenchmarkPipeline(
         file_names=CommonsenseQaBenchmarkFileNames(
             meta_data="metadata.json",
@@ -31,4 +31,4 @@ def test_extract_transform_load(tmp_path):
     new_graph = Graph()
     with open(rdf_bz2_file_path, "rb") as rdf_bz2_file:
         with bz2.open(rdf_bz2_file, "rb") as rdf_file:
-            new_graph.parse(source=rdf_file, format="turtle")
+            new_graph.parse(source=rdf_file, format="ttl")

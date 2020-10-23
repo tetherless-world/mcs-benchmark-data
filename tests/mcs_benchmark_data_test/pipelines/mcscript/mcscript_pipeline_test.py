@@ -32,4 +32,4 @@ def test_extract_transform_load():
     new_graph = Graph()
     with open(rdf_bz2_file_path, "rb") as rdf_bz2_file:
         with bz2.open(rdf_bz2_file, "rb") as rdf_file:
-            new_graph.parse(source=rdf_file, format="turtle")
+            new_graph.parse(source=rdf_file, format="ttl")
