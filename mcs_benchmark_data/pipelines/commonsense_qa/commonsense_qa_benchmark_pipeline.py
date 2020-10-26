@@ -6,25 +6,20 @@ from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_extrac
 from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_transformer import (
     CommonsenseQaBenchmarkTransformer,
 )
+from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_file_names import (
+    CommonsenseQaBenchmarkFileNames,
+)
 
 
 class CommonsenseQaBenchmarkPipeline(_Pipeline):
     ID = "CommonsenseQA"
 
-    def __init__(
-        self,
-        dev_jsonl_file_name="dev_rand_split.jsonl",
-        test_jsonl_file_name="test_rand_split_no_answers.jsonl",
-        train_jsonl_file_name="train_rand_split.jsonl",
-        **kwds
-    ):
+    def __init__(self, file_names: CommonsenseQaBenchmarkFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=CommonsenseQaBenchmarkExtractor(
                 pipeline_id=self.ID,
-                dev_jsonl_file_name=dev_jsonl_file_name,
-                test_jsonl_file_name=test_jsonl_file_name,
-                train_jsonl_file_name=train_jsonl_file_name,
+                file_names=file_names,
                 **kwds,
             ),
             id=self.ID,

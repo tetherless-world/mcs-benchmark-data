@@ -1,0 +1,41 @@
+{
+    "@context": "http://schema.org/",
+    "@id": "PhysicalIQA",
+    "@type": "Benchmark",
+    "name": "PhysicalIQA",
+    "abstract": "To apply eyeshadow without a brush, should I use acottonswab or a toothpick? Questions requiring this kind ofphys-ical commonsensepose a challenge to today’s natural lan-guage understanding systems. While recent pretrained mod-els (such as BERT) have made progress on question answer-ing over moreabstractdomains – such as news articles andencyclopedia entries, where text is plentiful – in morephysi-caldomains, text is inherently limited due to reporting bias.Can AI systems learn to reliably answer physical common-sense questions without experiencing the physical world?In this paper, we introduce the task of physical commonsensereasoning and a corresponding benchmark datasetPhysicalInteraction: Question AnsweringorPIQA. Though hu-mans find the dataset easy (95% accuracy), large pretrainedmodels struggle (∼77%). We provide analysis about the di-mensions of knowledge that existing models lack, which of-fers significant opportunities for future research.",
+    "authors": [
+        {
+            "name": "Yonatan Bisk"
+        },
+        {
+            "name": "Rowan Zellers"
+        },
+        {
+            "name": "Ronan Le Bras"
+        },
+        {
+            "name": "Jianfeng Gao"
+        },
+        {
+            "name": "Yejin Choi"
+        }
+    ],
+    "datasets": [
+        {
+            "@id": "PhysicalIQA/train",
+            "@type": "BenchmarkTrainingDataset",
+            "name": "PhysicalIQA training dataset"
+        },
+        {
+            "@id": "PhysicalIQA/dev",
+            "@type": "BenchmarkDevDataset",
+            "name": "PhysicalIQA dev dataset"
+        },
+        {
+            "@id": "PhysicalIQA/test",
+            "@type": "BenchmarkTestDataset",
+            "name": "PhysicalIQA test dataset"
+        }
+    ]
+}

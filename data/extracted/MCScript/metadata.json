@@ -1,0 +1,41 @@
+{
+    "@context": "http://schema.org/",
+    "@id": "MCScript",
+    "@type": "Benchmark",
+    "name": "MCScript",
+    "abstract": "This report summarizes the results of the Se-mEval 2018 task on machine comprehensionusing commonsense knowledge.  For this ma-chine comprehension task,  we created a newcorpus,MCScript.    It  contains  a  high  num-ber  of  questions  that  require  commonsenseknowledge for finding the correct answer.  11teams  from  4  different  countries  participatedin  this  shared  task,  most  of  them  used  neu-ral  approaches.   The  best  performing  systemachieves an accuracy of 83.95%,  outperform-ing  the  baselines  by  a  large  margin,  but  stillfar from the human upper bound,  which wasfound to be at 98%.",
+    "authors": [
+        {
+            "name": "Simon Ostermann"
+        },
+        {
+            "name": "Michael Roth"
+        },
+        {
+            "name": "Ashutosh Modi"
+        },
+        {
+            "name": "Stefan Thater"
+        },
+        {
+            "name": "Manfred Pinkal"
+        }
+    ],
+    "datasets": [
+        {
+            "@id": "MCScript/train",
+            "@type": "BenchmarkTrainingDataset",
+            "name": "MCScript training dataset"
+        },
+        {
+            "@id": "MCScript/dev",
+            "@type": "BenchmarkDevDataset",
+            "name": "MCScript dev dataset"
+        },
+        {
+            "@id": "MCScript/test",
+            "@type": "BenchmarkTestDataset",
+            "name": "MCScript test dataset"
+        }
+    ]
+}
