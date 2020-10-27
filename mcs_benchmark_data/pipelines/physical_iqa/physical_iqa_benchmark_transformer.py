@@ -76,6 +76,8 @@ class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
             yield from self._yield_goal_models(
                 dataset_uri=dataset_uri,
                 sample_id=sample["id"],
+                concepts=None,
+                context=None,
                 correct_choice=correct_choice,
                 goal=goal,
                 hypotheses=hypotheses,
