@@ -17,10 +17,10 @@ def test_extract_transform_load():
     SocialIQaBenchmarkPipeline(
         file_names=SocialIQaBenchmarkFileNames(
             metadata="metadata.json",
-            dev_labels="dev-labels.lst",
-            dev_samples="dev.jsonl",
-            train_labels="train-labels.lst",
-            train_samples="train.jsonl",
+            dev_labels="dev-labels_small.lst",
+            dev_samples="dev_small.jsonl",
+            train_labels="train-labels_small.lst",
+            train_samples="train_small.jsonl",
         ),
     ).extract_transform_load()
 

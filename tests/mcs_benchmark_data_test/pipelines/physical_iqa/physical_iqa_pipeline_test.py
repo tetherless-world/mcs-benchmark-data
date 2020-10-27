@@ -17,11 +17,11 @@ def test_extract_transform_load():
     PhysicalIQaBenchmarkPipeline(
         file_names=PhysicalIQaBenchmarkFileNames(
             metadata="metadata.json",
-            dev_labels="dev-labels.lst",
-            dev_samples="dev.jsonl",
-            train_labels="train-labels.lst",
-            train_samples="train.jsonl",
-            test_samples="test.jsonl",
+            dev_labels="dev-labels_small.lst",
+            dev_samples="dev_small.jsonl",
+            train_labels="train-labels_small.lst",
+            train_samples="train_small.jsonl",
+            test_samples="test_small.jsonl",
         ),
     ).extract_transform_load()
 

@@ -17,9 +17,9 @@ def test_extract_transform_load():
     MCScriptBenchmarkPipeline(
         file_names=MCScriptBenchmarkFileNames(
             metadata="metadata.json",
-            dev_samples="dev-data.xml",
-            train_samples="train-data.xml",
-            test_samples="test-data.xml",
+            dev_samples="dev-data_small.xml",
+            train_samples="train-data_small.xml",
+            test_samples="test-data_small.xml",
         ),
     ).extract_transform_load()
 

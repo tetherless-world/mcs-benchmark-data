@@ -17,10 +17,10 @@ def test_extract_transform_load():
     CycicBenchmarkPipeline(
         file_names=CycicBenchmarkFileNames(
             metadata="metadata.json",
-            dev_labels="CycIC_dev_labels.jsonl",
-            dev_samples="CycIC_dev_questions.jsonl",
-            train_labels="CycIC_training_labels.jsonl",
-            train_samples="CycIC_training_questions.jsonl",
+            dev_labels="CycIC_dev_labels_small.jsonl",
+            dev_samples="CycIC_dev_questions_small.jsonl",
+            train_labels="CycIC_training_labels_small.jsonl",
+            train_samples="CycIC_training_questions_small.jsonl",
         ),
     ).extract_transform_load()
 
