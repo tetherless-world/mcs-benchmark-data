@@ -13,7 +13,7 @@ from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submissio
 
 
 class KagnetCommonsenseQaSubmissionPipeline(_Pipeline):
-    __ID = "KagnetCommonsenseQA"
+    __ID = "CommonsenseQA"
 
     def __init__(self, file_names: KagnetCommonsenseQaSubmissionFileNames, **kwds):
         _Pipeline.__init__(

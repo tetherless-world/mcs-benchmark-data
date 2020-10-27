@@ -39,7 +39,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     ) -> Generator[_Model, None, None]:
 
         submission_data_jsonl_file_path = extracted_path / getattr(
-            file_names, "meta_data"
+            file_names, "metadata"
         )
 
         submission_jsonl_file_path = extracted_path / getattr(

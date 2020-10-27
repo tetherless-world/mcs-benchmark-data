@@ -12,7 +12,7 @@ from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submissi
 
 
 class RobertaCommonsenseQaSubmissionPipeline(_Pipeline):
-    __ID = "RobertaCommonsenseQA"
+    __ID = "CommonsenseQA"
 
     def __init__(self, file_names: RobertaCommonsenseQaSubmissionFileNames, **kwds):
         _Pipeline.__init__(
