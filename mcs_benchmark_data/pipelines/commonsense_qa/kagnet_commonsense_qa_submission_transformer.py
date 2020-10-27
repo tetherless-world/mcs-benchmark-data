@@ -17,18 +17,3 @@ class KagnetCommonsenseQaSubmissionTransformer(_BenchmarkSubmissionTransformer):
     """
     Class for transforming CommonsenseQA kagnet sample.
     """
-
-    def transform(
-        self,
-        *,
-        extracted_path: Path,
-        file_names: KagnetCommonsenseQaSubmissionFileNames,
-        **kwds,
-    ) -> Generator[_Model, None, None]:
-
-        yield from self._transform(
-            extracted_path=extracted_path,
-            file_names=file_names,
-            submission_name="kagnet",
-            **kwds,
-        )

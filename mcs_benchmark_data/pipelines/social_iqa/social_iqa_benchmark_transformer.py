@@ -18,76 +18,65 @@ from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
 from mcs_benchmark_data.pipelines.social_iqa.social_iqa_benchmark_file_names import (
     SocialIQaBenchmarkFileNames,
 )
+from mcs_benchmark_data.answer_data import AnswerData
+from mcs_benchmark_data.dataset_type import DatasetType
 
 
 class SocialIQaBenchmarkTransformer(_BenchmarkTransformer):
-    def transform(
-        self,
-        *,
-        extracted_path: Path,
-        file_names: SocialIQaBenchmarkFileNames,
-        **kwds,
-    ) -> Generator[_Model, None, None]:
-        yield from _BenchmarkTransformer._transform(
-            self, extracted_path=extracted_path, file_names=file_names, **kwds
-        )
-
     def _transform_benchmark_sample(
         self,
         *,
-        extracted_path: Path,
+        extracted_data_dir_path: Path,
         file_names: SocialIQaBenchmarkFileNames,
         dataset_type: str,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        if dataset_type != "test":
-            sample_labels_file_path = extracted_path / getattr(
+        all_labels = None
+
+        if dataset_type != DatasetType.TEST.value:
+            sample_labels_file_path = extracted_data_dir_path / getattr(
                 file_names, dataset_type + "_labels"
             )
 
             with open(sample_labels_file_path) as labels_file:
                 all_labels = list(labels_file)
 
-        sample_jsonl_file_path = extracted_path / getattr(
+        sample_jsonl_file_path = extracted_data_dir_path / getattr(
             file_names, dataset_type + "_samples"
         )
 
-        with open(sample_jsonl_file_path) as sample_file:
-            all_samples = list(sample_file)
+        with open(sample_jsonl_file_path) as all_samples:
 
-        i = 0
+            for i, (line, label) in enumerate(zip(all_samples, all_labels)):
 
-        for line in all_samples:
+                sample = json.loads(line)
 
-            sample = json.loads(line)
+                benchmark_sample_uri = URIRef(f"{dataset_uri}:sample:{i}")
 
-            correct_choice = None
+                correct_choice = None
 
-            if dataset_type != "test":
-                correct_choice = URIRef(
-                    f"{dataset_uri}:sample:{i}:correct_choice:{int(all_labels[i]) + 1}"
+                if dataset_type != DatasetType.TEST.value:
+                    correct_choice = URIRef(
+                        f"{dataset_uri}:sample:{i}:correct_choice:{int(label) + 1}"
+                    )
+
+                yield from self._yield_sample_concept_context(
+                    dataset_uri=dataset_uri,
+                    sample_id=i,
+                    concepts=None,
+                    context=sample["context"],
+                    correct_choice=correct_choice,
                 )
 
-            question = sample["question"]
-
-            context = sample["context"]
-
-            answers = []
-
-            for letter in ["A", "B", "C"]:
-                answer = ("answer{letter}", letter)
-                answers.append(answer)
-
-            yield from self._yield_qa_models(
-                dataset_uri=dataset_uri,
-                sample_id=i,
-                concepts=None,
-                context=context,
-                correct_choice=correct_choice,
-                question=question,
-                answers=answers,
-            )
-
-            i += 1
+                yield from self._yield_qa_models(
+                    dataset_uri=dataset_uri,
+                    sample_id=i,
+                    benchmark_sample_uri=benchmark_sample_uri,
+                    question=sample["question"],
+                    answers=(
+                        AnswerData(label=letter, text=sample[f"answer{letter}"])
+                        for letter in ["A", "B", "C"]
+                    ),
+                )

@@ -25,7 +25,7 @@ class Roberta4CycicSubmissionPipeline(_Pipeline):
             ),
             id=self.__ID,
             transformer=Roberta4CycicSubmissionTransformer(
-                pipeline_id=self.__ID, system="Roberta4", **kwds
+                pipeline_id=self.__ID, submission_name="Roberta4", **kwds
             ),
             **kwds,
         )

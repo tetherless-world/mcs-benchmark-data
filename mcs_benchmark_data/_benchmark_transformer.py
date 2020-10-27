@@ -3,7 +3,7 @@ import json
 from abc import abstractmethod
 from pathlib import Path
 from rdflib import URIRef
-from typing import Generator, Optional, Tuple
+from typing import Generator, Optional, Tuple, List
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._transformer import _Transformer
@@ -22,6 +22,7 @@ from mcs_benchmark_data.models.benchmark_goal import BenchmarkGoal
 from mcs_benchmark_data.models.benchmark_hypothesis import BenchmarkHypothesis
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_answer import BenchmarkAnswer
+from mcs_benchmark_data.answer_data import AnswerData
 
 
 class _BenchmarkTransformer(_Transformer):
@@ -42,11 +43,13 @@ class _BenchmarkTransformer(_Transformer):
             "train": BenchmarkTrainDataset,
         }
 
-    def _transform(
-        self, *, extracted_path: Path, file_names: _BenchmarkFileNames, **kwds
+    def transform(
+        self, *, extracted_data_dir_path: Path, file_names: _BenchmarkFileNames, **kwds
     ) -> Generator[_Model, None, None]:
 
-        benchmark_json_file_path = extracted_path / getattr(file_names, "metadata")
+        benchmark_json_file_path = extracted_data_dir_path / getattr(
+            file_names, "metadata"
+        )
 
         with open(benchmark_json_file_path) as benchmark_json:
             benchmark_metadata = json.loads(benchmark_json.read())
@@ -75,28 +78,23 @@ class _BenchmarkTransformer(_Transformer):
             yield new_dataset
 
             yield from self._transform_benchmark_sample(
-                extracted_path=extracted_path,
+                extracted_data_dir_path=extracted_data_dir_path,
                 file_names=file_names,
                 dataset_type=dataset_type,
                 dataset_uri=new_dataset.uri,
                 **kwds,
             )
 
-    def _yield_qa_models(
+    def _yield_sample_concept_context(
         self,
         *,
         dataset_uri: URIRef,
         sample_id: str,
-        concepts: Optional[Tuple[str, ...]],
-        context: Optional[str],
         correct_choice: URIRef,
-        question: str,
-        answers: Tuple[Tuple[str, str], ...],
+        concepts: Optional[List[str]],
+        context: Optional[str],
         **kwds,
-    ) -> Generator[_Model, None, None]:
-
-        ans_mapping = {ans: i for i, ans in enumerate("ABCDE")}
-
+    ):
         benchmark_sample = BenchmarkSample(
             uri=URIRef(f"{dataset_uri}:sample:{sample_id}"),
             dataset_uri=dataset_uri,
@@ -105,17 +103,12 @@ class _BenchmarkTransformer(_Transformer):
 
         yield benchmark_sample
 
-        yield BenchmarkQuestionType.multiple_choice(
-            uri_base=self._uri_base,
-            benchmark_sample_uri=benchmark_sample.uri,
-        )
-
         if concepts is not None:
-            for i in range(len(concepts)):
+            for i, concept in enumerate(concepts):
                 yield BenchmarkConcept(
                     uri=URIRef(f"{benchmark_sample.uri}:concept:{i}"),
                     benchmark_sample_uri=benchmark_sample.uri,
-                    concept=concepts[i],
+                    concept=concept,
                 )
 
         if context is not None:
@@ -125,18 +118,32 @@ class _BenchmarkTransformer(_Transformer):
                 text=context,
             )
 
+    def _yield_qa_models(
+        self,
+        *,
+        dataset_uri: URIRef,
+        benchmark_sample_uri: str,
+        question: str,
+        answers: List[AnswerData],
+        **kwds,
+    ) -> Generator[_Model, None, None]:
+
+        ans_mapping = {ans: i for i, ans in enumerate("ABCDE")}
+
         yield BenchmarkQuestion(
-            uri=URIRef(f"{benchmark_sample.uri}:question"),
-            benchmark_sample_uri=benchmark_sample.uri,
+            uri=URIRef(f"{benchmark_sample_uri}:question"),
+            benchmark_sample_uri=benchmark_sample_uri,
             text=question,
         )
 
         for answer in answers:
+            label = getattr(answer, "label")
+            text = getattr(answer, "text")
             yield BenchmarkAnswer(
-                uri=URIRef(f"{benchmark_sample.uri}:answer:{answer[1]}"),
-                benchmark_sample_uri=benchmark_sample.uri,
-                position=ans_mapping[answer[1]],
-                text=answer[0],
+                uri=URIRef(f"{benchmark_sample_uri}:answer:{label}"),
+                benchmark_sample_uri=benchmark_sample_uri,
+                position=ans_mapping[label],
+                text=text,
             )
 
     def _yield_goal_models(
@@ -144,66 +151,31 @@ class _BenchmarkTransformer(_Transformer):
         *,
         dataset_uri: URIRef,
         sample_id: str,
-        concepts: Optional[Tuple[str, ...]],
-        context: Optional[str],
-        correct_choice: URIRef,
+        benchmark_sample_uri: URIRef,
         goal: str,
-        hypotheses: Tuple[str, ...],
+        hypotheses: List[str],
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        benchmark_sample = BenchmarkSample(
-            uri=URIRef(f"{dataset_uri}:sample:{sample_id}"),
-            dataset_uri=dataset_uri,
-            correct_choice=correct_choice,
-        )
-
-        yield benchmark_sample
-
-        yield BenchmarkQuestionType.multiple_choice(
-            uri_base=self._uri_base,
-            benchmark_sample_uri=benchmark_sample.uri,
-        )
-
-        if concepts is not None:
-            for i in range(len(concepts)):
-                yield BenchmarkConcept(
-                    uri=URIRef(f"{benchmark_sample.uri}:concept"),
-                    benchmark_sample_uri=benchmark_sample.uri,
-                    concept=concepts[i],
-                )
-
-        if context is not None:
-            yield BenchmarkContext(
-                uri=URIRef(f"{benchmark_sample.uri}:context"),
-                benchmark_sample_uri=benchmark_sample.uri,
-                text=context,
-            )
-
-        yield BenchmarkQuestionType.multiple_choice(
-            uri_base=self._uri_base,
-            benchmark_sample_uri=benchmark_sample.uri,
-        )
-
         yield BenchmarkGoal(
-            uri=URIRef(f"{benchmark_sample.uri}:goal"),
-            benchmark_sample_uri=benchmark_sample.uri,
+            uri=URIRef(f"{benchmark_sample_uri}:goal"),
+            benchmark_sample_uri=benchmark_sample_uri,
             text=goal,
         )
 
-        for i in range(len(hypotheses)):
+        for i, hypothesis in enumerate(hypotheses):
             yield BenchmarkHypothesis(
-                uri=URIRef(f"{benchmark_sample.uri}:hypothesis:{i+1}"),
-                benchmark_sample_uri=benchmark_sample.uri,
+                uri=URIRef(f"{benchmark_sample_uri}:hypothesis:{i+1}"),
+                benchmark_sample_uri=benchmark_sample_uri,
                 position=i + 1,
-                text=hypotheses[i],
+                text=hypothesis,
             )
 
     @abstractmethod
     def _transform_benchmark_sample(
         self,
         *,
-        extracted_path: Path,
+        extracted_data_dir_path: Path,
         file_names: _BenchmarkFileNames,
         dataset_type: str,
         dataset_uri: URIRef,

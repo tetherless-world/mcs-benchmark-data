@@ -24,28 +24,22 @@ from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
 from mcs_benchmark_data.pipelines.mcscript.mcscript_benchmark_file_names import (
     MCScriptBenchmarkFileNames,
 )
+from mcs_benchmark_data.dataset_type import DatasetType
+from mcs_benchmark_data.answer_data import AnswerData
 
 
 class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
-    def transform(
-        self, *, extracted_path: Path, file_names: MCScriptBenchmarkFileNames, **kwds
-    ) -> Generator[_Model, None, None]:
-
-        yield from _BenchmarkTransformer._transform(
-            self, extracted_path=extracted_path, file_names=file_names, **kwds
-        )
-
     def _transform_benchmark_sample(
         self,
         *,
-        extracted_path: Path,
+        extracted_data_dir_path: Path,
         file_names: MCScriptBenchmarkFileNames,
         dataset_type: str,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        sample_xml_file_path = extracted_path / getattr(
+        sample_xml_file_path = extracted_data_dir_path / getattr(
             file_names, dataset_type + "_samples"
         )
         with open(sample_xml_file_path) as sample_file:
@@ -69,17 +63,7 @@ class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
                     f"{dataset_uri}:sample:{sample['@id']}_{question['@id']}"
                 )
 
-                yield BenchmarkConcept(
-                    uri=URIRef(f"{benchmark_sample_uri}:concept"),
-                    benchmark_sample_uri=benchmark_sample_uri,
-                    concept=sample["@scenario"],
-                )
-
-                yield BenchmarkContext(
-                    uri=URIRef(f"{benchmark_sample_uri}:context"),
-                    benchmark_sample_uri=benchmark_sample_uri,
-                    text=sample["text"],
-                )
+                sample_id = URIRef(f"{sample['@id']}_{question['@id']}")
 
                 yield BenchmarkQuestionType.multiple_choice(
                     uri_base=self._uri_base,
@@ -94,25 +78,33 @@ class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
 
                 yield benchmark_question
 
-                for answer in question["answer"]:
-                    benchmark_answer = BenchmarkAnswer(
-                        uri=URIRef(
-                            f"{benchmark_question.uri}:choice:{str(answer['@id'])}"
-                        ),
-                        benchmark_sample_uri=benchmark_sample_uri,
-                        position=answer["@id"],
-                        text=answer["@text"],
-                    )
+                answers = ["A", "B"]
 
-                    yield benchmark_answer
-
-                    if dataset_type != "test" and answer["@correct"] == "True":
-                        correct_choice = URIRef(
-                            f"{benchmark_question.uri}:correct_choice:{answer['@id']}"
-                        )
-
-                yield BenchmarkSample(
-                    uri=benchmark_sample_uri,
+                yield from self._yield_qa_models(
                     dataset_uri=dataset_uri,
+                    sample_id=sample_id,
+                    benchmark_sample_uri=benchmark_sample_uri,
+                    question=question["@text"],
+                    answers=(
+                        AnswerData(
+                            label=answers[int(answer["@id"])], text=answer["@text"]
+                        )
+                        for answer in question["answer"]
+                    ),
+                )
+
+                if dataset_type != DatasetType.TEST.value:
+                    for answer in question["answer"]:
+                        if answer["@correct"] == "True":
+                            correct_choice = URIRef(
+                                f"{benchmark_question.uri}:correct_choice:{answer['@id']}"
+                            )
+                            break
+
+                yield from self._yield_sample_concept_context(
+                    dataset_uri=dataset_uri,
+                    sample_id=URIRef(f"{sample['@id']}_{question['@id']}"),
+                    concepts=[sample["@scenario"]],
+                    context=sample["text"],
                     correct_choice=correct_choice,
                 )

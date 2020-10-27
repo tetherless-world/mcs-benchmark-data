@@ -22,65 +22,67 @@ from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
 from mcs_benchmark_data.pipelines.physical_iqa.physical_iqa_benchmark_file_names import (
     PhysicalIQaBenchmarkFileNames,
 )
+from mcs_benchmark_data.dataset_type import DatasetType
 
 
 class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
-    def transform(
-        self, *, extracted_path: Path, file_names: PhysicalIQaBenchmarkFileNames, **kwds
-    ) -> Generator[_Model, None, None]:
-
-        yield from _BenchmarkTransformer._transform(
-            self, extracted_path=extracted_path, file_names=file_names, **kwds
-        )
-
     def _transform_benchmark_sample(
         self,
-        extracted_path: Path,
+        extracted_data_dir_path: Path,
         file_names: PhysicalIQaBenchmarkFileNames,
         dataset_type: str,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        if dataset_type != "test":
-            sample_labels_file_path = extracted_path / getattr(
+        all_labels = None
+
+        if dataset_type != DatasetType.TEST.value:
+            sample_labels_file_path = extracted_data_dir_path / getattr(
                 file_names, dataset_type + "_labels"
             )
 
             with open(sample_labels_file_path) as labels_file:
                 all_labels = list(labels_file)
 
-        sample_jsonl_file_path = extracted_path / getattr(
+        sample_jsonl_file_path = extracted_data_dir_path / getattr(
             file_names, dataset_type + "_samples"
         )
 
-        with open(sample_jsonl_file_path) as sample_file:
-            all_samples = list(sample_file)
+        with open(sample_jsonl_file_path) as all_samples:
 
-        i = 0
+            for i, line in enumerate(all_samples):
 
-        for line in all_samples:
+                sample = json.loads(line)
 
-            sample = json.loads(line)
+                sample_id = sample["id"]
 
-            correct_choice = None
+                benchmark_sample_uri = URIRef(f"{dataset_uri}:sample:{sample_id}")
 
-            if dataset_type != "test":
-                correct_choice = URIRef(
-                    f"{dataset_uri}:sample:{sample['id']}:correct_choice:{int(all_labels[i]) + 1}"
+                correct_choice = None
+
+                if dataset_type != DatasetType.TEST.value:
+                    correct_choice = URIRef(
+                        f"{benchmark_sample_uri}:correct_choice:{int(all_labels[i]) + 1}"
+                    )
+
+                yield BenchmarkQuestionType.multiple_choice(
+                    uri_base=self._uri_base,
+                    benchmark_sample_uri=benchmark_sample_uri,
                 )
 
-            goal = sample["goal"]
-            hypotheses = [sample["sol1"], sample["sol2"]]
+                yield from self._yield_sample_concept_context(
+                    dataset_uri=dataset_uri,
+                    sample_id=sample_id,
+                    concepts=None,
+                    context=None,
+                    correct_choice=correct_choice,
+                )
 
-            yield from self._yield_goal_models(
-                dataset_uri=dataset_uri,
-                sample_id=sample["id"],
-                concepts=None,
-                context=None,
-                correct_choice=correct_choice,
-                goal=goal,
-                hypotheses=hypotheses,
-            )
-
-            i += 1
+                yield from self._yield_goal_models(
+                    dataset_uri=dataset_uri,
+                    sample_id=sample_id,
+                    benchmark_sample_uri=benchmark_sample_uri,
+                    goal=sample["goal"],
+                    hypotheses=tuple((sample["sol1"], sample["sol2"])),
+                )

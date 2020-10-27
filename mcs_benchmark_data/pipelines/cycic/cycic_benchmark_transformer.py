@@ -18,78 +18,79 @@ from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
 from mcs_benchmark_data.pipelines.cycic.cycic_benchmark_file_names import (
     CycicBenchmarkFileNames,
 )
+from mcs_benchmark_data.answer_data import AnswerData
+from mcs_benchmark_data.dataset_type import DatasetType
 
 
 class CycicBenchmarkTransformer(_BenchmarkTransformer):
-    def transform(
-        self,
-        *,
-        extracted_path: Path,
-        file_names: CycicBenchmarkFileNames,
-        **kwds,
-    ) -> Generator[_Model, None, None]:
-        yield from _BenchmarkTransformer._transform(
-            self, extracted_path=extracted_path, file_names=file_names, **kwds
-        )
-
     def _transform_benchmark_sample(
         self,
         *,
-        extracted_path: Path,
+        extracted_data_dir_path: Path,
         file_names: CycicBenchmarkFileNames,
         dataset_type: str,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        if dataset_type != "test":
-            sample_labels_file_path = extracted_path / getattr(
+        if dataset_type != DatasetType.TEST.value:
+            sample_labels_file_path = extracted_data_dir_path / getattr(
                 file_names, dataset_type + "_labels"
             )
 
             with open(sample_labels_file_path) as labels_file:
                 all_labels = list(labels_file)
 
-        sample_jsonl_file_path = extracted_path / getattr(
+        sample_jsonl_file_path = extracted_data_dir_path / getattr(
             file_names, dataset_type + "_samples"
         )
 
-        with open(sample_jsonl_file_path) as sample_file:
-            all_samples = list(sample_file)
+        with open(sample_jsonl_file_path) as all_samples:
 
-        for i in range(len(all_samples)):
+            for i, sample in enumerate(all_samples):
 
-            sample = json.loads(all_samples[i])
+                sample = json.loads(sample)
 
-            label_entry = json.loads(all_labels[i])
+                label_entry = json.loads(all_labels[i])
 
-            sample_id = f"{sample['run_id']}_{sample['guid']}"
+                sample_id = f"{sample['run_id']}_{sample['guid']}"
 
-            correct_choice = None
+                benchmark_sample_uri_str = f"{dataset_uri}:sample:{sample_id}"
 
-            if dataset_type != "test":
-                correct_choice = URIRef(
-                    f"{dataset_uri}:sample:{sample_id}:correct_choice:{label_entry['correct_answer']}"
+                correct_choice = None
+
+                if dataset_type != "test":
+                    correct_choice = URIRef(
+                        f"{dataset_uri}:sample:{sample_id}:correct_choice:{label_entry['correct_answer']}"
+                    )
+
+                yield BenchmarkQuestionType.multiple_choice(
+                    uri_base=self._uri_base,
+                    benchmark_sample_uri=URIRef(benchmark_sample_uri_str),
                 )
 
-            question = sample["question"]
+                letters = ["A", "B", "C", "D", "E"]
 
-            concepts = sample["categories"]
+                answer_num = 0
 
-            answers = []
+                while f"answer_option{i}" in sample:
+                    answer_num += 1
 
-            letters = ["A", "B", "C", "D", "E"]
+                yield from self._yield_sample_concept_context(
+                    dataset_uri=dataset_uri,
+                    sample_id=sample_id,
+                    concepts=sample["categories"],
+                    context=None,
+                    correct_choice=correct_choice,
+                )
 
-            for i in range(len(letters)):
-                answer = ("answer_option{i}", letters[i])
-                answers.append(answer)
-
-            yield from self._yield_qa_models(
-                dataset_uri=dataset_uri,
-                sample_id=sample_id,
-                concepts=concepts,
-                context=None,
-                correct_choice=correct_choice,
-                question=question,
-                answers=answers,
-            )
+                yield from self._yield_qa_models(
+                    dataset_uri=dataset_uri,
+                    sample_id=sample_id,
+                    benchmark_sample_uri=benchmark_sample_uri,
+                    question=sample["question"],
+                    answers=(
+                        AnswerData(label=letter, text=sample[f"answer_option{i}"])
+                        for i, letter in enumerate(letters[:answer_num])
+                    ),
+                )

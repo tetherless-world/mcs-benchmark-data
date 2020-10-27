@@ -12,6 +12,7 @@ from mcs_benchmark_data.models.submission_sample import SubmissionSample
 from mcs_benchmark_data.models.test_score import TestScore
 from mcs_benchmark_data.models.dev_score import DevScore
 from mcs_benchmark_data._benchmark_file_names import _BenchmarkFileNames
+from mcs_benchmark_data._pipeline_phase import _PipelinePhase
 
 
 class _BenchmarkSubmissionTransformer(_Transformer):
@@ -21,6 +22,10 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     See the transform method of _Transformer.
     """
 
+    def __init__(self, *, pipeline_id: str, submission_name: str, **kwds):
+        _Transformer.__init__(self, pipeline_id=pipeline_id, **kwds)
+        self._submission_name = submission_name
+
     @property
     def _uri_base(self):
         return f"benchmark:submission:{self._pipeline_id}"
@@ -29,44 +34,40 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     def _benchmark_score_classes(self):
         return {"TestScore": TestScore, "DevScore": DevScore}
 
-    def _transform(
+    def transform(
         self,
         *,
-        extracted_path: Path,
+        extracted_data_dir_path: Path,
         file_names: _BenchmarkFileNames,
-        submission_name: str,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        submission_data_jsonl_file_path = extracted_path / getattr(
+        submission_data_jsonl_file_path = extracted_data_dir_path / getattr(
             file_names, "metadata"
         )
 
-        submission_jsonl_file_path = extracted_path / getattr(
-            file_names, "submission_file_name"
+        submission_jsonl_file_path = extracted_data_dir_path / getattr(
+            file_names, "submission"
         )
 
         # Yield submissions
         # Assumes file name in form "*_[systemname]_submission.jsonl" (e.g. dev_rand_split_roberta_submission.jsonl)
         yield from self.__transform_submission(
             submission_data_jsonl_file_path=submission_data_jsonl_file_path,
-            submission_name=submission_name,
         )
 
         submission_uri = URIRef(
-            f"{self._uri_base}:submission:{self._pipeline_id}-{submission_name}"
+            f"{self._uri_base}:submission:{self._pipeline_id}-{self._submission_name}"
         )
 
         yield from self.__transform_submission_sample(
             submission_sample_jsonl_file_path=submission_jsonl_file_path,
             submission_uri=submission_uri,
-            submission_name=submission_name,
         )
 
     def __transform_submission(
         self,
         submission_data_jsonl_file_path: Path,
-        submission_name: str,
     ) -> Generator[_Model, None, None]:
 
         with open(submission_data_jsonl_file_path) as submission_data_jsonl:
@@ -76,7 +77,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
 
             submission = json.loads(line)
 
-            if submission["name"].lower() != submission_name:
+            if submission["name"].lower() != self._submission_name:
                 continue
 
             submission_obj = Submission(
@@ -114,7 +115,6 @@ class _BenchmarkSubmissionTransformer(_Transformer):
         self,
         submission_sample_jsonl_file_path: Path,
         submission_uri: URIRef,
-        submission_name: str,
     ) -> Generator[_Model, None, None]:
 
         with open(submission_sample_jsonl_file_path) as submission_sample_jsonl:
@@ -128,5 +128,5 @@ class _BenchmarkSubmissionTransformer(_Transformer):
                 uri=URIRef(f"{submission_uri}:sample:{sample['id']}"),
                 submission_uri=submission_uri,
                 value=sample["chosenAnswer"],
-                about=f"{submission_name}-{sample['id']}",
+                about=f"{self._submission_name}-{sample['id']}",
             )

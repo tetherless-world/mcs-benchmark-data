@@ -4,5 +4,6 @@ from dataclasses_json import LetterCase, dataclass_json
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass(frozen=True)
-class _BenchmarkFileNames:
-    metadata: str = "metadata.json"
+class AnswerData:
+    label: str
+    text: str

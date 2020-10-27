@@ -25,7 +25,7 @@ class KagnetCommonsenseQaSubmissionPipeline(_Pipeline):
             ),
             id=self.__ID,
             transformer=KagnetCommonsenseQaSubmissionTransformer(
-                pipeline_id=self.__ID, system="Kagnet", **kwds
+                pipeline_id=self.__ID, submission_name="kagnet", **kwds
             ),
             **kwds,
         )

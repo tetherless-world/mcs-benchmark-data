@@ -19,6 +19,6 @@ class BenchmarkExtractor(_Extractor):
     def extract(self, **kwds):
 
         return {
-            "extracted_path": self._extracted_data_dir_path,
+            "extracted_data_dir_path": self._extracted_data_dir_path,
             "file_names": self.__file_names,
         }

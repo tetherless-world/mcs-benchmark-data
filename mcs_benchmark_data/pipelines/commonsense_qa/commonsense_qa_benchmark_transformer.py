@@ -18,65 +18,62 @@ from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
 from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_file_names import (
     CommonsenseQaBenchmarkFileNames,
 )
+from mcs_benchmark_data.answer_data import AnswerData
+from mcs_benchmark_data.dataset_type import DatasetType
 
 
 class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
-    def transform(
-        self,
-        *,
-        extracted_path: Path,
-        file_names: CommonsenseQaBenchmarkFileNames,
-        **kwds,
-    ) -> Generator[_Model, None, None]:
-        yield from _BenchmarkTransformer._transform(
-            self, extracted_path=extracted_path, file_names=file_names, **kwds
-        )
-
     def _transform_benchmark_sample(
         self,
         *,
-        extracted_path: Path,
+        extracted_data_dir_path: Path,
         file_names: CommonsenseQaBenchmarkFileNames,
         dataset_type: str,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        sample_jsonl_file_path = extracted_path / getattr(
+        sample_jsonl_file_path = extracted_data_dir_path / getattr(
             file_names, dataset_type + "_samples"
         )
 
-        with open(sample_jsonl_file_path) as file:
+        with open(sample_jsonl_file_path) as all_samples:
 
-            all_samples = list(file)
+            for line in all_samples:
 
-        for line in all_samples:
+                sample = json.loads(line)
 
-            sample = json.loads(line)
+                sample_id = sample["id"]
 
-            correct_choice = None
+                benchmark_sample_uri = URIRef(f"{dataset_uri}:sample:{sample_id}")
 
-            if dataset_type != "test":
-                correct_choice = URIRef(
-                    f"{dataset_uri}:sample:{sample['id']}:correct_choice:{sample['answerKey']}"
+                correct_choice = None
+
+                if dataset_type != DatasetType.TEST.value:
+                    correct_choice = URIRef(
+                        f"{benchmark_sample_uri}:correct_choice:{sample['answerKey']}"
+                    )
+
+                yield BenchmarkQuestionType.multiple_choice(
+                    uri_base=self._uri_base,
+                    benchmark_sample_uri=URIRef(benchmark_sample_uri),
                 )
 
-            concept = [sample["question"]["question_concept"]]
+                yield from self._yield_sample_concept_context(
+                    dataset_uri=dataset_uri,
+                    sample_id=sample_id,
+                    concepts=[sample["question"]["question_concept"]],
+                    context=None,
+                    correct_choice=correct_choice,
+                )
 
-            question = sample["question"]["stem"]
-
-            answers = []
-
-            for item in sample["question"]["choices"]:
-                answer_tuple = (item["text"], item["label"])
-                answers.append(answer_tuple)
-
-            yield from self._yield_qa_models(
-                dataset_uri=dataset_uri,
-                sample_id=sample["id"],
-                concepts=concept,
-                context=None,
-                correct_choice=correct_choice,
-                question=question,
-                answers=answers,
-            )
+                yield from self._yield_qa_models(
+                    dataset_uri=dataset_uri,
+                    sample_id=sample_id,
+                    benchmark_sample_uri=benchmark_sample_uri,
+                    question=sample["question"]["stem"],
+                    answers=(
+                        AnswerData(label=item["label"], text=item["text"])
+                        for item in sample["question"]["choices"]
+                    ),
+                )

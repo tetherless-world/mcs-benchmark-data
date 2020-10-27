@@ -24,7 +24,7 @@ class RobertaCommonsenseQaSubmissionPipeline(_Pipeline):
             ),
             id=self.__ID,
             transformer=RobertaCommonsenseQaSubmissionTransformer(
-                pipeline_id=self.__ID, system="Roberta", **kwds
+                pipeline_id=self.__ID, submission_name="roberta", **kwds
             ),
             **kwds,
         )

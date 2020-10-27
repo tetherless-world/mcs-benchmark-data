@@ -15,18 +15,3 @@ class RobertaCommonsenseQaSubmissionTransformer(_BenchmarkSubmissionTransformer)
     """
     Class for transforming CommonsenseQA roberta sample.
     """
-
-    def transform(
-        self,
-        *,
-        extracted_path: Path,
-        file_names: RobertaCommonsenseQaSubmissionFileNames,
-        **kwds,
-    ) -> Generator[_Model, None, None]:
-
-        yield from self._transform(
-            extracted_path=extracted_path,
-            file_names=file_names,
-            submission_name="roberta",
-            **kwds,
-        )
