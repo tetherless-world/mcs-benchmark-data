@@ -26,7 +26,7 @@ class RdfFileLoader(_BufferingLoader):
         *,
         compress: bool = True,
         file_path: Optional[Path] = None,
-        format="json-ld",
+        format="ttl",
         **kwds,
     ):
         _BufferingLoader.__init__(self, **kwds)
