@@ -5,7 +5,7 @@ from typing import Tuple
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass(frozen=True)
-class BenchmarkBootstrap:
+class BenchmarkMetadata:
     """A model to parse data for a given benchmark"""
 
     name: str

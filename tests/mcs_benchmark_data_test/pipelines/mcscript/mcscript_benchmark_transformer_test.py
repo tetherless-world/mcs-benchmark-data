@@ -12,7 +12,7 @@ def test_extract_transform():
     models = tuple(
         MCScriptBenchmarkPipeline(
             file_names=MCScriptBenchmarkFileNames(
-                meta_data="metadata.json",
+                metadata="metadata.json",
                 dev_samples="dev-data.xml",
                 train_samples="train-data.xml",
                 test_samples="test-data.xml",

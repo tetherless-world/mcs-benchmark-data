@@ -15,7 +15,7 @@ from mcs_benchmark_data.pipelines.mcscript.mcscript_benchmark_file_names import 
 def test_extract_transform_load():
     MCScriptBenchmarkPipeline(
         file_names=MCScriptBenchmarkFileNames(
-            meta_data="metadata.json",
+            metadata="metadata.json",
             dev_samples="dev-data.xml",
             train_samples="train-data.xml",
             test_samples="test-data.xml",

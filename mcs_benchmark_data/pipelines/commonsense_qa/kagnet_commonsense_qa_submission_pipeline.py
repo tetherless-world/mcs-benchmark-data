@@ -1,7 +1,7 @@
 from mcs_benchmark_data._pipeline import _Pipeline
 
-from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submission_extractor import (
-    KagnetCommonsenseQaSubmissionExtractor,
+from mcs_benchmark_data.benchmark_extractor import (
+    BenchmarkExtractor,
 )
 from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submission_transformer import (
     KagnetCommonsenseQaSubmissionTransformer,
@@ -13,12 +13,12 @@ from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submissio
 
 
 class KagnetCommonsenseQaSubmissionPipeline(_Pipeline):
-    __ID = "CommonsenseQA"
+    __ID = "KagnetCommonsenseQA"
 
     def __init__(self, file_names: KagnetCommonsenseQaSubmissionFileNames, **kwds):
         _Pipeline.__init__(
             self,
-            extractor=KagnetCommonsenseQaSubmissionExtractor(
+            extractor=BenchmarkExtractor(
                 pipeline_id=self.__ID,
                 file_names=file_names,
                 **kwds,

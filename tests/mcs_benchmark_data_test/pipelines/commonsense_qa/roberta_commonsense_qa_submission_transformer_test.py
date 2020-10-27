@@ -11,7 +11,7 @@ def test_extract_transform():
     models = tuple(
         RobertaCommonsenseQaSubmissionPipeline(
             file_names=RobertaCommonsenseQaSubmissionFileNames(
-                meta_data="CommonsenseQA_dev_submissions.jsonl",
+                metadata="CommonsenseQA_dev_submissions.jsonl",
                 submission_file_name="dev_rand_split_roberta_submission.jsonl",
             )
         ).extract_transform()

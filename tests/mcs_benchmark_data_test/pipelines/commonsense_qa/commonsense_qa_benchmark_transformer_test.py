@@ -12,7 +12,7 @@ def test_extract_transform():
     models = tuple(
         CommonsenseQaBenchmarkPipeline(
             file_names=CommonsenseQaBenchmarkFileNames(
-                meta_data="metadata.json",
+                metadata="metadata.json",
                 train_samples="train_rand_split_small.jsonl",
                 dev_samples="dev_rand_split_small.jsonl",
                 test_samples="test_rand_split_no_answers_small.jsonl",

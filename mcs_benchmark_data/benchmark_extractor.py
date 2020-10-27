@@ -2,15 +2,15 @@ from mcs_benchmark_data._extractor import _Extractor
 
 from mcs_benchmark_data.path import DATA_DIR_PATH
 
-from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submission_file_names import (
-    KagnetCommonsenseQaSubmissionFileNames,
+from mcs_benchmark_data._benchmark_file_names import (
+    _BenchmarkFileNames,
 )
 
 
-class KagnetCommonsenseQaSubmissionExtractor(_Extractor):
+class BenchmarkExtractor(_Extractor):
     def __init__(
         self,
-        file_names: KagnetCommonsenseQaSubmissionFileNames,
+        file_names: _BenchmarkFileNames,
         **kwds,
     ):
         _Extractor.__init__(self, **kwds)

@@ -1,0 +1,24 @@
+{
+    "@context": "http://schema.org/",
+    "@id": "CycIC",
+    "@type": "Benchmark",
+    "name": "CycIC",
+    "abstract": "The main member of our team is a computer program: the Cyc symbolic AI system itself. Built over the past 35 years, largely by hand (about 4,000,000 person-hours, primarily Ph.D.’s), this ontology has about a million terms in its ontology (not including proper nouns), a knowledge base of 25 million general assertions and rules using that vocabulary written in higher order logic (e.g., able to fully represent nested modals), and a battery of over 1,000 inference engines covering the spectrum from very general to very stylized reasoners. Using this foundation, Cyc can perform a few reasoning steps to create a question/answer item, and generate an understandable English expression of the question and possible answers, that humans will almost certainly say “is just common sense.” This can be repeated to produce potentially astronomical numbers of questions and answers and plausible distractors. The half-dozen human members of the team -- the individuals who in effect asked Cyc to produce this particular question set -- include Ph.D. computational linguists, philosophers of language, logicians, and computer scientists.",
+    "authors": [
+        {
+            "name": "Cyc"
+        }
+    ],
+    "datasets": [
+        {
+            "@id": "CycIC/train",
+            "@type": "BenchmarkTrainingDataset",
+            "name": "CycIC training dataset"
+        },
+        {
+            "@id": "CycIC/dev",
+            "@type": "BenchmarkDevDataset",
+            "name": "CycIC dev dataset"
+        }
+    ]
+}

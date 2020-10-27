@@ -15,17 +15,17 @@ from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
-from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_file_names import (
-    CommonsenseQaBenchmarkFileNames,
+from mcs_benchmark_data.pipelines.cycic.cycic_benchmark_file_names import (
+    CycicBenchmarkFileNames,
 )
 
 
-class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
+class CycicBenchmarkTransformer(_BenchmarkTransformer):
     def transform(
         self,
         *,
         extracted_path: Path,
-        file_names: CommonsenseQaBenchmarkFileNames,
+        file_names: CycicBenchmarkFileNames,
         **kwds,
     ) -> Generator[_Model, None, None]:
         yield from _BenchmarkTransformer._transform(
@@ -36,45 +36,58 @@ class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
         self,
         *,
         extracted_path: Path,
-        file_names: CommonsenseQaBenchmarkFileNames,
+        file_names: CycicBenchmarkFileNames,
         dataset_type: str,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
+        if dataset_type != "test":
+            sample_labels_file_path = extracted_path / getattr(
+                file_names, dataset_type + "_labels"
+            )
+
+            with open(sample_labels_file_path) as labels_file:
+                all_labels = list(labels_file)
+
         sample_jsonl_file_path = extracted_path / getattr(
             file_names, dataset_type + "_samples"
         )
 
-        with open(sample_jsonl_file_path) as file:
+        with open(sample_jsonl_file_path) as sample_file:
+            all_samples = list(sample_file)
 
-            all_samples = list(file)
+        for i in range(len(all_samples)):
 
-        for line in all_samples:
+            sample = json.loads(all_samples[i])
 
-            sample = json.loads(line)
+            label_entry = json.loads(all_labels[i])
+
+            sample_id = f"{sample['run_id']}_{sample['guid']}"
 
             correct_choice = None
 
             if dataset_type != "test":
                 correct_choice = URIRef(
-                    f"{dataset_uri}:sample:{sample['id']}:correct_choice:{sample['answerKey']}"
+                    f"{dataset_uri}:sample:{sample_id}:correct_choice:{label_entry['correct_answer']}"
                 )
 
-            concept = [sample["question"]["question_concept"]]
+            question = sample["question"]
 
-            question = sample["question"]["stem"]
+            concepts = sample["categories"]
 
             answers = []
 
-            for item in sample["question"]["choices"]:
-                answer_tuple = (item["text"], item["label"])
-                answers.append(answer_tuple)
+            letters = ["A", "B", "C", "D", "E"]
+
+            for i in range(len(letters)):
+                answer = ("answer_option{i}", letters[i])
+                answers.append(answer)
 
             yield from self._yield_qa_models(
                 dataset_uri=dataset_uri,
-                sample_id=sample["id"],
-                concepts=concept,
+                sample_id=sample_id,
+                concepts=concepts,
                 context=None,
                 correct_choice=correct_choice,
                 question=question,

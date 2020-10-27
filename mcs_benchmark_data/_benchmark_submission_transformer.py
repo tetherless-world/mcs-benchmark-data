@@ -11,18 +11,19 @@ from mcs_benchmark_data.models.submission import Submission
 from mcs_benchmark_data.models.submission_sample import SubmissionSample
 from mcs_benchmark_data.models.test_score import TestScore
 from mcs_benchmark_data.models.dev_score import DevScore
+from mcs_benchmark_data._benchmark_file_names import _BenchmarkFileNames
 
 
 class _BenchmarkSubmissionTransformer(_Transformer):
 
     """
-    Abstract base class for benchmark transformers.
+    Abstract base class for benchmark submissions.
     See the transform method of _Transformer.
     """
 
     @property
     def _uri_base(self):
-        return f"benchmark:{self._pipeline_id}"
+        return f"benchmark:submission:{self._pipeline_id}"
 
     @property
     def _benchmark_score_classes(self):
@@ -31,16 +32,18 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     def _transform(
         self,
         *,
+        extracted_path: Path,
+        file_names: _BenchmarkFileNames,
         submission_name: str,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        submission_data_jsonl_file_path = kwds["extracted_path"] / getattr(
-            kwds["file_names"], "meta_data"
+        submission_data_jsonl_file_path = extracted_path / getattr(
+            file_names, "meta_data"
         )
 
-        submission_jsonl_file_path = kwds["extracted_path"] / getattr(
-            kwds["file_names"], "submission_file_name"
+        submission_jsonl_file_path = extracted_path / getattr(
+            file_names, "submission_file_name"
         )
 
         # Yield submissions
@@ -61,7 +64,9 @@ class _BenchmarkSubmissionTransformer(_Transformer):
         )
 
     def __transform_submission(
-        self, submission_data_jsonl_file_path: Path, submission_name: str
+        self,
+        submission_data_jsonl_file_path: Path,
+        submission_name: str,
     ) -> Generator[_Model, None, None]:
 
         with open(submission_data_jsonl_file_path) as submission_data_jsonl:

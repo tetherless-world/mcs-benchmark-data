@@ -9,5 +9,5 @@ from mcs_benchmark_data._benchmark_file_names import (
 
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass(frozen=True)
-class RobertaCommonsenseQaSubmissionFileNames(_BenchmarkFileNames):
-    submission_file_name: str = "dev_rand_split_roberta_submission.jsonl"
+class Roberta4CycicSubmissionFileNames(_BenchmarkFileNames):
+    submission_file_name: str = "CycIC_dev_cycic-transformers_submission.jsonl"
