@@ -47,9 +47,12 @@ class CycicBenchmarkTransformer(_BenchmarkTransformer):
 
         with open(sample_jsonl_file_path) as all_samples:
 
-            for i, sample in enumerate(all_samples):
+            for i, line in enumerate(all_samples):
 
-                sample = json.loads(sample)
+                if line == "\n":
+                    continue
+
+                sample = json.loads(line)
 
                 label_entry = json.loads(all_labels[i])
 

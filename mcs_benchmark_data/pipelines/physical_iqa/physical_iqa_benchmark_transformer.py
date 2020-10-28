@@ -53,6 +53,9 @@ class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
 
             for i, line in enumerate(all_samples):
 
+                if line == "\n":
+                    continue
+
                 sample = json.loads(line)
 
                 sample_id = sample["id"]

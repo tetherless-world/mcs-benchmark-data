@@ -40,6 +40,8 @@ class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
         with open(sample_jsonl_file_path) as all_samples:
 
             for line in all_samples:
+                if line == "\n":
+                    continue
 
                 sample = json.loads(line)
 
