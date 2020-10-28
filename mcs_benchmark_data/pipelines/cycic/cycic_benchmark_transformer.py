@@ -55,7 +55,7 @@ class CycicBenchmarkTransformer(_BenchmarkTransformer):
 
                 sample_id = f"{sample['run_id']}_{sample['guid']}"
 
-                benchmark_sample_uri_str = f"{dataset_uri}:sample:{sample_id}"
+                benchmark_sample_uri = URIRef(f"{dataset_uri}:sample:{sample_id}")
 
                 correct_choice = None
 
@@ -66,14 +66,14 @@ class CycicBenchmarkTransformer(_BenchmarkTransformer):
 
                 yield BenchmarkQuestionType.multiple_choice(
                     uri_base=self._uri_base,
-                    benchmark_sample_uri=URIRef(benchmark_sample_uri_str),
+                    benchmark_sample_uri=URIRef(benchmark_sample_uri),
                 )
 
                 letters = ["A", "B", "C", "D", "E"]
 
                 answer_num = 0
 
-                while f"answer_option{i}" in sample:
+                while f"answer_option{answer_num}" in sample:
                     answer_num += 1
 
                 yield from self._yield_sample_concept_context(
