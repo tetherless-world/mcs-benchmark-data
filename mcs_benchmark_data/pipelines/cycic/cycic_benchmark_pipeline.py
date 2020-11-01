@@ -6,15 +6,15 @@ from mcs_benchmark_data.benchmark_extractor import (
 from mcs_benchmark_data.pipelines.cycic.cycic_benchmark_transformer import (
     CycicBenchmarkTransformer,
 )
-from mcs_benchmark_data.pipelines.cycic.cycic_benchmark_file_names import (
-    CycicBenchmarkFileNames,
+from mcs_benchmark_data.infile_labels_benchmark_file_names import (
+    InfileLabelsBenchmarkFileNames,
 )
 
 
 class CycicBenchmarkPipeline(_Pipeline):
     ID = "CycIC"
 
-    def __init__(self, file_names: CycicBenchmarkFileNames, **kwds):
+    def __init__(self, file_names: InfileLabelsBenchmarkFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=BenchmarkExtractor(

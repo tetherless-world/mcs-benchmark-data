@@ -39,8 +39,10 @@ class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        sample_xml_file_path = extracted_data_dir_path / getattr(
-            file_names, dataset_type + "_samples"
+        sample_xml_file_path = (
+            extracted_data_dir_path
+            / "dataset"
+            / getattr(file_names, dataset_type + "_samples")
         )
         with open(sample_xml_file_path) as sample_file:
             all_samples = xmltodict.parse(sample_file.read())

@@ -1,0 +1,53 @@
+{
+    "@context": "http://schema.org/",
+    "@id": "ANLI",
+    "@type": "Benchmark",
+    "name": "aNLI",
+    "abstract": "Abductive Natural Language Inference (aNLI) is a new commonsense benchmark dataset designed to test an AI system’s capability to apply abductive reasoning and common sense to form possible explanations for a given set of observations. Formulated as a binary-classification task, the goal is to pick the most plausible explanatory hypothesis given two observations from narrative contexts.",
+    "authors": [
+        {
+            "name": "CHandra Bhagavatula"
+        },
+        {
+            "name": "Ronan Le Bras"
+        },
+        {
+            "name": "Chaitanya Malaviya"
+        },
+        {
+            "name": "Keisuke Sakaguchi"
+        },
+        {
+            "name": "Ari Holtzman"
+        },
+        {
+            "name": "Hannah Rashkin"
+        },
+        {
+            "name": "Doug Downey"
+        },
+        {
+            "name": "Scott Wen-tau Yih"
+        },
+        {
+            "name": "Yejin Choi"
+        }
+    ],
+    "datasets": [
+        {
+            "@id": "ANLI/train",
+            "@type": "BenchmarkTrainingDataset",
+            "name": "aNLI training dataset"
+        },
+        {
+            "@id": "ANLI/dev",
+            "@type": "BenchmarkDevDataset",
+            "name": "aNLI dev dataset"
+        },
+        {
+            "@id": "ANLI/test",
+            "@type": "BenchmarkTestDataset",
+            "name": "aNLI test dataset"
+        }
+    ]
+}

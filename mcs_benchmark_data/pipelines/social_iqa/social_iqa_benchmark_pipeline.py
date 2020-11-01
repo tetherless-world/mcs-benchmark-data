@@ -6,15 +6,15 @@ from mcs_benchmark_data.benchmark_extractor import (
 from mcs_benchmark_data.pipelines.social_iqa.social_iqa_benchmark_transformer import (
     SocialIQaBenchmarkTransformer,
 )
-from mcs_benchmark_data.pipelines.social_iqa.social_iqa_benchmark_file_names import (
-    SocialIQaBenchmarkFileNames,
+from mcs_benchmark_data.infile_labels_benchmark_file_names import (
+    InfileLabelsBenchmarkFileNames,
 )
 
 
 class SocialIQaBenchmarkPipeline(_Pipeline):
     ID = "SocialIQA"
 
-    def __init__(self, file_names: SocialIQaBenchmarkFileNames, **kwds):
+    def __init__(self, file_names: InfileLabelsBenchmarkFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=BenchmarkExtractor(

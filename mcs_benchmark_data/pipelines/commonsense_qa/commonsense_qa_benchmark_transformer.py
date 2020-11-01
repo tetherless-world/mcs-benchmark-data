@@ -33,8 +33,10 @@ class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        sample_jsonl_file_path = extracted_data_dir_path / getattr(
-            file_names, dataset_type + "_samples"
+        sample_jsonl_file_path = (
+            extracted_data_dir_path
+            / "dataset"
+            / getattr(file_names, dataset_type + "_samples")
         )
 
         with open(sample_jsonl_file_path) as all_samples:

@@ -6,15 +6,15 @@ from mcs_benchmark_data.benchmark_extractor import (
 from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_transformer import (
     CommonsenseQaBenchmarkTransformer,
 )
-from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_file_names import (
-    CommonsenseQaBenchmarkFileNames,
+from mcs_benchmark_data.inline_labels_benchmark_file_names import (
+    InlineLabelsBenchmarkFileNames,
 )
 
 
 class CommonsenseQaBenchmarkPipeline(_Pipeline):
     ID = "CommonsenseQA"
 
-    def __init__(self, file_names: CommonsenseQaBenchmarkFileNames, **kwds):
+    def __init__(self, file_names: InlineLabelsBenchmarkFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=BenchmarkExtractor(

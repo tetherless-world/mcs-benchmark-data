@@ -28,7 +28,7 @@ class _Loader(_PipelinePhase):
         A loader does not have to use this directory. It can load data into an external database, for example.
         """
 
-        loaded_data_dir_path = DATA_DIR_PATH / "loaded" / self._pipeline_id
+        loaded_data_dir_path = DATA_DIR_PATH / self._pipeline_id / "loaded"
         loaded_data_dir_path = loaded_data_dir_path.absolute()
         loaded_data_dir_path.mkdir(parents=True, exist_ok=True)
         return loaded_data_dir_path

@@ -1,7 +1,7 @@
 from mcs_benchmark_data._pipeline import _Pipeline
 
-from mcs_benchmark_data.benchmark_extractor import (
-    BenchmarkExtractor,
+from mcs_benchmark_data.benchmark_submission_extractor import (
+    BenchmarkSubmissionExtractor,
 )
 from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_transformer import (
     RobertaCommonsenseQaSubmissionTransformer,
@@ -17,7 +17,7 @@ class RobertaCommonsenseQaSubmissionPipeline(_Pipeline):
     def __init__(self, file_names: RobertaCommonsenseQaSubmissionFileNames, **kwds):
         _Pipeline.__init__(
             self,
-            extractor=BenchmarkExtractor(
+            extractor=BenchmarkSubmissionExtractor(
                 pipeline_id=self.__ID,
                 file_names=file_names,
                 **kwds,

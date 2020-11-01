@@ -6,15 +6,15 @@ from mcs_benchmark_data.benchmark_extractor import (
 from mcs_benchmark_data.pipelines.mcscript.mcscript_benchmark_transformer import (
     MCScriptBenchmarkTransformer,
 )
-from mcs_benchmark_data.pipelines.mcscript.mcscript_benchmark_file_names import (
-    MCScriptBenchmarkFileNames,
+from mcs_benchmark_data.inline_labels_benchmark_file_names import (
+    InlineLabelsBenchmarkFileNames,
 )
 
 
 class MCScriptBenchmarkPipeline(_Pipeline):
     ID = "MCScript"
 
-    def __init__(self, file_names: MCScriptBenchmarkFileNames, **kwds):
+    def __init__(self, file_names: InlineLabelsBenchmarkFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=BenchmarkExtractor(

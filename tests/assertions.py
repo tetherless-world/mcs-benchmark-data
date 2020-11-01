@@ -5,7 +5,7 @@ import bz2
 
 def assert_valid_rdf_loaded(pipeline_id: str):
 
-    loaded_data_dir_path = DATA_DIR_PATH / "loaded" / pipeline_id
+    loaded_data_dir_path = DATA_DIR_PATH / pipeline_id / "loaded"
     assert loaded_data_dir_path.is_dir()
     rdf_bz2_file_path = loaded_data_dir_path / (pipeline_id + ".ttl.bz2")
     assert rdf_bz2_file_path.is_file()

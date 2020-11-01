@@ -6,5 +6,5 @@ from mcs_benchmark_data._benchmark_submission_transformer import (
 class Roberta4CycicSubmissionTransformer(_BenchmarkSubmissionTransformer):
 
     """
-    Class for transforming CommonsenseQA kagnet sample.
+    Class for transforming Cycic Roberta4 sample.
     """

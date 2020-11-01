@@ -19,6 +19,8 @@ from mcs_benchmark_data._benchmark_file_names import _BenchmarkFileNames
 from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
 from mcs_benchmark_data.models.benchmark_context import BenchmarkContext
 from mcs_benchmark_data.models.benchmark_goal import BenchmarkGoal
+from mcs_benchmark_data.models.benchmark_solution import BenchmarkSolution
+from mcs_benchmark_data.models.benchmark_observation import BenchmarkObservation
 from mcs_benchmark_data.models.benchmark_hypothesis import BenchmarkHypothesis
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_answer import BenchmarkAnswer
@@ -153,7 +155,7 @@ class _BenchmarkTransformer(_Transformer):
         sample_id: str,
         benchmark_sample_uri: URIRef,
         goal: str,
-        hypotheses: List[str],
+        solutions: Tuple[str, str],
         **kwds,
     ) -> Generator[_Model, None, None]:
 
@@ -162,6 +164,32 @@ class _BenchmarkTransformer(_Transformer):
             benchmark_sample_uri=benchmark_sample_uri,
             text=goal,
         )
+
+        for i, solution in enumerate(solutions):
+            yield BenchmarkSolution(
+                uri=URIRef(f"{benchmark_sample_uri}:solution:{i+1}"),
+                benchmark_sample_uri=benchmark_sample_uri,
+                position=i + 1,
+                text=solution,
+            )
+
+    def _yield_obs_models(
+        self,
+        *,
+        dataset_uri: URIRef,
+        sample_id: str,
+        benchmark_sample_uri: URIRef,
+        observations: Tuple[str, str],
+        hypotheses: Tuple[str, str],
+        **kwds,
+    ) -> Generator[_Model, None, None]:
+
+        for i, observation in enumerate(observations):
+            yield BenchmarkObservation(
+                uri=URIRef(f"{benchmark_sample_uri}:observation:{i+1}"),
+                benchmark_sample_uri=benchmark_sample_uri,
+                text=observation,
+            )
 
         for i, hypothesis in enumerate(hypotheses):
             yield BenchmarkHypothesis(
@@ -182,7 +210,6 @@ class _BenchmarkTransformer(_Transformer):
         **kwds,
     ) -> Generator[_Model, None, None]:
         """
-        Transform previously-extracted data into models.
-        :param kwds: merged dictionary of initial extract kwds and the result of extract
+        Transform previously-extracted data into models
         :return: generator of models
         """

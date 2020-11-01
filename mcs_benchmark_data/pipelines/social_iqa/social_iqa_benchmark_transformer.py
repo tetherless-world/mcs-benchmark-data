@@ -36,15 +36,19 @@ class SocialIQaBenchmarkTransformer(_BenchmarkTransformer):
         all_labels = None
 
         if dataset_type != DatasetType.TEST.value:
-            sample_labels_file_path = extracted_data_dir_path / getattr(
-                file_names, dataset_type + "_labels"
+            sample_labels_file_path = (
+                extracted_data_dir_path
+                / "dataset"
+                / getattr(file_names, dataset_type + "_labels")
             )
 
             with open(sample_labels_file_path) as labels_file:
                 all_labels = list(labels_file)
 
-        sample_jsonl_file_path = extracted_data_dir_path / getattr(
-            file_names, dataset_type + "_samples"
+        sample_jsonl_file_path = (
+            extracted_data_dir_path
+            / "dataset"
+            / getattr(file_names, dataset_type + "_samples")
         )
 
         with open(sample_jsonl_file_path) as all_samples:

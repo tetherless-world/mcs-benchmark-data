@@ -12,7 +12,7 @@ def test_extract_transform():
         KagnetCommonsenseQaSubmissionPipeline(
             file_names=KagnetCommonsenseQaSubmissionFileNames(
                 metadata="CommonsenseQA_dev_submissions.jsonl",
-                submission="dev_rand_split_roberta_submission.jsonl",
+                submission="dev_rand_split_kagnet_submission.jsonl",
             )
         ).extract_transform()
     )
