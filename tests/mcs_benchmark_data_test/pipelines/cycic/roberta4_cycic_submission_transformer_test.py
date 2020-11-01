@@ -21,7 +21,7 @@ def test_extract_transform():
     submissions = [model for model in models if not isinstance(model, SubmissionSample)]
     assert submissions
     submission = submissions[0]
-    assert submission.name == "cycic-roberta4"
+    assert submission.name == "CycIC-roberta4"
 
     samples = [model for model in models if isinstance(model, SubmissionSample)]
     assert len(samples) > 3
