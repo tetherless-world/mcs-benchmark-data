@@ -6,6 +6,8 @@ from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submissio
     KagnetCommonsenseQaSubmissionFileNames,
 )
 
+from tests.assertions import assert_submission_models
+
 
 def test_extract_transform():
     models = tuple(
@@ -16,14 +18,8 @@ def test_extract_transform():
             )
         ).extract_transform()
     )
-    assert models
-    print(models[1200])
-
-    submissions = [model for model in models if not isinstance(model, SubmissionSample)]
-    assert submissions
-    submission = submissions[0]
-    assert submission.name == "CommonsenseQA-kagnet"
-
-    samples = [model for model in models if isinstance(model, SubmissionSample)]
-    assert len(samples) > 3
-    assert all(sample.submission_uri == submission.uri for sample in samples)
+    assert_submission_models(
+        KagnetCommonsenseQaSubmissionPipeline.ID,
+        KagnetCommonsenseQaSubmissionPipeline.SUBMISSION_NAME,
+        models,
+    )

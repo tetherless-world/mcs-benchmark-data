@@ -13,19 +13,20 @@ from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submissio
 
 
 class KagnetCommonsenseQaSubmissionPipeline(_Pipeline):
-    __ID = "CommonsenseQA"
+    ID = "CommonsenseQA"
+    SUBMISSION_NAME = "kagnet"
 
     def __init__(self, file_names: KagnetCommonsenseQaSubmissionFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=BenchmarkSubmissionExtractor(
-                pipeline_id=self.__ID,
+                pipeline_id=self.ID,
                 file_names=file_names,
                 **kwds,
             ),
-            id=self.__ID,
+            id=self.ID,
             transformer=KagnetCommonsenseQaSubmissionTransformer(
-                pipeline_id=self.__ID, submission_name="kagnet", **kwds
+                pipeline_id=self.ID, submission_name=self.SUBMISSION_NAME, **kwds
             ),
             **kwds,
         )

@@ -13,19 +13,20 @@ from mcs_benchmark_data.pipelines.mcscript.trian_mcscript_submission_file_names 
 
 
 class TrianMCScriptSubmissionPipeline(_Pipeline):
-    __ID = "MCScript"
+    ID = "MCScript"
+    SUBMISSION_NAME = "trian"
 
     def __init__(self, file_names: TrianMCScriptSubmissionFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=BenchmarkSubmissionExtractor(
-                pipeline_id=self.__ID,
+                pipeline_id=self.ID,
                 file_names=file_names,
                 **kwds,
             ),
-            id=self.__ID,
+            id=self.ID,
             transformer=TrianMCScriptSubmissionTransformer(
-                pipeline_id=self.__ID, submission_name="trian", **kwds
+                pipeline_id=self.ID, submission_name=self.SUBMISSION_NAME, **kwds
             ),
             **kwds,
         )

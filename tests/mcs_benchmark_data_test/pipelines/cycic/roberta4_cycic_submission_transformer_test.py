@@ -6,6 +6,8 @@ from mcs_benchmark_data.pipelines.cycic.roberta4_cycic_submission_file_names imp
     Roberta4CycicSubmissionFileNames,
 )
 
+from tests.assertions import assert_submission_models
+
 
 def test_extract_transform():
     models = tuple(
@@ -16,13 +18,8 @@ def test_extract_transform():
             )
         ).extract_transform()
     )
-    assert models
-
-    submissions = [model for model in models if not isinstance(model, SubmissionSample)]
-    assert submissions
-    submission = submissions[0]
-    assert submission.name == "CycIC-roberta4"
-
-    samples = [model for model in models if isinstance(model, SubmissionSample)]
-    assert len(samples) > 3
-    assert all(sample.submission_uri == submission.uri for sample in samples)
+    assert_submission_models(
+        Roberta4CycicSubmissionPipeline.ID,
+        Roberta4CycicSubmissionPipeline.SUBMISSION_NAME,
+        models,
+    )
