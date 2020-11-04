@@ -45,7 +45,7 @@ class AnliBenchmarkTransformer(_BenchmarkTransformer):
 
         sample_jsonl_file_path = (
             extracted_data_dir_path
-            / "dataset"
+            / "datasets"
             / getattr(file_names, dataset_type + "_samples")
         )
 
