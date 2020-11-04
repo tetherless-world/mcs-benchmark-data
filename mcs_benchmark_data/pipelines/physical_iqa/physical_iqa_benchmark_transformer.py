@@ -19,8 +19,8 @@ from mcs_benchmark_data.models.benchmark_dev_dataset import BenchmarkDevDataset
 from mcs_benchmark_data.models.benchmark_goal import BenchmarkGoal
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
-from mcs_benchmark_data.pipelines.physical_iqa.physical_iqa_benchmark_file_names import (
-    PhysicalIQaBenchmarkFileNames,
+from mcs_benchmark_data.infile_labels_benchmark_file_names import (
+    InfileLabelsBenchmarkFileNames,
 )
 from mcs_benchmark_data.dataset_type import DatasetType
 
@@ -29,8 +29,8 @@ class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
     def _transform_benchmark_sample(
         self,
         extracted_data_dir_path: Path,
-        file_names: PhysicalIQaBenchmarkFileNames,
-        dataset_type: str,
+        file_names: InfileLabelsBenchmarkFileNames,
+        dataset_type: DatasetType,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
@@ -40,7 +40,7 @@ class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
         if dataset_type != DatasetType.TEST.value:
             sample_labels_file_path = (
                 extracted_data_dir_path
-                / "dataset"
+                / "datasets"
                 / getattr(file_names, dataset_type + "_labels")
             )
 
@@ -49,7 +49,7 @@ class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
 
         sample_jsonl_file_path = (
             extracted_data_dir_path
-            / "dataset"
+            / "datasets"
             / getattr(file_names, dataset_type + "_samples")
         )
 

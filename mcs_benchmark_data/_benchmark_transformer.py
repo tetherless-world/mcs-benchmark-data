@@ -173,7 +173,7 @@ class _BenchmarkTransformer(_Transformer):
                 text=solution,
             )
 
-    def _yield_obs_models(
+    def _yield_observation_models(
         self,
         *,
         dataset_uri: URIRef,

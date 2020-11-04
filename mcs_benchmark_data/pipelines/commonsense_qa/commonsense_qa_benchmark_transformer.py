@@ -15,8 +15,8 @@ from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
-from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_file_names import (
-    CommonsenseQaBenchmarkFileNames,
+from mcs_benchmark_data.inline_labels_benchmark_file_names import (
+    InlineLabelsBenchmarkFileNames,
 )
 from mcs_benchmark_data.answer_data import AnswerData
 from mcs_benchmark_data.dataset_type import DatasetType
@@ -27,22 +27,22 @@ class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
         self,
         *,
         extracted_data_dir_path: Path,
-        file_names: CommonsenseQaBenchmarkFileNames,
-        dataset_type: str,
+        file_names: InlineLabelsBenchmarkFileNames,
+        dataset_type: DatasetType,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
         sample_jsonl_file_path = (
             extracted_data_dir_path
-            / "dataset"
+            / "datasets"
             / getattr(file_names, dataset_type + "_samples")
         )
 
         with open(sample_jsonl_file_path) as all_samples:
 
             for line in all_samples:
-                if line == "\n":
+                if not line.strip():
                     continue
 
                 sample = json.loads(line)

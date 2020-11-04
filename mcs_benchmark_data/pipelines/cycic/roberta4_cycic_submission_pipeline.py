@@ -13,20 +13,22 @@ from mcs_benchmark_data.pipelines.cycic.roberta4_cycic_submission_file_names imp
 
 
 class Roberta4CycicSubmissionPipeline(_Pipeline):
-    ID = "CycIC"
-    SUBMISSION_NAME = "roberta4"
+    BENCHMARK_ID = "CycIC"
+    SUBMISSION_ID = "roberta4"
 
     def __init__(self, file_names: Roberta4CycicSubmissionFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=BenchmarkSubmissionExtractor(
-                pipeline_id=self.ID,
+                pipeline_id=self.BENCHMARK_ID,
                 file_names=file_names,
                 **kwds,
             ),
-            id=self.ID,
+            id=self.BENCHMARK_ID,
             transformer=Roberta4CycicSubmissionTransformer(
-                pipeline_id=self.ID, submission_name=self.SUBMISSION_NAME, **kwds
+                pipeline_id=self.BENCHMARK_ID,
+                submission_id=self.SUBMISSION_ID,
+                **kwds,
             ),
             **kwds,
         )

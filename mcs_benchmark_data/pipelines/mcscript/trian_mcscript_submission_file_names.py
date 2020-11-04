@@ -9,4 +9,4 @@ from mcs_benchmark_data._benchmark_file_names import (
 @dataclass_json(letter_case=LetterCase.CAMEL)
 @dataclass(frozen=True)
 class TrianMCScriptSubmissionFileNames(_BenchmarkFileNames):
-    submission: str = "trian_dev_submission.jsonl"
+    submission: str = "trian_dev_submission.txt"

@@ -21,8 +21,8 @@ from mcs_benchmark_data.models.benchmark_dev_dataset import BenchmarkDevDataset
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
-from mcs_benchmark_data.pipelines.mcscript.mcscript_benchmark_file_names import (
-    MCScriptBenchmarkFileNames,
+from mcs_benchmark_data.inline_labels_benchmark_file_names import (
+    InlineLabelsBenchmarkFileNames,
 )
 from mcs_benchmark_data.dataset_type import DatasetType
 from mcs_benchmark_data.answer_data import AnswerData
@@ -33,15 +33,15 @@ class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
         self,
         *,
         extracted_data_dir_path: Path,
-        file_names: MCScriptBenchmarkFileNames,
-        dataset_type: str,
+        file_names: InlineLabelsBenchmarkFileNames,
+        dataset_type: DatasetType,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
         sample_xml_file_path = (
             extracted_data_dir_path
-            / "dataset"
+            / "datasets"
             / getattr(file_names, dataset_type + "_samples")
         )
         with open(sample_xml_file_path) as sample_file:

@@ -15,11 +15,11 @@ from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
-from mcs_benchmark_data.pipelines.anli.anli_benchmark_file_names import (
-    AnliBenchmarkFileNames,
-)
 from mcs_benchmark_data.answer_data import AnswerData
 from mcs_benchmark_data.dataset_type import DatasetType
+from mcs_benchmark_data.infile_labels_benchmark_file_names import (
+    InfileLabelsBenchmarkFileNames,
+)
 
 
 class AnliBenchmarkTransformer(_BenchmarkTransformer):
@@ -27,8 +27,8 @@ class AnliBenchmarkTransformer(_BenchmarkTransformer):
         self,
         *,
         extracted_data_dir_path: Path,
-        file_names: AnliBenchmarkFileNames,
-        dataset_type: str,
+        file_names: InfileLabelsBenchmarkFileNames,
+        dataset_type: DatasetType,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
@@ -36,7 +36,7 @@ class AnliBenchmarkTransformer(_BenchmarkTransformer):
         if dataset_type != DatasetType.TEST.value:
             sample_labels_file_path = (
                 extracted_data_dir_path
-                / "dataset"
+                / "datasets"
                 / getattr(file_names, dataset_type + "_labels")
             )
 
@@ -64,7 +64,7 @@ class AnliBenchmarkTransformer(_BenchmarkTransformer):
 
                 correct_choice = None
 
-                if dataset_type != "test":
+                if dataset_type != DatasetType.TEST.value:
                     correct_choice = URIRef(
                         f"{dataset_uri}:sample:{sample_id}:correct_choice:{all_labels[i]}"
                     )
@@ -82,7 +82,7 @@ class AnliBenchmarkTransformer(_BenchmarkTransformer):
                     correct_choice=correct_choice,
                 )
 
-                yield from self._yield_obs_models(
+                yield from self._yield_observation_models(
                     dataset_uri=dataset_uri,
                     sample_id=sample_id,
                     benchmark_sample_uri=benchmark_sample_uri,

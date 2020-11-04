@@ -12,20 +12,22 @@ from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submissi
 
 
 class RobertaCommonsenseQaSubmissionPipeline(_Pipeline):
-    ID = "CommonsenseQA"
-    SUBMISSION_NAME = "roberta"
+    BENCHMARK_ID = "CommonsenseQA"
+    SUBMISSION_ID = "roberta"
 
     def __init__(self, file_names: RobertaCommonsenseQaSubmissionFileNames, **kwds):
         _Pipeline.__init__(
             self,
             extractor=BenchmarkSubmissionExtractor(
-                pipeline_id=self.ID,
+                pipeline_id=self.BENCHMARK_ID,
                 file_names=file_names,
                 **kwds,
             ),
-            id=self.ID,
+            id=self.BENCHMARK_ID,
             transformer=RobertaCommonsenseQaSubmissionTransformer(
-                pipeline_id=self.ID, submission_name=self.SUBMISSION_NAME, **kwds
+                pipeline_id=self.BENCHMARK_ID,
+                submission_id=self.SUBMISSION_ID,
+                **kwds,
             ),
             **kwds,
         )

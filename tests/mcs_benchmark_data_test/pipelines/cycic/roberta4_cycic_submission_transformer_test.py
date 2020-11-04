@@ -19,7 +19,7 @@ def test_extract_transform():
         ).extract_transform()
     )
     assert_submission_models(
-        Roberta4CycicSubmissionPipeline.ID,
-        Roberta4CycicSubmissionPipeline.SUBMISSION_NAME,
-        models,
+        benchmark_id=Roberta4CycicSubmissionPipeline.BENCHMARK_ID,
+        submission_id=Roberta4CycicSubmissionPipeline.SUBMISSION_ID,
+        models=models,
     )

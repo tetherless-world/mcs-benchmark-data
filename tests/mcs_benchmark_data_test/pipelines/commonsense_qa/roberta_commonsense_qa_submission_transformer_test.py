@@ -19,7 +19,7 @@ def test_extract_transform():
         ).extract_transform()
     )
     assert_submission_models(
-        RobertaCommonsenseQaSubmissionPipeline.ID,
-        RobertaCommonsenseQaSubmissionPipeline.SUBMISSION_NAME,
-        models,
+        benchmark_id=RobertaCommonsenseQaSubmissionPipeline.BENCHMARK_ID,
+        submission_id=RobertaCommonsenseQaSubmissionPipeline.SUBMISSION_ID,
+        models=models,
     )

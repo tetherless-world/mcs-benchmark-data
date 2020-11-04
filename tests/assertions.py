@@ -18,15 +18,15 @@ def assert_valid_rdf_loaded(pipeline_id: str):
             new_graph.parse(source=rdf_file, format="ttl")
 
 
-def assert_submission_models(pipeline_id: str, submission_id: str, models):
+def assert_submission_models(*, benchmark_id: str, submission_id: str, models):
     assert models
 
     submissions = [model for model in models if not isinstance(model, SubmissionSample)]
     assert submissions
     submission = submissions[0]
-    print(f"{pipeline_id}-{submission_id}")
+    print(f"{benchmark_id}-{submission_id}")
     print(submission.name)
-    assert submission.name == f"{pipeline_id}-{submission_id}"
+    assert submission.name == f"{benchmark_id}-{submission_id}"
 
     samples = [model for model in models if isinstance(model, SubmissionSample)]
     assert len(samples) > 3

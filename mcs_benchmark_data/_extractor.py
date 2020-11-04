@@ -50,7 +50,6 @@ class _Extractor(_PipelinePhase):
         The directory is created on demand when this method is called.
         Paths into this directory can be passed to the transformer via the kwds return from extract.
         """
-
         extracted_data_dir_path = DATA_DIR_PATH / self._pipeline_id
         extracted_data_dir_path = extracted_data_dir_path.absolute()
         extracted_data_dir_path.mkdir(parents=True, exist_ok=True)

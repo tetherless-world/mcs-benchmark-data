@@ -14,12 +14,13 @@ def test_extract_transform():
         TrianMCScriptSubmissionPipeline(
             file_names=TrianMCScriptSubmissionFileNames(
                 metadata="MCScript_dev_submissions.jsonl",
-                submission="trian_dev_submission.jsonl",
+                submission="trian_dev_submission.txt",
             )
         ).extract_transform()
     )
+
     assert_submission_models(
-        TrianMCScriptSubmissionPipeline.ID,
-        TrianMCScriptSubmissionPipeline.SUBMISSION_NAME,
-        models,
+        benchmark_id=TrianMCScriptSubmissionPipeline.BENCHMARK_ID,
+        submission_id=TrianMCScriptSubmissionPipeline.SUBMISSION_ID,
+        models=models,
     )

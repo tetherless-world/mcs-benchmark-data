@@ -19,7 +19,7 @@ def test_extract_transform():
         ).extract_transform()
     )
     assert_submission_models(
-        KagnetCommonsenseQaSubmissionPipeline.ID,
-        KagnetCommonsenseQaSubmissionPipeline.SUBMISSION_NAME,
-        models,
+        benchmark_id=KagnetCommonsenseQaSubmissionPipeline.BENCHMARK_ID,
+        submission_id=KagnetCommonsenseQaSubmissionPipeline.SUBMISSION_ID,
+        models=models,
     )
