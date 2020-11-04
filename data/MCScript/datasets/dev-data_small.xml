@@ -1,0 +1,102 @@
+<?xml version="1.0" ?>
+<!DOCTYPE data SYSTEM "MCScript.dtd">
+<data>
+  <instance id="0" scenario="heating food on kitchen gas">
+    <text>This past weekend, my family made so much food that there was still plenty of it going into the week. Knowing this, we chose not to make any new food, because we could still eat the leftover food from the weekend. All we would need to do was warm it up on the stove top. The stove is a gas stove, which produces a flame that, in my opinion, cooks food much better than an electric stove. On Monday after getting home from work, rather than making a new meal, my mom took some of the food that we had saved from the weekend and put it into a pan, and put that pan on the stove. She turned the gas on until the burner ignited, and left the heat on until she felt that the food was warm enough. When she ate it, she swore it was as good as it was when it was freshly made.</text>
+    <questions>
+      <question id="0" text="Where were they heating the food?" type="text">
+        <answer correct="False" id="0" text="On an electric stove."/>
+        <answer correct="True" id="1" text="On the stove/home"/>
+      </question>
+      <question id="1" text="How many people were making the food?" type="text">
+        <answer correct="True" id="0" text="Just one."/>
+        <answer correct="False" id="1" text="About 5."/>
+      </question>
+      <question id="2" text="Was it leftover from home or takeout?" type="text">
+        <answer correct="False" id="0" text="Takeout"/>
+        <answer correct="True" id="1" text="From home"/>
+      </question>
+      <question id="3" text="What is dangerous about this?" type="commonsense">
+        <answer correct="True" id="0" text="It creates a flame to cook with and if you aren't careful, it could start a fire in your home."/>
+        <answer correct="False" id="1" text="nothing"/>
+      </question>
+      <question id="4" text="Is it hard using a gas stove?" type="commonsense">
+        <answer correct="False" id="0" text="Yes it is."/>
+        <answer correct="True" id="1" text="No."/>
+      </question>
+      <question id="5" text="How did they like the food?" type="text">
+        <answer correct="False" id="0" text="hated it"/>
+        <answer correct="True" id="1" text="They loved it."/>
+      </question>
+      <question id="6" text="Why do you need to have a flame to cook?" type="commonsense">
+        <answer correct="False" id="0" text="to burn it up"/>
+        <answer correct="True" id="1" text="to have the heat"/>
+      </question>
+      <question id="7" text="Were they heating leftovers?" type="text">
+        <answer correct="True" id="0" text="Yes they were reheating leftovers."/>
+        <answer correct="False" id="1" text="No,it was fresh."/>
+      </question>
+      <question id="8" text="Who was cooking in the kitchen?" type="text">
+        <answer correct="False" id="0" text="Friend"/>
+        <answer correct="True" id="1" text="Mother."/>
+      </question>
+      <question id="9" text="Who is making the food?" type="text">
+        <answer correct="True" id="0" text="The narrator's mother."/>
+        <answer correct="False" id="1" text="My father"/>
+      </question>
+      <question id="10" text="What type of food were they cooking?" type="text">
+        <answer correct="True" id="0" text="Leftovers"/>
+        <answer correct="False" id="1" text="Frozen dinner"/>
+      </question>
+      <question id="11" text="How did the food taste?" type="text">
+        <answer correct="False" id="0" text="Terrible"/>
+        <answer correct="True" id="1" text="Delicious."/>
+      </question>
+    </questions>
+  </instance>
+  <instance id="1" scenario="borrowing a book from the library">
+    <text>The other day , I finished reading the fourth book of the Game of Thrones Series . With the new season about to start on HBO , I wanted to get ahead of the show and continue reading the books in the series -- but I did not want to pay for the next book . Remembering that I had a library card somewhere in my desk at home , I went home and found it . I went to the library and after browsing the fiction section , I finally found the fifth book in the series and brought it to the check out desk of the library . I handed over my information and library card and checked out the book , getting two weeks to read it for free . I 'm now a quarter of the way through the book and enjoy every page of it while loving the fact that my taxes paid for me to read this and I had to pay no extra money . </text>
+    <questions>
+      <question id="0" text="Have they read anything else by that book's author?" type="text">
+        <answer correct="False" id="0" text="no"/>
+        <answer correct="True" id="1" text="Yes, the first 4 Game of Throne books"/>
+      </question>
+      <question id="1" text="Did they have outstanding fines on their library card?" type="commonsense">
+        <answer correct="False" id="0" text="yes, five dollars"/>
+        <answer correct="True" id="1" text="no because they didn't pay any money when checking out"/>
+      </question>
+      <question id="2" text="Why did they borrow a book?" type="text">
+        <answer correct="False" id="0" text="They wanted to try out a new series they'd never read"/>
+        <answer correct="True" id="1" text="They wanted to read it before the new season started"/>
+      </question>
+      <question id="3" text="What is the genre of the book?" type="commonsense">
+        <answer correct="True" id="0" text="Fantasy/Fiction"/>
+        <answer correct="False" id="1" text="non-fiction"/>
+      </question>
+      <question id="4" text="What happens if they don't return the book in time?" type="commonsense">
+        <answer correct="False" id="0" text="nothing"/>
+        <answer correct="True" id="1" text="Receive a fine"/>
+      </question>
+      <question id="5" text="Did they need anything to borrow the book?" type="text">
+        <answer correct="True" id="0" text="A library card"/>
+        <answer correct="False" id="1" text="money"/>
+      </question>
+      <question id="6" text="When do they need to return the book?" type="text">
+        <answer correct="True" id="0" text="In two weeks"/>
+        <answer correct="False" id="1" text="2 months"/>
+      </question>
+      <question id="7" text="Did they have to pay anything to borrow the book?" type="text">
+        <answer correct="True" id="0" text="no, it was free"/>
+        <answer correct="False" id="1" text="yes, thirty dollars"/>
+      </question>
+      <question id="8" text="When did they go to the library?" type="text">
+        <answer correct="True" id="0" text="After finding their library card"/>
+        <answer correct="False" id="1" text="Before they had read any books in the series"/>
+      </question>
+      <question id="9" text="When must they return the book?" type="text">
+        <answer correct="True" id="0" text="In 2 weeks"/>
+        <answer correct="False" id="1" text="1 month"/>
+      </question>
+    </questions>
+  </instance>
+</data>

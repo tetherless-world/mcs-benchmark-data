@@ -6,23 +6,20 @@ from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submissi
     RobertaCommonsenseQaSubmissionFileNames,
 )
 
+from tests.assertions import assert_submission_models
+
 
 def test_extract_transform():
     models = tuple(
         RobertaCommonsenseQaSubmissionPipeline(
             file_names=RobertaCommonsenseQaSubmissionFileNames(
-                meta_data="CommonsenseQA_dev_submissions.jsonl",
-                submission_file_name="dev_rand_split_roberta_submission.jsonl",
+                metadata="CommonsenseQA_dev_submissions.jsonl",
+                submission="dev_rand_split_roberta_submission.jsonl",
             )
         ).extract_transform()
     )
-    assert models
-
-    submissions = [model for model in models if not isinstance(model, SubmissionSample)]
-    assert submissions
-    submission = submissions[0]
-    assert submission.name == "CommonsenseQA-roberta"
-
-    samples = [model for model in models if isinstance(model, SubmissionSample)]
-    assert len(samples) > 3
-    assert all(sample.submission_uri == submission.uri for sample in samples)
+    assert_submission_models(
+        benchmark_id=RobertaCommonsenseQaSubmissionPipeline.BENCHMARK_ID,
+        submission_id=RobertaCommonsenseQaSubmissionPipeline.SUBMISSION_ID,
+        models=models,
+    )
