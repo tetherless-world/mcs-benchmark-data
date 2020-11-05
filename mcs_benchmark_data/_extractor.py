@@ -1,5 +1,4 @@
-import logging
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from pathlib import Path
 from typing import Dict, Optional
 from urllib.request import urlopen

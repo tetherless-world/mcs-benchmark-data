@@ -1,4 +1,3 @@
-import logging
 import json
 from abc import abstractmethod
 from pathlib import Path
@@ -11,7 +10,6 @@ from mcs_benchmark_data._transformer import _Transformer
 from mcs_benchmark_data.models.benchmark import Benchmark
 from mcs_benchmark_data.models.benchmark_metadata import BenchmarkMetadata
 from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
-from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.models.benchmark_train_dataset import BenchmarkTrainDataset
 from mcs_benchmark_data.models.benchmark_test_dataset import BenchmarkTestDataset
 from mcs_benchmark_data.models.benchmark_dev_dataset import BenchmarkDevDataset

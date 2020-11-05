@@ -3,11 +3,11 @@ from mcs_benchmark_data._pipeline import _Pipeline
 from mcs_benchmark_data.benchmark_submission_extractor import (
     BenchmarkSubmissionExtractor,
 )
-from mcs_benchmark_data.pipelines.cycic.roberta4_cycic_submission_transformer import (
+from mcs_benchmark_data.pipelines.CycIC.roberta4_cycic_submission_transformer import (
     Roberta4CycicSubmissionTransformer,
 )
 
-from mcs_benchmark_data.pipelines.cycic.roberta4_cycic_submission_file_names import (
+from mcs_benchmark_data.pipelines.CycIC.roberta4_cycic_submission_file_names import (
     Roberta4CycicSubmissionFileNames,
 )
 

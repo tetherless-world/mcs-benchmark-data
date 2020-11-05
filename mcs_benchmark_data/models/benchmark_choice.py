@@ -3,7 +3,6 @@ from dataclasses_json import LetterCase, dataclass_json
 
 from mcs_benchmark_data.namespace import SCHEMA, MCS, RDF
 from rdflib import Graph, URIRef, Literal
-from rdflib.resource import Resource
 
 from mcs_benchmark_data._model import _Model
 

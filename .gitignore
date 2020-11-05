@@ -2,4 +2,4 @@
 __pycache__/
 /venv/
 mcs-benchmark-data/data/loaded/CommonsenseQA/CommonsenseQA.ttl
-mcs-benchmark-data/data/loaded/CommonsenseQA/CommonsenseQA.jsonld
+.vscode
