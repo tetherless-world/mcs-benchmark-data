@@ -1,7 +1,7 @@
-from mcs_benchmark_data.pipelines.MCScript.trian_mcscript_submission_pipeline import (
+from mcs_benchmark_data.pipelines.mcscript.trian_mcscript_submission_pipeline import (
     TrianMCScriptSubmissionPipeline,
 )
-from mcs_benchmark_data.pipelines.MCScript.trian_mcscript_submission_file_names import (
+from mcs_benchmark_data.pipelines.mcscript.trian_mcscript_submission_file_names import (
     TrianMCScriptSubmissionFileNames,
 )
 

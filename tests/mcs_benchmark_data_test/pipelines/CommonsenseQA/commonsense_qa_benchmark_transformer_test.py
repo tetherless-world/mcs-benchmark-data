@@ -1,6 +1,6 @@
 from mcs_benchmark_data.models.benchmark import Benchmark
 from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
-from mcs_benchmark_data.pipelines.CommonsenseQA.commonsense_qa_benchmark_pipeline import (
+from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_pipeline import (
     CommonsenseQaBenchmarkPipeline,
 )
 from mcs_benchmark_data.inline_labels_benchmark_file_names import (

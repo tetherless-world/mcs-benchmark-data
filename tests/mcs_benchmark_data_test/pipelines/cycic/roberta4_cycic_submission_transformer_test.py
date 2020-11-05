@@ -1,7 +1,7 @@
-from mcs_benchmark_data.pipelines.CycIC.roberta4_cycic_submission_pipeline import (
+from mcs_benchmark_data.pipelines.cycic.roberta4_cycic_submission_pipeline import (
     Roberta4CycicSubmissionPipeline,
 )
-from mcs_benchmark_data.pipelines.CycIC.roberta4_cycic_submission_file_names import (
+from mcs_benchmark_data.pipelines.cycic.roberta4_cycic_submission_file_names import (
     Roberta4CycicSubmissionFileNames,
 )
 

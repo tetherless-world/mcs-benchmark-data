@@ -1,8 +1,8 @@
 from mcs_benchmark_data.models.submission_sample import SubmissionSample
-from mcs_benchmark_data.pipelines.CommonsenseQA.kagnet_commonsense_qa_submission_pipeline import (
+from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submission_pipeline import (
     KagnetCommonsenseQaSubmissionPipeline,
 )
-from mcs_benchmark_data.pipelines.CommonsenseQA.kagnet_commonsense_qa_submission_file_names import (
+from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submission_file_names import (
     KagnetCommonsenseQaSubmissionFileNames,
 )
 

@@ -3,11 +3,11 @@ from mcs_benchmark_data._pipeline import _Pipeline
 from mcs_benchmark_data.benchmark_submission_extractor import (
     BenchmarkSubmissionExtractor,
 )
-from mcs_benchmark_data.pipelines.CommonsenseQA.kagnet_commonsense_qa_submission_transformer import (
+from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submission_transformer import (
     KagnetCommonsenseQaSubmissionTransformer,
 )
 
-from mcs_benchmark_data.pipelines.CommonsenseQA.kagnet_commonsense_qa_submission_file_names import (
+from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submission_file_names import (
     KagnetCommonsenseQaSubmissionFileNames,
 )
 

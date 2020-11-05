@@ -3,10 +3,10 @@ from mcs_benchmark_data._pipeline import _Pipeline
 from mcs_benchmark_data.benchmark_submission_extractor import (
     BenchmarkSubmissionExtractor,
 )
-from mcs_benchmark_data.pipelines.CommonsenseQA.roberta_commonsense_qa_submission_transformer import (
+from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_transformer import (
     RobertaCommonsenseQaSubmissionTransformer,
 )
-from mcs_benchmark_data.pipelines.CommonsenseQA.roberta_commonsense_qa_submission_file_names import (
+from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_file_names import (
     RobertaCommonsenseQaSubmissionFileNames,
 )
 

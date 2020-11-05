@@ -3,7 +3,7 @@ from mcs_benchmark_data._pipeline import _Pipeline
 from mcs_benchmark_data.benchmark_extractor import (
     BenchmarkExtractor,
 )
-from mcs_benchmark_data.pipelines.CommonsenseQA.commonsense_qa_benchmark_transformer import (
+from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_transformer import (
     CommonsenseQaBenchmarkTransformer,
 )
 from mcs_benchmark_data.inline_labels_benchmark_file_names import (

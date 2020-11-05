@@ -3,11 +3,11 @@ from mcs_benchmark_data._pipeline import _Pipeline
 from mcs_benchmark_data.benchmark_submission_extractor import (
     BenchmarkSubmissionExtractor,
 )
-from mcs_benchmark_data.pipelines.MCScript.trian_mcscript_submission_transformer import (
+from mcs_benchmark_data.pipelines.mcscript.trian_mcscript_submission_transformer import (
     TrianMCScriptSubmissionTransformer,
 )
 
-from mcs_benchmark_data.pipelines.MCScript.trian_mcscript_submission_file_names import (
+from mcs_benchmark_data.pipelines.mcscript.trian_mcscript_submission_file_names import (
     TrianMCScriptSubmissionFileNames,
 )
 

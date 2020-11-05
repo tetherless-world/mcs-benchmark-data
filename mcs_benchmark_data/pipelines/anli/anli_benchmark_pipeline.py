@@ -3,7 +3,7 @@ from mcs_benchmark_data._pipeline import _Pipeline
 from mcs_benchmark_data.benchmark_extractor import (
     BenchmarkExtractor,
 )
-from mcs_benchmark_data.pipelines.aNLI.anli_benchmark_transformer import (
+from mcs_benchmark_data.pipelines.anli.anli_benchmark_transformer import (
     AnliBenchmarkTransformer,
 )
 from mcs_benchmark_data.infile_labels_benchmark_file_names import (

@@ -3,16 +3,16 @@ from mcs_benchmark_data._pipeline import _Pipeline
 from mcs_benchmark_data.benchmark_extractor import (
     BenchmarkExtractor,
 )
-from mcs_benchmark_data.pipelines.PhysicalIQA.physical_iqa_benchmark_transformer import (
-    PhysicalIQaBenchmarkTransformer,
+from mcs_benchmark_data.pipelines.social_iqa.social_iqa_benchmark_transformer import (
+    SocialIQaBenchmarkTransformer,
 )
 from mcs_benchmark_data.infile_labels_benchmark_file_names import (
     InfileLabelsBenchmarkFileNames,
 )
 
 
-class PhysicalIQaBenchmarkPipeline(_Pipeline):
-    ID = "PhysicalIQA"
+class SocialIQaBenchmarkPipeline(_Pipeline):
+    ID = "SocialIQA"
 
     def __init__(self, file_names: InfileLabelsBenchmarkFileNames, **kwds):
         _Pipeline.__init__(
@@ -23,10 +23,10 @@ class PhysicalIQaBenchmarkPipeline(_Pipeline):
                 **kwds,
             ),
             id=self.ID,
-            transformer=PhysicalIQaBenchmarkTransformer(pipeline_id=self.ID, **kwds),
+            transformer=SocialIQaBenchmarkTransformer(pipeline_id=self.ID, **kwds),
             **kwds,
         )
 
 
 if __name__ == "__main__":
-    PhysicalIQaBenchmarkPipeline.main()
+    SocialIQaBenchmarkPipeline.main()
