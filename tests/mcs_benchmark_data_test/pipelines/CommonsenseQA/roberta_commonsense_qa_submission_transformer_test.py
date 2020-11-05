@@ -13,10 +13,10 @@ def test_extract_transform():
     models = tuple(
         RobertaCommonsenseQaSubmissionPipeline(
             file_names=RobertaCommonsenseQaSubmissionFileNames(
-                metadata="submissions_metadata.json",
+                metadata="submissions_metadata.jsonl",
                 submission="dev_rand_split_roberta_submission_small.jsonl",
             )
-        ).extract_transform_load()
+        ).extract_transform()
     )
     assert_submission_models(
         benchmark_id=RobertaCommonsenseQaSubmissionPipeline.BENCHMARK_ID,
