@@ -14,7 +14,7 @@ def test_extract_transform():
         RobertaCommonsenseQaSubmissionPipeline(
             file_names=RobertaCommonsenseQaSubmissionFileNames(
                 metadata="submissions_metadata.jsonl",
-                submission="dev_rand_split_roberta_submission_small.jsonl",
+                submission="roberta_dev_submission.jsonl",
             )
         ).extract_transform()
     )

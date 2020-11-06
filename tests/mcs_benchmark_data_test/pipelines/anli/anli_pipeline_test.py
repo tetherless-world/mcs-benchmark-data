@@ -11,11 +11,11 @@ def test_extract_transform_load():
     AnliBenchmarkPipeline(
         file_names=InfileLabelsBenchmarkFileNames(
             metadata="metadata.json",
-            dev_labels="dev-labels_small.lst",
-            dev_samples="dev_small.jsonl",
-            train_labels="train-labels_small.lst",
-            train_samples="train_small.jsonl",
-            test_samples="test_small.jsonl",
+            dev_labels="dev_labels.lst",
+            dev_samples="dev_samples.jsonl",
+            train_labels="train_labels.lst",
+            train_samples="train_samples.jsonl",
+            test_samples="test_samples.jsonl",
         ),
     ).extract_transform_load()
     assert_valid_rdf_loaded(AnliBenchmarkPipeline.ID)

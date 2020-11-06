@@ -11,9 +11,9 @@ def test_extract_transform_load():
     MCScriptBenchmarkPipeline(
         file_names=InlineLabelsBenchmarkFileNames(
             metadata="metadata.json",
-            dev_samples="dev-data_small.xml",
-            train_samples="train-data_small.xml",
-            test_samples="test-data_small.xml",
+            dev_samples="dev_samples.xml",
+            train_samples="train_samples.xml",
+            test_samples="test_samples.xml",
         ),
     ).extract_transform_load()
 

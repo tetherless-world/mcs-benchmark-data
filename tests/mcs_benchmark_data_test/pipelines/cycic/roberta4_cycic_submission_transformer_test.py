@@ -13,7 +13,7 @@ def test_extract_transform():
         Roberta4CycicSubmissionPipeline(
             file_names=Roberta4CycicSubmissionFileNames(
                 metadata="submissions_metadata.json",
-                submission="CycIC_dev_cycic-transformers_submission.jsonl",
+                submission="roberta4_dev_submission.jsonl",
             )
         ).extract_transform()
     )
