@@ -1,6 +1,6 @@
 from dataclasses import dataclass
-from dataclasses_json import LetterCase, dataclass_json
 
+from dataclasses_json import LetterCase, dataclass_json
 from mcs_benchmark_data.models.benchmark_choice import BenchmarkChoice
 
 

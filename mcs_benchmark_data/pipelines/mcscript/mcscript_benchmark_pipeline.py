@@ -12,7 +12,7 @@ from mcs_benchmark_data.inline_labels_benchmark_file_names import (
 
 
 class MCScriptBenchmarkPipeline(_Pipeline):
-    ID = "MCScript"
+    ID = "mcscript"
 
     def __init__(self, file_names: InlineLabelsBenchmarkFileNames, **kwds):
         _Pipeline.__init__(

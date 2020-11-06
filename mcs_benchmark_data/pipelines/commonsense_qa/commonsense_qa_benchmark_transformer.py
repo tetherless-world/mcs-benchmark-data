@@ -1,25 +1,16 @@
 import json
-import os
-from datetime import datetime
 from pathlib import Path
-from typing import Tuple, Generator
+from typing import Generator
 from rdflib import URIRef
-from dataclasses_json import dataclass_json
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._benchmark_transformer import _BenchmarkTransformer
-from mcs_benchmark_data.models.benchmark import Benchmark
-from mcs_benchmark_data.models.benchmark_answer import BenchmarkAnswer
-from mcs_benchmark_data.models.benchmark_choice import BenchmarkChoice
-from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
-from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
-from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
+from mcs_benchmark_data.answer_data import AnswerData
+from mcs_benchmark_data.dataset_type import DatasetType
 from mcs_benchmark_data.inline_labels_benchmark_file_names import (
     InlineLabelsBenchmarkFileNames,
 )
-from mcs_benchmark_data.answer_data import AnswerData
-from mcs_benchmark_data.dataset_type import DatasetType
 
 
 class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
@@ -36,6 +27,7 @@ class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
         sample_jsonl_file_path = (
             extracted_data_dir_path
             / "datasets"
+            / dataset_type
             / getattr(file_names, dataset_type + "_samples")
         )
 

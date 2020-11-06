@@ -1,8 +1,6 @@
 import json
-import os
 from time import strptime
 from pathlib import Path
-from abc import abstractmethod
 from typing import Generator
 from rdflib import URIRef
 
@@ -13,7 +11,6 @@ from mcs_benchmark_data.models.submission_sample import SubmissionSample
 from mcs_benchmark_data.models.test_score import TestScore
 from mcs_benchmark_data.models.dev_score import DevScore
 from mcs_benchmark_data._benchmark_file_names import _BenchmarkFileNames
-from mcs_benchmark_data._pipeline_phase import _PipelinePhase
 
 
 class _BenchmarkSubmissionTransformer(_Transformer):
@@ -57,7 +54,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
         submission_uri = URIRef(f"{self._uri_base}:submission:{self._pipeline_id}")
 
         yield from getattr(
-            self, f"_transform_{self._pipeline_id.lower()}_submission_sample"
+            self, f"_transform_{self._pipeline_id}_submission_sample"
         )(
             submission_sample_file_path=submission_file_path,
             submission_uri=submission_uri,
@@ -113,7 +110,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
 
             break
 
-    def _transform_commonsenseqa_submission_sample(
+    def _transform_commonsense_qa_submission_sample(
         self,
         submission_sample_file_path: Path,
         submission_uri: URIRef,

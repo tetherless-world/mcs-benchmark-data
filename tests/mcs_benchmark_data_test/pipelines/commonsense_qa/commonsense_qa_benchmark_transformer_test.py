@@ -13,9 +13,9 @@ def test_extract_transform():
         CommonsenseQaBenchmarkPipeline(
             file_names=InlineLabelsBenchmarkFileNames(
                 metadata="metadata.json",
-                train_samples="train_rand_split_small.jsonl",
-                dev_samples="dev_rand_split_small.jsonl",
-                test_samples="test_rand_split_no_answers_small.jsonl",
+                train_samples="train_samples.jsonl",
+                dev_samples="dev_samples.jsonl",
+                test_samples="test_samples.jsonl",
             ),
         ).extract_transform()
     )

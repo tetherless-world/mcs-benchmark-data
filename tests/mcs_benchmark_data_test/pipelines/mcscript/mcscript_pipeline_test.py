@@ -1,10 +1,4 @@
-import bz2
-from io import StringIO
-
-from rdflib import Graph
-
-from mcs_benchmark_data.path import DATA_DIR_PATH
-from tests.assertions import assert_valid_rdf_loaded
+from tests.mcs_benchmark_data_test.assertions import assert_valid_rdf_loaded
 from mcs_benchmark_data.pipelines.mcscript.mcscript_benchmark_pipeline import (
     MCScriptBenchmarkPipeline,
 )
@@ -17,9 +11,9 @@ def test_extract_transform_load():
     MCScriptBenchmarkPipeline(
         file_names=InlineLabelsBenchmarkFileNames(
             metadata="metadata.json",
-            dev_samples="dev-data_small.xml",
-            train_samples="train-data_small.xml",
-            test_samples="test-data_small.xml",
+            dev_samples="dev_samples.xml",
+            train_samples="train_samples.xml",
+            test_samples="test_samples.xml",
         ),
     ).extract_transform_load()
 

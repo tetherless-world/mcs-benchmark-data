@@ -13,7 +13,7 @@ from mcs_benchmark_data.pipelines.cycic.roberta4_cycic_submission_file_names imp
 
 
 class Roberta4CycicSubmissionPipeline(_Pipeline):
-    BENCHMARK_ID = "CycIC"
+    BENCHMARK_ID = "cycic"
     SUBMISSION_ID = "roberta4"
 
     def __init__(self, file_names: Roberta4CycicSubmissionFileNames, **kwds):

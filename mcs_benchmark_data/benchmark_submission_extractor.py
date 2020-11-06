@@ -1,7 +1,5 @@
 from mcs_benchmark_data._extractor import _Extractor
 
-from mcs_benchmark_data.path import DATA_DIR_PATH
-
 from mcs_benchmark_data._benchmark_file_names import (
     _BenchmarkFileNames,
 )

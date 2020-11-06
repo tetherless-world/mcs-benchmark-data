@@ -3,16 +3,12 @@ from typing import Optional
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
 
-from rdflib import Graph, URIRef, Literal
+from rdflib import Graph, URIRef
 from rdflib.resource import Resource
 
 from mcs_benchmark_data.namespace import MCS, SCHEMA
 
 from mcs_benchmark_data._model import _Model
-from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
-from mcs_benchmark_data.models.benchmark_question_category import (
-    BenchmarkQuestionCategory,
-)
 
 
 @dataclass_json(letter_case=LetterCase.CAMEL)

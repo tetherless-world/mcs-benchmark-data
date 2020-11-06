@@ -1,28 +1,15 @@
 import json
-import os
-from datetime import datetime
 from pathlib import Path
-from typing import Tuple, Generator
+from typing import Generator
 from rdflib import URIRef
-from dataclasses_json import dataclass_json
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._benchmark_transformer import _BenchmarkTransformer
-from mcs_benchmark_data.models.benchmark import Benchmark
-from mcs_benchmark_data.models.benchmark_hypothesis import BenchmarkHypothesis
-from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
-from mcs_benchmark_data.models.benchmark_context import BenchmarkContext
-from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
-from mcs_benchmark_data.models.benchmark_train_dataset import BenchmarkTrainDataset
-from mcs_benchmark_data.models.benchmark_test_dataset import BenchmarkTestDataset
-from mcs_benchmark_data.models.benchmark_dev_dataset import BenchmarkDevDataset
-from mcs_benchmark_data.models.benchmark_goal import BenchmarkGoal
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
-from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
+from mcs_benchmark_data.dataset_type import DatasetType
 from mcs_benchmark_data.infile_labels_benchmark_file_names import (
     InfileLabelsBenchmarkFileNames,
 )
-from mcs_benchmark_data.dataset_type import DatasetType
 
 
 class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
@@ -41,6 +28,7 @@ class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
             sample_labels_file_path = (
                 extracted_data_dir_path
                 / "datasets"
+                / dataset_type
                 / getattr(file_names, dataset_type + "_labels")
             )
 
@@ -50,6 +38,7 @@ class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
         sample_jsonl_file_path = (
             extracted_data_dir_path
             / "datasets"
+            / dataset_type
             / getattr(file_names, dataset_type + "_samples")
         )
 

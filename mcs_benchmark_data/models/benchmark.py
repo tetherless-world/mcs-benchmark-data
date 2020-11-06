@@ -1,10 +1,10 @@
 from dataclasses import dataclass
 from dataclasses_json import LetterCase, dataclass_json
-from typing import NamedTuple, Tuple, Optional
+from typing import Tuple
 
 from rdflib import Graph
 from rdflib.resource import Resource
-from mcs_benchmark_data.namespace import SCHEMA, MCS
+from mcs_benchmark_data.namespace import SCHEMA
 
 from mcs_benchmark_data._model import _Model
 

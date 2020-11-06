@@ -6,15 +6,15 @@ from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submissio
     KagnetCommonsenseQaSubmissionFileNames,
 )
 
-from tests.assertions import assert_submission_models
+from tests.mcs_benchmark_data_test.assertions import assert_submission_models
 
 
 def test_extract_transform():
     models = tuple(
         KagnetCommonsenseQaSubmissionPipeline(
             file_names=KagnetCommonsenseQaSubmissionFileNames(
-                metadata="CommonsenseQA_dev_submissions.jsonl",
-                submission="dev_rand_split_kagnet_submission.jsonl",
+                metadata="submissions_metadata.jsonl",
+                submission="kagnet_dev_submission.jsonl",
             )
         ).extract_transform()
     )

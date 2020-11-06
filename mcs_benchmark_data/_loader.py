@@ -1,6 +1,6 @@
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from pathlib import Path
-from typing import Generator, Optional
+from typing import Generator
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._pipeline_phase import _PipelinePhase
