@@ -13,7 +13,7 @@ from mcs_benchmark_data.pipelines.mcscript.trian_mcscript_submission_file_names 
 
 
 class TrianMCScriptSubmissionPipeline(_Pipeline):
-    BENCHMARK_ID = "MCScript"
+    BENCHMARK_ID = "mcscript"
     SUBMISSION_ID = "trian"
 
     def __init__(self, file_names: TrianMCScriptSubmissionFileNames, **kwds):

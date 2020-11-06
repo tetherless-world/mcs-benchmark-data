@@ -12,7 +12,7 @@ from mcs_benchmark_data.infile_labels_benchmark_file_names import (
 
 
 class SocialIQaBenchmarkPipeline(_Pipeline):
-    ID = "SocialIQA"
+    ID = "social_iqa"
 
     def __init__(self, file_names: InfileLabelsBenchmarkFileNames, **kwds):
         _Pipeline.__init__(
