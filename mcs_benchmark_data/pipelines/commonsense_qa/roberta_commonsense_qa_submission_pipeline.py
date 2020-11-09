@@ -1,13 +1,11 @@
 from mcs_benchmark_data._pipeline import _Pipeline
+from mcs_benchmark_data.path import TEST_DATA_DIR_PATH
 
-from mcs_benchmark_data.benchmark_submission_extractor import (
-    BenchmarkSubmissionExtractor,
+from mcs_benchmark_data.nop_extractor import (
+    NopExtractor,
 )
 from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_transformer import (
     RobertaCommonsenseQaSubmissionTransformer,
-)
-from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_file_names import (
-    RobertaCommonsenseQaSubmissionFileNames,
 )
 
 
@@ -15,18 +13,15 @@ class RobertaCommonsenseQaSubmissionPipeline(_Pipeline):
     BENCHMARK_ID = "commonsense_qa"
     SUBMISSION_ID = "roberta"
 
-    def __init__(self, file_names: RobertaCommonsenseQaSubmissionFileNames, **kwds):
+    def __init__(self, **kwds):
         _Pipeline.__init__(
             self,
-            extractor=BenchmarkSubmissionExtractor(
-                pipeline_id=self.BENCHMARK_ID,
-                file_names=file_names,
-                **kwds,
-            ),
+            extractor=NopExtractor(pipeline_id=self.BENCHMARK_ID),
             id=self.BENCHMARK_ID,
             transformer=RobertaCommonsenseQaSubmissionTransformer(
                 pipeline_id=self.BENCHMARK_ID,
                 submission_id=self.SUBMISSION_ID,
+                data_dir_path=TEST_DATA_DIR_PATH,
                 **kwds,
             ),
             **kwds,

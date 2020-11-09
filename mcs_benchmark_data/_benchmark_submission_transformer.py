@@ -1,7 +1,7 @@
 import json
 from time import strptime
 from pathlib import Path
-from typing import Generator
+from typing import Generator, Dict
 from rdflib import URIRef
 
 from mcs_benchmark_data._model import _Model
@@ -10,7 +10,6 @@ from mcs_benchmark_data.models.submission import Submission
 from mcs_benchmark_data.models.submission_sample import SubmissionSample
 from mcs_benchmark_data.models.test_score import TestScore
 from mcs_benchmark_data.models.dev_score import DevScore
-from mcs_benchmark_data._benchmark_file_names import _BenchmarkFileNames
 
 
 class _BenchmarkSubmissionTransformer(_Transformer):
@@ -32,19 +31,25 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     def _benchmark_score_classes(self):
         return {"TestScore": TestScore, "DevScore": DevScore}
 
+    def _read_jsonl_file(
+        self,
+        jsonl_file_path: Path,
+    ) -> Generator[Dict[str, object], None, None]:
+        with open(jsonl_file_path) as jsonl_file:
+            for line in jsonl_file:
+                if not line.strip():
+                    continue
+                yield json.loads(line)
+
     def transform(
         self,
-        *,
-        extracted_data_dir_path: Path,
-        file_names: _BenchmarkFileNames,
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        submission_data_jsonl_file_path = extracted_data_dir_path / file_names.metadata
-
-        submission_file_path = (
-            extracted_data_dir_path / self._submission_id / file_names.submission
+        submission_data_jsonl_file_path = (
+            self._extracted_data_dir_path / "submissions" / "submissions_metadata.jsonl"
         )
+        print(submission_data_jsonl_file_path)
 
         # Yield submissions
         yield from self.__transform_submission(
@@ -53,10 +58,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
 
         submission_uri = URIRef(f"{self._uri_base}:submission:{self._pipeline_id}")
 
-        yield from getattr(
-            self, f"_transform_{self._pipeline_id}_submission_sample"
-        )(
-            submission_sample_file_path=submission_file_path,
+        yield from getattr(self, f"_transform_{self._pipeline_id}_submission_sample")(
             submission_uri=submission_uri,
         )
 
@@ -65,12 +67,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
         submission_data_jsonl_file_path: Path,
     ) -> Generator[_Model, None, None]:
 
-        with open(submission_data_jsonl_file_path) as submission_data_jsonl:
-            all_submissions = list(submission_data_jsonl)
-
-        for line in all_submissions:
-
-            submission_line = json.loads(line)
+        for submission_line in self._read_jsonl_file(submission_data_jsonl_file_path):
 
             if self._submission_id not in submission_line["name"].lower():
                 continue
@@ -112,38 +109,42 @@ class _BenchmarkSubmissionTransformer(_Transformer):
 
     def _transform_commonsense_qa_submission_sample(
         self,
-        submission_sample_file_path: Path,
         submission_uri: URIRef,
     ) -> Generator[_Model, None, None]:
 
-        with open(submission_sample_file_path) as submission_sample_jsonl:
+        submission_sample_file_path = (
+            self._extracted_data_dir_path
+            / "submissions"
+            / self._submission_id
+            / f"{self._submission_id}_dev_submission.jsonl"
+        )
 
-            for line in submission_sample_jsonl:
+        for sample in self._read_jsonl_file(submission_sample_file_path):
 
-                sample = json.loads(line)
-
-                yield SubmissionSample(
-                    uri=URIRef(f"{submission_uri}:sample:{sample['id']}"),
-                    submission_uri=submission_uri,
-                    value=sample["chosenAnswer"],
-                    about=f"{self._submission_id}-{sample['id']}",
-                )
+            yield SubmissionSample(
+                uri=URIRef(f"{submission_uri}:sample:{sample['id']}"),
+                submission_uri=submission_uri,
+                value=sample["chosenAnswer"],
+                about=f"{self._submission_id}-{sample['id']}",
+            )
 
     def _transform_cycic_submission_sample(
         self,
-        submission_sample_file_path: Path,
         submission_uri: URIRef,
     ) -> Generator[_Model, None, None]:
 
-        with open(submission_sample_file_path) as submission_sample_jsonl:
+        submission_sample_file_path = (
+            self._extracted_data_dir_path
+            / "submissions"
+            / self._submission_id
+            / f"{self._submission_id}_dev_submission.jsonl"
+        )
 
-            for line in submission_sample_jsonl:
+        for sample in self._read_jsonl_file(submission_sample_file_path):
 
-                sample = json.loads(line)
-
-                yield SubmissionSample(
-                    uri=URIRef(f"{submission_uri}:sample:{sample['example_id']}"),
-                    submission_uri=submission_uri,
-                    value=sample["pred"],
-                    about=f"{self._submission_id}-{sample['example_id']}",
-                )
+            yield SubmissionSample(
+                uri=URIRef(f"{submission_uri}:sample:{sample['example_id']}"),
+                submission_uri=submission_uri,
+                value=sample["pred"],
+                about=f"{self._submission_id}-{sample['example_id']}",
+            )

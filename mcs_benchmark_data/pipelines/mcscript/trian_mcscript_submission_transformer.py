@@ -18,9 +18,15 @@ class TrianMCScriptSubmissionTransformer(_BenchmarkSubmissionTransformer):
 
     def _transform_mcscript_submission_sample(
         self,
-        submission_sample_file_path: Path,
         submission_uri: URIRef,
     ) -> Generator[_Model, None, None]:
+
+        submission_sample_file_path = (
+            self._extracted_data_dir_path
+            / "submissions"
+            / self._submission_id
+            / f"{self._submission_id}_dev_submission.txt"
+        )
 
         with open(submission_sample_file_path) as submission_sample_text:
 
