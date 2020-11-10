@@ -1,21 +1,15 @@
-from mcs_benchmark_data.models.submission_sample import SubmissionSample
 from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_pipeline import (
     RobertaCommonsenseQaSubmissionPipeline,
 )
-from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_file_names import (
-    RobertaCommonsenseQaSubmissionFileNames,
-)
-
 from tests.mcs_benchmark_data_test.assertions import assert_submission_models
+
+from mcs_benchmark_data.path import TEST_DATA_DIR_PATH
 
 
 def test_extract_transform():
     models = tuple(
         RobertaCommonsenseQaSubmissionPipeline(
-            file_names=RobertaCommonsenseQaSubmissionFileNames(
-                metadata="submissions_metadata.jsonl",
-                submission="roberta_dev_submission.jsonl",
-            )
+            data_dir_path=TEST_DATA_DIR_PATH
         ).extract_transform()
     )
     assert_submission_models(

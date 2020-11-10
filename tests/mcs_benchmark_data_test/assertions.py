@@ -1,13 +1,14 @@
 from mcs_benchmark_data.path import DATA_DIR_PATH
 from rdflib import Graph
+from pathlib import Path
 import bz2
 
 from mcs_benchmark_data.models.submission_sample import SubmissionSample
 
 
-def assert_valid_rdf_loaded(pipeline_id: str):
+def assert_valid_rdf_loaded_test(pipeline_id: str, data_dir_path: Path = DATA_DIR_PATH):
 
-    loaded_data_dir_path = DATA_DIR_PATH / pipeline_id / "loaded"
+    loaded_data_dir_path = data_dir_path / pipeline_id / "loaded"
     assert loaded_data_dir_path.is_dir()
     rdf_bz2_file_path = loaded_data_dir_path / (pipeline_id + ".ttl.bz2")
     assert rdf_bz2_file_path.is_file()

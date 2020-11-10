@@ -1,6 +1,7 @@
 import logging
 from abc import abstractmethod
 from typing import Generator
+from pathlib import Path
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._pipeline_phase import _PipelinePhase

@@ -1,29 +1,28 @@
 from mcs_benchmark_data._pipeline import _Pipeline
+from mcs_benchmark_data.path import DATA_DIR_PATH
 
-from mcs_benchmark_data.benchmark_extractor import (
-    BenchmarkExtractor,
+from pathlib import Path
+
+from mcs_benchmark_data.nop_extractor import (
+    NopExtractor,
 )
 from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_transformer import (
     CommonsenseQaBenchmarkTransformer,
-)
-from mcs_benchmark_data.inline_labels_benchmark_file_names import (
-    InlineLabelsBenchmarkFileNames,
 )
 
 
 class CommonsenseQaBenchmarkPipeline(_Pipeline):
     ID = "commonsense_qa"
 
-    def __init__(self, file_names: InlineLabelsBenchmarkFileNames, **kwds):
+    def __init__(self, data_dir_path: Path = DATA_DIR_PATH, **kwds):
         _Pipeline.__init__(
             self,
-            extractor=BenchmarkExtractor(
-                pipeline_id=self.ID,
-                file_names=file_names,
-                **kwds,
-            ),
+            extractor=NopExtractor(pipeline_id=self.ID, **kwds),
             id=self.ID,
-            transformer=CommonsenseQaBenchmarkTransformer(pipeline_id=self.ID, **kwds),
+            transformer=CommonsenseQaBenchmarkTransformer(
+                pipeline_id=self.ID, data_dir_path=data_dir_path, **kwds
+            ),
+            data_dir_path=data_dir_path,
             **kwds,
         )
 

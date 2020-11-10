@@ -3,20 +3,14 @@ from mcs_benchmark_data.models.benchmark_dataset import BenchmarkDataset
 from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_pipeline import (
     CommonsenseQaBenchmarkPipeline,
 )
-from mcs_benchmark_data.inline_labels_benchmark_file_names import (
-    InlineLabelsBenchmarkFileNames,
-)
+
+from mcs_benchmark_data.path import TEST_DATA_DIR_PATH
 
 
 def test_extract_transform():
     models = tuple(
         CommonsenseQaBenchmarkPipeline(
-            file_names=InlineLabelsBenchmarkFileNames(
-                metadata="metadata.json",
-                train_samples="train_samples.jsonl",
-                dev_samples="dev_samples.jsonl",
-                test_samples="test_samples.jsonl",
-            ),
+            data_dir_path=TEST_DATA_DIR_PATH
         ).extract_transform()
     )
     assert models

@@ -1,20 +1,16 @@
 from mcs_benchmark_data.pipelines.mcscript.trian_mcscript_submission_pipeline import (
     TrianMCScriptSubmissionPipeline,
 )
-from mcs_benchmark_data.pipelines.mcscript.trian_mcscript_submission_file_names import (
-    TrianMCScriptSubmissionFileNames,
-)
 
 from tests.mcs_benchmark_data_test.assertions import assert_submission_models
+
+from mcs_benchmark_data.path import TEST_DATA_DIR_PATH
 
 
 def test_extract_transform():
     models = tuple(
         TrianMCScriptSubmissionPipeline(
-            file_names=TrianMCScriptSubmissionFileNames(
-                metadata="submissions_metadata.json",
-                submission="trian_dev_submission.txt",
-            )
+            data_dir_path=TEST_DATA_DIR_PATH
         ).extract_transform()
     )
 

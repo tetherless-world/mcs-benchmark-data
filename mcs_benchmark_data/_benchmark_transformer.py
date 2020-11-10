@@ -2,7 +2,7 @@ import json
 from abc import abstractmethod
 from pathlib import Path
 from rdflib import URIRef
-from typing import Generator, Optional, Tuple, List
+from typing import Generator, Optional, Tuple, List, Dict
 
 from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._transformer import _Transformer
@@ -13,7 +13,6 @@ from mcs_benchmark_data.models.benchmark_sample import BenchmarkSample
 from mcs_benchmark_data.models.benchmark_train_dataset import BenchmarkTrainDataset
 from mcs_benchmark_data.models.benchmark_test_dataset import BenchmarkTestDataset
 from mcs_benchmark_data.models.benchmark_dev_dataset import BenchmarkDevDataset
-from mcs_benchmark_data._benchmark_file_names import _BenchmarkFileNames
 from mcs_benchmark_data.models.benchmark_concept import BenchmarkConcept
 from mcs_benchmark_data.models.benchmark_context import BenchmarkContext
 from mcs_benchmark_data.models.benchmark_goal import BenchmarkGoal
@@ -43,13 +42,19 @@ class _BenchmarkTransformer(_Transformer):
             "train": BenchmarkTrainDataset,
         }
 
-    def transform(
-        self, *, extracted_data_dir_path: Path, file_names: _BenchmarkFileNames, **kwds
-    ) -> Generator[_Model, None, None]:
+    def _read_jsonl_file(
+        self,
+        jsonl_file_path: Path,
+    ) -> Generator[Dict[str, object], None, None]:
+        with open(jsonl_file_path) as jsonl_file:
+            for line in jsonl_file:
+                if not line.strip():
+                    continue
+                yield json.loads(line)
 
-        benchmark_json_file_path = extracted_data_dir_path / getattr(
-            file_names, "metadata"
-        )
+    def transform(self, **kwds) -> Generator[_Model, None, None]:
+
+        benchmark_json_file_path = self._pipeline_data_dir_path / "metadata.json"
 
         with open(benchmark_json_file_path) as benchmark_json:
             benchmark_metadata = json.loads(benchmark_json.read())
@@ -78,8 +83,6 @@ class _BenchmarkTransformer(_Transformer):
             yield new_dataset
 
             yield from self._transform_benchmark_sample(
-                extracted_data_dir_path=extracted_data_dir_path,
-                file_names=file_names,
                 dataset_type=dataset_type,
                 dataset_uri=new_dataset.uri,
                 **kwds,
@@ -201,8 +204,6 @@ class _BenchmarkTransformer(_Transformer):
     def _transform_benchmark_sample(
         self,
         *,
-        extracted_data_dir_path: Path,
-        file_names: _BenchmarkFileNames,
         dataset_type: str,
         dataset_uri: URIRef,
         **kwds,

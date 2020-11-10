@@ -1,20 +1,16 @@
 from mcs_benchmark_data.pipelines.cycic.roberta4_cycic_submission_pipeline import (
     Roberta4CycicSubmissionPipeline,
 )
-from mcs_benchmark_data.pipelines.cycic.roberta4_cycic_submission_file_names import (
-    Roberta4CycicSubmissionFileNames,
-)
 
 from tests.mcs_benchmark_data_test.assertions import assert_submission_models
+
+from mcs_benchmark_data.path import TEST_DATA_DIR_PATH
 
 
 def test_extract_transform():
     models = tuple(
         Roberta4CycicSubmissionPipeline(
-            file_names=Roberta4CycicSubmissionFileNames(
-                metadata="submissions_metadata.json",
-                submission="roberta4_dev_submission.jsonl",
-            )
+            data_dir_path=TEST_DATA_DIR_PATH
         ).extract_transform()
     )
     assert_submission_models(

@@ -1,22 +1,16 @@
-from tests.mcs_benchmark_data_test.assertions import assert_valid_rdf_loaded
+from tests.mcs_benchmark_data_test.assertions import assert_valid_rdf_loaded_test
 from mcs_benchmark_data.pipelines.physical_iqa.physical_iqa_benchmark_pipeline import (
     PhysicalIQaBenchmarkPipeline,
 )
-from mcs_benchmark_data.infile_labels_benchmark_file_names import (
-    InfileLabelsBenchmarkFileNames,
-)
+
+from mcs_benchmark_data.path import TEST_DATA_DIR_PATH
 
 
 def test_extract_transform_load():
     PhysicalIQaBenchmarkPipeline(
-        file_names=InfileLabelsBenchmarkFileNames(
-            metadata="metadata.json",
-            dev_labels="dev_labels.lst",
-            dev_samples="dev_samples.jsonl",
-            train_labels="train_labels.lst",
-            train_samples="train_samples.jsonl",
-            test_samples="test_samples.jsonl",
-        ),
+        data_dir_path=TEST_DATA_DIR_PATH
     ).extract_transform_load()
 
-    assert_valid_rdf_loaded(PhysicalIQaBenchmarkPipeline.ID)
+    assert_valid_rdf_loaded_test(
+        PhysicalIQaBenchmarkPipeline.ID, data_dir_path=TEST_DATA_DIR_PATH
+    )
