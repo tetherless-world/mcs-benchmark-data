@@ -1,6 +1,7 @@
 import logging
 from abc import ABC
 from typing import Dict, Optional
+from pathlib import Path
 
 from configargparse import ArgParser
 
@@ -8,6 +9,7 @@ from mcs_benchmark_data._extractor import _Extractor
 from mcs_benchmark_data._loader import _Loader
 from mcs_benchmark_data._transformer import _Transformer
 from mcs_benchmark_data.loaders.default_loader import DefaultLoader
+from mcs_benchmark_data.path import DATA_DIR_PATH
 
 
 class _Pipeline(ABC):
@@ -18,6 +20,7 @@ class _Pipeline(ABC):
         id: str,
         transformer: _Transformer,
         loader: Optional[_Loader] = None,
+        data_dir_path: Path = DATA_DIR_PATH,
         **kwds
     ):
         """
@@ -33,6 +36,7 @@ class _Pipeline(ABC):
             loader = DefaultLoader(pipeline_id=id, **kwds)
         self.__loader = loader
         self.__transformer = transformer
+        self.__data_dir_path = data_dir_path
 
     @classmethod
     def add_arguments(cls, arg_parser: ArgParser) -> None:
@@ -117,3 +121,15 @@ class _Pipeline(ABC):
     @property
     def transformer(self):
         return self.__transformer
+
+    @property
+    def _extracted_data_dir_path(self) -> Path:
+        """
+        Directory to use to store extracted data.
+        The directory is created on demand when this method is called.
+        Paths into this directory can be passed to the transformer via the kwds return from extract.
+        """
+        extracted_data_dir_path = self.__data_dir_path / self.__id
+        extracted_data_dir_path = extracted_data_dir_path.absolute()
+        extracted_data_dir_path.mkdir(parents=True, exist_ok=True)
+        return extracted_data_dir_path

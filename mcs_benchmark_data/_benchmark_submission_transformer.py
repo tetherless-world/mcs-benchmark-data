@@ -49,7 +49,6 @@ class _BenchmarkSubmissionTransformer(_Transformer):
         submission_data_jsonl_file_path = (
             self._extracted_data_dir_path / "submissions" / "submissions_metadata.jsonl"
         )
-        print(submission_data_jsonl_file_path)
 
         # Yield submissions
         yield from self.__transform_submission(

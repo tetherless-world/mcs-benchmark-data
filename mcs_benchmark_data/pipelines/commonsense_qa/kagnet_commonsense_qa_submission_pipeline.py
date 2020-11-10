@@ -24,6 +24,7 @@ class KagnetCommonsenseQaSubmissionPipeline(_Pipeline):
                 data_dir_path=TEST_DATA_DIR_PATH,
                 **kwds,
             ),
+            data_dir_path=TEST_DATA_DIR_PATH,
             **kwds,
         )
 
