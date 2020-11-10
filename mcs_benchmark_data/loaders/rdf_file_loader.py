@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import Optional
+from typing import Optional, Generator
 
 from pathvalidate import sanitize_filename
 from rdflib import Graph
@@ -7,11 +7,12 @@ import bz2
 
 from tqdm import tqdm
 
-from mcs_benchmark_data.loaders._buffering_loader import _BufferingLoader
+from mcs_benchmark_data._loader import _Loader
 from mcs_benchmark_data.namespace import bind_namespaces
+from mcs_benchmark_data._model import _Model
 
 
-class RdfFileLoader(_BufferingLoader):
+class RdfFileLoader(_Loader):
     __CONTEXT = [
         "https://tetherless-world.github.io/mcs-ontology/utils/context.jsonld",
         {
@@ -29,10 +30,14 @@ class RdfFileLoader(_BufferingLoader):
         format="ttl",
         **kwds,
     ):
-        _BufferingLoader.__init__(self, **kwds)
+        _Loader.__init__(self, **kwds)
+        self.__models = []
         self.__compress = compress
         self.__file_path = file_path
         self.__format = format
+
+    def flush(self):
+        return self._flush(tuple(self.__models))
 
     def _flush(self, models):
         graph = Graph()
@@ -63,3 +68,6 @@ class RdfFileLoader(_BufferingLoader):
             else:
                 graph.serialize(destination=file_, **graph_serialize_kwds)
         self._logger.info("wrote graph to %s", file_path)
+
+    def load(self, *, models: Generator[_Model, None, None]):
+        self.__models.extend(models)

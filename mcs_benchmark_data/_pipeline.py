@@ -8,7 +8,7 @@ from configargparse import ArgParser
 from mcs_benchmark_data._extractor import _Extractor
 from mcs_benchmark_data._loader import _Loader
 from mcs_benchmark_data._transformer import _Transformer
-from mcs_benchmark_data.loaders.default_loader import DefaultLoader
+from mcs_benchmark_data.loaders.rdf_file_loader import RdfFileLoader
 from mcs_benchmark_data.path import DATA_DIR_PATH
 
 
@@ -33,7 +33,7 @@ class _Pipeline(ABC):
         self.__extractor = extractor
         self.__id = id
         if loader is None:
-            loader = DefaultLoader(pipeline_id=id, data_dir_path=data_dir_path, **kwds)
+            loader = RdfFileLoader(pipeline_id=id, data_dir_path=data_dir_path, **kwds)
         self.__loader = loader
         self.__transformer = transformer
 
