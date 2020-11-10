@@ -4,9 +4,15 @@ from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_pipeli
     CommonsenseQaBenchmarkPipeline,
 )
 
+from mcs_benchmark_data.path import TEST_DATA_DIR_PATH
+
 
 def test_extract_transform():
-    models = tuple(CommonsenseQaBenchmarkPipeline().extract_transform())
+    models = tuple(
+        CommonsenseQaBenchmarkPipeline(
+            data_dir_path=TEST_DATA_DIR_PATH
+        ).extract_transform()
+    )
     assert models
 
     benchmark = [model for model in models if isinstance(model, Benchmark)]

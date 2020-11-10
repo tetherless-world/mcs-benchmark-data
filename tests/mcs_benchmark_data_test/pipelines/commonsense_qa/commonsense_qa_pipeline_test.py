@@ -1,3 +1,4 @@
+from mcs_benchmark_data.path import TEST_DATA_DIR_PATH
 from tests.mcs_benchmark_data_test.assertions import assert_valid_rdf_loaded_test
 from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_pipeline import (
     CommonsenseQaBenchmarkPipeline,
@@ -5,5 +6,7 @@ from mcs_benchmark_data.pipelines.commonsense_qa.commonsense_qa_benchmark_pipeli
 
 
 def test_extract_transform_load():
-    CommonsenseQaBenchmarkPipeline().extract_transform_load()
-    assert_valid_rdf_loaded_test(CommonsenseQaBenchmarkPipeline.ID)
+    CommonsenseQaBenchmarkPipeline(
+        data_dir_path=TEST_DATA_DIR_PATH
+    ).extract_transform_load()
+    assert_valid_rdf_loaded_test(CommonsenseQaBenchmarkPipeline.ID, TEST_DATA_DIR_PATH)

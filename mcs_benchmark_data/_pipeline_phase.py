@@ -22,13 +22,13 @@ class _PipelinePhase(ABC):
         return self.__pipeline_id
 
     @property
-    def _data_dir_path(self) -> Path:
+    def _pipeline_data_dir_path(self) -> Path:
         """
         Directory to use to store data.
         The directory is created on demand when this method is called.
         Paths into this directory can be passed to the transformer via the kwds return from extract.
         """
-        data_dir_path = self.__data_dir_path / self.__pipeline_id
-        data_dir_path = data_dir_path.absolute()
-        data_dir_path.mkdir(parents=True, exist_ok=True)
-        return data_dir_path
+        pipeline_data_dir_path = self.__data_dir_path / self.__pipeline_id
+        pipeline_data_dir_path = pipeline_data_dir_path.absolute()
+        pipeline_data_dir_path.mkdir(parents=True, exist_ok=True)
+        return pipeline_data_dir_path

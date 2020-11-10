@@ -36,7 +36,6 @@ class _Pipeline(ABC):
             loader = DefaultLoader(pipeline_id=id, data_dir_path=data_dir_path, **kwds)
         self.__loader = loader
         self.__transformer = transformer
-        self.__data_dir_path = data_dir_path
 
     @classmethod
     def add_arguments(cls, arg_parser: ArgParser) -> None:
@@ -121,15 +120,3 @@ class _Pipeline(ABC):
     @property
     def transformer(self):
         return self.__transformer
-
-    @property
-    def _extracted_data_dir_path(self) -> Path:
-        """
-        Directory to use to store extracted data.
-        The directory is created on demand when this method is called.
-        Paths into this directory can be passed to the transformer via the kwds return from extract.
-        """
-        extracted_data_dir_path = self.__data_dir_path / self.__id
-        extracted_data_dir_path = extracted_data_dir_path.absolute()
-        extracted_data_dir_path.mkdir(parents=True, exist_ok=True)
-        return extracted_data_dir_path

@@ -4,9 +4,13 @@ from mcs_benchmark_data.pipelines.mcscript.mcscript_benchmark_pipeline import (
     MCScriptBenchmarkPipeline,
 )
 
+from mcs_benchmark_data.path import TEST_DATA_DIR_PATH
+
 
 def test_extract_transform():
-    models = tuple(MCScriptBenchmarkPipeline().extract_transform())
+    models = tuple(
+        MCScriptBenchmarkPipeline(data_dir_path=TEST_DATA_DIR_PATH).extract_transform()
+    )
     assert models
 
     benchmark = [model for model in models if isinstance(model, Benchmark)]

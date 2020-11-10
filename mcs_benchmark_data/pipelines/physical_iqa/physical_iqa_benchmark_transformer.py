@@ -21,7 +21,7 @@ class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
 
         if dataset_type != DatasetType.TEST.value:
             sample_labels_file_path = (
-                self._data_dir_path
+                self._pipeline_data_dir_path
                 / "datasets"
                 / dataset_type
                 / f"{dataset_type}_labels.lst"
@@ -31,7 +31,7 @@ class PhysicalIQaBenchmarkTransformer(_BenchmarkTransformer):
                 all_labels = list(labels_file)
 
         sample_jsonl_file_path = (
-            self._data_dir_path
+            self._pipeline_data_dir_path
             / "datasets"
             / dataset_type
             / f"{dataset_type}_samples.jsonl"

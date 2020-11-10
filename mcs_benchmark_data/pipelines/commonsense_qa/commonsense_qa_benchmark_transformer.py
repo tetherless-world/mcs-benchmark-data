@@ -20,7 +20,7 @@ class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
     ) -> Generator[_Model, None, None]:
 
         sample_jsonl_file_path = (
-            self._data_dir_path
+            self._pipeline_data_dir_path
             / "datasets"
             / dataset_type
             / f"{dataset_type}_samples.jsonl"

@@ -22,7 +22,7 @@ class TrianMCScriptSubmissionTransformer(_BenchmarkSubmissionTransformer):
     ) -> Generator[_Model, None, None]:
 
         submission_sample_file_path = (
-            self._data_dir_path
+            self._pipeline_data_dir_path
             / "submissions"
             / self._submission_id
             / f"{self._submission_id}_dev_submission.txt"

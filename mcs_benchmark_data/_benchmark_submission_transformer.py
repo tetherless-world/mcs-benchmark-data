@@ -47,7 +47,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     ) -> Generator[_Model, None, None]:
 
         submission_data_jsonl_file_path = (
-            self._data_dir_path / "submissions" / "submissions_metadata.jsonl"
+            self._pipeline_data_dir_path / "submissions" / "submissions_metadata.jsonl"
         )
 
         # Yield submissions
@@ -112,7 +112,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     ) -> Generator[_Model, None, None]:
 
         submission_sample_file_path = (
-            self._data_dir_path
+            self._pipeline_data_dir_path
             / "submissions"
             / self._submission_id
             / f"{self._submission_id}_dev_submission.jsonl"
@@ -133,7 +133,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     ) -> Generator[_Model, None, None]:
 
         submission_sample_file_path = (
-            self._data_dir_path
+            self._pipeline_data_dir_path
             / "submissions"
             / self._submission_id
             / f"{self._submission_id}_dev_submission.jsonl"
