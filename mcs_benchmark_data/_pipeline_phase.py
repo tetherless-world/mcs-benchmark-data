@@ -9,9 +9,9 @@ class _PipelinePhase(ABC):
     def __init__(
         self, *, pipeline_id: str, data_dir_path: Path = DATA_DIR_PATH, **kwds
     ):
-        self.__data_dir_path = data_dir_path
         self.__logger = logging.getLogger(self.__class__.__name__)
         self.__pipeline_id = pipeline_id
+        self.__data_dir_path = data_dir_path
 
     @property
     def _logger(self):
@@ -22,13 +22,13 @@ class _PipelinePhase(ABC):
         return self.__pipeline_id
 
     @property
-    def _extracted_data_dir_path(self) -> Path:
+    def _data_dir_path(self) -> Path:
         """
-        Directory to use to store extracted data.
+        Directory to use to store data.
         The directory is created on demand when this method is called.
         Paths into this directory can be passed to the transformer via the kwds return from extract.
         """
-        extracted_data_dir_path = self.__data_dir_path / self._pipeline_id
-        extracted_data_dir_path = extracted_data_dir_path.absolute()
-        extracted_data_dir_path.mkdir(parents=True, exist_ok=True)
-        return extracted_data_dir_path
+        data_dir_path = self.__data_dir_path / self.__pipeline_id
+        data_dir_path = data_dir_path.absolute()
+        data_dir_path.mkdir(parents=True, exist_ok=True)
+        return data_dir_path

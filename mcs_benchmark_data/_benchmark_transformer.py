@@ -54,7 +54,7 @@ class _BenchmarkTransformer(_Transformer):
 
     def transform(self, **kwds) -> Generator[_Model, None, None]:
 
-        benchmark_json_file_path = self._extracted_data_dir_path / "metadata.json"
+        benchmark_json_file_path = self._data_dir_path / "metadata.json"
 
         with open(benchmark_json_file_path) as benchmark_json:
             benchmark_metadata = json.loads(benchmark_json.read())

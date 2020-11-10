@@ -1,4 +1,4 @@
-from tests.mcs_benchmark_data_test.assertions import assert_valid_rdf_loaded
+from tests.mcs_benchmark_data_test.assertions import assert_valid_rdf_loaded_test
 from mcs_benchmark_data.pipelines.anli.anli_benchmark_pipeline import (
     AnliBenchmarkPipeline,
 )
@@ -6,4 +6,4 @@ from mcs_benchmark_data.pipelines.anli.anli_benchmark_pipeline import (
 
 def test_extract_transform_load():
     AnliBenchmarkPipeline().extract_transform_load()
-    assert_valid_rdf_loaded(AnliBenchmarkPipeline.ID)
+    assert_valid_rdf_loaded_test(AnliBenchmarkPipeline.ID)

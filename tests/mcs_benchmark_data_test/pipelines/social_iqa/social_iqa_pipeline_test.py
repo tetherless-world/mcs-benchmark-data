@@ -1,4 +1,4 @@
-from tests.mcs_benchmark_data_test.assertions import assert_valid_rdf_loaded
+from tests.mcs_benchmark_data_test.assertions import assert_valid_rdf_loaded_test
 from mcs_benchmark_data.pipelines.social_iqa.social_iqa_benchmark_pipeline import (
     SocialIQaBenchmarkPipeline,
 )
@@ -7,4 +7,4 @@ from mcs_benchmark_data.pipelines.social_iqa.social_iqa_benchmark_pipeline impor
 def test_extract_transform_load():
     SocialIQaBenchmarkPipeline().extract_transform_load()
 
-    assert_valid_rdf_loaded(SocialIQaBenchmarkPipeline.ID)
+    assert_valid_rdf_loaded_test(SocialIQaBenchmarkPipeline.ID)

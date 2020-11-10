@@ -23,7 +23,7 @@ class CycicBenchmarkTransformer(_BenchmarkTransformer):
 
         if dataset_type != DatasetType.TEST.value:
             sample_labels_file_path = (
-                self._extracted_data_dir_path
+                self._data_dir_path
                 / "datasets"
                 / dataset_type
                 / f"{dataset_type}_labels.jsonl"
@@ -32,7 +32,7 @@ class CycicBenchmarkTransformer(_BenchmarkTransformer):
             all_labels = self._read_jsonl_file(sample_labels_file_path)
 
         sample_jsonl_file_path = (
-            self._extracted_data_dir_path
+            self._data_dir_path
             / "datasets"
             / dataset_type
             / f"{dataset_type}_samples.jsonl"

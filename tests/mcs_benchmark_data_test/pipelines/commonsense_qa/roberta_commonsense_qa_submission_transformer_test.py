@@ -1,4 +1,3 @@
-from mcs_benchmark_data.models.submission_sample import SubmissionSample
 from mcs_benchmark_data.pipelines.commonsense_qa.roberta_commonsense_qa_submission_pipeline import (
     RobertaCommonsenseQaSubmissionPipeline,
 )

@@ -33,7 +33,7 @@ class _Pipeline(ABC):
         self.__extractor = extractor
         self.__id = id
         if loader is None:
-            loader = DefaultLoader(pipeline_id=id, **kwds)
+            loader = DefaultLoader(pipeline_id=id, data_dir_path=data_dir_path, **kwds)
         self.__loader = loader
         self.__transformer = transformer
         self.__data_dir_path = data_dir_path
