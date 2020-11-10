@@ -20,6 +20,7 @@ class SocialIQaBenchmarkPipeline(_Pipeline):
             transformer=SocialIQaBenchmarkTransformer(
                 pipeline_id=self.ID, data_dir_path=TEST_DATA_DIR_PATH, **kwds
             ),
+            data_dir_path=TEST_DATA_DIR_PATH,
             **kwds,
         )
 
