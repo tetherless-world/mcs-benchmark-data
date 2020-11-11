@@ -31,21 +31,16 @@ class RdfFileLoader(_Loader):
         **kwds,
     ):
         _Loader.__init__(self, **kwds)
-        self.__models = []
         self.__compress = compress
         self.__file_path = file_path
         self.__format = format
 
-    def flush(self):
-        return self._flush(tuple(self.__models))
-
-    def _flush(self, models):
+    def load(self, *, models: Generator[_Model, None, None]):
         graph = Graph()
         bind_namespaces(graph.namespace_manager)
-        self._logger.info("serializing %d models to RDF", len(models))
-        for model in tqdm(models):
+
+        for model in models:
             model.to_rdf(graph=graph)
-        self._logger.info("serialized %d models to RDF", len(models))
 
         file_path = self.__file_path
         if file_path is None:
@@ -68,6 +63,3 @@ class RdfFileLoader(_Loader):
             else:
                 graph.serialize(destination=file_, **graph_serialize_kwds)
         self._logger.info("wrote graph to %s", file_path)
-
-    def load(self, *, models: Generator[_Model, None, None]):
-        self.__models.extend(models)

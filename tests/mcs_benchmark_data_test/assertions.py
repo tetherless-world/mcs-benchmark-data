@@ -6,7 +6,7 @@ import bz2
 from mcs_benchmark_data.models.submission_sample import SubmissionSample
 
 
-def assert_valid_rdf_loaded(pipeline_id: str, data_dir_path: Path = DATA_DIR_PATH):
+def assert_valid_rdf_loaded(*, pipeline_id: str, data_dir_path: Path):
 
     loaded_data_dir_path = data_dir_path / pipeline_id / "loaded"
     assert loaded_data_dir_path.is_dir()

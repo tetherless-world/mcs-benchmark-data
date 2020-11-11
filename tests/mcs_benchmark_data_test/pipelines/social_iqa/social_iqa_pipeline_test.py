@@ -12,5 +12,5 @@ def test_extract_transform_load():
     ).extract_transform_load()
 
     assert_valid_rdf_loaded(
-        SocialIQaBenchmarkPipeline.ID, data_dir_path=TEST_DATA_DIR_PATH
+        pipeline_id=SocialIQaBenchmarkPipeline.ID, data_dir_path=TEST_DATA_DIR_PATH
     )
