@@ -10,7 +10,7 @@ from tests.mcs_benchmark_data_test.assertions import assert_submission_models
 def test_extract_transform():
     models = tuple(
         KagnetCommonsenseQaSubmissionPipeline(
-            data_dir_path=TEST_DATA_DIR_PATH
+            data_dir_path=TEST_DATA_DIR_PATH,
         ).extract_transform()
     )
     assert_submission_models(

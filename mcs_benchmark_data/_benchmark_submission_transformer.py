@@ -19,9 +19,20 @@ class _BenchmarkSubmissionTransformer(_Transformer):
     See the transform method of _Transformer.
     """
 
-    def __init__(self, *, pipeline_id: str, submission_id: str, **kwds):
-        _Transformer.__init__(self, pipeline_id=pipeline_id, **kwds)
+    def __init__(
+        self,
+        *,
+        pipeline_id: str,
+        submission_id: str,
+        data_dir_path: Path,
+        dataset_type: str,
+        **kwds,
+    ):
+        _Transformer.__init__(
+            self, pipeline_id=pipeline_id, data_dir_path=data_dir_path, **kwds
+        )
         self._submission_id = submission_id
+        self._dataset_type = dataset_type
 
     @property
     def _uri_base(self):
@@ -115,7 +126,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
             self._pipeline_data_dir_path
             / "submissions"
             / self._submission_id
-            / f"{self._submission_id}_dev_submission.jsonl"
+            / f"{self._submission_id}_{self._dataset_type}_submission.jsonl"
         )
 
         for sample in self._read_jsonl_file(submission_sample_file_path):
@@ -136,7 +147,7 @@ class _BenchmarkSubmissionTransformer(_Transformer):
             self._pipeline_data_dir_path
             / "submissions"
             / self._submission_id
-            / f"{self._submission_id}_dev_submission.jsonl"
+            / f"{self._submission_id}_{self._dataset_type}_submission.jsonl"
         )
 
         for sample in self._read_jsonl_file(submission_sample_file_path):
