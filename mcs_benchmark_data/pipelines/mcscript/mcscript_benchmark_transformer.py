@@ -13,6 +13,8 @@ from mcs_benchmark_data.dataset_type import DatasetType
 
 
 class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
+    ANSWER_CHOICES = tuple(("A", "B"))
+
     def _transform_benchmark_sample(
         self,
         *,
@@ -21,12 +23,8 @@ class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        sample_xml_file_path = (
-            self._pipeline_data_dir_path
-            / "datasets"
-            / dataset_type
-            / f"{dataset_type}_samples.xml"
-        )
+        sample_xml_file_path = self._sample_xml_file_path(dataset_type=dataset_type)
+
         with open(sample_xml_file_path) as sample_file:
             all_samples = xmltodict.parse(sample_file.read())
 
@@ -44,11 +42,11 @@ class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
                 if not isinstance(question, dict):
                     continue
 
-                benchmark_sample_uri = URIRef(
-                    f"{dataset_uri}:sample:{sample['@id']}_{question['@id']}"
-                )
-
                 sample_id = URIRef(f"{sample['@id']}_{question['@id']}")
+
+                benchmark_sample_uri = self._benchmark_sample_uri(
+                    dataset_uri=dataset_uri, sample_id=sample_id
+                )
 
                 yield BenchmarkQuestionType.multiple_choice(
                     uri_base=self._uri_base,
@@ -63,16 +61,15 @@ class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
 
                 yield benchmark_question
 
-                answers = ["A", "B"]
-
                 yield from self._yield_qa_models(
                     dataset_uri=dataset_uri,
                     sample_id=sample_id,
                     benchmark_sample_uri=benchmark_sample_uri,
                     question=question["@text"],
-                    answers=(
+                    answers=tuple(
                         AnswerData(
-                            label=answers[int(answer["@id"])], text=answer["@text"]
+                            label=self.ANSWER_CHOICES[int(answer["@id"])],
+                            text=answer["@text"],
                         )
                         for answer in question["answer"]
                     ),
@@ -89,7 +86,7 @@ class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
                 yield from self._yield_sample_concept_context(
                     dataset_uri=dataset_uri,
                     sample_id=URIRef(f"{sample['@id']}_{question['@id']}"),
-                    concepts=[sample["@scenario"]],
+                    concepts=tuple([sample["@scenario"]]),
                     context=sample["text"],
                     correct_choice=correct_choice,
                 )

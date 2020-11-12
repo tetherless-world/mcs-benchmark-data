@@ -1,4 +1,5 @@
 import json
+import itertools
 from pathlib import Path
 from typing import Generator
 from rdflib import URIRef
@@ -8,9 +9,12 @@ from mcs_benchmark_data._benchmark_transformer import _BenchmarkTransformer
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.answer_data import AnswerData
 from mcs_benchmark_data.dataset_type import DatasetType
+from mcs_benchmark_data.content_type import ContentType
 
 
 class CycicBenchmarkTransformer(_BenchmarkTransformer):
+    ANSWER_CHOICES = tuple(("A", "B", "C", "D", "E"))
+
     def _transform_benchmark_sample(
         self,
         *,
@@ -19,46 +23,33 @@ class CycicBenchmarkTransformer(_BenchmarkTransformer):
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        all_labels = None
-
         if dataset_type != DatasetType.TEST.value:
-            sample_labels_file_path = (
-                self._pipeline_data_dir_path
-                / "datasets"
-                / dataset_type
-                / f"{dataset_type}_labels.jsonl"
+            sample_labels_file_path = self._sample_jsonl_file_path(
+                dataset_type=dataset_type, content_type=ContentType.LABELS.value
             )
 
             all_labels = self._read_jsonl_file(sample_labels_file_path)
+        else:
+            all_labels = self._generate_none
 
-        sample_jsonl_file_path = (
-            self._pipeline_data_dir_path
-            / "datasets"
-            / dataset_type
-            / f"{dataset_type}_samples.jsonl"
+        sample_jsonl_file_path = self._sample_jsonl_file_path(
+            dataset_type=dataset_type, content_type=ContentType.SAMPLES.value
         )
 
-        for sample in self._read_jsonl_file(sample_jsonl_file_path):
-
-            label_entry = next(all_labels)
+        for sample, label_entry in zip(
+            self._read_jsonl_file(sample_jsonl_file_path), all_labels
+        ):
 
             sample_id = f"{sample['run_id']}_{sample['guid']}"
 
-            benchmark_sample_uri = URIRef(f"{dataset_uri}:sample:{sample_id}")
-
-            correct_choice = None
-
-            if dataset_type != DatasetType.TEST.value:
-                correct_choice = URIRef(
-                    f"{dataset_uri}:sample:{sample_id}:correct_choice:{label_entry['correct_answer']}"
-                )
+            benchmark_sample_uri = self._benchmark_sample_uri(
+                dataset_uri=dataset_uri, sample_id=sample_id
+            )
 
             yield BenchmarkQuestionType.multiple_choice(
                 uri_base=self._uri_base,
                 benchmark_sample_uri=benchmark_sample_uri,
             )
-
-            letters = ["A", "B", "C", "D", "E"]
 
             answer_num = 0
 
@@ -68,9 +59,13 @@ class CycicBenchmarkTransformer(_BenchmarkTransformer):
             yield from self._yield_sample_concept_context(
                 dataset_uri=dataset_uri,
                 sample_id=sample_id,
-                concepts=sample["categories"],
+                concepts=tuple(sample["categories"]),
                 context=None,
-                correct_choice=correct_choice,
+                correct_choice=URIRef(
+                    f"{dataset_uri}:sample:{sample_id}:correct_choice:{label_entry['correct_answer']}"
+                )
+                if dataset_type != DatasetType.TEST.value
+                else None,
             )
 
             yield from self._yield_qa_models(
@@ -78,8 +73,8 @@ class CycicBenchmarkTransformer(_BenchmarkTransformer):
                 sample_id=sample_id,
                 benchmark_sample_uri=benchmark_sample_uri,
                 question=sample["question"],
-                answers=(
-                    AnswerData(label=letter, text=sample[f"answer_option{i}"])
-                    for i, letter in enumerate(letters[:answer_num])
+                answers=tuple(
+                    AnswerData(label=answer_choice, text=sample[f"answer_option{i}"])
+                    for i, answer_choice in enumerate(self.ANSWER_CHOICES[:answer_num])
                 ),
             )
