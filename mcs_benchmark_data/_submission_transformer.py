@@ -12,7 +12,7 @@ from mcs_benchmark_data.models.test_score import TestScore
 from mcs_benchmark_data.models.dev_score import DevScore
 
 
-class _BenchmarkSubmissionTransformer(_Transformer):
+class _SubmissionTransformer(_Transformer):
 
     """
     Abstract base class for benchmark submissions.

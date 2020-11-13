@@ -22,6 +22,8 @@ from mcs_benchmark_data.models.benchmark_hypothesis import BenchmarkHypothesis
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_answer import BenchmarkAnswer
 from mcs_benchmark_data.answer_data import AnswerData
+from mcs_benchmark_data.dataset_type import DatasetType
+from mcs_benchmark_data.dataset_content_type import DatasetContentType
 
 
 class _BenchmarkTransformer(_Transformer):
@@ -45,7 +47,7 @@ class _BenchmarkTransformer(_Transformer):
     def _benchmark_sample_uri(self, *, dataset_uri: URIRef, sample_id: str):
         return URIRef(f"{dataset_uri}:sample:{sample_id}")
 
-    def _sample_labels_lst_file_path(self, *, dataset_type: str):
+    def _sample_labels_lst_file_path(self, *, dataset_type: DatasetType):
         return (
             self._pipeline_data_dir_path
             / "datasets"
@@ -53,7 +55,9 @@ class _BenchmarkTransformer(_Transformer):
             / f"{dataset_type}_labels.lst"
         )
 
-    def _sample_jsonl_file_path(self, *, dataset_type: str, content_type: str):
+    def _sample_jsonl_file_path(
+        self, *, dataset_type: DatasetType, dataset_content_type: DatasetContentType
+    ):
         """
         returns file path of the type of file indicated by the parameters
         @param dataset_type the type of dataset (i.e. dev, test, train)
@@ -64,10 +68,10 @@ class _BenchmarkTransformer(_Transformer):
             self._pipeline_data_dir_path
             / "datasets"
             / dataset_type
-            / f"{dataset_type}_{content_type}.jsonl"
+            / f"{dataset_type}_{dataset_content_type}.jsonl"
         )
 
-    def _sample_xml_file_path(self, *, dataset_type: str):
+    def _sample_xml_file_path(self, *, dataset_type: DatasetType):
         return (
             self._pipeline_data_dir_path
             / "datasets"
@@ -131,7 +135,7 @@ class _BenchmarkTransformer(_Transformer):
         dataset_uri: URIRef,
         sample_id: str,
         correct_choice: URIRef,
-        concepts: Optional[Tuple[str]],
+        concepts: Optional[Tuple[str, ...]],
         context: Optional[str],
         **kwds,
     ):
@@ -166,7 +170,7 @@ class _BenchmarkTransformer(_Transformer):
         dataset_uri: URIRef,
         benchmark_sample_uri: str,
         question: str,
-        answers: Tuple[AnswerData],
+        answers: Tuple[AnswerData, ...],
         **kwds,
     ) -> Generator[_Model, None, None]:
 

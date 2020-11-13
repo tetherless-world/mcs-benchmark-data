@@ -19,7 +19,7 @@ class KagnetCommonsenseQaSubmissionPipeline(_SubmissionPipeline):
         self,
         *,
         data_dir_path: Path = DATA_DIR_PATH,
-        dataset_type: str = _SubmissionPipeline.DATASET_TYPE_DEFAULT,
+        dataset_type: DatasetType = _SubmissionPipeline.DATASET_TYPE_DEFAULT,
         **kwds
     ):
         _SubmissionPipeline.__init__(

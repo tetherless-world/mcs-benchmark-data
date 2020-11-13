@@ -9,7 +9,7 @@ from mcs_benchmark_data._benchmark_transformer import _BenchmarkTransformer
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.answer_data import AnswerData
 from mcs_benchmark_data.dataset_type import DatasetType
-from mcs_benchmark_data.content_type import ContentType
+from mcs_benchmark_data.dataset_content_type import DatasetContentType
 
 
 class AnliBenchmarkTransformer(_BenchmarkTransformer):
@@ -32,7 +32,8 @@ class AnliBenchmarkTransformer(_BenchmarkTransformer):
             all_labels = self._generate_none()
 
         sample_jsonl_file_path = self._sample_jsonl_file_path(
-            dataset_type=dataset_type, content_type=ContentType.SAMPLES.value
+            dataset_type=dataset_type,
+            dataset_content_type=DatasetContentType.SAMPLES.value,
         )
 
         for sample, label in zip(
@@ -58,7 +59,7 @@ class AnliBenchmarkTransformer(_BenchmarkTransformer):
                 correct_choice=URIRef(
                     f"{dataset_uri}:sample:{sample_id}:correct_choice:{label}"
                 )
-                if dataset_type != DatasetType.TEST.value
+                if label is not None
                 else None,
             )
 

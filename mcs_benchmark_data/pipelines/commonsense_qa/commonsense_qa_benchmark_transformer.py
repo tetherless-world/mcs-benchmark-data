@@ -8,7 +8,7 @@ from mcs_benchmark_data._benchmark_transformer import _BenchmarkTransformer
 from mcs_benchmark_data.models.benchmark_question_type import BenchmarkQuestionType
 from mcs_benchmark_data.answer_data import AnswerData
 from mcs_benchmark_data.dataset_type import DatasetType
-from mcs_benchmark_data.content_type import ContentType
+from mcs_benchmark_data.dataset_content_type import DatasetContentType
 
 
 class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
@@ -21,7 +21,8 @@ class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
     ) -> Generator[_Model, None, None]:
 
         sample_jsonl_file_path = self._sample_jsonl_file_path(
-            dataset_type=dataset_type, content_type=ContentType.SAMPLES.value
+            dataset_type=dataset_type,
+            dataset_content_type=DatasetContentType.SAMPLES.value,
         )
 
         for sample in self._read_jsonl_file(sample_jsonl_file_path):
