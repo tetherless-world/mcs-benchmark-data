@@ -51,8 +51,8 @@ class _BenchmarkTransformer(_Transformer):
         return (
             self._pipeline_data_dir_path
             / "datasets"
-            / dataset_type
-            / f"{dataset_type}_labels.lst"
+            / dataset_type.value
+            / f"{dataset_type.value}_labels.lst"
         )
 
     def _sample_jsonl_file_path(
@@ -67,16 +67,16 @@ class _BenchmarkTransformer(_Transformer):
         return (
             self._pipeline_data_dir_path
             / "datasets"
-            / dataset_type
-            / f"{dataset_type}_{dataset_content_type.value}.jsonl"
+            / dataset_type.value
+            / f"{dataset_type.value}_{dataset_content_type.value}.jsonl"
         )
 
     def _sample_xml_file_path(self, *, dataset_type: DatasetType):
         return (
             self._pipeline_data_dir_path
             / "datasets"
-            / dataset_type
-            / f"{dataset_type}_samples.xml"
+            / dataset_type.value
+            / f"{dataset_type.value}_samples.xml"
         )
 
     def _generate_none(self) -> Generator[None, None, None]:
@@ -113,11 +113,11 @@ class _BenchmarkTransformer(_Transformer):
 
         for dataset in benchmark_metadata["datasets"]:
 
-            dataset_type = dataset["@id"].split("/")[-1]
+            dataset_type = getattr(DatasetType, dataset["@id"].split("/")[-1].upper())
 
             dataset_uri = URIRef(f"{self._uri_base}:dataset:{dataset['@id']}")
 
-            new_dataset = self.__benchmark_dataset_classes[dataset_type](
+            new_dataset = self.__benchmark_dataset_classes[dataset_type.value](
                 uri=dataset_uri, benchmark_uri=benchmark.uri, name=dataset["name"]
             )
 

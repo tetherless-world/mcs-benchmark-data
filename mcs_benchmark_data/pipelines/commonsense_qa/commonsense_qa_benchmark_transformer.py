@@ -46,7 +46,7 @@ class CommonsenseQaBenchmarkTransformer(_BenchmarkTransformer):
                 correct_choice=URIRef(
                     f"{benchmark_sample_uri}:correct_choice:{sample['answerKey']}"
                 )
-                if dataset_type != DatasetType.TEST.value
+                if dataset_type.value != DatasetType.TEST.value
                 else None,
             )
 

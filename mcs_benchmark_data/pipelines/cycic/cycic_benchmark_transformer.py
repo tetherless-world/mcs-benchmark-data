@@ -23,7 +23,7 @@ class CycicBenchmarkTransformer(_BenchmarkTransformer):
         **kwds,
     ) -> Generator[_Model, None, None]:
 
-        if dataset_type != DatasetType.TEST.value:
+        if dataset_type.value != DatasetType.TEST.value:
             sample_labels_file_path = self._sample_jsonl_file_path(
                 dataset_type=dataset_type,
                 dataset_content_type=DatasetContentType.LABELS,
