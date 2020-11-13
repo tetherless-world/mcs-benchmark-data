@@ -68,7 +68,7 @@ class _BenchmarkTransformer(_Transformer):
             self._pipeline_data_dir_path
             / "datasets"
             / dataset_type
-            / f"{dataset_type}_{dataset_content_type}.jsonl"
+            / f"{dataset_type}_{dataset_content_type.value}.jsonl"
         )
 
     def _sample_xml_file_path(self, *, dataset_type: DatasetType):
@@ -247,7 +247,7 @@ class _BenchmarkTransformer(_Transformer):
     def _transform_benchmark_sample(
         self,
         *,
-        dataset_type: str,
+        dataset_type: DatasetType,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:

@@ -35,7 +35,7 @@ class SocialIQaBenchmarkTransformer(_BenchmarkTransformer):
 
         sample_jsonl_file_path = self._sample_jsonl_file_path(
             dataset_type=dataset_type,
-            dataset_content_type=DatasetContentType.SAMPLES.value,
+            dataset_content_type=DatasetContentType.SAMPLES,
         )
 
         for i, (sample, label) in enumerate(
