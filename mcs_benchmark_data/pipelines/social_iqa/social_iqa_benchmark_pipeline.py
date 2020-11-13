@@ -13,7 +13,7 @@ from mcs_benchmark_data.pipelines.social_iqa.social_iqa_benchmark_transformer im
 class SocialIQaBenchmarkPipeline(_Pipeline):
     ID = "social_iqa"
 
-    def __init__(self, data_dir_path: Path = DATA_DIR_PATH, **kwds):
+    def __init__(self, *, data_dir_path: Path = DATA_DIR_PATH, **kwds):
         _Pipeline.__init__(
             self,
             extractor=NopExtractor(pipeline_id=self.ID),

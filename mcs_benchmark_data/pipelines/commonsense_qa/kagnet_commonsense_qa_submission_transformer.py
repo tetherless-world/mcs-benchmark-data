@@ -1,9 +1,9 @@
-from mcs_benchmark_data._benchmark_submission_transformer import (
-    _BenchmarkSubmissionTransformer,
+from mcs_benchmark_data._submission_transformer import (
+    _SubmissionTransformer,
 )
 
 
-class KagnetCommonsenseQaSubmissionTransformer(_BenchmarkSubmissionTransformer):
+class KagnetCommonsenseQaSubmissionTransformer(_SubmissionTransformer):
 
     """
     Class for transforming CommonsenseQA kagnet sample.

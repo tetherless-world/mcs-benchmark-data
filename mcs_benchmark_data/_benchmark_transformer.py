@@ -22,6 +22,8 @@ from mcs_benchmark_data.models.benchmark_hypothesis import BenchmarkHypothesis
 from mcs_benchmark_data.models.benchmark_question import BenchmarkQuestion
 from mcs_benchmark_data.models.benchmark_answer import BenchmarkAnswer
 from mcs_benchmark_data.answer_data import AnswerData
+from mcs_benchmark_data.dataset_type import DatasetType
+from mcs_benchmark_data.dataset_content_type import DatasetContentType
 
 
 class _BenchmarkTransformer(_Transformer):
@@ -31,16 +33,55 @@ class _BenchmarkTransformer(_Transformer):
     """
 
     @property
-    def _uri_base(self):
-        return f"benchmark:{self._pipeline_id}"
-
-    @property
     def __benchmark_dataset_classes(self):
         return {
             "dev": BenchmarkDevDataset,
             "test": BenchmarkTestDataset,
             "train": BenchmarkTrainDataset,
         }
+
+    @property
+    def _uri_base(self):
+        return f"benchmark:{self._pipeline_id}"
+
+    def _benchmark_sample_uri(self, *, dataset_uri: URIRef, sample_id: str):
+        return URIRef(f"{dataset_uri}:sample:{sample_id}")
+
+    def _sample_labels_lst_file_path(self, *, dataset_type: DatasetType):
+        return (
+            self._pipeline_data_dir_path
+            / "datasets"
+            / dataset_type.value
+            / f"{dataset_type.value}_labels.lst"
+        )
+
+    def _sample_jsonl_file_path(
+        self, *, dataset_type: DatasetType, dataset_content_type: DatasetContentType
+    ):
+        """
+        returns file path of the type of file indicated by the parameters
+        @param dataset_type the type of dataset (i.e. dev, test, train)
+        @param content_type the type of information contained in the file (i.e. samples, labels)
+
+        """
+        return (
+            self._pipeline_data_dir_path
+            / "datasets"
+            / dataset_type.value
+            / f"{dataset_type.value}_{dataset_content_type.value}.jsonl"
+        )
+
+    def _sample_xml_file_path(self, *, dataset_type: DatasetType):
+        return (
+            self._pipeline_data_dir_path
+            / "datasets"
+            / dataset_type.value
+            / f"{dataset_type.value}_samples.xml"
+        )
+
+    def _generate_none(self) -> Generator[None, None, None]:
+        while True:
+            yield None
 
     def _read_jsonl_file(
         self,
@@ -72,11 +113,11 @@ class _BenchmarkTransformer(_Transformer):
 
         for dataset in benchmark_metadata["datasets"]:
 
-            dataset_type = dataset["@id"].split("/")[-1]
+            dataset_type = getattr(DatasetType, dataset["@id"].split("/")[-1].upper())
 
             dataset_uri = URIRef(f"{self._uri_base}:dataset:{dataset['@id']}")
 
-            new_dataset = self.__benchmark_dataset_classes[dataset_type](
+            new_dataset = self.__benchmark_dataset_classes[dataset_type.value](
                 uri=dataset_uri, benchmark_uri=benchmark.uri, name=dataset["name"]
             )
 
@@ -94,12 +135,14 @@ class _BenchmarkTransformer(_Transformer):
         dataset_uri: URIRef,
         sample_id: str,
         correct_choice: URIRef,
-        concepts: Optional[List[str]],
+        concepts: Optional[Tuple[str, ...]],
         context: Optional[str],
         **kwds,
     ):
         benchmark_sample = BenchmarkSample(
-            uri=URIRef(f"{dataset_uri}:sample:{sample_id}"),
+            uri=self._benchmark_sample_uri(
+                dataset_uri=dataset_uri, sample_id=sample_id
+            ),
             dataset_uri=dataset_uri,
             correct_choice=correct_choice,
         )
@@ -127,7 +170,7 @@ class _BenchmarkTransformer(_Transformer):
         dataset_uri: URIRef,
         benchmark_sample_uri: str,
         question: str,
-        answers: List[AnswerData],
+        answers: Tuple[AnswerData, ...],
         **kwds,
     ) -> Generator[_Model, None, None]:
 
@@ -204,7 +247,7 @@ class _BenchmarkTransformer(_Transformer):
     def _transform_benchmark_sample(
         self,
         *,
-        dataset_type: str,
+        dataset_type: DatasetType,
         dataset_uri: URIRef,
         **kwds,
     ) -> Generator[_Model, None, None]:
