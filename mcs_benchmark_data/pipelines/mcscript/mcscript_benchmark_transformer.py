@@ -75,7 +75,7 @@ class MCScriptBenchmarkTransformer(_BenchmarkTransformer):
                     ),
                 )
 
-                if dataset_type.value != DatasetType.TEST.value:
+                if dataset_type != DatasetType.TEST:
                     for answer in question["answer"]:
                         if answer["@correct"] == "True":
                             correct_choice = URIRef(
