@@ -1,5 +1,5 @@
 import json
-from time import strptime
+from datetime import datetime
 from pathlib import Path
 from typing import Generator, Dict
 from rdflib import URIRef
@@ -36,7 +36,7 @@ class _SubmissionTransformer(_Transformer):
 
     @property
     def _uri_base(self):
-        return f"benchmark:submission:{self._pipeline_id}"
+        return URIRef(f"benchmark:{self._pipeline_id}")
 
     @property
     def _benchmark_score_classes(self):
@@ -66,7 +66,7 @@ class _SubmissionTransformer(_Transformer):
             submission_data_jsonl_file_path=submission_data_jsonl_file_path,
         )
 
-        submission_uri = URIRef(f"{self._uri_base}:submission:{self._pipeline_id}")
+        submission_uri = URIRef(f"{self._uri_base}:submission:{self._submission_id}")
 
         yield from getattr(self, f"_transform_{self._pipeline_id}_submission_sample")(
             submission_uri=submission_uri,
@@ -83,18 +83,18 @@ class _SubmissionTransformer(_Transformer):
                 continue
 
             submission = Submission(
-                uri=URIRef(f"{self._uri_base}:submission:{self._pipeline_id}"),
+                uri=URIRef(f"{self._uri_base}:submission:{self._submission_id}"),
                 name=f"{self._pipeline_id}-{self._submission_id}",
                 description=submission_line["description"],
                 date_created=submission_line["dateCreated"],
                 is_based_on=submission_line["isBasedOn"],
-                contributors=tuple(submission_line["contributor"]["name"]),
+                contributor=submission_line["contributor"]["name"],
                 result_of=(
                     submission_line["resultOf"]["@type"],
-                    strptime(
+                    datetime.strptime(
                         submission_line["resultOf"]["startTime"], "%m-%d-%YT%H:%M:%SZ"
                     ),
-                    strptime(
+                    datetime.strptime(
                         submission_line["resultOf"]["endTime"], "%m-%d-%YT%H:%M:%SZ"
                     ),
                     submission_line["resultOf"]["url"],

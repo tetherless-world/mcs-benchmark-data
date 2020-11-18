@@ -7,14 +7,14 @@ from mcs_benchmark_data.nop_extractor import (
     NopExtractor,
 )
 from mcs_benchmark_data.loaders.rdf_file_loader import RdfFileLoader
-from mcs_benchmark_data.pipelines.commonsense_qa.kagnet_commonsense_qa_submission_transformer import (
-    KagnetCommonsenseQaSubmissionTransformer,
+from mcs_benchmark_data.pipelines.benchmark_name.submission_name_benchmark_name_submission_transformer import (
+    SubmissionNameBenchmarkNameSubmissionTransformer,
 )
 
 
-class KagnetCommonsenseQaSubmissionPipeline(_SubmissionPipeline):
-    BENCHMARK_ID = "commonsense_qa"
-    SUBMISSION_ID = "kagnet"
+class SubmissionNameBenchmarkNameSubmissionPipeline(_SubmissionPipeline):
+    BENCHMARK_ID = "benchmark_name"
+    SUBMISSION_ID = "submission_name"
 
     def __init__(
         self,
@@ -27,7 +27,7 @@ class KagnetCommonsenseQaSubmissionPipeline(_SubmissionPipeline):
             self,
             extractor=NopExtractor(pipeline_id=self.BENCHMARK_ID),
             id=self.BENCHMARK_ID,
-            transformer=KagnetCommonsenseQaSubmissionTransformer(
+            transformer=SubmissionNameBenchmarkNameSubmissionTransformer(
                 pipeline_id=self.BENCHMARK_ID,
                 submission_id=self.SUBMISSION_ID,
                 data_dir_path=data_dir_path,
@@ -50,4 +50,4 @@ class KagnetCommonsenseQaSubmissionPipeline(_SubmissionPipeline):
 
 
 if __name__ == "__main__":
-    KagnetCommonsenseQaSubmissionPipeline.main()
+    SubmissionNameBenchmarkNameSubmissionPipeline.main()
