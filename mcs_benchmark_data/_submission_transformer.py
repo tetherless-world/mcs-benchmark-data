@@ -88,7 +88,9 @@ class _SubmissionTransformer(_Transformer):
                 description=submission_line["description"],
                 date_created=submission_line["dateCreated"],
                 is_based_on=submission_line["isBasedOn"],
-                contributor=submission_line["contributor"]["name"],
+                contributors=tuple(
+                    [person["name"] for person in submission_line["contributor"]]
+                ),
                 result_of=(
                     submission_line["resultOf"]["@type"],
                     datetime.strptime(

@@ -1,0 +1,14 @@
+from mcs_benchmark_data.path import {data_dir}
+from tests.mcs_benchmark_data_test.assertions import assert_valid_rdf_loaded
+from mcs_benchmark_data.pipelines.{benchmark_name}.{benchmark_name}_benchmark_pipeline import (
+    {BenchmarkName}BenchmarkPipeline,
+)
+
+
+def test_extract_transform_load():
+    {BenchmarkName}BenchmarkPipeline(
+        data_dir_path={data_dir}
+    ).extract_transform_load()
+    assert_valid_rdf_loaded(
+        pipeline_id={BenchmarkName}BenchmarkPipeline.ID, data_dir_path={data_dir}
+    )

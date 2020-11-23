@@ -1,8 +1,8 @@
 {
     "@context": "http://schema.org/",
-    "@id": "BenchmarkName",
+    "@id": "${BenchmarkName}",
     "@type": "Benchmark",
-    "name": "BenchmarkName",
+    "name": "${BenchmarkName}",
     "abstract": "",
     "authors": [
         {
@@ -17,19 +17,19 @@
     ],
     "datasets": [
         {
-            "@id": "BenchmarkName/train",
+            "@id": "${BenchmarkName}/train",
             "@type": "BenchmarkTrainingDataset",
-            "name": "BenchmarkName training dataset"
+            "name": "${BenchmarkName} training dataset"
         },
         {
-            "@id": "BenchmarkName/dev",
+            "@id": "${BenchmarkName}/dev",
             "@type": "BenchmarkDevDataset",
-            "name": "BenchmarkName dev dataset"
+            "name": "${BenchmarkName} dev dataset"
         },
         {
-            "@id": "BenchmarkName/test",
+            "@id": "${BenchmarkName}/test",
             "@type": "BenchmarkTestDataset",
-            "name": "BenchmarkName test dataset"
+            "name": "${BenchmarkName} test dataset"
         }
     ]
 }

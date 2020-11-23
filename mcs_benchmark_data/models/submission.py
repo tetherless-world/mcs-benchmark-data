@@ -19,7 +19,7 @@ class Submission(_Model):
     description: str
     date_created: datetime
     is_based_on: str  # benchmark name
-    contributor: str
+    contributors: Tuple[str, ...]
     result_of: Tuple[str, datetime, datetime, str]
 
     def to_rdf(self, *, graph: Graph) -> Resource:
@@ -29,7 +29,9 @@ class Submission(_Model):
         resource.add(SCHEMA.description, self._quote_rdf_literal(self.description))
         resource.add(SCHEMA.dateCreated, Literal(self.date_created))
         resource.add(SCHEMA.isBasedOn, self._quote_rdf_literal(self.is_based_on))
-        resource.add(MCS.contributor, self._quote_rdf_literal(self.contributor))
+
+        for contributor in self.contributors:
+            resource.add(MCS.contributor, self._quote_rdf_literal(contributor))
 
         resource.add(
             SCHEMA.softwareApplication, self._quote_rdf_literal(self.result_of[0])
