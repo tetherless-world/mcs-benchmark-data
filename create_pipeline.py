@@ -12,11 +12,6 @@ from pathlib import Path
 from mcs_benchmark_data.dataset_type import DatasetType
 from mcs_benchmark_data.template_type import TemplateType
 
-# from mcs_benchmark_data.metadata_template_metadata import MetadataTemplateMetadata
-# from mcs_benchmark_data.transformer_template_metadata import TransformerTemplateMetadata
-# from mcs_benchmark_data.test_template_metadata import TestTemplateMetadata
-# from mcs_benchmark_data.pipeline_template_metadata import PipelineTemplateMetadata
-
 
 class PipelineCreator:
     def __init__(
