@@ -10,12 +10,14 @@ For more information about the ontology, refer to:
 ### Create the Python virtual environment
 
 From the current directory:
+
     python3 -m venv venv
 
 
 ### Activate the virtual environment
 
 On Unix:
+
     source venv/bin/activate
 
 On Windows:
@@ -33,7 +35,7 @@ Adding a new benchmark to the ontology requires adding a pipeline.
 
 Activate the virtual environment as above, then run: 
 
-    python3.6 -m cli create_benchmark_pipeline --benchmark_name <benchmark_name> [--using-test-data]
+    python3.6 -m mcs_benchmark_data.cli create-benchmark-pipeline --benchmark-name <benchmark_name> [--using-test-data]
 
 Follow the logging instructions in order to add the appropriate data files and update the transformer file as follows:
 
@@ -52,13 +54,13 @@ Follow the logging instructions in order to add the appropriate data files and u
 - Consider using helper methods in `_BenchmarkTransformer`
 
 
-#### 2. (Optional) Adding a new benchmark submission
+### 2. (Optional) Adding a new benchmark submission
 
 Complete the following steps if using data from a completed benchmark submission.
 
 Activate the virtual environment as above, then run: 
 
-    python3.6 -m cli create_benchmark_pipeline --benchmark_name <benchmark_name> --submission_name <submission_name> [--using-test-data]
+    python3.6 -m mcs_benchmark_data.cli create-submission-pipeline --benchmark-name <benchmark_name> --submission_name <submission_name> [--using-test-data]
 
 Follow the logging instructions in order to add the appropriate data files.
 
@@ -75,15 +77,18 @@ Once the instructions above have been followed, run the following code to test t
 
 #### Testing the entire test suite
 From the root directory:
-`pytest`
+
+    pytest
 
 #### Testing individual benchmarks
 From the test directory of the given benchmark (`./tests/mcs_benchmark_data_test/pipelines/<benchmark_name>`):
-`pytest`
+
+    pytest
 
 #### Testing an individual file
 From the test directory of the given benchmark (`./tests/mcs_benchmark_data_test/pipelines/<benchmark_name>`):
-`pytest <test_file_name>.py`
+
+    pytest <test_file_name>.py
 
 ### 4. File-naming Conventions
 

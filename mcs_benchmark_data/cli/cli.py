@@ -3,10 +3,10 @@ import sys
 
 from configargparse import ArgParser
 
-from cli.commands.create_submission_pipeline_command import (
+from mcs_benchmark_data.cli.commands.create_submission_pipeline_command import (
     CreateSubmissionPipelineCommand,
 )
-from cli.commands.create_benchmark_pipeline_command import (
+from mcs_benchmark_data.cli.commands.create_benchmark_pipeline_command import (
     CreateBenchmarkPipelineCommand,
 )
 

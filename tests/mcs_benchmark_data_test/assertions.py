@@ -2,6 +2,7 @@ from mcs_benchmark_data.path import DATA_DIR_PATH
 from rdflib import Graph
 from pathlib import Path
 import bz2
+from typing import Optional
 
 from mcs_benchmark_data.models.submission_sample import SubmissionSample
 
