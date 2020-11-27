@@ -6,7 +6,7 @@ from configargparse import ArgParser
 from pathlib import Path
 from string import Template
 
-from mcs_benchmark_data.path import DATA_DIR_PATH, TEST_DATA_DIR_PATH
+from mcs_benchmark_data.path import ROOT_DIR_PATH
 from mcs_benchmark_data.dataset_type import DatasetType
 from mcs_benchmark_data.cli.template_type import TemplateType
 
@@ -25,8 +25,6 @@ class CreateBenchmarkPipelineCommand(_Command):
 
     def __call__(self, args):
 
-        root_path = Path(__file__).parent.parent.parent.parent
-
         benchmark_name = args.benchmark_name
 
         using_test_data = args.using_test_data
@@ -42,11 +40,11 @@ class CreateBenchmarkPipelineCommand(_Command):
             data_dir = "DATA_DIR_PATH"
 
         self.make_benchmark_directories(
-            root_path=root_path, benchmark_name=benchmark_name
+            root_path=ROOT_DIR_PATH, benchmark_name=benchmark_name
         )
 
         self.create_files_from_template(
-            root_path=root_path, benchmark_name=benchmark_name, data_dir=data_dir
+            root_path=ROOT_DIR_PATH, benchmark_name=benchmark_name, data_dir=data_dir
         )
 
     def create_files_from_template(
@@ -71,43 +69,32 @@ class CreateBenchmarkPipelineCommand(_Command):
 
         for dataset_type in DatasetType:
 
-            Path(
-                root_path / "data" / benchmark_name / "datasets" / dataset_type.value
-            ).mkdir(parents=True)
-
-            self._logger.info(
-                "A new directory has been made at %s.\n",
-                str(
+            self._make_new_directory(
+                file_path=Path(
                     root_path
                     / "data"
                     / benchmark_name
                     / "datasets"
                     / dataset_type.value
                 ),
+                need_init=False,
             )
-            Path(
-                root_path
-                / "test_data"
-                / benchmark_name
-                / "datasets"
-                / dataset_type.value
-            ).mkdir(parents=True)
 
-            self._logger.info(
-                "A new directory has been made at %s.\n",
-                str(
+            self._make_new_directory(
+                file_path=Path(
                     root_path
                     / "test_data"
                     / benchmark_name
                     / "datasets"
                     / dataset_type.value
                 ),
+                need_init=False,
             )
 
         self._logger.info(
             """6 new directories have been made for the dev, train, and test datasets of the new benchmark.\n
             Please add the proper data files to each respective directory. Test_data files should have a smaller subset of data to facilitate expedited testing.\n
-            Additionally, edit the metadata.json files in ./data/%s and ./test_data/%s by filling in the names of the benchmark authors.\n""",
+            Additionally, edit the metadata.json files in ./data/%s and ./test_data/%s by filling in the names of the benchmark authors.""",
             benchmark_name,
             benchmark_name,
         )
@@ -118,25 +105,7 @@ class CreateBenchmarkPipelineCommand(_Command):
             root_path / "mcs_benchmark_data" / "pipelines" / benchmark_name
         )
 
-        Path(path_to_pipeline).mkdir(parents=True)
-
-        Path(path_to_pipeline / "__init__.py").touch()
-
-        self._logger.info(
-            """A new directory has been made for the pipeline files of the new benchmark at the following path:\n
-        -./mcs_benchmark_data/pipelines/%s\n
-        Please edit the %s_benchmark_* files according to the steps specified in the README.md\n""",
-            benchmark_name,
-            benchmark_name,
-        )
-
-        self._logger.info(
-            """The benchmark pipeline files have been added to the following directory:\n
-        -./mcs_benchmark_data/pipelines/%s\n
-        Please edit the %s_submission_* files according to the steps specified in the README.md\n""",
-            benchmark_name,
-            benchmark_name,
-        )
+        self._make_new_directory(file_path=path_to_pipeline, need_init=True)
 
         path_to_tests = (
             root_path
@@ -146,15 +115,4 @@ class CreateBenchmarkPipelineCommand(_Command):
             / benchmark_name
         )
 
-        # Make test directory
-        Path(path_to_tests).mkdir(parents=True)
-
-        Path(path_to_tests / "__init__.py").touch()
-
-        self._logger.info(
-            """The benchmark pipeline test files have been added to the following directory:\n
-        -./tests/mcs_benchmark_data_test/pipelines/%s\n
-        Please edit the %s_submission_pipeline_test.py file according to the steps specified in the README.md""",
-            benchmark_name,
-            benchmark_name,
-        )
+        self._make_new_directory(file_path=path_to_tests, need_init=True)

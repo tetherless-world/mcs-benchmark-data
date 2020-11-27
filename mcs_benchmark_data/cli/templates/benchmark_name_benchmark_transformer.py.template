@@ -6,7 +6,7 @@ from mcs_benchmark_data._model import _Model
 from mcs_benchmark_data._benchmark_transformer import _BenchmarkTransformer
 
 
-class {BenchmarkName}BenchmarkTransformer(_BenchmarkTransformer):
+class ${BenchmarkName}BenchmarkTransformer(_BenchmarkTransformer):
     def _transform_benchmark_sample(
         self,
         *,

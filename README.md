@@ -35,7 +35,7 @@ Adding a new benchmark to the ontology requires adding a pipeline.
 
 Activate the virtual environment as above, then run: 
 
-    python3.6 -m mcs_benchmark_data.cli create-benchmark-pipeline --benchmark-name <benchmark_name> [--using-test-data]
+    python3 -m mcs_benchmark_data.cli create-benchmark-pipeline --benchmark-name <benchmark_name> [--using-test-data]
 
 Follow the logging instructions in order to add the appropriate data files and update the transformer file as follows:
 
@@ -60,7 +60,7 @@ Complete the following steps if using data from a completed benchmark submission
 
 Activate the virtual environment as above, then run: 
 
-    python3.6 -m mcs_benchmark_data.cli create-submission-pipeline --benchmark-name <benchmark_name> --submission_name <submission_name> [--using-test-data]
+    python3 -m mcs_benchmark_data.cli create-submission-pipeline --benchmark-name <benchmark_name> --submission-name <submission_name> [--using-test-data]
 
 Follow the logging instructions in order to add the appropriate data files.
 
@@ -73,22 +73,7 @@ You may need to adjust/add functionality based on the submission (as can be seen
 
 ### 3. Test the Functionality
 
-Once the instructions above have been followed, run the following code to test the functionality:
-
-#### Testing the entire test suite
-From the root directory:
-
-    pytest
-
-#### Testing individual benchmarks
-From the test directory of the given benchmark (`./tests/mcs_benchmark_data_test/pipelines/<benchmark_name>`):
-
-    pytest
-
-#### Testing an individual file
-From the test directory of the given benchmark (`./tests/mcs_benchmark_data_test/pipelines/<benchmark_name>`):
-
-    pytest <test_file_name>.py
+Python's pytest library is used to test the functionality of the scripts. (See documentation here: <https://docs.pytest.org/en/stable/contents.html>)
 
 ### 4. File-naming Conventions
 

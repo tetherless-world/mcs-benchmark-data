@@ -7,14 +7,14 @@ from mcs_benchmark_data.nop_extractor import (
     NopExtractor,
 )
 from mcs_benchmark_data.loaders.rdf_file_loader import RdfFileLoader
-from mcs_benchmark_data.pipelines.{benchmark_name}.{submission_name}_{benchmark_name}_submission_transformer import (
-    {SubmissionName}{BenchmarkName}SubmissionTransformer,
+from mcs_benchmark_data.pipelines.${benchmark_name}.${submission_name}_${benchmark_name}_submission_transformer import (
+    ${SubmissionName}${BenchmarkName}SubmissionTransformer,
 )
 
 
-class {SubmissionName}{BenchmarkName}SubmissionPipeline(_SubmissionPipeline):
-    BENCHMARK_ID = "{benchmark_name}"
-    SUBMISSION_ID = "{submission_name}"
+class ${SubmissionName}${BenchmarkName}SubmissionPipeline(_SubmissionPipeline):
+    BENCHMARK_ID = "${benchmark_name}"
+    SUBMISSION_ID = "${submission_name}"
 
     def __init__(
         self,
@@ -27,7 +27,7 @@ class {SubmissionName}{BenchmarkName}SubmissionPipeline(_SubmissionPipeline):
             self,
             extractor=NopExtractor(pipeline_id=self.BENCHMARK_ID),
             id=self.BENCHMARK_ID,
-            transformer={SubmissionName}{BenchmarkName}SubmissionTransformer(
+            transformer=${SubmissionName}${BenchmarkName}SubmissionTransformer(
                 pipeline_id=self.BENCHMARK_ID,
                 submission_id=self.SUBMISSION_ID,
                 data_dir_path=data_dir_path,
@@ -50,4 +50,4 @@ class {SubmissionName}{BenchmarkName}SubmissionPipeline(_SubmissionPipeline):
 
 
 if __name__ == "__main__":
-    {SubmissionName}{BenchmarkName}SubmissionPipeline.main()
+    ${SubmissionName}${BenchmarkName}SubmissionPipeline.main()

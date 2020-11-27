@@ -49,7 +49,7 @@ def test_create_benchmark_pipeline(tmpdir):
     CreateBenchmarkPipelineCommand().create_files_from_template(
         root_path=tmpdir,
         benchmark_name=test_args.benchmark_name,
-        data_dir=TEST_DATA_DIR_PATH if test_args.using_test_data else DATA_DIR_PATH,
+        data_dir="TEST_DATA_DIR_PATH" if test_args.using_test_data else "DATA_DIR_PATH",
     )
 
     pipeline_path = Path(

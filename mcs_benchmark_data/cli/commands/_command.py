@@ -7,6 +7,7 @@ from types import FunctionType
 from typing import Optional
 from pathlib import Path
 from string import Template
+from mcs_benchmark_data.path import ROOT_DIR_PATH
 
 from mcs_benchmark_data.dataset_type import DatasetType
 from mcs_benchmark_data.cli.template_type import TemplateType
@@ -25,6 +26,7 @@ class _Command(ABC):
     def __init__(self):
         self._logger = logging.getLogger(self.__class__.__name__)
 
+    @classmethod
     def add_arguments(
         self, arg_parser: ArgParser, add_parent_args: FunctionType
     ) -> None:
@@ -38,6 +40,19 @@ class _Command(ABC):
         Invoke .__call__ with the parsed arguments
         """
 
+    def _make_new_directory(self, *, file_path: Path, need_init: bool):
+
+        if Path(file_path).exists():
+            raise FileExistsError(f"The directory at {file_path} already exists.")
+
+        Path(file_path).mkdir(parents=True)
+
+        if need_init:
+
+            Path(file_path / "__init__.py").touch()
+
+        self._logger.info("The directory %s has been created.", file_path)
+
     def _create_files_from_template(
         self,
         *,
@@ -49,10 +64,6 @@ class _Command(ABC):
         is_first_submission: Optional[bool] = None,
     ):
 
-        repo_root = Path(__file__).parent.parent.parent.parent
-
-        path_to_templates = repo_root / "mcs_benchmark_data" / "cli" / "templates"
-
         for template_type in TemplateType:
 
             if (
@@ -63,51 +74,31 @@ class _Command(ABC):
                 continue
 
             template_module = importlib.import_module(
-                f"mcs_benchmark_data.cli.template_contexts.{template_type.value}_template_context"
+                f"mcs_benchmark_data.cli.template_contexts.{template_type.value}_template"
             )
             TemplateDataclass = getattr(
-                template_module, f"{template_type.value.capitalize()}TemplateContext"
+                template_module, f"{template_type.value.capitalize()}Template"
             )
 
             template_metadata = TemplateDataclass(
                 benchmark_name=benchmark_name, submission_name=submission_name
             )
 
-            with open(
-                path_to_templates / template_metadata.template_name
-            ) as template_file:
-                template_str = template_file.read()
+            ##INSERT CALL TO TEMPLATE.EXECUTE HERE
 
-            if template_type == TemplateType.METADATA:
-                temp = Template(template_str)
-                formatted_str = temp.substitute(**format_args)
+            template_metadata.execute(root_path=root_path, data_dir=data_dir)
 
-            else:
-                formatted_str = template_str.format(**format_args)
-
-            if Path(root_path / template_metadata.dest_file_path_from_root).exists():
-                raise FileExistsError(
-                    f"The file at {root_path / template_metadata.dest_file_path_from_root} already exists."
-                )
-
-            with open(
-                root_path / template_metadata.dest_file_path_from_root, "w"
-            ) as fp:
-                fp.write(formatted_str)
+            self._logger.info(
+                "A %s file has been created at %s",
+                template_metadata.__class__.__name__,
+                ROOT_DIR_PATH / template_metadata.dest_file_path_from_root,
+            )
 
             if template_type == TemplateType.METADATA:
 
-                if Path(
-                    root_path
-                    / f"test_{str(template_metadata.dest_file_path_from_root)}"
-                ).exists():
-                    raise FileExistsError(
-                        f"The file at {root_path}/test_{str(template_metadata.dest_file_path_from_root)} already exists."
-                    )
-
-                with open(
+                self._logger.info(
+                    "A %s file has been created at %s",
+                    template_type.value,
                     root_path
                     / f"test_{str(template_metadata.dest_file_path_from_root)}",
-                    "w",
-                ) as fp:
-                    fp.write(formatted_str)
+                )

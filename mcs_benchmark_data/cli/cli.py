@@ -24,6 +24,7 @@ class Cli:
             "--logging-level",
             help="set logging-level level (see Python logging module)",
         )
+        arg_parser.add_argument("-f", "--force", action="store_true")
 
     def __configure_logging(self, args):
         if args.debug:
@@ -39,7 +40,10 @@ class Cli:
 
     def main(self):
         args = self.__parse_args()
-        self.__commands[args.command](args)
+        for command in self.__commands.values():
+            command.add_arguments(arg_parser)
+            command = self.__commands[args.command](args)
+            command()
 
     def __parse_args(self):
         arg_parser = ArgParser()

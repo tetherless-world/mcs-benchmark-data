@@ -6,20 +6,20 @@ from pathlib import Path
 from mcs_benchmark_data.nop_extractor import (
     NopExtractor,
 )
-from mcs_benchmark_data.pipelines.{benchmark_name}.{benchmark_name}_benchmark_transformer import (
-    {BenchmarkName}BenchmarkTransformer,
+from mcs_benchmark_data.pipelines.${benchmark_name}.${benchmark_name}_benchmark_transformer import (
+    ${BenchmarkName}BenchmarkTransformer,
 )
 
 
-class {BenchmarkName}BenchmarkPipeline(_Pipeline):
-    ID = "{benchmark_name}"
+class ${BenchmarkName}BenchmarkPipeline(_Pipeline):
+    ID = "${benchmark_name}"
 
     def __init__(self, *, data_dir_path: Path = DATA_DIR_PATH, **kwds):
         _Pipeline.__init__(
             self,
             extractor=NopExtractor(pipeline_id=self.ID, **kwds),
             id=self.ID,
-            transformer={BenchmarkName}BenchmarkTransformer(
+            transformer=${BenchmarkName}BenchmarkTransformer(
                 pipeline_id=self.ID, data_dir_path=data_dir_path, **kwds
             ),
             data_dir_path=data_dir_path,
@@ -28,4 +28,4 @@ class {BenchmarkName}BenchmarkPipeline(_Pipeline):
 
 
 if __name__ == "__main__":
-    {BenchmarkName}BenchmarkPipeline.main()
+    ${BenchmarkName}BenchmarkPipeline.main()
