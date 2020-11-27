@@ -64,38 +64,11 @@ class CreateSubmissionPipelineCommand(_Command):
             submission_name=submission_name,
         )
 
-        self.__create_files_from_template(
+        self._create_files_from_template(
             root_path=ROOT_DIR_PATH,
             benchmark_name=benchmark_name,
             submission_name=submission_name,
             data_dir=data_dir,
-            is_first_submission=is_first_submission,
-        )
-
-    def __create_files_from_template(
-        self,
-        *,
-        root_path: Path,
-        benchmark_name: str,
-        submission_name: str,
-        data_dir: str,
-        is_first_submission: bool,
-    ):
-
-        format_args = {
-            "benchmark_name": benchmark_name,
-            "BenchmarkName": sc.capitalcase(benchmark_name),
-            "submission_name": submission_name,
-            "SubmissionName": sc.capitalcase(submission_name),
-            "data_dir": data_dir,
-        }
-
-        self._create_files_from_template(
-            root_path=root_path,
-            benchmark_name=benchmark_name,
-            submission_name=submission_name,
-            data_dir=data_dir,
-            format_args=format_args,
             is_first_submission=is_first_submission,
         )
 
@@ -111,10 +84,10 @@ class CreateSubmissionPipelineCommand(_Command):
             os.path.exists(submission_data_path / "submissions_metadata.jsonl")
         )
 
-        self.make_new_directory(
+        self._make_new_directory(
             file_path=Path(submission_data_path / f"{submission_name}"), need_init=False
         )
-        self.make_new_directory(
+        self._make_new_directory(
             file_path=Path(root_path / f"test_{data_path}/{submission_name}"),
             need_init=False,
         )

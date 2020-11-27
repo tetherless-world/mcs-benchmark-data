@@ -44,7 +44,6 @@ class Template:
             if field_value is not None:
                 format_args[sc.pascalcase(field.name)] = sc.pascalcase(field_value)
         format_args["data_dir"] = data_dir
-        print(format_args)
 
         with open(TEMPLATE_DIR_PATH / self.template_file_name) as template_file:
             template_str = template_file.read()

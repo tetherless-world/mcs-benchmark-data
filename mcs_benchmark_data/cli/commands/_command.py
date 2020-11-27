@@ -59,7 +59,6 @@ class _Command(ABC):
         root_path: Path,
         benchmark_name: str,
         data_dir: str,
-        format_args: dict,
         submission_name: Optional[str] = None,
         is_first_submission: Optional[bool] = None,
     ):

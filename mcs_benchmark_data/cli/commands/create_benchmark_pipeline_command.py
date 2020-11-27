@@ -39,33 +39,15 @@ class CreateBenchmarkPipelineCommand(_Command):
         else:
             data_dir = "DATA_DIR_PATH"
 
-        self.make_benchmark_directories(
+        self._make_benchmark_directories(
             root_path=ROOT_DIR_PATH, benchmark_name=benchmark_name
         )
 
-        self.create_files_from_template(
+        self._create_files_from_template(
             root_path=ROOT_DIR_PATH, benchmark_name=benchmark_name, data_dir=data_dir
         )
 
-    def create_files_from_template(
-        self, *, root_path: Path, benchmark_name: str, data_dir: str, **kwds
-    ):
-
-        format_args = {
-            "benchmark_name": benchmark_name,
-            "BenchmarkName": sc.capitalcase(benchmark_name),
-            "data_dir": data_dir,
-        }
-
-        self._create_files_from_template(
-            root_path=root_path,
-            benchmark_name=benchmark_name,
-            data_dir=data_dir,
-            format_args=format_args,
-            **kwds,
-        )
-
-    def make_benchmark_directories(self, root_path: Path, benchmark_name: str):
+    def _make_benchmark_directories(self, root_path: Path, benchmark_name: str):
 
         for dataset_type in DatasetType:
 
