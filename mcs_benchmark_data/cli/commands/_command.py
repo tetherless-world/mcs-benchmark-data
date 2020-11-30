@@ -41,6 +41,11 @@ class _Command(ABC):
         """
 
     def _make_new_directory(self, *, file_path: Path, need_init: bool):
+        """
+        Make a new directory at the path specified.
+        @param: file_path the path to the file/directory
+        @param: need_init true if the directory needs an __init__ file created
+        """
 
         if Path(file_path).exists():
             raise FileExistsError(f"The directory at {file_path} already exists.")
@@ -63,8 +68,19 @@ class _Command(ABC):
         is_first_submission: Optional[bool] = None,
     ):
 
+        """
+        Create all of the necessary pipeline files for a benchmark/submission from tempaltes
+        @param: root_path the path from root to the mcs-benchmark-data directory
+        @param benchmark_name the name of the benchmark
+        @param data_dir the directory being used for testing (i.e. DATA_DIR_PATH or TEST_DATA_DIR_PATH)
+        @param submission_name the name of the submission; None if benchmark files being created
+        @param is_first_submission true if the submission is the first submission for the benchmark
+        """
+
         for template_type in TemplateType:
 
+            # Do not re-create the submission_metadata file if it already
+            # exists for other submission(s) for this benchmark
             if (
                 template_type == TemplateType.METADATA
                 and is_first_submission is not None
@@ -83,8 +99,7 @@ class _Command(ABC):
                 benchmark_name=benchmark_name, submission_name=submission_name
             )
 
-            ##INSERT CALL TO TEMPLATE.EXECUTE HERE
-
+            # Update the template for the benchmark/submission provided
             template_metadata.execute(root_path=root_path, data_dir=data_dir)
 
             self._logger.info(

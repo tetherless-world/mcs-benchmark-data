@@ -2,9 +2,11 @@ from mcs_benchmark_data.path import DATA_DIR_PATH
 from rdflib import Graph
 from pathlib import Path
 import bz2
-from typing import Optional
+import py_compile
+from typing import Optional, Tuple
 
 from mcs_benchmark_data.models.submission_sample import SubmissionSample
+from mcs_benchmark_data.dataset_type import DatasetType
 
 
 def assert_valid_rdf_loaded(*, pipeline_id: str, data_dir_path: Path):
@@ -33,3 +35,97 @@ def assert_submission_models(*, benchmark_id: str, submission_id: str, models):
     samples = [model for model in models if isinstance(model, SubmissionSample)]
     assert len(samples) > 3
     assert all(sample.submission_uri == submission.uri for sample in samples)
+
+
+def assert_benchmark_pipeline_compiles(*, root_path: Path, benchmark_name: str):
+
+    paths = [
+        Path(root_path / "data" / benchmark_name / "datasets" / dataset_type.value)
+        for dataset_type in DatasetType
+    ]
+
+    paths += [
+        Path(root_path / "test_data" / benchmark_name / "datasets" / dataset_type.value)
+        for dataset_type in DatasetType
+    ]
+    path_to_pipeline = Path(
+        root_path / "mcs_benchmark_data" / "pipelines" / benchmark_name
+    )
+    path_to_tests = Path(
+        root_path / "tests" / "mcs_benchmark_data_test" / "pipelines" / benchmark_name
+    )
+    path_to_metadata = Path(root_path / "data" / Path(benchmark_name) / "metadata.json")
+    paths.append(path_to_pipeline)
+    paths.append(path_to_tests)
+    for path in paths:
+        assert path.exists()
+        if path == path_to_pipeline:
+            py_compile.compile(
+                path / f"{benchmark_name}_benchmark_pipeline.py",
+                doraise=True,
+            )
+            py_compile.compile(
+                path / f"{benchmark_name}_benchmark_transformer.py",
+                doraise=True,
+            )
+        elif path == path_to_tests:
+            py_compile.compile(
+                path / f"{benchmark_name}_pipeline_test.py", doraise=True
+            )
+        elif path == path_to_metadata:
+            py_compile.compile(path, doraise=True)
+
+
+def assert_submission_pipeline_compiles(
+    *, root_path: Path, benchmark_name: str, submission_name: str
+):
+
+    paths = []
+
+    submission_data_path = Path(
+        root_path / "data" / benchmark_name / "submissions" / submission_name
+    )
+
+    submission_test_data_path = Path(
+        root_path / "test_data" / benchmark_name / "submissions" / submission_name
+    )
+
+    path_to_metadata = Path(
+        root_path
+        / "data"
+        / benchmark_name
+        / "submissions"
+        / "submissions_metadata.jsonl"
+    )
+
+    path_to_pipeline = Path(
+        root_path / "mcs_benchmark_data" / "pipelines" / benchmark_name
+    )
+    path_to_tests = Path(
+        root_path / "tests" / "mcs_benchmark_data_test" / "pipelines" / benchmark_name
+    )
+
+    paths.append(path_to_pipeline)
+    paths.append(path_to_tests)
+
+    paths.append(submission_data_path)
+    paths.append(submission_test_data_path)
+
+    for path in paths:
+        assert path.exists()
+        if path == path_to_pipeline:
+            py_compile.compile(
+                path / f"{submission_name}_{benchmark_name}_submission_pipeline.py",
+                doraise=True,
+            )
+            py_compile.compile(
+                path / f"{submission_name}_{benchmark_name}_submission_transformer.py",
+                doraise=True,
+            )
+        elif path == path_to_tests:
+            py_compile.compile(
+                path / f"{submission_name}_{benchmark_name}_pipeline_test.py",
+                doraise=True,
+            )
+        elif path == path_to_metadata:
+            py_compile.compile(path, doraise=True)

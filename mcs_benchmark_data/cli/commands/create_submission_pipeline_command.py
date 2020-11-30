@@ -15,6 +15,10 @@ from mcs_benchmark_data.cli.commands._command import _Command
 
 
 class CreateSubmissionPipelineCommand(_Command):
+    """
+    Creates the directories and files necessary for a benchmark submission pipeline
+    """
+
     def add_arguments(self, arg_parser: ArgParser, add_parent_args):
         arg_parser.add_argument(
             "--benchmark-name",
@@ -58,7 +62,7 @@ class CreateSubmissionPipelineCommand(_Command):
         else:
             data_dir = "DATA_DIR_PATH"
 
-        is_first_submission = self.__make_submission_directories(
+        is_first_submission = self._make_submission_directories(
             root_path=ROOT_DIR_PATH,
             benchmark_name=benchmark_name,
             submission_name=submission_name,
@@ -72,16 +76,22 @@ class CreateSubmissionPipelineCommand(_Command):
             is_first_submission=is_first_submission,
         )
 
-    def __make_submission_directories(
+    def _make_submission_directories(
         self, root_path: Path, benchmark_name: str, submission_name: str
     ) -> bool:
-
+        """
+        Make the directories needed for the submission pipeline
+        @param: root_path the path to the mcs-benchmark-data directory
+        @param: benchmark_name the name of the benchmark the submission ran against
+        @param: submission_name the name of the submission
+        @return true if this is the first submission for the benchmark specified
+        """
         data_path = Path(f"data/{benchmark_name}/submissions")
 
         submission_data_path = root_path / data_path
 
         is_first_submission = not bool(
-            os.path.exists(submission_data_path / "submissions_metadata.jsonl")
+            Path(submission_data_path / "submissions_metadata.jsonl").exists()
         )
 
         self._make_new_directory(
@@ -92,7 +102,7 @@ class CreateSubmissionPipelineCommand(_Command):
             need_init=False,
         )
 
-        if is_first_submission:
+        if not is_first_submission:
             self._logger.info(
                 """Since this is not the first submission for this benchmark, please edit the file ./data/%s/submissions/submissions_metadata.jsonl and the same file in the /test_data/%s/submissions/ directory.\n
             Edit the files by copying the last entry and pasting it directly below. Edit the entry according to the information from the new submission.""",

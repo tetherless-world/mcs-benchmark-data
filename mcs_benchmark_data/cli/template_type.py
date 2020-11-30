@@ -3,7 +3,7 @@ from enum import Enum
 
 class TemplateType(Enum):
     """
-    Types of file templates
+    Types of benchmark/submission file templates
     """
 
     PIPELINE = "pipeline"

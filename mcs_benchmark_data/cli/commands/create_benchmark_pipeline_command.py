@@ -14,6 +14,10 @@ from mcs_benchmark_data.cli.commands._command import _Command
 
 
 class CreateBenchmarkPipelineCommand(_Command):
+    """
+    Creates the directories and files necessary for a benchmark pipeline
+    """
+
     def add_arguments(self, arg_parser: ArgParser, add_parent_args):
         arg_parser.add_argument(
             "--benchmark-name", help="name of the new benchmark (in snake_case)"
@@ -48,7 +52,11 @@ class CreateBenchmarkPipelineCommand(_Command):
         )
 
     def _make_benchmark_directories(self, root_path: Path, benchmark_name: str):
-
+        """
+        Make the directories needed for the benchmark pipeline
+        @param: root_path the path to the mcs-benchmark-data directory
+        @param: benchmark_name the name of the benchmark
+        """
         for dataset_type in DatasetType:
 
             self._make_new_directory(
