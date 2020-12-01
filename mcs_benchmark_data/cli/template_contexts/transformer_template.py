@@ -5,7 +5,6 @@ from pathlib import Path
 from mcs_benchmark_data.cli.template_contexts.template import Template
 
 
-@dataclass(init=True)
 class TransformerTemplate(Template):
     """
     Information about the transformer file necessary to create a file from a template

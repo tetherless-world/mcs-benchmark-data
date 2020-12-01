@@ -73,7 +73,7 @@ You may need to adjust/add functionality based on the submission (as can be seen
 
 ### 3. Test the Functionality
 
-Python's pytest library is used to test the functionality of the scripts. (See documentation here: <https://docs.pytest.org/en/stable/contents.html>)
+Python's [pytest](https://docs.pytest.org/en/stable/contents.html) library is used to test the functionality of the scripts.
 
 ### 4. File-naming Conventions
 

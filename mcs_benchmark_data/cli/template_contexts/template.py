@@ -10,7 +10,7 @@ from mcs_benchmark_data.path import TEMPLATE_DIR_PATH, ROOT_DIR_PATH
 
 
 class Template:
-    @dataclass
+    @dataclass(frozen=True)
     class Context:
         benchmark_name: str
         submission_name: Optional[str] = None

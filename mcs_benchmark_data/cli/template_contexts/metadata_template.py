@@ -6,7 +6,6 @@ from mcs_benchmark_data.path import ROOT_DIR_PATH
 from mcs_benchmark_data.cli.template_contexts.template import Template
 
 
-@dataclass(init=True)
 class MetadataTemplate(Template):
     """
     Information about the metadata file necessary to create a file from a template

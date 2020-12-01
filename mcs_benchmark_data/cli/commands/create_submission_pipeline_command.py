@@ -19,74 +19,55 @@ class CreateSubmissionPipelineCommand(_Command):
     Creates the directories and files necessary for a benchmark submission pipeline
     """
 
-    def add_arguments(self, arg_parser: ArgParser, add_parent_args):
-        arg_parser.add_argument(
-            "--benchmark-name",
-            help="name of the benchmark the submission was tested against (in snake_case)",
-        )
-        arg_parser.add_argument(
-            "--submission-name",
-            help="name of the model that the submission was made from (in snake_case)",
-        )
-        arg_parser.add_argument(
-            "--using-test-data",
-            help="true if using truncated data for testing (in the test_data directory)\nalters the test file input path",
-        )
+    @classmethod
+    def add_arguments(self, arg_parser: ArgParser):
+        pass
 
-    def __call__(self, args):
+    def __call__(self):
 
-        benchmark_name = args.benchmark_name
-
-        submission_name = args.submission_name
-
-        using_test_data = args.using_test_data
-
-        if not benchmark_name == sc.snakecase(benchmark_name):
+        if not self.benchmark_name == sc.snakecase(self.benchmark_name):
             raise ValueError(
                 "This benchmark name is not in snake_case. See https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841 for more information."
             )
-        if not submission_name == sc.snakecase(submission_name):
+        if not self.submission_name == sc.snakecase(self.submission_name):
             raise ValueError(
                 "This benchmark name is not in snake_case. See https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841 for more information."
             )
 
         if not Path(
-            ROOT_DIR_PATH / "mcs_benchmark_data/pipelines" / benchmark_name
+            ROOT_DIR_PATH / "mcs_benchmark_data/pipelines" / self.benchmark_name
         ).exists():
             raise FileNotFoundError(
                 "The benchmark that corresponds to the given benchmark name does not have an existing pipeline. Please follow the steps in the README to add the pipeline before proceeding with the submission."
             )
 
-        if using_test_data:
+        if self.using_test_data:
             data_dir = "TEST_DATA_DIR_PATH"
         else:
             data_dir = "DATA_DIR_PATH"
 
         is_first_submission = self._make_submission_directories(
             root_path=ROOT_DIR_PATH,
-            benchmark_name=benchmark_name,
-            submission_name=submission_name,
         )
 
         self._create_files_from_template(
             root_path=ROOT_DIR_PATH,
-            benchmark_name=benchmark_name,
-            submission_name=submission_name,
             data_dir=data_dir,
             is_first_submission=is_first_submission,
         )
 
     def _make_submission_directories(
-        self, root_path: Path, benchmark_name: str, submission_name: str
+        self,
+        root_path: Path,
     ) -> bool:
         """
         Make the directories needed for the submission pipeline
-        @param: root_path the path to the mcs-benchmark-data directory
-        @param: benchmark_name the name of the benchmark the submission ran against
-        @param: submission_name the name of the submission
-        @return true if this is the first submission for the benchmark specified
+        :param root_path: the path to the mcs-benchmark-data directory
+        :param benchmark_name: the name of the benchmark the submission ran against
+        :param submission_name: the name of the submission
+        :return: true if this is the first submission for the benchmark specified
         """
-        data_path = Path(f"data/{benchmark_name}/submissions")
+        data_path = Path(f"data/{self.benchmark_name}/submissions")
 
         submission_data_path = root_path / data_path
 
@@ -95,28 +76,30 @@ class CreateSubmissionPipelineCommand(_Command):
         )
 
         self._make_new_directory(
-            file_path=Path(submission_data_path / f"{submission_name}"), need_init=False
+            file_path=Path(submission_data_path / f"{self.submission_name}"),
+            need_init=False,
         )
         self._make_new_directory(
-            file_path=Path(root_path / f"test_{data_path}/{submission_name}"),
+            file_path=Path(root_path / f"test_{data_path}/{self.submission_name}"),
             need_init=False,
         )
 
         if not is_first_submission:
             self._logger.info(
-                """Since this is not the first submission for this benchmark, please edit the file ./data/%s/submissions/submissions_metadata.jsonl and the same file in the /test_data/%s/submissions/ directory.\n
+                """Since this is not the first submission for this benchmark, please edit the file ./data/%s/submissions/submissions_metadata.jsonl and the same file in the /test_data/%s/submissions/ directory.
             Edit the files by copying the last entry and pasting it directly below. Edit the entry according to the information from the new submission.""",
-                benchmark_name,
-                benchmark_name,
+                self.benchmark_name,
+                self.benchmark_name,
             )
         else:
             self._logger.info(
-                """The submission metadata files have been created at the following paths:\n 
-                 - ./data/%s/submissions/submissions_metadata.jsonl\n 
-                 - ./test_data/%s/submissions/submissions_metadata.jsonl\n
-            Edit the files by entering in the missing information that corresponds to the submission.""",
-                benchmark_name,
-                benchmark_name,
+                """\
+        The submission metadata files have been created at the following paths: 
+            - ./data/%s/submissions/submissions_metadata.jsonl 
+            - ./test_data/%s/submissions/submissions_metadata.jsonl
+        Edit the files by entering in the missing information that corresponds to the submission.""",
+                self.benchmark_name,
+                self.benchmark_name,
             )
 
         return is_first_submission

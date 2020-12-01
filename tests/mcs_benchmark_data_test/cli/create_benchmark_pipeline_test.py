@@ -19,15 +19,17 @@ def test_create_benchmark_pipeline(tmpdir):
 
     test_args = TestArgs("snazzy_new_benchmark", True)
 
-    CreateBenchmarkPipelineCommand()._make_benchmark_directories(
-        root_path=tmpdir, benchmark_name=test_args.benchmark_name
-    )
+    CreateBenchmarkPipelineCommand(args=test_args, root_path=tmpdir)()
 
-    CreateBenchmarkPipelineCommand()._create_files_from_template(
-        root_path=tmpdir,
-        benchmark_name=test_args.benchmark_name,
-        data_dir="TEST_DATA_DIR_PATH" if test_args.using_test_data else "DATA_DIR_PATH",
-    )
+    # CreateBenchmarkPipelineCommand()._make_benchmark_directories(
+    #     root_path=tmpdir, benchmark_name=test_args.benchmark_name
+    # )
+
+    # CreateBenchmarkPipelineCommand()._create_files_from_template(
+    #     root_path=tmpdir,
+    #     benchmark_name=test_args.benchmark_name,
+    #     data_dir="TEST_DATA_DIR_PATH" if test_args.using_test_data else "DATA_DIR_PATH",
+    # )
 
     assert_benchmark_pipeline_compiles(
         root_path=tmpdir, benchmark_name=test_args.benchmark_name

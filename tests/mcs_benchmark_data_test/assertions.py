@@ -3,6 +3,7 @@ from rdflib import Graph
 from pathlib import Path
 import bz2
 import py_compile
+import json
 from typing import Optional, Tuple
 
 from mcs_benchmark_data.models.submission_sample import SubmissionSample
@@ -37,43 +38,70 @@ def assert_submission_models(*, benchmark_id: str, submission_id: str, models):
     assert all(sample.submission_uri == submission.uri for sample in samples)
 
 
+def check_py(path: Path):
+    py_compile.compile(path, doraise=True)
+
+
+def check_json(path: Path):
+
+    with open(path, "r") as fp:
+        json.loads(fp)
+
+
 def assert_benchmark_pipeline_compiles(*, root_path: Path, benchmark_name: str):
 
     paths = [
-        Path(root_path / "data" / benchmark_name / "datasets" / dataset_type.value)
+        (
+            Path(root_path / "data" / benchmark_name / "datasets" / dataset_type.value),
+            None,
+        )
         for dataset_type in DatasetType
     ]
 
     paths += [
-        Path(root_path / "test_data" / benchmark_name / "datasets" / dataset_type.value)
+        (
+            Path(
+                root_path
+                / "test_data"
+                / benchmark_name
+                / "datasets"
+                / dataset_type.value
+            ),
+            None,
+        )
         for dataset_type in DatasetType
     ]
     path_to_pipeline = Path(
-        root_path / "mcs_benchmark_data" / "pipelines" / benchmark_name
+        root_path
+        / "mcs_benchmark_data"
+        / "pipelines"
+        / benchmark_name
+        / f"{benchmark_name}_benchmark_pipeline.py"
     )
-    path_to_tests = Path(
-        root_path / "tests" / "mcs_benchmark_data_test" / "pipelines" / benchmark_name
+    path_to_transformer = Path(
+        root_path
+        / "mcs_benchmark_data"
+        / "pipelines"
+        / benchmark_name
+        / f"{benchmark_name}_benchmark_transformer.py"
+    )
+    path_to_test = Path(
+        root_path
+        / "tests"
+        / "mcs_benchmark_data_test"
+        / "pipelines"
+        / benchmark_name
+        / f"{benchmark_name}_pipeline_test.py"
     )
     path_to_metadata = Path(root_path / "data" / Path(benchmark_name) / "metadata.json")
-    paths.append(path_to_pipeline)
-    paths.append(path_to_tests)
-    for path in paths:
+    paths.append((path_to_pipeline, check_py))
+    paths.append((path_to_transformer, check_py))
+    paths.append((path_to_test, check_py))
+    paths.append((path_to_metadata, check_json))
+    for path, callable_check in paths:
         assert path.exists()
-        if path == path_to_pipeline:
-            py_compile.compile(
-                path / f"{benchmark_name}_benchmark_pipeline.py",
-                doraise=True,
-            )
-            py_compile.compile(
-                path / f"{benchmark_name}_benchmark_transformer.py",
-                doraise=True,
-            )
-        elif path == path_to_tests:
-            py_compile.compile(
-                path / f"{benchmark_name}_pipeline_test.py", doraise=True
-            )
-        elif path == path_to_metadata:
-            py_compile.compile(path, doraise=True)
+        if callable_check:
+            callable_check(path)
 
 
 def assert_submission_pipeline_compiles(

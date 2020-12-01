@@ -23,19 +23,26 @@ class _Command(ABC):
     3) Invoke .__call__ with the parsed arguments
     """
 
-    def __init__(self):
+    def __init__(
+        self,
+        benchmark_name: str,
+        submission_name: str = None,
+        using_test_data: bool = False,
+        **kwds,
+    ):
         self._logger = logging.getLogger(self.__class__.__name__)
+        self.benchmark_name = benchmark_name
+        self.submission_name = submission_name
+        self.using_test_data = using_test_data
 
     @classmethod
-    def add_arguments(
-        self, arg_parser: ArgParser, add_parent_args: FunctionType
-    ) -> None:
+    def add_arguments(cls, arg_parser: ArgParser) -> None:
         """
         Add sub-command-specific arguments to the argparse (sub-) ArgParser
         """
 
     @abstractmethod
-    def __call__(self, args) -> None:
+    def __call__(self) -> None:
         """
         Invoke .__call__ with the parsed arguments
         """
@@ -43,8 +50,8 @@ class _Command(ABC):
     def _make_new_directory(self, *, file_path: Path, need_init: bool):
         """
         Make a new directory at the path specified.
-        @param: file_path the path to the file/directory
-        @param: need_init true if the directory needs an __init__ file created
+        :param file_path: the path to the file/directory
+        :param need_init: true if the directory needs an __init__ file created
         """
 
         if Path(file_path).exists():
@@ -62,19 +69,15 @@ class _Command(ABC):
         self,
         *,
         root_path: Path,
-        benchmark_name: str,
         data_dir: str,
-        submission_name: Optional[str] = None,
         is_first_submission: Optional[bool] = None,
     ):
 
         """
         Create all of the necessary pipeline files for a benchmark/submission from tempaltes
-        @param: root_path the path from root to the mcs-benchmark-data directory
-        @param benchmark_name the name of the benchmark
-        @param data_dir the directory being used for testing (i.e. DATA_DIR_PATH or TEST_DATA_DIR_PATH)
-        @param submission_name the name of the submission; None if benchmark files being created
-        @param is_first_submission true if the submission is the first submission for the benchmark
+        :param root_path: the path from root to the mcs-benchmark-data directory
+        :param data_dir: the directory being used for testing (i.e. DATA_DIR_PATH or TEST_DATA_DIR_PATH)
+        :param is_first_submission: true if the submission is the first submission for the benchmark
         """
 
         for template_type in TemplateType:
@@ -96,7 +99,7 @@ class _Command(ABC):
             )
 
             template_metadata = TemplateDataclass(
-                benchmark_name=benchmark_name, submission_name=submission_name
+                benchmark_name=self.benchmark_name, submission_name=self.submission_name
             )
 
             # Update the template for the benchmark/submission provided
