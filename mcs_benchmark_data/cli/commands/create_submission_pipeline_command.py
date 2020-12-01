@@ -19,6 +19,14 @@ class CreateSubmissionPipelineCommand(_Command):
     Creates the directories and files necessary for a benchmark submission pipeline
     """
 
+    def __init__(self, args: dict, **kwds):
+        _Command.__init__(self, **kwds)
+        self.benchmark_name = args.benchmark_name
+        self.submission_name = args.submission_name
+
+        self.using_test_data = args.using_test_data
+        self.root_path = args.root_path
+
     @classmethod
     def add_arguments(self, arg_parser: ArgParser):
         pass
@@ -31,11 +39,11 @@ class CreateSubmissionPipelineCommand(_Command):
             )
         if not self.submission_name == sc.snakecase(self.submission_name):
             raise ValueError(
-                "This benchmark name is not in snake_case. See https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841 for more information."
+                "This submission name is not in snake_case. See https://medium.com/better-programming/string-case-styles-camel-pascal-snake-and-kebab-case-981407998841 for more information."
             )
 
         if not Path(
-            ROOT_DIR_PATH / "mcs_benchmark_data/pipelines" / self.benchmark_name
+            self.root_path / "mcs_benchmark_data/pipelines" / self.benchmark_name
         ).exists():
             raise FileNotFoundError(
                 "The benchmark that corresponds to the given benchmark name does not have an existing pipeline. Please follow the steps in the README to add the pipeline before proceeding with the submission."
@@ -46,30 +54,22 @@ class CreateSubmissionPipelineCommand(_Command):
         else:
             data_dir = "DATA_DIR_PATH"
 
-        is_first_submission = self._make_submission_directories(
-            root_path=ROOT_DIR_PATH,
-        )
+        is_first_submission = self._make_submission_directories()
 
         self._create_files_from_template(
-            root_path=ROOT_DIR_PATH,
-            data_dir=data_dir,
-            is_first_submission=is_first_submission,
+            data_dir=data_dir, is_first_submission=is_first_submission
         )
 
     def _make_submission_directories(
         self,
-        root_path: Path,
     ) -> bool:
         """
         Make the directories needed for the submission pipeline
-        :param root_path: the path to the mcs-benchmark-data directory
-        :param benchmark_name: the name of the benchmark the submission ran against
-        :param submission_name: the name of the submission
         :return: true if this is the first submission for the benchmark specified
         """
         data_path = Path(f"data/{self.benchmark_name}/submissions")
 
-        submission_data_path = root_path / data_path
+        submission_data_path = self.root_path / data_path
 
         is_first_submission = not bool(
             Path(submission_data_path / "submissions_metadata.jsonl").exists()
@@ -80,7 +80,7 @@ class CreateSubmissionPipelineCommand(_Command):
             need_init=False,
         )
         self._make_new_directory(
-            file_path=Path(root_path / f"test_{data_path}/{self.submission_name}"),
+            file_path=Path(self.root_path / f"test_{data_path}/{self.submission_name}"),
             need_init=False,
         )
 

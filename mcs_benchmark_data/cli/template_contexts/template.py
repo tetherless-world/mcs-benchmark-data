@@ -29,6 +29,7 @@ class Template:
         self.dest_file_path_from_root = dest_file_path_from_root
 
     def write_new_file(self, file_path: Path, file_data: str):
+
         if Path(file_path).exists():
             raise FileExistsError(f"The file at {file_path} already exists.")
 

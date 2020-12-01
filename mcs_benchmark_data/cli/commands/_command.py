@@ -25,15 +25,9 @@ class _Command(ABC):
 
     def __init__(
         self,
-        benchmark_name: str,
-        submission_name: str = None,
-        using_test_data: bool = False,
         **kwds,
     ):
         self._logger = logging.getLogger(self.__class__.__name__)
-        self.benchmark_name = benchmark_name
-        self.submission_name = submission_name
-        self.using_test_data = using_test_data
 
     @classmethod
     def add_arguments(cls, arg_parser: ArgParser) -> None:
@@ -68,7 +62,6 @@ class _Command(ABC):
     def _create_files_from_template(
         self,
         *,
-        root_path: Path,
         data_dir: str,
         is_first_submission: Optional[bool] = None,
     ):
@@ -103,12 +96,12 @@ class _Command(ABC):
             )
 
             # Update the template for the benchmark/submission provided
-            template_metadata.execute(root_path=root_path, data_dir=data_dir)
+            template_metadata.execute(root_path=self.root_path, data_dir=data_dir)
 
             self._logger.info(
                 "A %s file has been created at %s",
                 template_metadata.__class__.__name__,
-                ROOT_DIR_PATH / template_metadata.dest_file_path_from_root,
+                self.root_path / template_metadata.dest_file_path_from_root,
             )
 
             if template_type == TemplateType.METADATA:
@@ -116,6 +109,6 @@ class _Command(ABC):
                 self._logger.info(
                     "A %s file has been created at %s",
                     template_type.value,
-                    root_path
+                    self.root_path
                     / f"test_{str(template_metadata.dest_file_path_from_root)}",
                 )

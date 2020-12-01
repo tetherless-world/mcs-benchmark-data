@@ -18,19 +18,17 @@ class CreateBenchmarkPipelineCommand(_Command):
     Creates the directories and files necessary for a benchmark pipeline
     """
 
-    def __init__(self, root_path: Path, **kwds):
+    def __init__(self, args: dict, **kwds):
         _Command.__init__(self, **kwds)
-        self.__root_path = root_path
+        self.benchmark_name = args.benchmark_name
+        self.submission_name = None
+
+        self.using_test_data = args.using_test_data
+        self.root_path = args.root_path
 
     @classmethod
     def add_arguments(self, arg_parser: ArgParser):
-        arg_parser.add_argument(
-            "--benchmark-name", help="name of the new benchmark (in snake_case)"
-        )
-        arg_parser.add_argument(
-            "--using-test-data",
-            help="true if using truncated data for testing (in the test_data directory)\nalters the test file input path",
-        )
+        pass
 
     def __call__(self):
 
@@ -44,9 +42,9 @@ class CreateBenchmarkPipelineCommand(_Command):
         else:
             data_dir = "DATA_DIR_PATH"
 
-        self._make_benchmark_directories(root_path=ROOT_DIR_PATH)
+        self._make_benchmark_directories()
 
-        self._create_files_from_template(root_path=ROOT_DIR_PATH, data_dir=data_dir)
+        self._create_files_from_template(data_dir=data_dir)
 
     def _make_benchmark_directories(self):
         """
@@ -58,7 +56,7 @@ class CreateBenchmarkPipelineCommand(_Command):
 
             self._make_new_directory(
                 file_path=Path(
-                    self.__root_path
+                    self.root_path
                     / "data"
                     / self.benchmark_name
                     / "datasets"
@@ -69,7 +67,7 @@ class CreateBenchmarkPipelineCommand(_Command):
 
             self._make_new_directory(
                 file_path=Path(
-                    self.__root_path
+                    self.root_path
                     / "test_data"
                     / self.benchmark_name
                     / "datasets"
@@ -89,13 +87,13 @@ class CreateBenchmarkPipelineCommand(_Command):
         # Make pipeline directory
 
         path_to_pipeline = (
-            self.__root_path / "mcs_benchmark_data" / "pipelines" / self.benchmark_name
+            self.root_path / "mcs_benchmark_data" / "pipelines" / self.benchmark_name
         )
 
         self._make_new_directory(file_path=path_to_pipeline, need_init=True)
 
         path_to_tests = (
-            self.__root_path
+            self.root_path
             / "tests"
             / "mcs_benchmark_data_test"
             / "pipelines"

@@ -45,7 +45,14 @@ def check_py(path: Path):
 def check_json(path: Path):
 
     with open(path, "r") as fp:
-        json.loads(fp)
+        json.load(fp)
+
+
+def check_jsonl(path: Path):
+
+    with open(path, "r") as fp:
+        for line in fp:
+            json.loads(line)
 
 
 def assert_benchmark_pipeline_compiles(*, root_path: Path, benchmark_name: str):
@@ -127,33 +134,37 @@ def assert_submission_pipeline_compiles(
     )
 
     path_to_pipeline = Path(
-        root_path / "mcs_benchmark_data" / "pipelines" / benchmark_name
+        root_path
+        / "mcs_benchmark_data"
+        / "pipelines"
+        / benchmark_name
+        / f"{submission_name}_{benchmark_name}_submission_pipeline.py"
     )
-    path_to_tests = Path(
-        root_path / "tests" / "mcs_benchmark_data_test" / "pipelines" / benchmark_name
+    path_to_transformer = Path(
+        root_path
+        / "mcs_benchmark_data"
+        / "pipelines"
+        / benchmark_name
+        / f"{submission_name}_{benchmark_name}_submission_transformer.py"
+    )
+    path_to_test = Path(
+        root_path
+        / "tests"
+        / "mcs_benchmark_data_test"
+        / "pipelines"
+        / benchmark_name
+        / f"{submission_name}_{benchmark_name}_pipeline_test.py"
     )
 
-    paths.append(path_to_pipeline)
-    paths.append(path_to_tests)
+    paths.append((path_to_pipeline, check_py))
+    paths.append((path_to_transformer, check_py))
+    paths.append((path_to_test, check_py))
+    paths.append((path_to_metadata, check_jsonl))
 
-    paths.append(submission_data_path)
-    paths.append(submission_test_data_path)
+    paths.append((submission_data_path, None))
+    paths.append((submission_test_data_path, None))
 
-    for path in paths:
+    for path, callable_check in paths:
         assert path.exists()
-        if path == path_to_pipeline:
-            py_compile.compile(
-                path / f"{submission_name}_{benchmark_name}_submission_pipeline.py",
-                doraise=True,
-            )
-            py_compile.compile(
-                path / f"{submission_name}_{benchmark_name}_submission_transformer.py",
-                doraise=True,
-            )
-        elif path == path_to_tests:
-            py_compile.compile(
-                path / f"{submission_name}_{benchmark_name}_pipeline_test.py",
-                doraise=True,
-            )
-        elif path == path_to_metadata:
-            py_compile.compile(path, doraise=True)
+        if callable_check:
+            callable_check(path)

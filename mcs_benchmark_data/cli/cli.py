@@ -3,6 +3,7 @@ import sys
 
 from configargparse import ArgParser
 
+from mcs_benchmark_data.path import ROOT_DIR_PATH
 from mcs_benchmark_data.cli.commands.create_submission_pipeline_command import (
     CreateSubmissionPipelineCommand,
 )
@@ -78,12 +79,10 @@ class Cli:
         if root_path is not None:
             root_path = Path(root_path)
         else:
-            root_path = Path(__file__).parent.parent.parent / "data"
+            root_path = ROOT_DIR_PATH 
         if not root_path.is_dir():
             raise ValueError(root_path + " does not exist or is not a directory")
         args.root_path = root_path
-
-        print(args)
 ​
         command_class = self.__COMMAND_CLASSES[args.command]
         command_kwds = vars(args).copy()
@@ -92,22 +91,6 @@ class Cli:
         command = command_class(**command_kwds)
 ​
         command()
-
-    # def __parse_args(self):
-    #     arg_parser = ArgParser()
-    #     subparsers = arg_parser.add_subparsers(title="commands", dest="command")
-    #     self.__add_global_args(arg_parser)
-    #     for command_name, command in self.__commands.items():
-    #         subparser = subparsers.add_parser(command_name)
-    #         self.__add_global_args(subparser)
-    #         command.add_arguments(subparser, self.__add_global_args)
-
-    #     parsed_args = arg_parser.parse_args()
-    #     if parsed_args.command is None:
-    #         arg_parser.print_usage()
-    #         sys.exit(1)
-
-    #     return parsed_args
 
 
 def main():

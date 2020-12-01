@@ -18,27 +18,19 @@ def test_create_submission_pipeline(tmpdir):
 
     TestArgs = NamedTuple(
         "TestArgs",
-        [("benchmark_name", str), ("submission_name", str), ("using_test_data", bool)],
+        [
+            ("benchmark_name", str),
+            ("submission_name", str),
+            ("using_test_data", bool),
+            ("root_path", Path),
+        ],
     )
 
-    test_args = TestArgs("snazzy_new_benchmark", "kagnet", True)
+    test_args = TestArgs("snazzy_new_benchmark", "kagnet", True, tmpdir)
 
-    CreateBenchmarkPipelineCommand()._make_benchmark_directories(
-        root_path=tmpdir, benchmark_name=test_args.benchmark_name
-    )
+    CreateBenchmarkPipelineCommand(args=test_args)()
 
-    CreateSubmissionPipelineCommand()._make_submission_directories(
-        root_path=tmpdir,
-        benchmark_name=test_args.benchmark_name,
-        submission_name=test_args.submission_name,
-    )
-
-    CreateSubmissionPipelineCommand()._create_files_from_template(
-        root_path=tmpdir,
-        benchmark_name=test_args.benchmark_name,
-        submission_name=test_args.submission_name,
-        data_dir="TEST_DATA_DIR_PATH" if test_args.using_test_data else "DATA_DIR_PATH",
-    )
+    CreateSubmissionPipelineCommand(args=test_args)()
 
     assert_submission_pipeline_compiles(
         root_path=tmpdir,
@@ -46,23 +38,9 @@ def test_create_submission_pipeline(tmpdir):
         submission_name=test_args.submission_name,
     )
 
-    test_args_new = TestArgs("snazzy_new_benchmark", "roberta", True)
+    test_args_new = TestArgs("snazzy_new_benchmark", "roberta", True, tmpdir)
 
-    is_first_submission = (
-        CreateSubmissionPipelineCommand()._make_submission_directories(
-            root_path=tmpdir,
-            benchmark_name=test_args_new.benchmark_name,
-            submission_name=test_args_new.submission_name,
-        )
-    )
-
-    CreateSubmissionPipelineCommand()._create_files_from_template(
-        root_path=tmpdir,
-        benchmark_name=test_args_new.benchmark_name,
-        submission_name=test_args_new.submission_name,
-        data_dir="TEST_DATA_DIR_PATH" if test_args.using_test_data else "DATA_DIR_PATH",
-        is_first_submission=is_first_submission,
-    )
+    CreateSubmissionPipelineCommand(args=test_args_new)()
 
     assert_submission_pipeline_compiles(
         root_path=tmpdir,
