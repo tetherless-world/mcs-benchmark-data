@@ -16,34 +16,41 @@ from mcs_benchmark_data.cli.commands.create_submission_pipeline_command import (
 
 def test_create_submission_pipeline(tmpdir):
 
-    TestArgs = NamedTuple(
-        "TestArgs",
-        [
-            ("benchmark_name", str),
-            ("submission_name", str),
-            ("using_test_data", bool),
-            ("root_path", Path),
-        ],
+    benchmark_name = "snazzy_new_benchmark"
+    submission_name_kag = "kagnet"
+    using_test_data = True
+    root_path = tmpdir
+
+    CreateBenchmarkPipelineCommand(
+        benchmark_name=benchmark_name,
+        using_test_data=using_test_data,
+        root_path=root_path,
+    )()
+
+    CreateSubmissionPipelineCommand(
+        benchmark_name=benchmark_name,
+        submission_name=submission_name_kag,
+        using_test_data=using_test_data,
+        root_path=root_path,
+    )()
+
+    assert_submission_pipeline_compiles(
+        root_path=root_path,
+        benchmark_name=benchmark_name,
+        submission_name=submission_name_kag,
     )
 
-    test_args = TestArgs("snazzy_new_benchmark", "kagnet", True, tmpdir)
+    submission_name_rob = "roberta"
 
-    CreateBenchmarkPipelineCommand(args=test_args)()
-
-    CreateSubmissionPipelineCommand(args=test_args)()
+    CreateSubmissionPipelineCommand(
+        benchmark_name=benchmark_name,
+        submission_name=submission_name_rob,
+        using_test_data=using_test_data,
+        root_path=root_path,
+    )()
 
     assert_submission_pipeline_compiles(
         root_path=tmpdir,
-        benchmark_name=test_args.benchmark_name,
-        submission_name=test_args.submission_name,
-    )
-
-    test_args_new = TestArgs("snazzy_new_benchmark", "roberta", True, tmpdir)
-
-    CreateSubmissionPipelineCommand(args=test_args_new)()
-
-    assert_submission_pipeline_compiles(
-        root_path=tmpdir,
-        benchmark_name=test_args_new.benchmark_name,
-        submission_name=test_args_new.submission_name,
+        benchmark_name=benchmark_name,
+        submission_name=submission_name_rob,
     )

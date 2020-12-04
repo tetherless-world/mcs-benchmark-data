@@ -36,18 +36,6 @@ class Cli:
             arg_parser.add_argument("--root-path",
                                            help="path to the mcs-benchmark-data directory")
             arg_parser.add_argument(
-                "--benchmark-name",
-                help="name of the benchmark the submission was tested against (in snake_case)",
-            )
-            arg_parser.add_argument(
-                "--submission-name",
-                help="name of the model that the submission was made from (in snake_case)",
-            )
-            arg_parser.add_argument(
-                "--using-test-data",
-                help="true if using truncated data for testing (in the test_data directory)\nalters the test file input path",
-            )
-            arg_parser.add_argument(
                 '--debug',
                 action='store_true',
                 help='turn on debugging'

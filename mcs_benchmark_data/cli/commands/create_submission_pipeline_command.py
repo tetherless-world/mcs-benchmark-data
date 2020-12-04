@@ -19,17 +19,38 @@ class CreateSubmissionPipelineCommand(_Command):
     Creates the directories and files necessary for a benchmark submission pipeline
     """
 
-    def __init__(self, args: dict, **kwds):
+    def __init__(
+        self,
+        *,
+        benchmark_name: str,
+        submission_name: str,
+        using_test_data: bool,
+        root_path: Path,
+        **kwds,
+    ):
         _Command.__init__(self, **kwds)
-        self.benchmark_name = args.benchmark_name
-        self.submission_name = args.submission_name
+        self.benchmark_name = benchmark_name
+        self.submission_name = submission_name
 
-        self.using_test_data = args.using_test_data
-        self.root_path = args.root_path
+        self.using_test_data = using_test_data
+        self.root_path = root_path
 
     @classmethod
     def add_arguments(self, arg_parser: ArgParser):
-        pass
+        arg_parser.add_argument(
+            "--benchmark-name",
+            required=True,
+            help="name of the benchmark the submission was tested against (in snake_case)",
+        )
+        arg_parser.add_argument(
+            "--submission-name",
+            required=True,
+            help="name of the model that the submission was made from (in snake_case)",
+        )
+        arg_parser.add_argument(
+            "--using-test-data",
+            help="true if using truncated data for testing (in the test_data directory)\nalters the test file input path",
+        )
 
     def __call__(self):
 

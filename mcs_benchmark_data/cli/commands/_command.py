@@ -68,7 +68,6 @@ class _Command(ABC):
 
         """
         Create all of the necessary pipeline files for a benchmark/submission from tempaltes
-        :param root_path: the path from root to the mcs-benchmark-data directory
         :param data_dir: the directory being used for testing (i.e. DATA_DIR_PATH or TEST_DATA_DIR_PATH)
         :param is_first_submission: true if the submission is the first submission for the benchmark
         """

@@ -13,15 +13,16 @@ from mcs_benchmark_data.cli.commands.create_benchmark_pipeline_command import (
 
 def test_create_benchmark_pipeline(tmpdir):
 
-    TestArgs = NamedTuple(
-        "TestArgs",
-        [("benchmark_name", str), ("using_test_data", bool), ("root_path", Path)],
-    )
+    benchmark_name = "snazzy_new_benchmark"
+    using_test_data = True
+    root_path = tmpdir
 
-    test_args = TestArgs("snazzy_new_benchmark", True, tmpdir)
-
-    CreateBenchmarkPipelineCommand(args=test_args)()
+    CreateBenchmarkPipelineCommand(
+        benchmark_name=benchmark_name,
+        using_test_data=using_test_data,
+        root_path=root_path,
+    )()
 
     assert_benchmark_pipeline_compiles(
-        root_path=tmpdir, benchmark_name=test_args.benchmark_name
+        root_path=root_path, benchmark_name=benchmark_name
     )
