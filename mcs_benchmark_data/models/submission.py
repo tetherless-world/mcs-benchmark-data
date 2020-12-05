@@ -3,7 +3,7 @@ from dataclasses_json import LetterCase, dataclass_json
 from datetime import datetime
 from typing import Tuple
 
-from rdflib import Graph
+from rdflib import Graph, Literal
 from rdflib.resource import Resource
 from mcs_benchmark_data.namespace import MCS, SCHEMA
 
@@ -27,16 +27,17 @@ class Submission(_Model):
 
         resource.add(SCHEMA.name, self._quote_rdf_literal(self.name))
         resource.add(SCHEMA.description, self._quote_rdf_literal(self.description))
-        resource.add(SCHEMA.dateCreated, self.date_created)
+        resource.add(SCHEMA.dateCreated, Literal(self.date_created))
         resource.add(SCHEMA.isBasedOn, self._quote_rdf_literal(self.is_based_on))
+
         for contributor in self.contributors:
             resource.add(MCS.contributor, self._quote_rdf_literal(contributor))
 
         resource.add(
             SCHEMA.softwareApplication, self._quote_rdf_literal(self.result_of[0])
         )
-        resource.add(SCHEMA.endTime, self.result_of[1])
-        resource.add(SCHEMA.startTime, self.result_of[2])
+        resource.add(SCHEMA.endTime, Literal(self.result_of[1]))
+        resource.add(SCHEMA.startTime, Literal(self.result_of[2]))
         resource.add(SCHEMA.url, self._quote_rdf_literal(self.result_of[3]))
 
         return resource

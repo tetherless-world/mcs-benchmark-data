@@ -42,7 +42,7 @@ class _BenchmarkTransformer(_Transformer):
 
     @property
     def _uri_base(self):
-        return f"benchmark:{self._pipeline_id}"
+        return URIRef(f"benchmark:{self._pipeline_id}")
 
     def _benchmark_sample_uri(self, *, dataset_uri: URIRef, sample_id: str):
         return URIRef(f"{dataset_uri}:sample:{sample_id}")
@@ -103,7 +103,7 @@ class _BenchmarkTransformer(_Transformer):
         benchmark_bootstrap = BenchmarkMetadata.from_dict(benchmark_metadata)
 
         benchmark = Benchmark(
-            uri=URIRef(f"{self._uri_base}:benchmark:{benchmark_metadata['@id']}"),
+            uri=self._uri_base,
             name=benchmark_bootstrap.name,
             abstract=benchmark_bootstrap.abstract,
             authors=tuple(author["name"] for author in benchmark_bootstrap.authors),
